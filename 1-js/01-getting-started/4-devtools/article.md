@@ -1,63 +1,63 @@
-# Developer console
+# Udvikler konsollen
 
-Code is prone to errors. You will quite likely make errors... Oh, what am I talking about? You are *absolutely* going to make errors, at least if you're a human, not a [robot](https://en.wikipedia.org/wiki/Bender_(Futurama)).
+Kode er næsten dømt til at indeholde fejl. Du vil næsten helt sikkert lave fejl jævnligt ... hvad snakker jeg om? Du vil *helt sikkert* lave fejl - i hvert fald, hvis du er menneske og ikke en [robot](https://en.wikipedia.org/wiki/Bender_(Futurama)).
 
-But in the browser, users don't see errors by default. So, if something goes wrong in the script, we won't see what's broken and can't fix it.
+Men, i en browser ser du ikke umiddelbart fejlene. Så, når noget går galt er det ikke altid muligt at se i browseren og derfor heller ikke muligt at fikse fejlen.
 
-To see errors and get a lot of other useful information about scripts, "developer tools" have been embedded in browsers.
+For at se fejlene og samtidig få en masse anden brugbar information om din kode, så findes der en række værktøjer i browseren kaldet "developer tools".
 
-Most developers lean towards Chrome or Firefox for development because those browsers have the best developer tools. Other browsers also provide developer tools, sometimes with special features, but are usually playing "catch-up" to Chrome or Firefox. So most developers have a "favorite" browser and switch to others if a problem is browser-specific.
+Mange udviklere hælder til at bruge Chrome eller Firefox fordi deres værktøjer er meget udviklede. Andre browsere tilbyder også udviklingsværktøjer, nogle gange med specielle features, men prøver normalt at samle op på mulighederne fra Chrome eller Firefox. De fleste udviklere har en favorit browser og skifter til de andre for at teste browserspecifikke problemer.
 
-Developer tools are potent, they have many features. To start, we'll learn how to open them, look at errors, and run JavaScript commands.
+Udviklingsværktøjerne har mange praktiske features. Til at starte med, skal du lære at åbne dem, kigge efter fejl og afvikle JavaScript kommandoer.
 
 ## Google Chrome
 
-Open the page [bug.html](bug.html).
+Åbn siden [bug.html](bug.html).
 
-There's an error in the JavaScript code on it. It's hidden from a regular visitor's eyes, so let's open developer tools to see it.
+Der er en fejl i sidens JavaScript kode. Det er skjult for den besøgende, så åbn udviklingsværktøjerne (developer tools) for at se dem.
 
-Press `key:F12` or, if you're on Mac, then `key:Cmd+Opt+J`.
+Tryk `key:F12` eller, hvis du er på Mac `key:Cmd+Opt+J`.
 
-The developer tools will open on the Console tab by default.
+Udviklingsværktøjerne vil åbne med tabben KOnsol (Console) som standard.
 
-It looks somewhat like this:
+Det ser ud i stil med dette:
 
 ![chrome](chrome.png)
 
-The exact look of developer tools depends on your version of Chrome. It changes from time to time but should be similar.
+Det præcise udseende vil afhænge af din version af Chrome. Det skifter fra tid til anden men burde minde om billedet.
 
-- Here we can see the red-colored error message. In this case, the script contains an unknown "lalala" command.
-- On the right, there is a clickable link to the source `bug.html:12` with the line number where the error has occurred.
+- Her kan du se fejlmeddelelsen i en rød farve. I det her tilfælde indeholder scriptet en ukendt "lalala" kommando.
+- Til højre er et klikbart link til kildekoden `bug.html:12` med den linje i koden, hvor fejlen er opstået.
 
-Below the error message, there is a blue `>` symbol. It marks a "command line" where we can type JavaScript commands. Press `key:Enter` to run them.
+Under fejlmeddelelsen er det et blåt `>` symbol. Det markerer en "kommandolinje" hvor du kan skrive JavaScript kommandoer. Tryk `key:Enter` for at afvikle dem.
 
-Now we can see errors, and that's enough for a start. We'll come back to developer tools later and cover debugging more in-depth in the chapter <info:debugging-chrome>.
+Nu har du lært, hvor du kan se fejl, og det er nok til en begyndelse. Du kommer tilbage til udviklingsværktøjerne senere og lærer om at finde fejl (debugge) i kapitlet <info:debuggingD-chrome>.
 
 ```smart header="Multi-line input"
-Usually, when we put a line of code into the console, and then press `key:Enter`, it executes.
+Normalt, når du skriver en linje kode og trykker `key:Enter`, bliver kommandoen afviklet.
 
-To insert multiple lines, press `key:Shift+Enter`. This way one can enter long fragments of JavaScript code.
+For at afvikle flere linjer på én gang skal du trykke `key:Shift+Enter` mellem hver kommando. På den måde kan du skrive længere stykker JavaScript kode der skal afvikles samtidig
 ```
 
-## Firefox, Edge, and others
+## Firefox, Edge og andre
 
-Most other browsers use `key:F12` to open developer tools.
+De fleste browsere bruger `key:F12` for at åbne udviklingsværktøjerne
 
-The look & feel of them is quite similar. Once you know how to use one of these tools (you can start with Chrome), you can easily switch to another.
+Udseendet og måden de virker på er ret ens. Så snart du kender til én af browsernes værktøjer, kan du nemt skifte til de andre.
 
 ## Safari
 
-Safari (Mac browser, not supported by Windows/Linux) is a little bit special here. We need to enable the "Develop menu" first.
+Safari (Mac browser, ikke understøttet af Windows/Linux) er lidt speciel her. Du er nød til først at aktivere "Udviklermenu" (Develop menu) først.
 
-Open Preferences and go to the "Advanced" pane. There's a checkbox at the bottom:
+Åbn indstillingerne og gå til "Avanceret" (Advanced) pane. Her er der en checkbox nederst:
 
 ![safari](safari.png)
 
-Now `key:Cmd+Opt+C` can toggle the console. Also, note that the new top menu item named "Develop" has appeared. It has many commands and options.
+Nu kan `key:Cmd+Opt+C` åbne konsollen. Derudover har du en menu i toppen kaldet "Udvikler" (Develop) med en række muligheder.
 
-## Summary
+## Opsummering
 
-- Developer tools allow us to see errors, run commands, examine variables, and much more.
-- They can be opened with `key:F12` for most browsers on Windows. Chrome for Mac needs `key:Cmd+Opt+J`, Safari: `key:Cmd+Opt+C` (need to enable first).
+- Udviklingsværktøjer gør det muligt at se fejl, afvikle kommandoer, undersøge variable og meget mere.
+- De kan åbnes med `key:F12` i de fleste browsere på Windows. Chrome for Mac bruger `key:Cmd+Opt+J`, Safari: `key:Cmd+Opt+C` (Husk, at åbne for muligheden i indstillinger).
 
-Now we have the environment ready. In the next section, we'll get down to JavaScript.
+Nu er udviklingsmiljøet sat op. I den næste sektion, skal du dykke ned i JavaScript sproget.
