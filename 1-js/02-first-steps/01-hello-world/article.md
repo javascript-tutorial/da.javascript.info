@@ -1,17 +1,17 @@
 # Hello, world!
 
-This part of the tutorial is about core JavaScript, the language itself.
+Denne del af tutorialen er om ren JavaScript, selve komponenterne i sproget.
 
-But we need a working environment to run our scripts and, since this book is online, the browser is a good choice. We'll keep the amount of browser-specific commands (like `alert`) to a minimum so that you don't spend time on them if you plan to concentrate on another environment (like Node.js). We'll focus on JavaScript in the browser in the [next part](/ui) of the tutorial.
+Men, du behøver et miljø til at afvikle dine scripts og siden denne bog er en online bog, så er browseren et godt bud. Jeg vil holde browser-specifikke kommandoer (som `alert`) til et minimum. Det gør jeg, hvis du f.eks. læser dette for at arbejde i andre miljøer (som f.eks. Node.js). Jeg vil fokusere på JavaScript i browseren i den [næste del](/ui) af tutorialen.
 
-So first, let's see how we attach a script to a webpage. For server-side environments (like Node.js), you can execute the script with a command like `"node my.js"`.
+Først, lad os se, hvordan du kobler et script til en webside. For server-side miljøer som Node.js, kan du afvikle scripts med kommandoen`"node my.js"`.
 
 
-## The "script" tag
+## "script" tagget
 
-JavaScript programs can be inserted into any part of an HTML document with the help of the `<script>` tag.
+JavaScript programmer kan blive sat ind i alle dele af et HTML-dokument ved hjælp af et `<script>` tag.
 
-For instance:
+For eksempel:
 
 ```html run height=100
 <!DOCTYPE HTML>
@@ -35,24 +35,24 @@ For instance:
 ```
 
 ```online
-You can run the example by clicking the "Play" button in the right-top corner of the box above.
+Du kan køre eksemplet ved at klikke på "Play" i øverste højre hjørne.
 ```
 
-The `<script>` tag contains JavaScript code which is automatically executed when the browser processes the tag.
+`<script>` tagget indeholder JavaScript kode, der automatisk bliver afviklet når browseren processerer det.
 
 
-## Modern markup
+## Moderne markup
 
-The `<script>` tag has a few attributes that are rarely used nowadays but can still be found in old code:
+`<script>` tagget har et par egenskaber (kaldet attributes) der sjældent bruges mere, men du kan stadig finde dem i ældre kode:
 
-The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
-: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic, we'll talk about modules in another part of the tutorial.
+`type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
+: Den gamle HTML-standard, HTML4, krævede at et script beskrev sin `type`. Normalt var den sat til `type="text/javascript"`. Det er ikke påkrævet mere. Samtidig har den moderne HTML-standard helt ændret meningen med den attribut. Nu, kan den bruges til f.eks. JavaScript moduler, men det er et sværere emne, og jeg dækker moduler i et andet afsnit senere.
 
-The `language` attribute: <code>&lt;script <u>language</u>=...&gt;</code>
-: This attribute was meant to show the language of the script. This attribute no longer makes sense because JavaScript is the default language. There is no need to use it.
+`language` attribute: <code>&lt;script <u>language</u>=...&gt;</code>
+: Denne attribut var ment til at vise sproget koden blev skrevet i. Denne attribut giver ikke længere mening fordi JavaScript er standardsproget i browseren.
 
-Comments before and after scripts.
-: In really ancient books and guides, you may find comments inside `<script>` tags, like this:
+Kommentarer før og efter scripts.
+: I virkelig gamle bøger og guides kan du finde kommentarer inde i `<script>` tags, i stil med dette:
 
     ```html no-beautify
     <script type="text/javascript"><!--
@@ -60,28 +60,28 @@ Comments before and after scripts.
     //--></script>
     ```
 
-    This trick isn't used in modern JavaScript. These comments hide JavaScript code from old browsers that didn't know how to process the `<script>` tag. Since browsers released in the last 15 years don't have this issue, this kind of comment can help you identify really old code.
+    Dette trick bruges ikke i moderne JavaScript. Disse kommentar tegn (<!-- og -->) skjulte JavaScript fra ældre browsere, der endnu ikke vidste hvodan man afviklede `<script>` tag. Siden browsere i de seneste 15 år ikke har haft problemer med dette, kan det hjælpe dig med at identificere virkelig gamle eksempler.
 
 
-## External scripts
+## Eksterne scripts
 
-If we have a lot of JavaScript code, we can put it into a separate file.
+HVis du har meget JavaScript kode, kan du placere det i en ekstern fil.
 
-Script files are attached to HTML with the `src` attribute:
+Script-filer bliver knuttet til HTML gennem en `src` attribut:
 
 ```html
 <script src="/path/to/script.js"></script>
 ```
 
-Here, `/path/to/script.js` is an absolute path to the script from the site root. One can also provide a relative path from the current page. For instance, `src="script.js"` would mean a file `"script.js"` in the current folder.
+Her er `/path/to/script.js` en absolut sti til scriptet fra sitets rod. Du kan også give en relativ sti fra det aktuelle HTML-dokument. F.eks. betyder `src="script.js"` at filen `"script.js"` findes i samme folder som HTML-dokumetet.
 
-We can give a full URL as well. For instance:
+Endelig, kan du give en fuld URL som f.eks:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
 ```
 
-To attach several scripts, use multiple tags:
+Hvis du vil koble flere eksterne scripts til dokumentet skal du bruge flere tags:
 
 ```html
 <script src="/js/script1.js"></script>
@@ -90,29 +90,29 @@ To attach several scripts, use multiple tags:
 ```
 
 ```smart
-As a rule, only the simplest scripts are put into HTML. More complex ones reside in separate files.
+Som regel er det kun meget simple scripts der skrives direkte i HTML. Mere komplekse scripts placeres i eksterne filer.
 
-The benefit of a separate file is that the browser will download it and store it in its [cache](https://en.wikipedia.org/wiki/Web_cache).
+En fordel ved eksterne filer er, at browseren vil downloade dem og gemme dem i sin [cache](https://en.wikipedia.org/wiki/Web_cache).
 
-Other pages that reference the same script will take it from the cache instead of downloading it, so the file is actually downloaded only once.
+Andre dokumenter der referer til den samme fil vil så læse den fra chachen i stedet for at downloade det igen.
 
-That reduces traffic and makes pages faster.
+Det sparer trafik og gør siden hurtigere.
 ```
 
-````warn header="If `src` is set, the script content is ignored."
-A single `<script>` tag can't have both the `src` attribute and code inside.
+````warn header="Hvis `src` er sat vil indholdet af `<script>` tagget blive ignoreret."
+Et enkelt `<script>` tag kan ikke både have en `src` attribut og egen kode i sig.
 
-This won't work:
+Dette vil ikke virke:
 
 ```html
 <script *!*src*/!*="file.js">
-  alert(1); // the content is ignored, because src is set
+  alert(1); // Indholdet ignoreres fordi src er sat
 </script>
 ```
 
-We must choose either an external `<script src="…">` or a regular `<script>` with code.
+Du må vælge enten eksternt med `<script src="…">` eller internt `<script>` med kode i.
 
-The example above can be split into two scripts to work:
+Eksemplet ovenfor kan blive delt op i to scripts for at virke:
 
 ```html
 <script src="file.js"></script>
@@ -122,11 +122,11 @@ The example above can be split into two scripts to work:
 ```
 ````
 
-## Summary
+## Opsummering
 
-- We can use a `<script>` tag to add JavaScript code to a page.
-- The `type` and `language` attributes are not required.
-- A script in an external file can be inserted with `<script src="path/to/script.js"></script>`.
+- Du bruger et `<script>` tag til at tilføje JavaScript til et HTML-dokument.
+- `type` og `language` attributter er ikke længere påkrævet.
+- Et eksternt script kan blive knyttet til dokumentet med `<script src="path/to/script.js"></script>`.
 
 
-There is much more to learn about browser scripts and their interaction with the webpage. But let's keep in mind that this part of the tutorial is devoted to the JavaScript language, so we shouldn't distract ourselves with browser-specific implementations of it. We'll be using the browser as a way to run JavaScript, which is very convenient for online reading, but only one of many.
+Der er meget mere at lære om browser scripts og deres interaktion med selve websiden. Men husk, at denne del af tutorialen har fokus på JavaScript sproget, så jeg vil ikke forvirre med for mange browser-specifikke emner. Du vil bruge en browser som en måde at afvikle JavaScript, som passer godt med denne online bog. Men, det er kun en af mange måder JavaScript kan afvikles.

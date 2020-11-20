@@ -1,8 +1,8 @@
-The HTML code:
+html-koden:
 
 [html src="index.html"]
 
-For the file `alert.js` in the same folder:
+og her er JavaScript koden `alert.js` som skal ligge i samme folder:
 
 [js src="alert.js"]
 

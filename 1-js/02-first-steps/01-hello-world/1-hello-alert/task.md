@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Show an alert
+# Vis en advarsel
 
-Create a page that shows a message "I'm JavaScript!".
+Opret en side der viser beskeden "Jeg er JavaScript!".
 
-Do it in a sandbox, or on your hard drive, doesn't matter, just ensure that it works.
+Gør det i en sandkasse, eller på din egen harddisk. Det er ligemeget hvor - bare det virker. :)
 
 [demo src="solution"]
 
