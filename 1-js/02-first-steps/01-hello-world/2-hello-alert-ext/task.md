@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Show an alert with an external script
+# Vis en advarsel med gennem et eksternt script
 
-Take the solution of the previous task <info:task/hello-alert>. Modify it by extracting the script content into an external file `alert.js`, residing in the same folder.
+Tag din løsning fra før <info:task/hello-alert>. Tilret det, så du trækker JavaScript koden ud til en ekstern fil kaldet `alert.js` og som er placeret i samme folder som html-dokumentet.
 
-Open the page, ensure that the alert works.
+Åbn side for at sikre dig, at dialogboksen stadig vises.
