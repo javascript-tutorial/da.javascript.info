@@ -1,11 +1,6 @@
 # The Modern JavaScript Tutorial in Danish
 
-<<<<<<< HEAD
 This repository hosts the translation of <https://javascript.info> in Danish.
-=======
-This repository hosts the English content of the Modern JavaScript Tutorial, published in [https://javascript.info](https://javascript.info).
->>>>>>> 99e59ba611ab11319ef9d0d66734b0bea2c3f058
-
 
 **That's how you can contribute:**
 
