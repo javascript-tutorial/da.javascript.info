@@ -102,12 +102,12 @@ document.querySelector('.hola').innerHTML = text;
 
 Please note, that sometimes code is followed by pictures, and if you translate text `Hello` -> `Hola` in the code, you need to translate text in picturess as well.
 
-
 In that case it's probably easier not to translate such text. See more about translating images later.
-
+=======
   - `index.md` stands for a chapter
   - `article.md` stands for an article
   - `task.md` stands for a task (solution must be provided in `solution.md` file as well)
+
 
 ### External Links
 
