@@ -1,44 +1,44 @@
-# Code structure
+# Kodens struktur
 
-The first thing we'll study is the building blocks of code.
+Den første ting du skal lære er byggestenene for kode.
 
-## Statements
+## Udsagn (statements)
 
-Statements are syntax constructs and commands that perform actions.
+Et udsagn er en syntakskonstruktion eller kommando der udfører en handling.
 
-We've already seen a statement, `alert('Hello, world!')`, which shows the message "Hello, world!".
+Du har allerede set et udsagn, `alert('Hello, world!')`, der viste meddelelsen "Hello, world!".
 
-We can have as many statements in our code as we want. Statements can be separated with a semicolon.
+Du kan have så mange udsagn du vil i din kode. Udsagn adskilles af et semikolon (;)
 
-For example, here we split "Hello World" into two alerts:
+Dette eksempel splitter "Hello World" op i to advarsler:
 
 ```js run no-beautify
 alert('Hello'); alert('World');
 ```
 
-Usually, statements are written on separate lines to make the code more readable:
+Normal skrives udsagn på hver sin linje for at gøre koden mere læsbar:
 
 ```js run no-beautify
 alert('Hello');
 alert('World');
 ```
 
-## Semicolons [#semicolon]
+## Semikolon [#semicolon]
 
-A semicolon may be omitted in most cases when a line break exists.
+Et semikolon kan i de fleste tilfælde udelades, hvis der er et linjeskift.
 
-This would also work:
+Dette vil også virke:
 
 ```js run no-beautify
 alert('Hello')
 alert('World')
 ```
 
-Here, JavaScript interprets the line break as an "implicit" semicolon. This is called an [automatic semicolon insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion).
+Her fortolker JavaScript linjeskiftet som et implicit semikolon. Dette kaldes en [automatisk semikolon indsættelse](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion).
 
-**In most cases, a newline implies a semicolon. But "in most cases" does not mean "always"!**
+**I de fleste tilfælde vil et linjeskift forstås som et semikolon. Men "i de fleste tilfælde" betyder ikke "altid!"**
 
-There are cases when a newline does not mean a semicolon. For example:
+Der er tilfælde, hvor et linjeskift ikke betyder semikolon. For eksempel:
 
 ```js run no-beautify
 alert(3 +
@@ -46,114 +46,114 @@ alert(3 +
 + 2);
 ```
 
-The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so the semicolon is not required. And in this case that works as intended.
+Koden viser `6` fordi JavaScript ikke indsætter et semikolon her. Det er intuitivt åbenlyst at, hvis en linje ender med et plus `"+"`, så er det et "ufuldstændigt udtryk", så et semikolon er ikke påkrævet. I dette tilfælde virker det som forventet.
 
-**But there are situations where JavaScript "fails" to assume a semicolon where it is really needed.**
+**Men, der er situationer hvor JavaScript "fejler" med at regne ud om der virkelig er behov for et semikolon.**
 
-Errors which occur in such cases are quite hard to find and fix.
+Fejl der opstår på denne måde kan være svære at finde og rette.
 
-````smart header="An example of an error"
-If you're curious to see a concrete example of such an error, check this code out:
+````smart header="Et ekempel på en fejl"
+Hvis du er nysgerrig efter et konkret eksempel på sådan en fejl, så prøv denne kode:
 
 ```js run
 [1, 2].forEach(alert)
 ```
 
-No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of the code: it shows `1` then `2`.
+Tænk ikke for meget på de hårde paranteser `[]` og `forEach` endnuyet. Dem lærer du om senere. For nu, så tænk bare, at denne kode vil vise en dialogboks med tallet `1` efterfulgt af tallet `2`.
 
-Now, let's add an `alert` before the code and *not* finish it with a semicolon:
+Prøv nu, at tilføje en `alert` før den anden kode og lad være med at afslutte med semikolon:
 
 ```js run no-beautify
-alert("There will be an error")
+alert("Nu vil der ske en fejl")
 
 [1, 2].forEach(alert)
 ```
 
-Now if we run the code, only the first `alert` is shown and then we have an error!
+Nu vil den føre advarsel vise sig og bagefter vil konsollen melde fejl.
 
-But everything is fine again if we add a semicolon after `alert`:
+Men, alt vil virke fint, hvis du sætter et semikolon efter `alert`:
 ```js run
-alert("All fine now");
+alert("Alt er fint nu");
 
 [1, 2].forEach(alert)  
 ```
 
-Now we have the "All fine now" message followed by `1` and `2`.
+Nu vil du se teksten "Alt er fint nu" efterfulgt af `1` and `2`.
 
 
-The error in the no-semicolon variant occurs because JavaScript does not assume a semicolon before square brackets `[...]`.
+Fejlen her opstår fordi JavaScript ikke forventer et semikolon før hårde paranteser `[...]`.
 
-So, because the semicolon is not auto-inserted, the code in the first example is treated as a single statement. Here's how the engine sees it:
+Så, fordi semikolon ikke sættes ind automatisk vil det blive opfattet som ét langt udsagn. Her er hvordan motoren ser det:
 
 ```js run no-beautify
-alert("There will be an error")[1, 2].forEach(alert)
+alert("Nu vil der ske en fejl")[1, 2].forEach(alert)
 ```
 
-But it should be two separate statements, not one. Such a merging in this case is just wrong, hence the error. This can happen in other situations.
+Men det burde være to seperate udsagn og ikke ét. Sådan en sammentrækning er forkert og derfor melder JavaScript fejl. Denne type fejl kan også ske i andre sammenhænge.
 ````
 
-We recommend putting semicolons between statements even if they are separated by newlines. This rule is widely adopted by the community. Let's note once again -- *it is possible* to leave out semicolons most of the time. But it's safer -- especially for a beginner -- to use them.
+Jeg anbefaler at du sætter semikolon mellem udsagn - også selvom de bliver adskilt af linjeskift. Så, opsummeret -- *det er muligt* at udelade semikolon i de fleste tilfælde. Men det er sikre -- specielt for en begynder -- at bruge dem.
 
-## Comments [#code-comments]
+## Kommentarer [#code-comments]
 
-As time goes on, programs become more and more complex. It becomes necessary to add *comments* which describe what the code does and why.
+Som tiden går og programmer bliver mere og mere komplekse, er det nødvendigt at tilføje *kommentarer* der beskriver hvad koden gør og hvorfor.
 
-Comments can be put into any place of a script. They don't affect its execution because the engine simply ignores them.
+Kommentarer kan puttes ind alle steder i et script. De påvirker ikke afviklingen af koden fordi JavaScript-motoren ganske enkelt ignorerer dem.
 
-**One-line comments start with two forward slash characters `//`.**
+**Enkeltlinjeskommentar starter med for skråstreger `//`.**
 
-The rest of the line is a comment. It may occupy a full line of its own or follow a statement.
+Resten af linjen vil være en kommentar. Den kan stå på en linje for sig selv eller stå efter et udsagn.
 
-Like here:
+Som her:
 ```js run
-// This comment occupies a line of its own
+// Denne kommentar står på sin egen linje
 alert('Hello');
 
-alert('World'); // This comment follows the statement
+alert('World'); // Denne kommentar står efter et udsagn
 ```
 
-**Multiline comments start with a forward slash and an asterisk <code>/&#42;</code> and end with an asterisk and a forward slash <code>&#42;/</code>.**
+**Flerlinjeskommenter starter med en skråstreg og en stjerne <code>/&#42;</code> og slutter med en stjerne og en skråstreg <code>&#42;/</code>.**
 
-Like this:
+Som her:
 
 ```js run
-/* An example with two messages.
-This is a multiline comment.
+/* Et eksempel med to beskeder.
+Dette er en kommenatar over flere linjer.
 */
 alert('Hello');
 alert('World');
 ```
 
-The content of comments is ignored, so if we put code inside <code>/&#42; ... &#42;/</code>, it won't execute.
+Indholdet af kommentarer ignoreres, så hvis du putter kode ind <code>/&#42; ... &#42;/</code> vil det ikke blive afviklet.
 
-Sometimes it can be handy to temporarily disable a part of code:
+Nogle gange kan det være praktisk, hvis du vil deaktivere dele af din kode:
 
 ```js run
-/* Commenting out the code
+/* Kommenterer noget kode ud
 alert('Hello');
 */
 alert('World');
 ```
 
-```smart header="Use hotkeys!"
-In most editors, a line of code can be commented out by pressing the `key:Ctrl+/` hotkey for a single-line comment and something like `key:Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac, try `key:Cmd` instead of `key:Ctrl` and `key:Option` instead of `key:Shift`.
+```smart header="Brug genvejstaster!"
+I de fleste editorer kan du kommentere kode ud ved at trykke genvejstasten `key:Ctrl+/` for en enkelt linje og noget i stil med `key:Ctrl+Shift+/` -- for flere linjer (marker linjer med kode og tryk genvejskombinationen). For Mac, prøv `key:Cmd` i stedet for `key:Ctrl` og `key:Option` i stedet for `key:Shift`. Det danske tastaturlayout har ikke nem tilgang til skråstreg som genvej. Derfor har editorer som f.eks. VSCode genvejen `key:Ctrl+'`
 ```
 
-````warn header="Nested comments are not supported!"
-There may not be `/*...*/` inside another `/*...*/`.
+````warn header="Indlejrede kommentarer er ikke understøttet!"
+Du kan ikke have `/*...*/` inde i et andet sæt `/*...*/`.
 
-Such code will die with an error:
+Sådan en kode vil resultere i en fejl:
 
 ```js run no-beautify
 /*
-  /* nested comment ?!? */
+  /* Indlejret kommentar ?!? */
 */
 alert( 'World' );
 ```
 ````
 
-Please, don't hesitate to comment your code.
+Husk, at kommenter din kode.
 
-Comments increase the overall code footprint, but that's not a problem at all. There are many tools which minify code before publishing to a production server. They remove comments, so they don't appear in the working scripts. Therefore, comments do not have negative effects on production at all.
+Kommentarer øger størrelsen på koden, men det er ikke et problem. Der findes mange værktøjer til at minimere din kode før den endeligt sendes til en produktionsserver. Det vil fjerne alle kommentarer, så de ikke er med i det endelige script. Derfor har kommentarer ikke nogen negativ effekt på den endelige kode.
 
-Later in the tutorial there will be a chapter <info:code-quality> that also explains how to write better comments.
+Senere i tutorialen vil du læse et kapitel <info:code-quality> der forklarer, hvordan du skriver bedre kommentarer.
