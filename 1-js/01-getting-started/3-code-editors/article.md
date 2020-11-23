@@ -1,46 +1,46 @@
-# Code editors
+# Kodeeditorer
 
-A code editor is the place where programmers spend most of their time.
+En kodeeditor er det sted, hvor du som programmør bruger det meste af din tid.
 
-There are two main types of code editors: IDEs and lightweight editors. Many people use one tool of each type.
+Der er grundlæggende to typer af editorer: IDE'er og letvægtseditorer. Mange udviklere bruger én af hver type.
 
 ## IDE
 
-The term [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) (Integrated Development Environment) refers to a powerful editor with many features that usually operates on a "whole project." As the name suggests, it's not just an editor, but a full-scale "development environment."
+Begrebet [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) (Integrated Development Environment) referer til en kraftfuld editor med mange muligheder der gør det muligt at arbejde med "hele projekter". Som navnet antyder, er det ikke kun en editor, men et fuldskala udviklingsmiljø.
 
-An IDE loads the project (which can be many files), allows navigation between files, provides autocompletion based on the whole project (not just the open file), and integrates with a version management system (like [git](https://git-scm.com/)), a testing environment, and other "project-level" stuff.
+Et IDE henter et projekt (som kan indeholde mange filer), tillader navigation mellem filer, hjælper med automatisk udførelse baseret på hele projektet og ikke bare den åbne fil, og integrerer med systemer til versionering (såsom [git](https://git-scm.com/)), et testmiljø og andre funktioner på projektniveau.
 
-If you haven't selected an IDE yet, consider the following options:
+Hvis du ikke har valgt en IDE endnu, så kan du prøve følgende:
 
-- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
-- [WebStorm](http://www.jetbrains.com/webstorm/) (cross-platform, paid).
+- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, gratis).
+- [WebStorm](http://www.jetbrains.com/webstorm/) (cross-platform, betaling).
 
-For Windows, there's also "Visual Studio", not to be confused with "Visual Studio Code". "Visual Studio" is a paid and mighty Windows-only editor, well-suited for the .NET platform. It's also good at JavaScript. There's also a free version [Visual Studio Community](https://www.visualstudio.com/vs/community/).
+Til WIndows er der også "Visual Studio", ikke at forveksle med "Visual Studio Code". "Visual Studio" er en kraftfuld WIndows-only editor der dog koster penge i den fulde version og virkelig god til udvikling på .NET platformen. Den er dog også god til JavsScript og der findes en gratis version kaldet [Visual Studio Community](https://www.visualstudio.com/vs/community/).
 
-Many IDEs are paid, but have a trial period. Their cost is usually negligible compared to a qualified developer's salary, so just choose the best one for you.
+Mange IDE er betalingsprogrammer, men de har ofte en prøveperiode. De koster dog ikke så meget at man som professionel udvikler ikke kan forsvare at betale det, så vælg den du synes matcher dine behov bedst, når du begynder at arbejde professionelt med programmering.
 
-## Lightweight editors
+## Letvægtseditorer
 
-"Lightweight editors" are not as powerful as IDEs, but they're fast, elegant and simple.
+Letvægtseditorer er ikke så kraftfulde som IDE'er, men de er hurtige, elegante og simple. 
 
-They are mainly used to open and edit a file instantly.
+De bliver hovedsageligt brugt til hurtigt at åbne og redigere filer.
 
-The main difference between a "lightweight editor" and an "IDE" is that an IDE works on a project-level, so it loads much more data on start, analyzes the project structure if needed and so on. A lightweight editor is much faster if we need only one file.
+Hovedforskellen mellem et IDE og en letvægtseditor er, at IDE'et arbejder på projektniveau, så den henter mange flere data fra starte, analyserer projektets struktur, hvis der er behov for det osv. En letvægtseditor er meget hurtigere, hvis du bare skal arbejde med enkelte filer.
 
-In practice, lightweight editors may have a lot of plugins including directory-level syntax analyzers and autocompleters, so there's no strict border between a lightweight editor and an IDE.
+I praksis, så har mange letvægtseditorer mulighed for en masse plugin programmer, der også indbefatter syntax-analusering, autofuldførelse osv, så der er ikke nogen klar grænse mellem letvægtseditorer og et IDE.
 
-The following options deserve your attention:
+Følgende programmer kan være gode at undersøge:
 
-- [Atom](https://atom.io/) (cross-platform, free).
-- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
+- [Atom](https://atom.io/) (cross-platform, gratis).
+- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, gratis).
 - [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
-- [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
-- [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
+- [Notepad++](https://notepad-plus-plus.org/) (Windows, gratis).
+- [Vim](http://www.vim.org/) og [Emacs](https://www.gnu.org/software/emacs/) er også gode, hvis man ved, hvordan de bruges.
 
-## Let's not argue
+## Lad os nu ikke komme op og skændes
 
-The editors in the lists above are those that either I or my friends whom I consider good developers have been using for a long time and are happy with.
+Editorer på listen ovenfor er dem som enten jeg eller jeg har set folk omkring mig bruge og betragte som gode redskaber for dem.
 
-There are other great editors in our big world. Please choose the one you like the most.
+Der findes andre gode editorer på nettet. Kig dig omkring og brug den du har det bedst med..
 
-The choice of an editor, like any other tool, is individual and depends on your projects, habits, and personal preferences.
+Valget af editor er, som med mange andre redskaber, et individuelt valg og er nogle gange afhængig af projektet, vaner og personlig præference.

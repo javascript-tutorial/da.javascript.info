@@ -1,89 +1,61 @@
-# The modern mode, "use strict"
+# Den 'moderne' metode, "use strict"
 
-For a long time, JavaScript evolved without compatibility issues. New features were added to the language while old functionality didn't change.
+I lang tid udviklede JavaScript sig uden problemer med kompatibilitet. Nye muligheder blev tilføjet til sproget, men den gamle funktionalitet blev ikke ændret.
 
-That had the benefit of never breaking existing code. But the downside was that any mistake or an imperfect decision made by JavaScript's creators got stuck in the language forever.
+Det havde den fordel at gammel kode aldrig fejlede. Man det havde den ulempe at uperfekte beslutninger lavet af skaberne af JavaScript blevet fanget i sproget for evigt.
 
-This was the case until 2009 when ECMAScript 5 (ES5) appeared. It added new features to the language and modified some of the existing ones. To keep the old code working, most such modifications are off by default. You need to explicitly enable them with a special directive: `"use strict"`.
+Sådan var det indtil 2009, hvor ECMAScript 5 (ES5) kom frem. Det tilføjede en række nye muligheder til sproget og ændrede nogle af de eksisterende. FOr at holde den gamle kode kørende var de fleste ændringer slået fra som standard. Du skulle aktivt slå dem til med et specielt direktiv kaldet `"use strict"`.
 
 ## "use strict"
 
-The directive looks like a string: `"use strict"` or `'use strict'`. When it is located at the top of a script, the whole script works the "modern" way.
+Direktivet ligner en simpel tekststreng: `"use strict"` eller `'use strict'`. Når den står skrevet øverst i dit script vil hele scriptet virke på "den nye måde".
 
-For example:
+For eksempel
 
 ```js
 "use strict";
 
-// this code works the modern way
+// Denne kode bruger de nye funktioner i JavaScript
 ...
 ```
 
-Quite soon we're going to learn functions (a way to group commands), so let's note in advance that `"use strict"` can be put at the beginning of a function. Doing that enables strict mode in that function only. But usually people use it for the whole script.
+Du vil snart lære om funktioner, som er en måde at gruppere kommandoer.
 
-````warn header="Ensure that \"use strict\" is at the top"
-Please make sure that `"use strict"` is at the top of your scripts, otherwise strict mode may not be enabled.
+I denne sammenhæng skal det dog nævnes at `"use strict"` kan skrives i starten af en funktion (de fleste funktioner, i hvert fald) i stedet for øverst i scriptet. Hvis du gør det, vil strict mode kun være aktiv inde i funktionen. Men, det mest normale er at sætte det for hele ens script.
 
-Strict mode isn't enabled here:
+
+````warn header="Sørg for at \"use strict\" er placeret i toppen"
+Du skal sikre dig at `"use strict"` er allerøverst i dit dokument, ellers vil de dele af din kode der er over ikke forholde sig til det.
+
+strict mode er ikke aktiv her:
 
 ```js no-strict
-alert("some code");
-// "use strict" below is ignored--it must be at the top
+alert("noget kode");
+// "use strict" under bliver ignoreret. Det skal stå øverst.
 
 "use strict";
 
-// strict mode is not activated
+// strict mode bliver ikke aktiveret
 ```
 
-Only comments may appear above `"use strict"`.
+Kun kommentarer må stå over `"use strict"`.
 ````
 
-```warn header="There's no way to cancel `use strict`"
-There is no directive like `"no use strict"` that reverts the engine to old behavior.
+```warn header="Der er ingen måde at fortryde `use strict`"
+Der findes ikke et direktiv i stil med`"no use strict"`, der vil vende tilbage til den gamle måde.
 
-Once we enter strict mode, there's no going back.
+Så snart du har aktiveret strict mode, er der ingen vej tilbage.
 ```
 
-## Browser console
+## Brug altid "use strict"
 
-When you use a [developer console](info:devtools) to run code, please note that it doesn't `use strict` by default.
+Forskellene mellem `"use strict"` og "standard" tilstand manger vi stadig at gennemgå.
 
-Sometimes, when `use strict` makes a difference, you'll get incorrect results.
+I de næste kapitler, efterhånden som vi lærer flere af sprogets muligheder, vil du blive bekendt med forskelle i strict mode. Heldigvis er der ikke så mange og de gør faktisk livet som udvikler bedre.
 
-So, how to actually `use strict` in the console?
+For nu er det nok, at du kender til det mere generelle:
 
-First, you can try to press `key:Shift+Enter` to input multiple lines, and put `use strict` on top, like this:
-
-```js
-'use strict'; <Shift+Enter for a newline>
-//  ...your code
-<Enter to run>
-```
-
-It works in most browsers, namely Firefox and Chrome.
-
-If it doesn't, e.g. in an old browser, there's an ugly, but reliable way to ensure `use strict`. Put it inside this kind of wrapper:
-
-```js
-(function() {
-  'use strict';
-
-  // ...your code here...
-})()
-```
-
-## Should we "use strict"?
-
-The question may sound obvious, but it's not so.
-
-One could recommend to start scripts with `"use strict"`... But you know what's cool?
-
-Modern JavaScript supports "classes" and "modules" - advanced language structures (we'll surely get to them), that enable `use strict` automatically. So we don't need to add the `"use strict"` directive, if we use them.
-
-**So, for now `"use strict";` is a welcome guest at the top of your scripts. Later, when your code is all in classes and modules, you may omit it.**
-
-As of now, we've got to know about `use strict` in general.
-
-In the next chapters, as we learn language features, we'll see the differences between the strict and old modes. Luckily, there aren't many and they actually make our lives better.
-
-All examples in this tutorial assume strict mode unless (very rarely) specified otherwise.
+1. `"use strict"` er et direktiv der skrifter JavaScrip-motoren til "modern" tilstand og ændrer måden den går til indbyggede muligheder. Det vil vil lære mere om, efterhånden som vi støder på dem.
+2. strict mode aktiveres ved at skrive `"use strict"` i toppen. Der er flere muligeheder i sproget (som klasser og moduler) der aktiverer stricvt mode automatisk.
+3. strict mode understøttes af alle moderne browsere.
+4. Det anbefales altid at starte et script med `"use strict"`. Alle eksempler i denne tutorial regner med at det er gjort. I sjældne tilfælde vil du blive bedt om andet.

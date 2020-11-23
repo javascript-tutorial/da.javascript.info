@@ -1,3 +1,3 @@
-# JavaScript Fundamentals
+# Grundlæggende JavaScript
 
-Let's learn the fundamentals of script building.
+Lær alle grundstenene i programmering med JavaScript.
