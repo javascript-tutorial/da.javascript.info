@@ -1,10 +1,6 @@
 # The Modern JavaScript Tutorial in Danish
 
-<<<<<<< HEAD
 This repository hosts the translation of <https://javascript.info> in Danish.
-=======
-This repository hosts the English content of the Modern JavaScript Tutorial, published in [https://javascript.info](https://javascript.info).
->>>>>>> 99e59ba611ab11319ef9d0d66734b0bea2c3f058
 
 
 **That's how you can contribute:**
@@ -106,14 +102,12 @@ document.querySelector('.hola').innerHTML = text;
 
 Please note, that sometimes code is followed by pictures, and if you translate text `Hello` -> `Hola` in the code, you need to translate text in picturess as well.
 
-<<<<<<< HEAD
+
 In that case it's probably easier not to translate such text. See more about translating images later.
-=======
+
   - `index.md` stands for a chapter
   - `article.md` stands for an article
   - `task.md` stands for a task (solution must be provided in `solution.md` file as well)
->>>>>>> 99e59ba611ab11319ef9d0d66734b0bea2c3f058
-
 
 ### External Links
 
