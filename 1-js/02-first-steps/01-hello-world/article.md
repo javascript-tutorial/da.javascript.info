@@ -9,7 +9,11 @@ Først, lad os se, hvordan du kobler et script til en webside. For server-side m
 
 ## "script" tagget
 
+<<<<<<< HEAD
 JavaScript programmer kan blive sat ind i alle dele af et HTML-dokument ved hjælp af et `<script>` tag.
+=======
+JavaScript programs can be inserted almost anywhere into an HTML document using the `<script>` tag.
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 For eksempel:
 
