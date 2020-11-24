@@ -6,9 +6,7 @@ Men, du behøver et miljø til at afvikle dine scripts og siden denne bog er en 
 
 Først, lad os se, hvordan du kobler et script til en webside. For server-side miljøer som Node.js, kan du afvikle scripts med kommandoen`"node my.js"`.
 
-
 ## "script" tagget
-
 JavaScript programmer kan blive sat ind i alle dele af et HTML-dokument ved hjælp af et `<script>` tag.
 
 For eksempel:
