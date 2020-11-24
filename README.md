@@ -3,7 +3,6 @@
 This repository hosts the translation of <https://javascript.info> in Danish.
 
 
-
 **That's how you can contribute:**
 
 - See the [Danish Translate Progress](https://github.com/javascript-tutorial/da.javascript.info/issues/1) issue.

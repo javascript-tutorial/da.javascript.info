@@ -4,7 +4,7 @@ importance: 4
 
 # Uppercase const?
 
-Examine the following code:
+Undersøg følgende kode:
 
 ```js
 const birthday = '18.04.1982';
@@ -12,13 +12,13 @@ const birthday = '18.04.1982';
 const age = someCode(birthday);
 ```
 
-Here we have a constant `birthday` date and the `age` is calculated from `birthday` with the help of some code (it is not provided for shortness, and because details don't matter here).
+Her har du en konstant `birthday` dato og `age` bliver beregnet fra `birthday` ved hjælp af noget kode (den kode er ikke vist for klarhedens skyld - og fordi det ikke er vigtigt i eksemplet).
 
-Would it be right to use upper case for `birthday`? For `age`? Or even for both?
+Vil det være rigtigt at bruge store bogstaver til `birthday`? Til `age`? Eller måske til begge?
 
 ```js
-const BIRTHDAY = '18.04.1982'; // make uppercase?
+const BIRTHDAY = '18.04.1982'; // lav til uppercase?
 
-const AGE = someCode(BIRTHDAY); // make uppercase?
+const AGE = someCode(BIRTHDAY); // lav til uppercase?
 ```
 
