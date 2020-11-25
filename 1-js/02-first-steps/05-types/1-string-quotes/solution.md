@@ -1,15 +1,15 @@
 
-Backticks embed the expression inside `${...}` into the string.
+Backticks indlejrer udtryk skrevet i `${...}` ind i selve tekststrengen.
 
 ```js run
 let name = "Ilya";
 
-// the expression is a number 1
+// udtrykket er et tal
 alert( `hello ${1}` ); // hello 1
 
-// the expression is a string "name"
+// udtrykket er selve teksten "name"
 alert( `hello ${"name"}` ); // hello name
 
-// the expression is a variable, embed it
+// udtrykket er indholdet af variablen name
 alert( `hello ${name}` ); // hello Ilya
 ```

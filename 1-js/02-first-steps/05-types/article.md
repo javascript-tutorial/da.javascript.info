@@ -1,18 +1,18 @@
-# Data types
+# Datatyper
 
-A value in JavaScript is always of a certain type. For example, a string or a number.
+En værdi i JavaScript er altid af en bestemt type - f.eks. en tekststreng eller et tal.
 
-There are eight basic data types in JavaScript. Here, we'll cover them in general and in the next chapters we'll talk about each of them in detail.
+Der er otte grundlæggende typer i JavScript. Her vil jeg beskrive dem overordnet og på de næste sider vil jeg tale om hver enkelt mere uddybende.
 
-We can put any type in a variable. For example, a variable can at one moment be a string and then store a number:
+Du kan putte alle typer data i en variabel. F.eks. kan en variabel på et tidspunkt indeholde en tekststreng og kort efter et tal:
 
 ```js
 // no error
-let message = "hello";
+let message = "hallo";
 message = 123456;
 ```
 
-Programming languages that allow such things, such as JavaScript, are called "dynamically typed", meaning that there exist data types, but variables are not bound to any of them.
+Sprog der tillader den slags ting kaldes "dynamically typed", hvilket betyder, at der findes datatyper, men variable er ikke bundet af dem.
 
 ## Number
 
@@ -21,206 +21,206 @@ let n = 123;
 n = 12.345;
 ```
 
-The *number* type represents both integer and floating point numbers.
+Datatypen *number* repræsenterer både heltal og kommatal.
 
-There are many operations for numbers, e.g. multiplication `*`, division `/`, addition `+`, subtraction `-`, and so on.
+Der er mange operatorer vor numre, som f.eks. multiplikation `*`, division `/`, addition `+`, subtraktion `-` og flere andre.
 
-Besides regular numbers, there are so-called "special numeric values" which also belong to this data type: `Infinity`, `-Infinity` and `NaN`.
+Udover regulære tal findes der også såkaldte "specielle numeriske værdier" der høre med under denne datatype: `Infinity`, `-Infinity` og `NaN`.
 
-- `Infinity` represents the mathematical [Infinity](https://en.wikipedia.org/wiki/Infinity) ∞. It is a special value that's greater than any number.
+- `Infinity` repræsenterer et matematisk [Uendeligt](https://en.wikipedia.org/wiki/Infinity) ∞. Det er en speciel værdi, der er højere end hvilket som helst andet tal.
 
-    We can get it as a result of division by zero:
+    Du kan få det som et resultat af at dividere med nul:
 
     ```js run
     alert( 1 / 0 ); // Infinity
     ```
 
-    Or just reference it directly:
+    Eller referere til det direkte:
 
     ```js run
     alert( Infinity ); // Infinity
     ```
-- `NaN` represents a computational error. It is a result of an incorrect or an undefined mathematical operation, for instance:
+- `NaN` repræsenterer en fejl i en beregning. Det er et resultat af en forkert eller ikke klart defineret matematisk operation:
 
     ```js run
-    alert( "not a number" / 2 ); // NaN, such division is erroneous
+    alert( "not a number" / 2 ); // NaN, sådan en division resulterer ikke i et tal
     ```
 
-    `NaN` is sticky. Any further operation on `NaN` returns `NaN`:
+    `NaN` hænger fast. Alle fremtidige oprerationer på `NaN` vil resultere i `NaN`:
 
     ```js run
     alert( "not a number" / 2 + 5 ); // NaN
     ```
 
-    So, if there's a `NaN` somewhere in a mathematical expression, it propagates to the whole result.
+    Så, hvis der er et `NaN` et eller andet sted i udtrykket, så vil det påvirke hele beregningen.
 
-```smart header="Mathematical operations are safe"
-Doing maths is "safe" in JavaScript. We can do anything: divide by zero, treat non-numeric strings as numbers, etc.
+```smart header="Matematiske operatorer er sikre"
+Matematik er "sikkert" i JavaScript. Du kan gøre alt: dividere med nul, behandle ikke-nummeriske tekststrenge som tal, etc.
 
-The script will never stop with a fatal error ("die"). At worst, we'll get `NaN` as the result.
+Dit script vil aldrig stoppe med en fatal fejl ("die"). Det værste der kan ske er, at du får et `NaN`som resultat.
 ```
 
-Special numeric values formally belong to the "number" type. Of course they are not numbers in the common sense of this word.
+Specielle nummeriske værdier tilfører formelt datatypen "number", selv om de ikke i ordets forstand er tal.
 
-We'll see more about working with numbers in the chapter <info:number>.
+Du lærer mere om at arbejde med tal i kapitlet <info:number>.
 
 ## BigInt
 
-In JavaScript, the "number" type cannot represent integer values larger than <code>(2<sup>53</sup>-1)</code> (that's `9007199254740991`), or less than <code>-(2<sup>53</sup>-1)</code> for negatives. It's a technical limitation caused by their internal representation.
+I JavaScript kan datatypen "Number" ikke repræsentere heltal større end <code>(2<sup>53</sup>-1)</code> (det svarer til `9007199254740991`), eller mindre end <code>-(2<sup>53</sup>-1)</code> for negative tal. Dette skyldes en intern begrænsning.
 
-For most purposes that's quite enough, but sometimes we need really big numbers, e.g. for cryptography or microsecond-precision timestamps.
+I de fleste tilfælde er det mere end rigeligt, men nogle gange har du brug for virkelig store tal, f.eks. til kryptografi eller microsekund-præcision i tidsstempler.
 
-`BigInt` type was recently added to the language to represent integers of arbitrary length.
+`BigInt` datatypen er tilføjet sproget for nyligt til at repræsentere heltal af en vilkårlig længde.
 
-A `BigInt` value is created by appending `n` to the end of an integer:
+En `BigInt` værdi oprettes ved at tilføje et `n` i slutningen af tallet:
 
 ```js
-// the "n" at the end means it's a BigInt
+// Et "n" i slutningen betyder at det er et BigInt
 const bigInt = 1234567890123456789012345678901234567890n;
 ```
 
-As `BigInt` numbers are rarely needed, we don't cover them here, but devoted them a separate chapter <info:bigint>. Read it when you need such big numbers.
+Fordi `BigInt` bruges meget sjældent vil jeg ikke dække det yderligere her, men du kan læse mere om dem i et seperat kapitel <info:bigint>. Læs det, hvis du skal arbejde med virkelig store tal.
 
 
-```smart header="Compatibility issues"
-Right now, `BigInt` is supported in Firefox/Chrome/Edge/Safari, but not in IE.
+```smart header="Kompatibilitet"
+Som det er nu, understøttes`BigInt` i Firefox/Chrome/Edge/Safari, men ikke i IE.
 ```
 
-You can check [*MDN* BigInt compatibility table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) to know which versions of a browser are supported.
+Du kan tjekke [*MDN* BigInt kompatabilitetstabel](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) for et overblik over, hvilke browsere der understøtter.
 
 ## String
 
-A string in JavaScript must be surrounded by quotes.
+En string (tekststreng) i JavaScript skal omkranses af anførselstegn (citationstegn).
 
 ```js
-let str = "Hello";
-let str2 = 'Single quotes are ok too';
-let phrase = `can embed another ${str}`;
+let str = "Hallo";
+let str2 = 'enkelt anførselstegn er også ok';
+let phrase = `backtick kan indlejre variable ${str}`;
 ```
 
-In JavaScript, there are 3 types of quotes.
+I JavaScript er der tre typer af anførselstegn.
 
-1. Double quotes: `"Hello"`.
-2. Single quotes: `'Hello'`.
-3. Backticks: <code>&#96;Hello&#96;</code>.
+1. Dobbelt anførselstegn: `"Hallo"`.
+2. Enkelt anførselstegn: `'Hallo'`.
+3. Grave (Backticks): <code>&#96;Hallo&#96;</code>.
 
-Double and single quotes are "simple" quotes. There's practically no difference between them in JavaScript.
+Dobbelt og enkelt anførselstegn er "simple" anførselstegn. Der er stort set ingen forskel på dem i JavaScript.
 
-Backticks are "extended functionality" quotes. They allow us to embed variables and expressions into a string by wrapping them in `${…}`, for example:
+Backticks har "udvidet funktionalitet". De tillader dig at indlejre variable og udtryk i tekststrengen ved at skrive `${…}`, for eksempel:
 
 ```js run
 let name = "John";
 
 // embed a variable
-alert( `Hello, *!*${name}*/!*!` ); // Hello, John!
+alert( `Hej, *!*${name}*/!*!` ); // Hej, John!
 
 // embed an expression
-alert( `the result is *!*${1 + 2}*/!*` ); // the result is 3
+alert( `resultatet er *!*${1 + 2}*/!*` ); // resultatet er 3
 ```
 
-The expression inside `${…}` is evaluated and the result becomes a part of the string. We can put anything in there: a variable like `name` or an arithmetical expression like `1 + 2` or something more complex.
+Udtryk inde i `${…}` evalueres først og resultatet bliver en del af tekststrengen. Du kan putte stort set alt ind: en variabel i stil med `name`, en aritmetisk operation som `1 + 2` eller noget mere komplekst.
 
-Please note that this can only be done in backticks. Other quotes don't have this embedding functionality!
+Vær opmærksom på, at du kun kan gøre dette i backticks. Normale anførselstegn har ikke denne mulighed!
 ```js run
-alert( "the result is ${1 + 2}" ); // the result is ${1 + 2} (double quotes do nothing)
+alert( "resultatet er ${1 + 2}" ); // resultatet er ${1 + 2} (anførselstegn udfører ikke beregningen)
 ```
 
-We'll cover strings more thoroughly in the chapter <info:string>.
+Du vil lære mere om tekststrenge i kapitlet <info:string>.
 
-```smart header="There is no *character* type."
-In some languages, there is a special "character" type for a single character. For example, in the C language and in Java it is called "char".
+```smart header="Der er ikke en *character* datatype."
+I nogle sprog er der en speciel "character" datatype for enkelte karakterer. F.eks. i sproget C og Java findes typen "char".
 
-In JavaScript, there is no such type. There's only one type: `string`. A string may consist of zero characters (be empty), one character or many of them.
+I JavaScript er der ikke sådan en type. Her er kun én type: `string`. En tekststreng kan indeholde nul karakterer (være tom), en karakter eller mange af dem.
 ```
 
-## Boolean (logical type)
+## Boolean (logisk type)
 
-The boolean type has only two values: `true` and `false`.
+Datatypen boolean har to værdier: `true` og `false`.
 
-This type is commonly used to store yes/no values: `true` means "yes, correct", and `false` means "no, incorrect".
+Denne type bruges normalt til at gemme ja/nej værdier: `true` byder "ja, rigtigt", og `false` betyder "nej, forkert".
 
-For instance:
+For eksempel:
 
 ```js
-let nameFieldChecked = true; // yes, name field is checked
-let ageFieldChecked = false; // no, age field is not checked
+let nameFieldChecked = true; // ja, name feltet er krydset af
+let ageFieldChecked = false; // nej, age feltet er ikke krydset af
 ```
 
-Boolean values also come as a result of comparisons:
+Boolean værdier kan ske som et resultat af en sammeligning:
 
 ```js run
 let isGreater = 4 > 1;
 
-alert( isGreater ); // true (the comparison result is "yes")
+alert( isGreater ); // true (sammeligningen er rigtig "ja")
 ```
 
-We'll cover booleans more deeply in the chapter <info:logical-operators>.
+Du lærer mere om booleans i kapitlet <info:logical-operators>.
 
-## The "null" value
+## Værdien "null"
 
-The special `null` value does not belong to any of the types described above.
+Den specielle `null` værdi hører ikke til nogle af datatyperne beskrevet ovenfor.
 
-It forms a separate type of its own which contains only the `null` value:
+Den er sin egen type og kan kun indeholde en `null` værdi:
 
 ```js
 let age = null;
 ```
 
-In JavaScript, `null` is not a "reference to a non-existing object" or a "null pointer" like in some other languages.
+I JavaScript er `null` ikke en "reference til et ikke-eksiserende objekt" eller en "null pointer" som i nogle andre sprog.
 
-It's just a special value which represents "nothing", "empty" or "value unknown".
+Det er simpelthen bare en speciel værdi til at repræsentere "ingenting" eller "tom".
 
-The code above states that `age` is unknown.
+Koden ovenfor fortæller at værdien for `age` ikke findes.
 
-## The "undefined" value
+## Værdien "undefined"
 
-The special value `undefined` also stands apart. It makes a type of its own, just like `null`.
+Den specielle værdi `undefined` skiller sig også ud. Den er sin egen datatype på samme måde som `null`.
 
-The meaning of `undefined` is "value is not assigned".
+Meningen med `undefined` er "værdien er ikke blevet tildelt".
 
-If a variable is declared, but not assigned, then its value is `undefined`:
+Hvis en variabel er blevet deklareret, men ikke tildelt en reel værdi er dens værdi `undefined`:
 
 ```js run
 let age;
 
-alert(age); // shows "undefined"
+alert(age); // viser "undefined"
 ```
 
-Technically, it is possible to explicitly assign `undefined` to a variable:
+Teknisk set er det muligt eksplicit at tildele en variabel værdien `undefined`:
 
 ```js run
 let age = 100;
 
-// change the value to undefined
+// Ændr værdien til undefined
 age = undefined;
 
 alert(age); // "undefined"
 ```
 
-...But we don't recommend doing that. Normally, one uses `null` to assign an "empty" or "unknown" value to a variable, while `undefined` is reserved as a default initial value for unassigned things.
+... men, det anbefaleas ikke. Normalt vil du bruge `null` til at tildele en variabel værdien "tomt" eller "ukendt", hvor `undefined` er reserveret til standard default værdien for variable der ikke har fået værdi tildelt endnu.
 
-## Objects and Symbols
+## Object og Symbol
 
-The `object` type is special.
+Datatypen `object` er speciel.
 
-All other types are called "primitive" because their values can contain only a single thing (be it a string or a number or whatever). In contrast, objects are used to store collections of data and more complex entities.
+Alle andre typer kaldes "primitive" fordi deres værdi indeholder én information (en tekststreng, et tal osv.). I modsætning til dette kan objekter gemme komplekse samlinger af information.
 
-Being that important, objects deserve a special treatment. We'll deal with them later in the chapter <info:object>, after we learn more about primitives.
+Med så mange underliggende muligheder fortjener objekter specialbehandling. Du lærer mere om dem senere i kapitlet <info:object>, efter du har lært mere om primitiver.
 
-The `symbol` type is used to create unique identifiers for objects. We have to mention it here for the sake of completeness, but also postpone the details till we know objects.
+Datatypen `symbol` bruges til at skabe unikke identifikationer for objekter. Jeg skriver det her for at du ved, at de findes som datatype, men jeg venter med at forklare dem yderligere før du ved mere om objekter.
 
-## The typeof operator [#type-typeof]
+## typeof operator [#type-typeof]
 
-The `typeof` operator returns the type of the argument. It's useful when we want to process values of different types differently or just want to do a quick check.
+`typeof` operatoren returnere datatypen af det argument den modtager. Dette er brugbart hvis du vil arbejde mde værdier af forskellige typer, eller bare vil sikre, at en variabel er af en bestemt type.
 
-It supports two forms of syntax:
+Den understøtter to former for syntaks:
 
-1. As an operator: `typeof x`.
-2. As a function: `typeof(x)`.
+1. Som en operator: `typeof x`.
+2. Som en funktion: `typeof(x)`.
 
-In other words, it works with parentheses or without them. The result is the same.
+Sagt på en anden måde, den virker både med og uden paranteser. Resultatet er det samme.
 
-The call to `typeof x` returns a string with the type name:
+Et kald til `typeof x` returnerer en tekststreng med datatypens navn:
 
 ```js
 typeof undefined // "undefined"
@@ -248,29 +248,29 @@ typeof alert // "function"  (3)
 */!*
 ```
 
-The last three lines may need additional explanation:
+De sidste tre linjer kræver lidt yderligere forklaring:
 
-1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
-2. The result of `typeof null` is `"object"`. That's an officially recognized error in `typeof` behavior, coming from the early days of JavaScript and kept for compatibility. Definitely, `null` is not an object. It is a special value with a separate type of its own.
-3. The result of `typeof alert` is `"function"`, because `alert` is a function. We'll study functions in the next chapters where we'll also see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently, returning `"function"`. That also comes from the early days of JavaScript. Technically, such behavior isn't correct, but can be convenient in practice.
+1. `Math` er et indbygget objekt, der leverer matematiske operationer. Du lærer mere om det i kapitlet <info:number>. Her, skal det bare ses som et eksempel på et objekt.
+2. Resultatet af `typeof null` er `"object"`. Det er officielt anerkendt som en fejl i `typeof` opførsel. Det startede i de tidlige dage af JavaScript og er blevet på grund af kompatibilitet. Det er sikkert at `null` ikke er et objekt, men sin egen datatype ... men JavaScript ved det bare ikke.
+3. Resultatet af `typeof alert` er `"function"`, fordi `alert` er en funktion. Du lærer mere om funktioner i næste kapitel, hvor du vil se, at der ikke er nogen speciel "funktion" datatype  i JavaScript. Funktioner tilhører typen `object`. Men `typeof` behandler dem forskelligt og returnerer `"function"`. Det fører også tilbage til gamle dage. Teknisk set er det forkert, men kan være praktisk i det daglige.
 
-## Summary
+## Opsummering
 
-There are 8 basic data types in JavaScript.
+Der er 8 grundlæggende datatyper i JavaScript.
 
-- `number` for numbers of any kind: integer or floating-point, integers are limited by <code>±(2<sup>53</sup>-1)</code>.
-- `bigint` is for integer numbers of arbitrary length.
-- `string` for strings. A string may have zero or more characters, there's no separate single-character type.
-- `boolean` for `true`/`false`.
-- `null` for unknown values -- a standalone type that has a single value `null`.
-- `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
-- `object` for more complex data structures.
-- `symbol` for unique identifiers.
+- `number` til alle slags tal: heltal og kommatal. Heltal er begrænset af <code>±(2<sup>53</sup>-1)</code>.
+- `bigint` er til heltal der er meget store.
+- `string` er til tekststrenge. En tekststreng kan have nul, en eller flere karakterer. Der er ikke en seperat datatype for enkelte karakterer..
+- `boolean` er til `true`/`false` værdier.
+- `null` for ukendte værdier -- en selvstændig datatype der kun kan have værdien `null`.
+- `undefined` for ikke tildelte værdier -- en selvstændig datatype der kun kan have værdien `undefined`.
+- `object` til mere komplekse datastrukturer.
+- `symbol` til unik identifikation.
 
-The `typeof` operator allows us to see which type is stored in a variable.
+`typeof` operatoren tillader dig at se, hvilken datatype en variabel er.
 
-- Two forms: `typeof x` or `typeof(x)`.
-- Returns a string with the name of the type, like `"string"`.
-- For `null` returns `"object"` -- this is an error in the language, it's not actually an object.
+- To måder: `typeof x` eller `typeof(x)`.
+- Returnerer en tekststreng med navnet på datatypen, i stil med `"string"`.
+- `null` returnerer `"object"` -- dette er en fejl i sproget, det er ikke et objekt.
 
-In the next chapters, we'll concentrate on primitive values and once we're familiar with them, we'll move on to objects.
+I det næste kapitel vil jeg koncentrere mig om primitive værdier. Så snart du er fortrolig med dem vil jeg gå videre med objekter.
