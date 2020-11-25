@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# String quotes
+# Tesktstrenge og citationstegn
 
-What is the output of the script?
+Hvad skriver følgende kommandoerWhat is the output of the script?
 
 ```js
 let name = "Ilya";
