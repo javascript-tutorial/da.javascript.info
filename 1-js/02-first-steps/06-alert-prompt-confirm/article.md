@@ -1,61 +1,61 @@
-# Interaction: alert, prompt, confirm
+# Interaktion: alert, prompt, confirm
 
-As we'll be using the browser as our demo environment, let's see a couple of functions to interact with the user: `alert`, `prompt` and `confirm`.
+Eftersom vi vil bruge en browser som mål i vores udviklingsmiljø, kan det være godt at se et par funktioner, der bruges til at interagere med brugeren: `alert`, `prompt` og `confirm`.
 
 ## alert
 
-This one we've seen already. It shows a message and waits for the user to press "OK".
+Denne her har du allerede set. Den viser en besked og venter på, at brugeren trykker "OK".
 
-For example:
+For eksempel:
 
 ```js run
-alert("Hello");
+alert("Hallo");
 ```
 
-The mini-window with the message is called a *modal window*. The word "modal" means that the visitor can't interact with the rest of the page, press other buttons, etc, until they have dealt with the window. In this case -- until they press "OK".
+Mini-vinduet med beskeden kaldes et *modalt vindue*. Ordet "modal" betyder, at brugeren ikke kan interagere med resten af siden, trykke på knapper etc, før de har håndteret vinduet. I dette tilfælde, før de har trykket på "OK".
 
 ## prompt
 
-The function `prompt` accepts two arguments:
+Funktionen `prompt` accepterer to argumenter:
 
 ```js no-beautify
 result = prompt(title, [default]);
 ```
 
-It shows a modal window with a text message, an input field for the visitor, and the buttons OK/Cancel.
+Den viser et modalt vindue med en tekstbesked, et inputfelt og knapperne OK og Cancel (fortryd).
 
 `title`
-: The text to show the visitor.
+: Den tekst der vises til brugeren.
 
 `default`
-: An optional second parameter, the initial value for the input field.
+: En frivillig anden parameter er hvilken tekst der skal stå som standard i inputfeltet.
 
-```smart header="The square brackets in syntax `[...]`"
-The square brackets around `default` in the syntax above denote that the parameter is optional, not required.
+```smart header="De hårde paranteser i en syntaks `[...]`"
+De hårde paranteser omkring `default` i syntaksen betyder, at parameteren er frivillig og derfor kan udelades.
 ```
 
-The visitor can type something in the prompt input field and press OK. Then we get that text in the `result`. Or they can cancel the input by pressing Cancel or hitting the `key:Esc` key, then we get `null` as the `result`.
+Brugeren kan skrive noget i promptens inputefelt og trykke på OK. Teksten bliver derved overført til variablen `result`. De kan også fortryde deres input ved at trykke Cancel eller trykke på `key:Esc`. I det tilfælde vil datatypen `null` overføres til `result`.
 
-The call to `prompt` returns the text from the input field or `null` if the input was canceled.
+Et kald til `prompt` returnerer enten teksten fra inputfeltet eller `null` hvis brugeren fortryder.
 
-For instance:
+For eksempel:
 
 ```js run
-let age = prompt('How old are you?', 100);
+let age = prompt('Hvor gammel er du?', 100);
 
-alert(`You are ${age} years old!`); // You are 100 years old!
+alert(`Du er ${age} år gammel!`); // Du er 100 år gammel!
 ```
 
-````warn header="In IE: always supply a `default`"
-The second parameter is optional, but if we don't supply it, Internet Explorer will insert the text `"undefined"` into the prompt.
+````warn header="I IE: Skriv altid en `default`"
+Anden parameter er frivillig men, hvis du ikke skriver den vil Internet Exlporer sætte teksten `"undefined"` ind i prompten.
 
-Run this code in Internet Explorer to see:
+Kør denne kode i Internet Exlporer for at se et eksempel:
 
 ```js run
 let test = prompt("Test");
 ```
 
-So, for prompts to look good in IE, we recommend always providing the second argument:
+Så, for at din prompt skal se ordentlig ud i IE anbefales det, altid at skrive det andet argument:
 
 ```js run
 let test = prompt("Test", ''); // <-- for IE
@@ -64,42 +64,42 @@ let test = prompt("Test", ''); // <-- for IE
 
 ## confirm
 
-The syntax:
+Syntaksen ser således ud:
 
 ```js
 result = confirm(question);
 ```
 
-The function `confirm` shows a modal window with a `question` and two buttons: OK and Cancel.
+Funktionen `confirm` viser et modalt vindue med et `spørgsmål` og to knapper: OK og Cancel.
 
-The result is `true` if OK is pressed and `false` otherwise.
+result bliver `true` hvis der trykkes på OK og ellers `false`.
 
-For example:
+For eksempel:
 
 ```js run
-let isBoss = confirm("Are you the boss?");
+let isBoss = confirm("Er du chefen?");
 
-alert( isBoss ); // true if OK is pressed
+alert( isBoss ); // true hvis der trykkes på OK
 ```
 
-## Summary
+## Opsummering
 
-We covered 3 browser-specific functions to interact with visitors:
+Du har set tre browser-specifikke funktioner til at interagere med brugere:
 
 `alert`
-: shows a message.
+: viser en besked.
 
 `prompt`
-: shows a message asking the user to input text. It returns the text or, if Cancel button or `key:Esc` is clicked, `null`.
+: viser en besked og beder brugeren om at skrive input tekst. Den returnerer teksten eller `null`hvis der trykkes på Cancel eller `key:Esc`
 
 `confirm`
-: shows a message and waits for the user to press "OK" or "Cancel". It returns `true` for OK and `false` for Cancel/`key:Esc`.
+: viser en besked og venter på, atbrugeren trykker "OK" eller "Cancel". Den returnerer `true` hvis der trykkes OK og `false` hvis der trykkes Cancel eller `key:Esc`.
 
-All these methods are modal: they pause script execution and don't allow the visitor to interact with the rest of the page until the window has been dismissed.
+e disse funktioner er modale: De pauser udførelsen af dit script og tillader ikke brugeren at interagere med resten af siden indtil arbejdet med vinduet er afsluttet.
 
-There are two limitations shared by all the methods above:
+Der er to begrænsninger der deles af alle metoderne ovenfor:
 
-1. The exact location of the modal window is determined by the browser. Usually, it's in the center.
-2. The exact look of the window also depends on the browser. We can't modify it.
+1. Den præcise placering af vinduet bestemmes af browseren. Normalt vil det være i midten.
+2. Udseendet af vinduet er også bestemt af browseren og du har ikke nogen nem måde at ændre det på.
 
-That is the price for simplicity. There are other ways to show nicer windows and richer interaction with the visitor, but if "bells and whistles" do not matter much, these methods work just fine.
+Dette er prisen for den simple adgang. Der er metoder til at vise pænere vinduer med mere mulighed for interaktion med brugeren. Men, hvis "bling og glimmer" ikke betyder så meget er disse metoder ret effektive.

@@ -2,8 +2,8 @@ importance: 4
 
 ---
 
-# A simple page
+# En simpel side
 
-Create a web-page that asks for a name and outputs it.
+Opret en webside der spørger efter et navn og skriver det på skærmen.
 
 [demo]
