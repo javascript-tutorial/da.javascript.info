@@ -1,150 +1,150 @@
-# Type Conversions
+# Konvertering mellem datatyper
 
-Most of the time, operators and functions automatically convert the values given to them to the right type.
+For det meste vil operatorer og funktioner automatisk konvertere værdier de modtager til den rigtige datatype.
 
-For example, `alert` automatically converts any value to a string to show it. Mathematical operations convert values to numbers.
+For eksempel vil `alert` automatisk konvertere alle værdier til tekststrenge for at vise dem. Matematiske operationer vil konvertere værdier til tal.
 
-There are also cases when we need to explicitly convert a value to the expected type.
+Der er også situationer, hvor du behøver eksplicit at konvertere en værdi til en forventet type.
 
-```smart header="Not talking about objects yet"
-In this chapter, we won't cover objects. For now we'll just be talking about primitives.
+```smart header="Ikke et ord om objekter ... endnu"
+I dette kapitel vil jeg ikke gennemgå objekter. For nu, vil jeg kun gennemgå primitiver.
 
-Later, after we learn about objects, in the chapter <info:object-toprimitive> we'll see how objects fit in.
+Senere, efter du har lært om objekter, i kapitlet <info:object-toprimitive> vil du lære, hvordan objekter passer ind.
 ```
 
-## String Conversion
+## KOnvertering til string
 
-String conversion happens when we need the string form of a value.
+Konvertering til tekststreng sker når du behøver at en værdi opfattes som en tekststreng.
 
-For example, `alert(value)` does it to show the value.
+For eksempel `alert(value)` gør det for at kunne vise værdien.
 
-We can also call the `String(value)` function to convert a value to a string:
+Du kan også kalde `String(value)` funktionen for at konvertere en værdi til en tekststreng:
 
 ```js run
 let value = true;
 alert(typeof value); // boolean
 
 *!*
-value = String(value); // now value is a string "true"
+value = String(value); // Er nu en tektstreng med værdien "true"
 alert(typeof value); // string
 */!*
 ```
 
-String conversion is mostly obvious. A `false` becomes `"false"`, `null` becomes `"null"`, etc.
+Konvertering til tekststreng er for det meste åbenlys. Booelan `false` bliver teksten `"false"`, `null` bliver `"null"`, etc.
 
-## Numeric Conversion
+## Konvertering til tal number
 
-Numeric conversion happens in mathematical functions and expressions automatically.
+Konvertering til tal sker automatisk i matematiske funktioner og udtryk.
 
-For example, when division `/` is applied to non-numbers:
+For eksempel, hvis division `/` udføres på ikke-tal:
 
 ```js run
-alert( "6" / "2" ); // 3, strings are converted to numbers
+alert( "6" / "2" ); // 3, tekststrengene konverteres til tal
 ```
 
-We can use the `Number(value)` function to explicitly convert a `value` to a number:
+Du kan bruge `Number(value)` funktionen til eksplicit at konvertere en værdi (`value`) til et tal.
 
 ```js run
 let str = "123";
 alert(typeof str); // string
 
-let num = Number(str); // becomes a number 123
+let num = Number(str); // bliver til tallet 123
 
 alert(typeof num); // number
 ```
 
-Explicit conversion is usually required when we read a value from a string-based source like a text form but expect a number to be entered.
+Eksplicit konvertering er normalt påkrævet når du læser værdier fra tekst-baserede kilder som tekstinput felter, men hvor du forventer at brugeren taster et tal.
 
-If the string is not a valid number, the result of such a conversion is `NaN`. For instance:
+Hvis strengen ikke er et gyldigt tal vil resultatet af en konvertering blive `NaN`. For eksempel:
 
 ```js run
-let age = Number("an arbitrary string instead of a number");
+let age = Number("en vilkårlig tekst i stedet for et tal");
 
-alert(age); // NaN, conversion failed
+alert(age); // NaN, konverteringen fejlede
 ```
 
-Numeric conversion rules:
+Regler for konvertering af tal:
 
-| Value |  Becomes... |
+| Værdi |  bliver ... |
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
-|<code>true&nbsp;and&nbsp;false</code> | `1` and `0` |
-| `string` | Whitespaces from the start and end are removed. If the remaining string is empty, the result is `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
+|<code>true&nbsp;og&nbsp;false</code> | `1` og `0` |
+| `string` | mellemrum i starten og slutningen fjernes. Hvis det der er tilbage er tomt, bliver resultatet `0`. Ellers læses tallet fra tekststrengen. En fejl vil give `NaN`. |
 
-Examples:
+Eksempler:
 
 ```js run
 alert( Number("   123   ") ); // 123
-alert( Number("123z") );      // NaN (error reading a number at "z")
+alert( Number("123z") );      // NaN (fejler når der læses et tal med "z" i)
 alert( Number(true) );        // 1
 alert( Number(false) );       // 0
 ```
 
-Please note that `null` and `undefined` behave differently here: `null` becomes zero while `undefined` becomes `NaN`.
+Vær opmærksom på, at `null` og `undefined` opfører sig forskelligt her: `null` bliver til nul (0) og `undefined` bliver til `NaN`.
 
-Most mathematical operators also perform such conversion, we'll see that in the next chapter.
+De fleste matematiske operatorer udfører denne konvertering - det vil du se i det næste kapitel.
 
-## Boolean Conversion
+## Konvertering af Boolean
 
-Boolean conversion is the simplest one.
+Konvertering af Boolean er den mest simple.
 
-It happens in logical operations (later we'll meet condition tests and other similar things) but can also be performed explicitly with a call to `Boolean(value)`.
+Dette sker i logiske operationer (senere ser du det også i betingelser og andet) men du kan konvertere eksplicit ved et kald til `Boolean(value)`.
 
-The conversion rule:
+Regler for konvertering:
 
-- Values that are intuitively "empty", like `0`, an empty string, `null`, `undefined`, and `NaN`, become `false`.
-- Other values become `true`.
+- Værdier der forstås som "tomme" som `0`, en tom tekststreng, `null`, `undefined`, og `NaN`, bliver `false`.
+- Alt andet bliver `true`.
 
-For instance:
+For eksempel:
 
 ```js run
 alert( Boolean(1) ); // true
 alert( Boolean(0) ); // false
 
-alert( Boolean("hello") ); // true
+alert( Boolean("hej!") ); // true
 alert( Boolean("") ); // false
 ```
 
-````warn header="Please note: the string with zero `\"0\"` is `true`"
-Some languages (namely PHP) treat `"0"` as `false`. But in JavaScript, a non-empty string is always `true`.
+````warn header="Læg mærke til: en tekststreng med et nul `\"0\"` er `true`"
+Nogle sprog (f.eks. PHP) behandler `"0"` som `false`. Men, i JavaScript er en ikke-tom tekststreng altid `true`.
 
 ```js run
 alert( Boolean("0") ); // true
-alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
+alert( Boolean(" ") ); // Mellemrum, og true (alle ikke-tomme tekststrenge er true)
 ```
 ````
 
-## Summary
+## Opsummering
 
-The three most widely used type conversions are to string, to number, and to boolean.
+De tre mest brugte konverteringer er til tekststreng, tal og boolean.
 
-**`String Conversion`** -- Occurs when we output something. Can be performed with `String(value)`. The conversion to string is usually obvious for primitive values.
+**`Konvertering til tekststreng`** -- sker når du skriver noget ud. Det kan også udføres med `String(value)`. Konverteringe er ret åbenlys for primitive værdier.
 
-**`Numeric Conversion`** -- Occurs in math operations. Can be performed with `Number(value)`.
+**`KOnvertering til tal`** -- Sker i matematiske operationer. Den kan også udføres med `Number(value)`.
 
-The conversion follows the rules:
+Konverteringen følger disse regler:
 
-| Value |  Becomes... |
+| Værdi |  bliver ... |
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
-|<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
-| `string` | The string is read "as is", whitespaces from both sides are ignored. An empty string becomes `0`. An error gives `NaN`. |
+|<code>true&nbsp;og&nbsp;false</code> | `1` og `0` |
+| `string` | mellemrum i starten og slutningen fjernes. Hvis det der er tilbage er tomt, bliver resultatet `0`. Ellers læses tallet fra tekststrengen. En fejl vil give `NaN`. |
 
-**`Boolean Conversion`** -- Occurs in logical operations. Can be performed with `Boolean(value)`.
+**`Konvertering af Boolean`** -- Sker i logiske operationer. Kan også udføres med `Boolean(value)`.
 
-Follows the rules:
+Følger disse regler:
 
-| Value |  Becomes... |
+| Værdi |  bliver ... |
 |-------|-------------|
 |`0`, `null`, `undefined`, `NaN`, `""` |`false`|
-|any other value| `true` |
+|alle andre værdier| `true` |
 
 
-Most of these rules are easy to understand and memorize. The notable exceptions where people usually make mistakes are:
+De fleste af disse regler er nemme at huske. De bemærkelsesværdige, og der hvor folk normal laver fejl, er::
 
-- `undefined` is `NaN` as a number, not `0`.
-- `"0"` and space-only strings like `"   "` are true as a boolean.
+- `undefined` er `NaN` som tal , ikke `0`.
+- `"0"` og en tekststreng med ene mellemrum, som `"   "` er true som boolean.
 
-Objects aren't covered here. We'll return to them later in the chapter <info:object-toprimitive> that is devoted exclusively to objects after we learn more basic things about JavaScript.
+Objects er ikke dækket her. Jeg vender tilbage til dem senere i kapitlet <info:object-toprimitive> der er afsat eksklusivt til objerkter. Det er efter vi har været gennem det mere grundlæggende af JavaScript.
