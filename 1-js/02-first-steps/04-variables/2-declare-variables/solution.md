@@ -10,7 +10,6 @@ let ourPlanetName = "Earth";
 
 Læg mærke til, at du kunne have brugt et kortere navn som `planet`, men det ville ikke være tydeligt, at navnet refererede til vores egen planet. Det er en god ting at skrive navnene på variable ud. Så længe du ikke ender med altForLangeVariabelnavne.
 
-
 ## The name of the current visitor
 
 Nummer to var navnet på den aktuelle besøgende:
