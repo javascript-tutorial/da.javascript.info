@@ -8,8 +8,12 @@ Den kunne simpelthen kaldes:
 let ourPlanetName = "Earth";
 ```
 
+<<<<<<< HEAD
 Læg mærke til, at du kunne have brugt et kortere navn som `planet`, men det ville ikke være tydeligt, at navnet refererede til vores egen planet. Det er en god ting at skrive navnene på variable ud. Så længe du ikke ender med altForLangeVariabelnavne.
 
+=======
+Note, we could use a shorter name `planet`, but it might not be obvious what planet it refers to. It's nice to be more verbose. At least until the variable isNotTooLong.
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
 
 ## The name of the current visitor
 
