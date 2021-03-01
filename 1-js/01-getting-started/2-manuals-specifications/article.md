@@ -13,20 +13,32 @@ En ny spedifikation bliver udgivet hvert år. Imellem hver udgivelse kan du se k
 
 Hvis du vil læse om de sidste nye features og de features der "næsten er standard" (kaldet "stage 3") kan du se dem på <https://github.com/tc39/proposals>.
 
+<<<<<<< HEAD
 Derudover, hvis du er interesseret i at udvikle til browseren, er der også andre specifikationer der dækkes i [anden del](info:browser-environment) af denne tutorial.
+=======
+Also, if you're developing for the browser, then there are other specifications covered in the [second part](info:browser-environment) of the tutorial.
+>>>>>>> f6ae0b5a5f3e48074312ca3e47c17c92a5a52328
 
 ## Manualer
 
+<<<<<<< HEAD
 - **MDN (Mozilla) JavaScript Reference** er en manual med ekempler og anden information. Den er en god kilde til uddybende information om sprogets funktioner, metoder etc.
+=======
+- **MDN (Mozilla) JavaScript Reference** is the main manual with examples and other information. It's great to get in-depth information about individual language functions, methods etc.
+>>>>>>> f6ae0b5a5f3e48074312ca3e47c17c92a5a52328
 
     Du kan finde den på <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference>.
 
+<<<<<<< HEAD
     Det kan dog ofte nemmest betale sig at søge i den via internettet. Skriv noget i stil med "MDN [term]" i søgefeltet, f.eks. <https://google.com/search?q=MDN+parseInt> for at slå op på funktionen `parseInt`.
 
 
 - **MSDN** – Microsoft manual med en masse information, blandt andet JavaScript (ofte referet til som JScript). Hvis du har behov for viden, der er specifik til Internet Exlporer, så kig på <http://msdn.microsoft.com/>.
 
     Her kan du også søge via en søgemaskine med sætninger som "RegExp MSDN" eller "RegExp MSDN jscript".
+=======
+Although, it's often best to use an internet search instead. Just use "MDN [term]" in the query, e.g. <https://google.com/search?q=MDN+parseInt> to search for `parseInt` function.
+>>>>>>> f6ae0b5a5f3e48074312ca3e47c17c92a5a52328
 
 ## Oversigter over kompatibilitet
 
