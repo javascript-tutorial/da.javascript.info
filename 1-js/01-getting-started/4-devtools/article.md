@@ -8,7 +8,11 @@ For at se fejlene og samtidig få en masse anden brugbar information om din kode
 
 Mange udviklere hælder til at bruge Chrome eller Firefox fordi deres værktøjer er meget udviklede. Andre browsere tilbyder også udviklingsværktøjer, nogle gange med specielle features, men prøver normalt at samle op på mulighederne fra Chrome eller Firefox. De fleste udviklere har en favorit browser og skifter til de andre for at teste browserspecifikke problemer.
 
+<<<<<<< HEAD
 Udviklingsværktøjerne har mange praktiske features. Til at starte med, skal du lære at åbne dem, kigge efter fejl og afvikle JavaScript kommandoer.
+=======
+Developer tools are potent; they have many features. To start, we'll learn how to open them, look at errors, and run JavaScript commands.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Google Chrome
 
