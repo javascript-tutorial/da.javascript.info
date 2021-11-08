@@ -64,7 +64,7 @@ Specielle nummeriske værdier tilfører formelt datatypen "number", selv om de i
 
 Du lærer mere om at arbejde med tal i kapitlet <info:number>.
 
-## BigInt
+## BigInt [#bigint-type]
 
 I JavaScript kan datatypen "Number" ikke repræsentere heltal større end <code>(2<sup>53</sup>-1)</code> (det svarer til `9007199254740991`), eller mindre end <code>-(2<sup>53</sup>-1)</code> for negative tal. Dette skyldes en intern begrænsning.
 
