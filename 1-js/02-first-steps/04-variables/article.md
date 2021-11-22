@@ -24,7 +24,11 @@ Nu kan du putte data ind i lageret med `=` kaldet en tildelingsoperator (på eng
 let message;
 
 *!*
+<<<<<<< HEAD
 message = 'Hallo'; // gemmer tekststrengen Hallo
+=======
+message = 'Hello'; // store the string 'Hello' in the variable named message
+>>>>>>> a82915575863d33db6b892087975f84dea6cb425
 */!*
 ```
 
