@@ -71,7 +71,11 @@ Script-filer bliver knuttet til HTML gennem en `src` attribut:
 <script src="/path/to/script.js"></script>
 ```
 
+<<<<<<< HEAD
 Her er `/path/to/script.js` en absolut sti til scriptet fra sitets rod. Du kan også give en relativ sti fra det aktuelle HTML-dokument. F.eks. betyder `src="script.js"` at filen `"script.js"` findes i samme folder som HTML-dokumetet.
+=======
+Here, `/path/to/script.js` is an absolute path to the script from the site root. One can also provide a relative path from the current page. For instance, `src="script.js"`, just like `src="./script.js"`, would mean a file `"script.js"` in the current folder.
+>>>>>>> e2f9e5840737e00846bfd492192d8a3828820c60
 
 Endelig, kan du give en fuld URL som f.eks:
 
