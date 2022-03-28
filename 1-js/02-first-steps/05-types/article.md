@@ -46,13 +46,23 @@ Udover regulære tal findes der også såkaldte "specielle numeriske værdier" d
     alert( "not a number" / 2 ); // NaN, sådan en division resulterer ikke i et tal
     ```
 
+<<<<<<< HEAD
     `NaN` hænger fast. Alle fremtidige oprerationer på `NaN` vil resultere i `NaN`:
+=======
+    `NaN` is sticky. Any further mathematical operation on `NaN` returns `NaN`:
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
     ```js run
-    alert( "not a number" / 2 + 5 ); // NaN
+    alert( NaN + 1 ); // NaN
+    alert( 3 * NaN ); // NaN
+    alert( "not a number" / 2 - 1 ); // NaN
     ```
 
+<<<<<<< HEAD
     Så, hvis der er et `NaN` et eller andet sted i udtrykket, så vil det påvirke hele beregningen.
+=======
+    So, if there's a `NaN` somewhere in a mathematical expression, it propagates to the whole result (there's only one exception to that: `NaN ** 0` is `1`).
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 ```smart header="Matematiske operatorer er sikre"
 Matematik er "sikkert" i JavaScript. Du kan gøre alt: dividere med nul, behandle ikke-nummeriske tekststrenge som tal, etc.
@@ -64,7 +74,7 @@ Specielle nummeriske værdier tilfører formelt datatypen "number", selv om de i
 
 Du lærer mere om at arbejde med tal i kapitlet <info:number>.
 
-## BigInt
+## BigInt [#bigint-type]
 
 I JavaScript kan datatypen "Number" ikke repræsentere heltal større end <code>(2<sup>53</sup>-1)</code> (det svarer til `9007199254740991`), eller mindre end <code>-(2<sup>53</sup>-1)</code> for negative tal. Dette skyldes en intern begrænsning.
 
@@ -213,6 +223,7 @@ Datatypen `symbol` bruges til at skabe unikke identifikationer for objekter. Jeg
 
 `typeof` operatoren returnere datatypen af det argument den modtager. Dette er brugbart hvis du vil arbejde mde værdier af forskellige typer, eller bare vil sikre, at en variabel er af en bestemt type.
 
+<<<<<<< HEAD
 Den understøtter to former for syntaks:
 
 1. Som en operator: `typeof x`.
@@ -221,6 +232,9 @@ Den understøtter to former for syntaks:
 Sagt på en anden måde, den virker både med og uden paranteser. Resultatet er det samme.
 
 Et kald til `typeof x` returnerer en tekststreng med datatypens navn:
+=======
+A call to `typeof x` returns a string with the type name:
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 ```js
 typeof undefined // "undefined"
@@ -250,11 +264,29 @@ typeof alert // "function"  (3)
 
 De sidste tre linjer kræver lidt yderligere forklaring:
 
+<<<<<<< HEAD
 1. `Math` er et indbygget objekt, der leverer matematiske operationer. Du lærer mere om det i kapitlet <info:number>. Her, skal det bare ses som et eksempel på et objekt.
 2. Resultatet af `typeof null` er `"object"`. Det er officielt anerkendt som en fejl i `typeof` opførsel. Det startede i de tidlige dage af JavaScript og er blevet på grund af kompatibilitet. Det er sikkert at `null` ikke er et objekt, men sin egen datatype ... men JavaScript ved det bare ikke.
 3. Resultatet af `typeof alert` er `"function"`, fordi `alert` er en funktion. Du lærer mere om funktioner i næste kapitel, hvor du vil se, at der ikke er nogen speciel "funktion" datatype  i JavaScript. Funktioner tilhører typen `object`. Men `typeof` behandler dem forskelligt og returnerer `"function"`. Det fører også tilbage til gamle dage. Teknisk set er det forkert, men kan være praktisk i det daglige.
 
 ## Opsummering
+=======
+1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
+2. The result of `typeof null` is `"object"`. That's an officially recognized error in `typeof`, coming from very early days of JavaScript and kept for compatibility. Definitely, `null` is not an object. It is a special value with a separate type of its own. The behavior of `typeof` is wrong here.
+3. The result of `typeof alert` is `"function"`, because `alert` is a function. We'll study functions in the next chapters where we'll also see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently, returning `"function"`. That also comes from the early days of JavaScript. Technically, such behavior isn't correct, but can be convenient in practice.
+
+```smart header="The `typeof(x)` syntax"
+You may also come across another syntax: `typeof(x)`. It's the same as `typeof x`.
+
+To put it clear: `typeof` is an operator, not a function. The parentheses here aren't a part of `typeof`. It's the kind of parentheses used for mathematical grouping.
+
+Usually, such parentheses contain a mathematical expression, such as `(2 + 2)`, but here they contain only one argument `(x)`. Syntactically, they allow to avoid a space between the `typeof` operator and its argument, and some people like it.
+
+Some people prefer `typeof(x)`, although the `typeof x` syntax is much more common.
+```
+
+## Summary
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 Der er 8 grundlæggende datatyper i JavaScript.
 
@@ -269,8 +301,14 @@ Der er 8 grundlæggende datatyper i JavaScript.
 
 `typeof` operatoren tillader dig at se, hvilken datatype en variabel er.
 
+<<<<<<< HEAD
 - To måder: `typeof x` eller `typeof(x)`.
 - Returnerer en tekststreng med navnet på datatypen, i stil med `"string"`.
 - `null` returnerer `"object"` -- dette er en fejl i sproget, det er ikke et objekt.
+=======
+- Usually used as `typeof x`, but `typeof(x)` is also possible.
+- Returns a string with the name of the type, like `"string"`.
+- For `null` returns `"object"` -- this is an error in the language, it's not actually an object.
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 I det næste kapitel vil jeg koncentrere mig om primitive værdier. Så snart du er fortrolig med dem vil jeg gå videre med objekter.
