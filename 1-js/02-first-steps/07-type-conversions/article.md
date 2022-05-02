@@ -6,8 +6,13 @@ For eksempel vil `alert` automatisk konvertere alle værdier til tekststrenge fo
 
 Der er også situationer, hvor du behøver eksplicit at konvertere en værdi til en forventet type.
 
+<<<<<<< HEAD
 ```smart header="Ikke et ord om objekter ... endnu"
 I dette kapitel vil jeg ikke gennemgå objekter. For nu, vil jeg kun gennemgå primitiver.
+=======
+```smart header="Not talking about objects yet"
+In this chapter, we won't cover objects. For now, we'll just be talking about primitives.
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 Senere, efter du har lært om objekter, i kapitlet <info:object-toprimitive> vil du lære, hvordan objekter passer ind.
 ```
