@@ -24,7 +24,11 @@ Nu kan du putte data ind i lageret med `=` kaldet en tildelingsoperator (på eng
 let message;
 
 *!*
+<<<<<<< HEAD
 message = 'Hallo'; // gemmer tekststrengen Hallo
+=======
+message = 'Hello'; // store the string 'Hello' in the variable named message
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 */!*
 ```
 
@@ -179,8 +183,13 @@ let 1a; // kan ikke starte med et tal
 let my-name; // en bindestreg er ikke tilladt i navnet
 ```
 
+<<<<<<< HEAD
 ```smart header="Store og små bogstaver betyder noget"
 Variable kaldet `apple` og `AppLE` -- er to forskellige variable.
+=======
+```smart header="Case matters"
+Variables named `apple` and `APPLE` are two different variables.
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 ```
 
 ````smart header="Ikke-engelske karakterer er tilladt, men anbefales ikke"
@@ -286,7 +295,11 @@ const pageLoadTime = /* tid det tog at hente siden */;
 
 Værdien af `pageLoadTime` kan ikke kendes inden siden hentes, så den navngives i camelcase. Men, det er stadig en konstant fordi den ikke kan ændres efterfølgende.
 
+<<<<<<< HEAD
 Med andre ord. Konstanter med store bogstaver (kapitæler) bruges kun til "hard-coded" værdier.  
+=======
+In other words, capital-named constants are only used as aliases for "hard-coded" values.
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
 ## Giv variable de rigtige navne
 
