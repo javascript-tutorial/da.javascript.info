@@ -31,8 +31,12 @@ I praksis, så har mange letvægtseditorer mulighed for en masse plugin programm
 
 Følgende programmer kan være gode at undersøge:
 
+<<<<<<< HEAD
 - [Atom](https://atom.io/) (cross-platform, gratis).
 - [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, gratis).
+=======
+- [Atom](https://atom.io/) (cross-platform, free).
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 - [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
 - [Notepad++](https://notepad-plus-plus.org/) (Windows, gratis).
 - [Vim](http://www.vim.org/) og [Emacs](https://www.gnu.org/software/emacs/) er også gode, hvis man ved, hvordan de bruges.
