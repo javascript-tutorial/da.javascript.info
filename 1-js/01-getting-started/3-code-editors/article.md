@@ -12,8 +12,13 @@ Et IDE henter et projekt (som kan indeholde mange filer), tillader navigation me
 
 Hvis du ikke har valgt en IDE endnu, så kan du prøve følgende:
 
+<<<<<<< HEAD
 - [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, gratis).
 - [WebStorm](http://www.jetbrains.com/webstorm/) (cross-platform, betaling).
+=======
+- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
+- [WebStorm](https://www.jetbrains.com/webstorm/) (cross-platform, paid).
+>>>>>>> 30a5d5e2a7c3504c9afd5028f83f4a696e60aede
 
 Til WIndows er der også "Visual Studio", ikke at forveksle med "Visual Studio Code". "Visual Studio" er en kraftfuld WIndows-only editor der dog koster penge i den fulde version og virkelig god til udvikling på .NET platformen. Den er dog også god til JavsScript og der findes en gratis version kaldet [Visual Studio Community](https://www.visualstudio.com/vs/community/).
 

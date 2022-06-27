@@ -46,8 +46,13 @@ JavaScript er et sprog i udvikling og nye muligheder bliver jævnligt tilføjet.
 
 For et overblik over, hvad der er understøttet i hvilke browsere, så kan du besøge:
 
+<<<<<<< HEAD
 - <http://caniuse.com> - oversigt over understøttelse af enkelte features, f.eks. for at se, hvilke motorer, der understøtter funtkioner til kryptering: <http://caniuse.com/#feat=cryptography>.
 - <https://kangax.github.io/compat-table> - en tanel med sprogfeatures og hvilke browsere der understøtter dem og hvilke der ikke gør.
+=======
+- <https://caniuse.com> - per-feature tables of support, e.g. to see which engines support modern cryptography functions: <http://caniuse.com/#feat=cryptography>.
+- <https://kangax.github.io/compat-table> - a table with language features and engines that support those or don't support.
+>>>>>>> 30a5d5e2a7c3504c9afd5028f83f4a696e60aede
 
 Alle disse ressourcer er anvendelige i dagligdags udvikling. De indeholder vigtig information om detaljer i sproget, deres grad af understøttelse osv.
 
