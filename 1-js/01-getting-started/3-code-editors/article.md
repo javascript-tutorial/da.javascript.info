@@ -12,8 +12,13 @@ Et IDE henter et projekt (som kan indeholde mange filer), tillader navigation me
 
 Hvis du ikke har valgt en IDE endnu, så kan du prøve følgende:
 
+<<<<<<< HEAD
 - [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, gratis).
 - [WebStorm](http://www.jetbrains.com/webstorm/) (cross-platform, betaling).
+=======
+- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
+- [WebStorm](https://www.jetbrains.com/webstorm/) (cross-platform, paid).
+>>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 
 Til WIndows er der også "Visual Studio", ikke at forveksle med "Visual Studio Code". "Visual Studio" er en kraftfuld WIndows-only editor der dog koster penge i den fulde version og virkelig god til udvikling på .NET platformen. Den er dog også god til JavsScript og der findes en gratis version kaldet [Visual Studio Community](https://www.visualstudio.com/vs/community/).
 
@@ -32,11 +37,14 @@ I praksis, så har mange letvægtseditorer mulighed for en masse plugin programm
 Følgende programmer kan være gode at undersøge:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [Atom](https://atom.io/) (cross-platform, gratis).
 - [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, gratis).
 =======
 - [Atom](https://atom.io/) (cross-platform, free).
 >>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
+=======
+>>>>>>> 1edb0a38330b54d2e1916f5193fc043e6fbbea78
 - [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
 - [Notepad++](https://notepad-plus-plus.org/) (Windows, gratis).
 - [Vim](http://www.vim.org/) og [Emacs](https://www.gnu.org/software/emacs/) er også gode, hvis man ved, hvordan de bruges.
