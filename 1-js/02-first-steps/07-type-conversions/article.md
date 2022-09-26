@@ -74,8 +74,13 @@ Regler for konvertering af tal:
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
+<<<<<<< HEAD
 |<code>true&nbsp;og&nbsp;false</code> | `1` og `0` |
 | `string` | mellemrum i starten og slutningen fjernes. Hvis det der er tilbage er tomt, bliver resultatet `0`. Ellers læses tallet fra tekststrengen. En fejl vil give `NaN`. |
+=======
+|<code>true&nbsp;and&nbsp;false</code> | `1` and `0` |
+| `string` | Whitespaces (includes spaces, tabs `\t`, newlines `\n` etc.) from the start and end are removed. If the remaining string is empty, the result is `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
+>>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
 
 Eksempler:
 
@@ -134,8 +139,13 @@ Konverteringen følger disse regler:
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
+<<<<<<< HEAD
 |<code>true&nbsp;og&nbsp;false</code> | `1` og `0` |
 | `string` | mellemrum i starten og slutningen fjernes. Hvis det der er tilbage er tomt, bliver resultatet `0`. Ellers læses tallet fra tekststrengen. En fejl vil give `NaN`. |
+=======
+|<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
+| `string` | The string is read "as is", whitespaces (includes spaces, tabs `\t`, newlines `\n` etc.) from both sides are ignored. An empty string becomes `0`. An error gives `NaN`. |
+>>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
 
 **`Konvertering af Boolean`** -- Sker i logiske operationer. Kan også udføres med `Boolean(value)`.
 
