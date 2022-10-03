@@ -1,6 +1,10 @@
 # The Modern JavaScript Tutorial in Danish
 
+<<<<<<< HEAD
 This repository hosts the translation of <https://javascript.info> in Danish.
+=======
+This repository hosts the English content of the Modern JavaScript Tutorial, published at [https://javascript.info](https://javascript.info).
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 
 **That's how you can contribute:**
@@ -21,6 +25,7 @@ If maintainers do not respond, or if you'd like to become a maintainer, write us
 
 🎉 Thank you!
 
+<<<<<<< HEAD
 Your name and the contribution size will appear in the "About project" page when the translation gets published.
 
 <<<<<<< HEAD
@@ -28,6 +33,11 @@ P.S. The full list of languages can be found at <https://javascript.info/transla
 =======
 **You can edit the text in any editor.** The tutorial uses enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.
 >>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
+=======
+Something's wrong? A topic is missing? Explain it to people, add it as PR 👏
+
+**You can edit the text in any editor.** The tutorial uses an enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 This repository hosts the translation of <https://javascript.info> in Danish.
 
@@ -55,6 +65,7 @@ P.S. The full list of languages can be found at <https://javascript.info/transla
 
 ## Structure
 
+<<<<<<< HEAD
 Every chapter, an article or a task resides in its own folder.
 
 The folder is named `N-url`, where `N` – is the number for sorting (articles are ordered), and `url` is the URL-slug on the site.
@@ -142,6 +153,11 @@ If you see that the English version can be improved – great, please send a PR 
 
 - Some specification terms are not to be translated, e.g. "Function Declaration" can be left "as is".
 - For other terms like `resolved promise`, `slash`, `regexp`, and so on - look for a glossary, hopefully there's one for your language already. If not, look for translations in manuals, such as [MDN](https://developer.mozilla.org/en-US/).
+=======
+Every chapter, article, or task has its folder.
+
+The folder is named like `N-url`, where `N` is a number for the sorting purposes and `URL` is the URL part with the title of the material.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 
 ### Terms with meaning
