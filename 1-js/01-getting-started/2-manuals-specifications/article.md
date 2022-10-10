@@ -1,7 +1,11 @@
 
 # Manualer og specifikationer
 
+<<<<<<< HEAD
 Denne bog er en *tutorial*. Den går efter at hjælpe dig med at lære dig sproget lidt ad gangen. Men, lige så snart du er fortrolig med det grundlæggende, vil du få brug for andre kilder til information.
+=======
+This book is a *tutorial*. It aims to help you gradually learn the language. But once you're familiar with the basics, you'll need other resources.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 ## Specifikationer
 
@@ -9,7 +13,11 @@ Denne bog er en *tutorial*. Den går efter at hjælpe dig med at lære dig sprog
 
 Men, når det er skrevet så formelt er det også meget svært at forstå for en begynder. Så, hvis du skal bruge den mest pålidelige kilde til information om detaljer i sproget, så er specifikationen det rigtige sted. Men, det er ikek til hverdagsbrug.
 
+<<<<<<< HEAD
 En ny spedifikation bliver udgivet hvert år. Imellem hver udgivelse kan du se kladden til den næste på <https://tc39.es/ecma262/>.
+=======
+A new specification version is released every year. Between these releases, the latest specification draft is at <https://tc39.es/ecma262/>.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 Hvis du vil læse om de sidste nye features og de features der "næsten er standard" (kaldet "stage 3") kan du se dem på <https://github.com/tc39/proposals>.
 
@@ -27,6 +35,7 @@ Also, if you're developing for the browser, then there are other specifications 
 - **MDN (Mozilla) JavaScript Reference** is the main manual with examples and other information. It's great to get in-depth information about individual language functions, methods etc.
 >>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
+<<<<<<< HEAD
     Du kan finde den på <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference>.
 
 <<<<<<< HEAD
@@ -39,6 +48,11 @@ Also, if you're developing for the browser, then there are other specifications 
 =======
 Although, it's often best to use an internet search instead. Just use "MDN [term]" in the query, e.g. <https://google.com/search?q=MDN+parseInt> to search for `parseInt` function.
 >>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
+=======
+    You can find it at <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference>.
+
+Although, it's often best to use an internet search instead. Just use "MDN [term]" in the query, e.g. <https://google.com/search?q=MDN+parseInt> to search for the `parseInt` function.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 ## Oversigter over kompatibilitet
 
@@ -46,9 +60,16 @@ JavaScript er et sprog i udvikling og nye muligheder bliver jævnligt tilføjet.
 
 For et overblik over, hvad der er understøttet i hvilke browsere, så kan du besøge:
 
+<<<<<<< HEAD
 - <http://caniuse.com> - oversigt over understøttelse af enkelte features, f.eks. for at se, hvilke motorer, der understøtter funtkioner til kryptering: <http://caniuse.com/#feat=cryptography>.
 - <https://kangax.github.io/compat-table> - en tanel med sprogfeatures og hvilke browsere der understøtter dem og hvilke der ikke gør.
 
 Alle disse ressourcer er anvendelige i dagligdags udvikling. De indeholder vigtig information om detaljer i sproget, deres grad af understøttelse osv.
+=======
+- <https://caniuse.com> - per-feature tables of support, e.g. to see which engines support modern cryptography functions: <https://caniuse.com/#feat=cryptography>.
+- <https://kangax.github.io/compat-table> - a table with language features and engines that support those or don't support.
+
+All these resources are useful in real-life development, as they contain valuable information about language details, their support, etc.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 Husk dem (eller denne side) til de tidspunkter, hvor du for brug for forklaringer på detaljer omkring sproget eller en specifik feature.

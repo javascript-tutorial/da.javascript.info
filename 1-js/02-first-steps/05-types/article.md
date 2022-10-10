@@ -76,9 +76,26 @@ Du lærer mere om at arbejde med tal i kapitlet <info:number>.
 
 ## BigInt [#bigint-type]
 
+<<<<<<< HEAD
 I JavaScript kan datatypen "Number" ikke repræsentere heltal større end <code>(2<sup>53</sup>-1)</code> (det svarer til `9007199254740991`), eller mindre end <code>-(2<sup>53</sup>-1)</code> for negative tal. Dette skyldes en intern begrænsning.
 
 I de fleste tilfælde er det mere end rigeligt, men nogle gange har du brug for virkelig store tal, f.eks. til kryptografi eller microsekund-præcision i tidsstempler.
+=======
+In JavaScript, the "number" type cannot safely represent integer values larger than <code>(2<sup>53</sup>-1)</code> (that's `9007199254740991`), or less than <code>-(2<sup>53</sup>-1)</code> for negatives.
+
+To be really precise, the "number" type can store larger integers (up to <code>1.7976931348623157 * 10<sup>308</sup></code>), but outside of the safe integer range <code>±(2<sup>53</sup>-1)</code> there'll be a precision error, because not all digits fit into the fixed 64-bit storage. So an "approximate" value may be stored.
+
+For example, these two numbers (right above the safe range) are the same:
+
+```js
+console.log(9007199254740991 + 1); // 9007199254740992
+console.log(9007199254740991 + 2); // 9007199254740992
+```
+
+So to say, all odd integers greater than <code>(2<sup>53</sup>-1)</code> can't be stored at all in the "number" type.
+
+For most purposes <code>±(2<sup>53</sup>-1)</code> range is quite enough, but sometimes we need the entire range of really big integers, e.g. for cryptography or microsecond-precision timestamps.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 `BigInt` datatypen er tilføjet sproget for nyligt til at repræsentere heltal af en vilkårlig længde.
 
@@ -286,6 +303,7 @@ Some people prefer `typeof(x)`, although the `typeof x` syntax is much more comm
 ```
 
 ## Summary
+<<<<<<< HEAD
 >>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
 Der er 8 grundlæggende datatyper i JavaScript.
@@ -306,6 +324,24 @@ Der er 8 grundlæggende datatyper i JavaScript.
 - Returnerer en tekststreng med navnet på datatypen, i stil med `"string"`.
 - `null` returnerer `"object"` -- dette er en fejl i sproget, det er ikke et objekt.
 =======
+=======
+
+There are 8 basic data types in JavaScript.
+
+- Seven primitive data types:
+    - `number` for numbers of any kind: integer or floating-point, integers are limited by <code>±(2<sup>53</sup>-1)</code>.
+    - `bigint` for integer numbers of arbitrary length.
+    - `string` for strings. A string may have zero or more characters, there's no separate single-character type.
+    - `boolean` for `true`/`false`.
+    - `null` for unknown values -- a standalone type that has a single value `null`.
+    - `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
+    - `symbol` for unique identifiers.
+- And one non-primitive data type:
+    - `object` for more complex data structures.
+
+The `typeof` operator allows us to see which type is stored in a variable.
+
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 - Usually used as `typeof x`, but `typeof(x)` is also possible.
 - Returns a string with the name of the type, like `"string"`.
 - For `null` returns `"object"` -- this is an error in the language, it's not actually an object.
