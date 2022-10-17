@@ -67,7 +67,12 @@ let age = 25;
 let message = 'Hello';
 ```
 
+<<<<<<< HEAD
 Nogle foretrækker at skrive variable over flere linjer således:
+=======
+Some people also define multiple variables in this multiline style:
+
+>>>>>>> bf7d8bb1af3b416d393af1c15b03cb1352da1f9c
 ```js no-beautify
 let user = 'John',
   age = 25,
@@ -109,6 +114,11 @@ Du kan putte hvilken som helst værdi i kassen.
 
 Du kan også ændre indholdet. Indholdet kan ændres så tit du vil:
 
+<<<<<<< HEAD
+=======
+We can also change it as many times as we want:
+
+>>>>>>> bf7d8bb1af3b416d393af1c15b03cb1352da1f9c
 ```js run
 let message;
 
@@ -258,8 +268,12 @@ myBirthday = '01.01.2001'; // fejl, kan ikke tildele ny værdi til en konstant!
 
 Når en programmør vil være sikker på, at en værdi ikke bliver ændret kan han bruge `const` for derved også klart at signalere at den ikke må røres til andre der læser koden.
 
+<<<<<<< HEAD
 
 ### Bar store bogstaver til konstanter
+=======
+### Uppercase constants
+>>>>>>> bf7d8bb1af3b416d393af1c15b03cb1352da1f9c
 
 Det er en udbredt praksis at bruge konstanter til værdier der kan være svære at huske eller forstå mens der udvikles.
 
@@ -288,7 +302,12 @@ Men, hvornår skal du bruge store bogstaver til konstanter og hvornår skal du s
 
 At være en "konstant" betyder, at indholdet aldrig kan ændres. Men, der er konstanter der kendes inden programmet afvikles (som hexadecimal værdien for farven rød) og der er konstanter der bliver regnet ud, når programmet startes, men ikke ændres så snart de er oprettet.
 
+<<<<<<< HEAD
 For eksempel:
+=======
+For instance:
+
+>>>>>>> bf7d8bb1af3b416d393af1c15b03cb1352da1f9c
 ```js
 const pageLoadTime = /* tid det tog at hente siden */;
 ```
