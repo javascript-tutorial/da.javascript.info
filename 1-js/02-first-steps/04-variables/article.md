@@ -77,7 +77,7 @@ let user = 'John'
 Teknisk set gør alle tre udgaver det samme. Det er mere et spørgsmål om personlig stil.
 
 
-````smart header="`var` i stedet for `let`"
+```smart header="`var` i stedet for `let`"
 I ældre scripts finder du ofte nøgleordet `var` i stedet for `let`:
 
 ```js
@@ -87,7 +87,7 @@ var message = 'Hello';
 Nøgleordet `var` gør *næsten* det samme som `let`. Det deklarere en variabel, men på en lidt anden, "old-school" måde.
 
 Der er små forskelle mellem `let` og `var`, men de har slet ingen betydning for os endnu. Du vil lære om dem senere i kapitlet <info:var>.
-````
+```
 
 ## Et eksempel fra virkeligheden
 
