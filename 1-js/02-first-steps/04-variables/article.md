@@ -87,7 +87,6 @@ var message = 'Hello';
 Nøgleordet `var` gør *næsten* det samme som `let`. Det deklarere en variabel, men på en lidt anden, "old-school" måde.
 
 Der er små forskelle mellem `let` og `var`, men de har slet ingen betydning for os endnu. Du vil lære om dem senere i kapitlet <info:var>.
-```
 
 ## Et eksempel fra virkeligheden
 
