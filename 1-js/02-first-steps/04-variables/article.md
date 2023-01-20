@@ -199,7 +199,7 @@ let return = 5; // heller ikke "return"!
 ```
 ````
 
-````warn header="Tildel værdi uden `use strict`"
+```warn header="Tildel værdi uden `use strict`"
 
 Normalt vil du deklarere variablen inden du bruger den. Men i gamle dage var det teknisk muligt at oprette en variabel bare ved at give den en værdi (uden først at bruge `let`). Det kan du stadig , hvis du ikke skriver `use strict`. Denne tilgang kan introducere fejl, men er stadig aktiv for at være kompatibel med ældre scripts.
 
@@ -217,6 +217,7 @@ Det er dårlig praksis og vil give fejl i strict mode:
 "use strict";
 
 num = 5; // fejl: num er ikke defineret
+```
 ```
 
 ## Konstanter
