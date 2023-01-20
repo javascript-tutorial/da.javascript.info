@@ -218,7 +218,6 @@ Det er dårlig praksis og vil give fejl i strict mode:
 
 num = 5; // fejl: num er ikke defineret
 ```
-```
 
 ## Konstanter
 
