@@ -31,12 +31,8 @@ I praksis, så har mange letvægtseditorer mulighed for en masse plugin programm
 
 Følgende programmer kan være gode at undersøge:
 
-<<<<<<< HEAD
 - [Atom](https://atom.io/) (cross-platform, gratis).
 - [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, gratis).
-=======
-- [Atom](https://atom.io/) (cross-platform, free).
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 - [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
 - [Notepad++](https://notepad-plus-plus.org/) (Windows, gratis).
 - [Vim](http://www.vim.org/) og [Emacs](https://www.gnu.org/software/emacs/) er også gode, hvis man ved, hvordan de bruges.
@@ -48,3 +44,8 @@ Editorer på listen ovenfor er dem som enten jeg eller jeg har set folk omkring 
 Der findes andre gode editorer på nettet. Kig dig omkring og brug den du har det bedst med..
 
 Valget af editor er, som med mange andre redskaber, et individuelt valg og er nogle gange afhængig af projektet, vaner og personlig præference.
+
+Min personlige favorit er:
+
+- Jeg bruger [Visual Studio Code](https://code.visualstudio.com/) hvis jeg skal udvikle frontend.
+- ellers, hvis der er tale om udvikling til andre platforme og måske kun delvist frontend, miljøer som XCode (Mac), Visual Studio (Windows) eller Jetbrains family (Webstorm, PHPStorm, RubyMine etc, afhængig af sproget).

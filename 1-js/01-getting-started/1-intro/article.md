@@ -1,122 +1,122 @@
-# An Introduction to JavaScript
+# En introduktion til JavaScript
 
-Let's see what's so special about JavaScript, what we can achieve with it, and what other technologies play well with it.
+Lad os se, hvad der er så specielt ved JavaScript, hvad vi kan opnå med det, og hvilke andre teknologier der spiller godt sammen med det.
 
 ## What is JavaScript?
 
-*JavaScript* was initially created to "make web pages alive".
+*JavaScript* blev oprindeligt skabt for at "gøre websider levende".
 
-The programs in this language are called *scripts*. They can be written right in a web page's HTML and run automatically as the page loads.
+Programmerne i dette sprog kaldes *scripts*. De kan skrives direkte i en websides HTML og køres automatisk, når siden indlæses.
 
-Scripts are provided and executed as plain text. They don't need special preparation or compilation to run.
+Scripts leveres og udføres som almindelig tekst. De behøver ikke nogen særlig forberedelse eller kompilering for at kunne køre.
 
-In this aspect, JavaScript is very different from another language called [Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
+På dette punkt adskiller JavaScript sig meget fra et andet sprog kaldet [Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
 
-```smart header="Why is it called <u>Java</u>Script?"
-When JavaScript was created, it initially had another name: "LiveScript". But Java was very popular at that time, so it was decided that positioning a new language as a "younger brother" of Java would help.
+```smart header="Hvorfor hedder det <u>Java</u>Script?"
+Da JavaScript blev skabt, havde det oprindeligt et andet navn: "LiveScript". Men Java var meget populært på det tidspunkt, så det blev besluttet, at det ville hjælpe at positionere et nyt sprog som en "lillebror" til Java at placere det som en "lillebror" til Java.
 
-But as it evolved, JavaScript became a fully independent language with its own specification called [ECMAScript](http://en.wikipedia.org/wiki/ECMAScript), and now it has no relation to Java at all.
+Men efterhånden som det udviklede sig, blev JavaScript et helt selvstændigt sprog med sin egen specifikation kaldet [ECMAScript](http://en.wikipedia.org/wiki/ECMAScript), og nu har det slet ingen relation til Java.
 ```
 
-Today, JavaScript can execute not only in the browser, but also on the server, or actually on any device that has a special program called [the JavaScript engine](https://en.wikipedia.org/wiki/JavaScript_engine).
+I dag kan JavaScript ikke kun afvikles i browseren, men også på serveren eller faktisk på enhver enhed, der har et særligt program kaldet [JavaScript engine](https://en.wikipedia.org/wiki/JavaScript_engine).
 
-The browser has an embedded engine sometimes called a "JavaScript virtual machine".
+Browseren har en indlejret motor, der nogle gange kaldes en "JavaScript virtual machine".
 
-Different engines have different "codenames". For example:
+Forskellige motorer har forskellige "kodenavne". F.eks:
 
-- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome, Opera and Edge.
-- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
-- ...There are other codenames like "Chakra" for IE, "JavaScriptCore", "Nitro" and "SquirrelFish" for Safari, etc.
+- V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- i Chrome, Opera og Edge.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- i Firefox.
+- ...Der er andre kodenavne som "Chakra" i IE, "JavaScriptCore", "Nitro" og "SquirrelFish" i Safari osv.
 
-The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome, Opera and Edge.
+Ovenstående betegnelser er gode at huske, fordi de bruges i udviklerartikler på internettet. Vi vil også bruge dem. Hvis f.eks. "en funktion X understøttes af V8", så virker den sandsynligvis i Chrome, Opera og Edge.
 
-```smart header="How do engines work?"
+```smart header="Hvordan fungerer en motor?"
 
-Engines are complicated. But the basics are easy.
+Motorer er komplicerede. Men det grundlæggende er ret nemt.
 
-1. The engine (embedded if it's a browser) reads ("parses") the script.
-2. Then it converts ("compiles") the script to the machine language.
-3. And then the machine code runs, pretty fast.
+1. Motoren (indlejret, hvis det er en browser) læser ("parser") et script.
+2. Derefter konverterer ("kompilerer") den scriptet til maskinkode.
+3. Og så kører maskinkoden, ret hurtigt.
 
-The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and further optimizes the machine code based on that knowledge.
+Motoren anvender optimeringer på hvert trin i processen. Den holder endda øje med det kompilerede script, mens det kører, analyserer de data, der strømmer gennem det, og optimerer maskinkoden yderligere på baggrund af denne viden.
 ```
 
-## What can in-browser JavaScript do?
+## Hvad kan JavaScript der afvikles i browseren gøre?
 
-Modern JavaScript is a "safe" programming language. It does not provide low-level access to memory or CPU, because it was initially created for browsers which do not require it.
+Moderne JavaScript er et "sikkert" programmeringssprog. Det giver ikke adgang til hukommelse eller CPU på lavt niveau, fordi det oprindeligt blev skabt til browsere, som ikke kræver det.
 
-JavaScript's capabilities greatly depend on the environment it's running in. For instance, [Node.js](https://wikipedia.org/wiki/Node.js) supports functions that allow JavaScript to read/write arbitrary files, perform network requests, etc.
+JavaScript's muligheder afhænger i høj grad af det miljø, det kører i. F.eks. understøtter [Node.js](https://wikipedia.org/wiki/Node.js) funktioner, der gør det muligt for JavaScript at læse/skrive vilkårlige filer, udføre netværksforespørgsler osv.
 
-In-browser JavaScript can do everything related to webpage manipulation, interaction with the user, and the webserver.
+I browseren kan JavaScript udføre alt, hvad der har med webside-manipulation, interaktion med brugeren og webserveren at gøre.
 
-For instance, in-browser JavaScript is able to:
+JavaScript i en browser er f.eks. i stand til at:
 
-- Add new HTML to the page, change the existing content, modify styles.
-- React to user actions, run on mouse clicks, pointer movements, key presses.
-- Send requests over the network to remote servers, download and upload files (so-called [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) and [COMET](https://en.wikipedia.org/wiki/Comet_(programming)) technologies).
+- Tilføje ny HTML til siden, ændre det eksisterende indhold, ændre stilarter.
+- Reagere på brugerhandlinger, køre på museklik, pointerbevægelser, tastetryk.
+- sende forespørgsler over nettet til fjernservere, downloade og uploade filer (de såkaldte [AJAX](https://en.wikipedia.org/wiki/Ajax_(programmering)) og [COMET](https://en.wikipedia.org/wiki/Comet_(programmering))-teknologier).
 - Get and set cookies, ask questions to the visitor, show messages.
 - Remember the data on the client-side ("local storage").
 
-## What CAN'T in-browser JavaScript do?
+## Hvad kan JavaScript i browseren ikke gøre?
 
-JavaScript's abilities in the browser are limited for the sake of a user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
+JavaScript's muligheder i browseren er begrænset for at beskytte brugerens sikkerhed. Formålet er at forhindre en ond webside i at få adgang til private oplysninger eller skade brugerens data.
 
-Examples of such restrictions include:
+Eksempler på sådanne begrænsninger er bl.a:
 
-- JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS functions.
+- JavaScript på en webside må ikke læse/skrive vilkårlige filer på harddisken, kopiere dem eller eksekvere programmer. Det har heller ikke direkte adgang til funktioner i styresystemet.
 
-    Modern browsers allow it to work with files, but the access is limited and only provided if the user does certain actions, like "dropping" a file into a browser window or selecting it via an `<input>` tag.
+  Moderne browsere tillader det dog at arbejde med filer, med adgangen er begrænset og tillades kun, hvis brugeren udfører specifikke handlinger såsom at "droppe" en fil hen over browservinduet eller vælge en fil via et `<input>`tag.
 
-    There are ways to interact with camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
-- Different tabs/windows generally do not know about each other. Sometimes they do, for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other if they come from different sites (from a different domain, protocol or port).
+  Der er måder hvor JavaScript kan interagere med kamera, microfon eller andre enheder, men det kræver en specifik tilladelse fra brugeren. På denne måde kan en side med JavaScript ikke snyde sig til at tænde for kameraet, observere omgivelserne og sende informationer videre til [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
+- Forskellige tabs eller vinduer kender generelt ikke noget til hinanden. Nogle gange gør de det, f.eks. når det ene vindue bruger JavaScript til at åbne det andet. Men selv i dette tilfælde kan JavaScript fra den ene side ikke få adgang til den anden side, hvis de kommer fra forskellige websteder (fra et andet domæne, en anden protokol eller port).
 
-    This is called the "Same Origin Policy". To work around that, *both pages* must agree for data exchange and contain a special JavaScript code that handles it. We'll cover that in the tutorial.
+    Dette kaldes "Same Origin Policy" (politik om samme oprindelse). For at omgå dette skal *begge sider* være enige om dataudveksling og skal indeholde særlig JavaScript-kode, der håndterer det. Vi vil dække det i tutorialen.
 
-    This limitation is, again, for the user's safety. A page from `http://anysite.com` which a user has opened must not be able to access another browser tab with the URL `http://gmail.com` and steal information from there.
-- JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is crippled. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that's a safety limitation.
+    Denne begrænsning er, igen, for brugerens sikkerhed. En side fra `http://anysite.com`, som en bruger har åbnet, må ikke kunne få adgang til en anden browserfane med URL-adressen `http://gmail.com`, f.eks. og stjæle oplysninger derfra.
+- JavaScript kan nemt kommunikere over nettet til den server, hvor den aktuelle side kom fra. Men dets evne til at modtage data fra andre websteder/domæner er begrænset. Selv om det er muligt, kræver det en udtrykkelig tilladelse (udtrykt i HTTP-headers) fra den eksterne side. Endnu en gang er det en sikkerhedsbegrænsning.
 
 ![](limitations.svg)
 
-Such limits do not exist if JavaScript is used outside of the browser, for example on a server. Modern browsers also allow plugin/extensions which may ask for extended permissions.
+Sådanne begrænsninger findes ikke, hvis JavaScript anvendes uden for browseren, f.eks. på en server. Moderne browsere tillader også plugins/udvidelser, som kan bede om udvidede tilladelser.
 
-## What makes JavaScript unique?
+## Hvad gør JavaScript unikt?
 
-There are at least *three* great things about JavaScript:
+Der er mindst *tre* gode ting ved JavaScript:
 
 ```compare
-+ Full integration with HTML/CSS.
-+ Simple things are done simply.
-+ Supported by all major browsers and enabled by default.
++ Fuld integration med HTML/CSS.
++ Simple ting gøres enkelt.
++ Understøttes af alle større browsere og er aktiveret som standard.
 ```
-JavaScript is the only browser technology that combines these three things.
+JavaScript er den eneste browserteknologi, der kombinerer disse tre ting.
 
-That's what makes JavaScript unique. That's why it's the most widespread tool for creating browser interfaces.
+Det er det, der gør JavaScript unikt. Det er derfor, det er det mest udbredte værktøj til at skabe browsergrænseflader.
 
-That said, JavaScript also allows to create servers, mobile applications, etc.
+Når det er sagt, kan JavaScript også bruges til at skabe servere, mobilapplikationer osv.
 
-## Languages "over" JavaScript
+## Sprog "over" JavaScript
 
-The syntax of JavaScript does not suit everyone's needs. Different people want different features.
+Syntaksen i JavaScript passer ikke til alles behov. Forskellige mennesker ønsker forskellige funktioner.
 
-That's to be expected, because projects and requirements are different for everyone.
+Det er forventeligt, fordi projekter og krav er forskellige for alle.
 
-So recently a plethora of new languages appeared, which are *transpiled* (converted) to JavaScript before they run in the browser.
+Derfor er der for nylig dukket et væld af nye sprog op, som *transpileres* (konverteres) til JavaScript, inden de kører i browseren.
 
-Modern tools make the transpilation very fast and transparent, actually allowing developers to code in another language and auto-converting it "under the hood".
+Moderne værktøjer gør transpileringen meget hurtig og gennemsigtig, idet de faktisk giver udviklerne mulighed for at kode på et andet sprog og automatisk konvertere det "under motorhjelmen".
 
-Examples of such languages:
+Eksempler på sådanne sprog:
 
-- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
-- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
-- [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
-- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
-- [Brython](https://brython.info/) is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.
-- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) is a modern, concise and safe programming language that can target the browser or Node.
+- [CoffeeScript] (https://coffeescript.org/) er "syntaktisk sukker" til JavaScript. Det introducerer en kortere syntaks, så du kan skrive klarere og mere præcis kode. Normalt kan Ruby-udviklere lide det.
+- [TypeScript](https://www.typescriptlang.org/) er koncentreret om at tilføje "strict data typing" for at forenkle udviklingen og understøttelsen af komplekse systemer. Det er udviklet af Microsoft.
+- [Flow](https://flow.org/) tilføjer også datatyper, men på en anden måde. Udviklet af Facebook.
+- [Dart](https://www.dartlang.org/) er et selvstændigt sprog, der har sin egen motor, som kører i miljøer uden for browsere (f.eks. mobilapps), men som også kan transpileres til JavaScript. Udviklet af Google.
+- [Brython](https://brython.info/) er en Python-transpiler til JavaScript, som gør det muligt at skrive programmer i ren Python uden JavaScript.
+- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) er et moderne, kortfattet og sikkert programmeringssprog, der kan målrettes mod browseren eller Node.
 
-There are more. Of course, even if we use one of transpiled languages, we should also know JavaScript to really understand what we're doing.
+Der er flere. Selv om vi bruger et af disse transpilerede sprog, bør vi naturligvis også kunne JavaScript for virkelig at forstå, hvad vi laver.
 
-## Summary
+## Resumé
 
-- JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
-- Today, JavaScript has a unique position as the most widely-adopted browser language, fully integrated with HTML/CSS.
-- There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
+- JavaScript blev oprindeligt skabt som et sprog kun til browsere, men det bruges nu også i mange andre miljøer.
+- I dag har JavaScript en enestående position som det mest udbredte browsersprog, der er fuldt integreret med HTML/CSS.
+- Der er mange sprog, som bliver "transpileret" til JavaScript og giver visse funktioner. Det anbefales at tage et kig på dem, i det mindste kortvarigt, efter at man har mestret JavaScript.
