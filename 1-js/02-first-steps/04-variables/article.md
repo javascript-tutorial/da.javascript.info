@@ -216,12 +216,8 @@ Det er dårlig praksis og vil give fejl i strict mode:
 ```js run untrusted
 "use strict";
 
-*!*
 num = 5; // fejl: num er ikke defineret
-*/!*
 ```
-
-````
 
 ## Konstanter
 
