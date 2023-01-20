@@ -23,7 +23,7 @@ alert('Hello');
 alert('World');
 ```
 
-## Semikolon [#semicolon]
+## Semikolon
 
 Et semikolon kan i de fleste tilfælde udelades, hvis der er et linjeskift.
 
@@ -60,7 +60,7 @@ alert("Hello");
 
 [1, 2].forEach(alert);
 ```
-
+````
 Tænk ikke for meget på de hårde paranteser `[]` og `forEach` endnu. Dem lærer du om senere. For nu, så tænk bare, at denne kode vil vise en dialogboks med tallet `1` efterfulgt af tallet `2`.
 
 Prøv nu, at tilføje en `alert` før den anden kode og lad være med at afslutte med semikolon:
@@ -93,7 +93,7 @@ Men det burde være to seperate udsagn og ikke ét. Sådan en sammentrækning er
 
 Jeg anbefaler at du sætter semikolon mellem udsagn - også selvom de bliver adskilt af linjeskift. Så, opsummeret -- *det er muligt* at udelade semikolon i de fleste tilfælde. Men det er sikre -- specielt for en begynder -- at bruge dem.
 
-## Kommentarer [#code-comments]
+## Kommentarer
 
 Som tiden går og programmer bliver mere og mere komplekse, er det nødvendigt at tilføje *kommentarer* der beskriver hvad koden gør og hvorfor.
 
