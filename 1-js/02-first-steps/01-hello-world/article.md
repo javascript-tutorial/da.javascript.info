@@ -103,7 +103,7 @@ Et enkelt `<script>` tag kan ikke både have en `src` attribut og egen kode i si
 Dette vil ikke virke:
 
 ```html
-<script *!*src*/!*="file.js">
+<script src="file.js">
   alert(1); // Indholdet ignoreres fordi src er sat
 </script>
 ```
