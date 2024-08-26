@@ -108,6 +108,7 @@ const bigInt = 1234567890123456789012345678901234567890n;
 
 Fordi `BigInt` bruges meget sjældent vil jeg ikke dække det yderligere her, men du kan læse mere om dem i et seperat kapitel <info:bigint>. Læs det, hvis du skal arbejde med virkelig store tal.
 
+<<<<<<< HEAD
 
 ```smart header="Kompatibilitet"
 Som det er nu, understøttes`BigInt` i Firefox/Chrome/Edge/Safari, men ikke i IE.
@@ -115,6 +116,8 @@ Som det er nu, understøttes`BigInt` i Firefox/Chrome/Edge/Safari, men ikke i IE
 
 Du kan tjekke [*MDN* BigInt kompatabilitetstabel](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) for et overblik over, hvilke browsere der understøtter.
 
+=======
+>>>>>>> b258d7d5b635c88228f7556e14fbe5e5ca7f736d
 ## String
 
 En string (tekststreng) i JavaScript skal omkranses af anførselstegn (citationstegn).
