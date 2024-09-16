@@ -39,7 +39,11 @@ Konvertering til tekststreng er for det meste åbenlys. Booelan `false` bliver t
 
 ## Konvertering til tal number
 
+<<<<<<< HEAD
 Konvertering til tal sker automatisk i matematiske funktioner og udtryk.
+=======
+Numeric conversion in mathematical functions and expressions happens automatically.
+>>>>>>> 9e3fa1351f80cfd6353a778a55b2c86bca9e895f
 
 For eksempel, hvis division `/` udføres på ikke-tal:
 
