@@ -46,11 +46,7 @@ alert(3 +
 + 2);
 ```
 
-<<<<<<< HEAD
 Koden viser `6` fordi JavaScript ikke indsætter et semikolon her. Det er intuitivt åbenlyst at, hvis en linje ender med et plus `"+"`, så er det et "ufuldstændigt udtryk", så et semikolon er ikke påkrævet. I dette tilfælde virker det som forventet.
-=======
-The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so a semicolon there would be incorrect. And in this case, that works as intended.
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
 **Men, der er situationer hvor JavaScript "fejler" med at regne ud om der virkelig er behov for et semikolon.**
 
@@ -65,38 +61,24 @@ alert("Hello");
 [1, 2].forEach(alert);
 ```
 
-<<<<<<< HEAD
 Tænk ikke for meget på de hårde paranteser `[]` og `forEach` endnuyet. Dem lærer du om senere. For nu, så tænk bare, at denne kode vil vise en dialogboks med tallet `1` efterfulgt af tallet `2`.
 
 Prøv nu, at tilføje en `alert` før den anden kode og lad være med at afslutte med semikolon:
 
 ```js run no-beautify
 alert("Nu vil der ske en fejl")
-=======
-No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of running the code: it shows `Hello`, then `1`, then `2`.
-
-Now let's remove the semicolon after the `alert`:
-
-```js run no-beautify
-alert("Hello")
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
 [1, 2].forEach(alert);
 ```
 
-<<<<<<< HEAD
-Nu vil den føre advarsel vise sig og bagefter vil konsollen melde fejl.
+Nu vil den første advarsel vise sig og bagefter vil konsollen melde fejl.
 
 Men, alt vil virke fint, hvis du sætter et semikolon efter `alert`:
 ```js run
 alert("Alt er fint nu");
-=======
-The difference compared to the code above is only one character: the semicolon at the end of the first line is gone.
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
 If we run this code, only the first `Hello` shows (and there's an error, you may need to open the console to see it). There are no numbers any more.
 
-<<<<<<< HEAD
 Nu vil du se teksten "Alt er fint nu" efterfulgt af `1` and `2`.
 
 
@@ -109,19 +91,6 @@ alert("Nu vil der ske en fejl")[1, 2].forEach(alert)
 ```
 
 Men det burde være to seperate udsagn og ikke ét. Sådan en sammentrækning er forkert og derfor melder JavaScript fejl. Denne type fejl kan også ske i andre sammenhænge.
-=======
-That's because JavaScript does not assume a semicolon before square brackets `[...]`. So, the code in the last example is treated as a single statement.
-
-Here's how the engine sees it:
-
-```js run no-beautify
-alert("Hello")[1, 2].forEach(alert);
-```
-
-Looks weird, right? Such merging in this case is just wrong. We need to put a semicolon after `alert` for the code to work correctly.
-
-This can happen in other situations also.
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 ````
 
 Jeg anbefaler at du sætter semikolon mellem udsagn - også selvom de bliver adskilt af linjeskift. Så, opsummeret -- *det er muligt* at udelade semikolon i de fleste tilfælde. Men det er sikre -- specielt for en begynder -- at bruge dem.
