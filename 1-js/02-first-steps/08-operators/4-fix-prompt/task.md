@@ -2,17 +2,18 @@ importance: 5
 
 ---
 
-# Fix the addition
+# Ret tilføjelsen
 
-Here's a code that asks the user for two numbers and shows their sum.
+Her er en kode, der beder brugeren om to tal og viser deres sum.
 
-It works incorrectly. The output in the example below is `12` (for default prompt values).
+Den fungerer forkert. Outputtet i eksemplet nedenfor er `12` (for standard prompt værdier).
 
-Why? Fix it. The result should be `3`.
+Hvorfor? Ret det. Resultatet skal være `3`.
 
 ```js run
-let a = prompt("First number?", 1);
-let b = prompt("Second number?", 2);
+let a = prompt("Første tal?", 1);
+let b = prompt("Andet tal?", 2);
 
 alert(a + b); // 12
 ```
+

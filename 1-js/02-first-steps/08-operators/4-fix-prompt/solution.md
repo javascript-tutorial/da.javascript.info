@@ -1,32 +1,33 @@
-The reason is that prompt returns user input as a string.
+Årsagen er, at prompt returnerer brugerinput som en streng.
 
-So variables have values `"1"` and `"2"` respectively.
+Så variablerne har værdierne `"1"` og `"2"` henholdsvis.
 
 ```js run
-let a = "1"; // prompt("First number?", 1);
-let b = "2"; // prompt("Second number?", 2);
+let a = "1"; // prompt("Første nummer?", 1);
+let b = "2"; // prompt("Andet nummer?", 2);
 
 alert(a + b); // 12
 ```
 
-What we should do is to convert strings to numbers before `+`. For example, using `Number()` or prepending them with `+`.
+Hvad vi skal gøre er at konvertere strenge til tal før `+`. For eksempel ved at bruge `Number()` eller ved at tilføje `+` foran dem.
 
-For example, right before `prompt`:
+For eksempel lige før `prompt`:
 
 ```js run
-let a = +prompt("First number?", 1);
-let b = +prompt("Second number?", 2);
+let a = +prompt("Første nummer?", 1);
+let b = +prompt("Andet nummer?", 2);
 
 alert(a + b); // 3
 ```
 
-Or in the `alert`:
+Eller i `alert`:
 
 ```js run
-let a = prompt("First number?", 1);
-let b = prompt("Second number?", 2);
+let a = prompt("Første nummer?", 1);
+let b = prompt("Andet nummer?", 2);
 
 alert(+a + +b); // 3
 ```
 
-Using both unary and binary `+` in the latest code. Looks funny, doesn't it?
+Ved at bruge både unær og binær `+` i den seneste kode. Ser sjovt ud, ikke?
+

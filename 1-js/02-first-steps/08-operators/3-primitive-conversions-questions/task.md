@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Type conversions
+# Typekonverteringer
 
-What are results of these expressions?
+Hvad er resultaterne af disse udtryk?
 
 ```js no-beautify
 "" + 1 + 0
@@ -23,4 +23,5 @@ undefined + 1
 " \t \n" - 2
 ```
 
-Think well, write down and then compare with the answer.
+Tænk dig godt om, skriv ned og sammenlign derefter med svaret.
+
