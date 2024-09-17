@@ -4,7 +4,7 @@ importance: 5
 
 # Tesktstrenge og citationstegn
 
-Hvad skriver følgende kommandoerWhat is the output of the script?
+Hvad skriver følgende kommandoer?
 
 ```js
 let name = "Ilya";

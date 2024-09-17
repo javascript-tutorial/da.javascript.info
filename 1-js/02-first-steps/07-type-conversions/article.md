@@ -6,18 +6,13 @@ For eksempel vil `alert` automatisk konvertere alle værdier til tekststrenge fo
 
 Der er også situationer, hvor du behøver eksplicit at konvertere en værdi til en forventet type.
 
-<<<<<<< HEAD
 ```smart header="Ikke et ord om objekter ... endnu"
 I dette kapitel vil jeg ikke gennemgå objekter. For nu, vil jeg kun gennemgå primitiver.
-=======
-```smart header="Not talking about objects yet"
-In this chapter, we won't cover objects. For now, we'll just be talking about primitives.
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
 Senere, efter du har lært om objekter, i kapitlet <info:object-toprimitive> vil du lære, hvordan objekter passer ind.
 ```
 
-## KOnvertering til string
+## Konvertering til string
 
 Konvertering til tekststreng sker når du behøver at en værdi opfattes som en tekststreng.
 
@@ -39,11 +34,7 @@ Konvertering til tekststreng er for det meste åbenlys. Booelan `false` bliver t
 
 ## Konvertering til tal number
 
-<<<<<<< HEAD
 Konvertering til tal sker automatisk i matematiske funktioner og udtryk.
-=======
-Numeric conversion in mathematical functions and expressions happens automatically.
->>>>>>> 9e3fa1351f80cfd6353a778a55b2c86bca9e895f
 
 For eksempel, hvis division `/` udføres på ikke-tal:
 
@@ -78,13 +69,8 @@ Regler for konvertering af tal:
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
-<<<<<<< HEAD
 |<code>true&nbsp;og&nbsp;false</code> | `1` og `0` |
 | `string` | mellemrum i starten og slutningen fjernes. Hvis det der er tilbage er tomt, bliver resultatet `0`. Ellers læses tallet fra tekststrengen. En fejl vil give `NaN`. |
-=======
-|<code>true&nbsp;and&nbsp;false</code> | `1` and `0` |
-| `string` | Whitespaces (includes spaces, tabs `\t`, newlines `\n` etc.) from the start and end are removed. If the remaining string is empty, the result is `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 
 Eksempler:
 
@@ -143,13 +129,8 @@ Konverteringen følger disse regler:
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
-<<<<<<< HEAD
 |<code>true&nbsp;og&nbsp;false</code> | `1` og `0` |
 | `string` | mellemrum i starten og slutningen fjernes. Hvis det der er tilbage er tomt, bliver resultatet `0`. Ellers læses tallet fra tekststrengen. En fejl vil give `NaN`. |
-=======
-|<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
-| `string` | The string is read "as is", whitespaces (includes spaces, tabs `\t`, newlines `\n` etc.) from both sides are ignored. An empty string becomes `0`. An error gives `NaN`. |
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 
 **`Konvertering af Boolean`** -- Sker i logiske operationer. Kan også udføres med `Boolean(value)`.
 

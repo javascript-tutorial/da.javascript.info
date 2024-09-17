@@ -95,7 +95,7 @@ Du har set tre browser-specifikke funktioner til at interagere med brugere:
 `confirm`
 : viser en besked og venter på, atbrugeren trykker "OK" eller "Cancel". Den returnerer `true` hvis der trykkes OK og `false` hvis der trykkes Cancel eller `key:Esc`.
 
-e disse funktioner er modale: De pauser udførelsen af dit script og tillader ikke brugeren at interagere med resten af siden indtil arbejdet med vinduet er afsluttet.
+Alle disse funktioner er modale: De pauser udførelsen af dit script og tillader ikke brugeren at interagere med resten af siden indtil arbejdet med vinduet er afsluttet.
 
 Der er to begrænsninger der deles af alle metoderne ovenfor:
 
