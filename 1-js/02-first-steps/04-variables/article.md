@@ -24,11 +24,7 @@ Nu kan du putte data ind i lageret med `=` kaldet en tildelingsoperator (på eng
 let message;
 
 *!*
-<<<<<<< HEAD
 message = 'Hallo'; // gemmer tekststrengen Hallo
-=======
-message = 'Hello'; // store the string 'Hello' in the variable named message
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 */!*
 ```
 
@@ -67,12 +63,7 @@ let age = 25;
 let message = 'Hello';
 ```
 
-<<<<<<< HEAD
 Nogle foretrækker at skrive variable over flere linjer således:
-=======
-Some people also define multiple variables in this multiline style:
-
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 ```js no-beautify
 let user = 'John',
   age = 25,
@@ -114,11 +105,6 @@ Du kan putte hvilken som helst værdi i kassen.
 
 Du kan også ændre indholdet. Indholdet kan ændres så tit du vil:
 
-<<<<<<< HEAD
-=======
-We can also change it as many times as we want:
-
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 ```js run
 let message;
 
@@ -151,29 +137,18 @@ alert(message); // Hello world!
 ```
 
 ```smart header="Funktionelle sprog"
-Som et sidespor, kan det være interessant for dig at vide, at der eksisterer såkaldte [funktionelle](https://en.wikipedia.org/wiki/Functional_programming) pprogrammeringssprog (functional programming) der forbyder, at du ændrer indholdet af variable. Eksempler på sådanne sprog er [Scala](http://www.scala-lang.org/) og [Erlang](http://www.erlang.org/).
+Som et sidespor, kan det være interessant for dig at vide, at der eksisterer såkaldte [pure functional](https://en.wikipedia.org/wiki/Purely_functional_programming) programmingssprog, så som [Haskell](https://en.wikipedia.org/wiki/Haskell), der forbyder ændring af variable.
 
-I sådanne sprog vil værdien være "gemt i kassen" for evigt. Hvis du vil gemme noget nyt, må du oprette en ny kasse (ny variabel) - du kan ikke bare genbruge den gamle
+I sådanne sprog vil værdien være "gemt i kassen" for evigt. Hvis du vil gemme noget nyt, må du oprette en ny kasse (ny variabel) - du kan ikke bare genbruge den gamle.
 
 Det virker måske lidt mærkeligt til at begynde med, men disse sprog er fuldt ud i stand til at udføre noget seriøs programmering. Derudover, er der områder som parallelberegning (parallel computations) hvor den slags begrænsning giver nogle fordele. Når du er blevet bedre til JavaScript vil studier af sprog som disse brede din forståelse af programmering ud - selv om du ikke planlægger at bruge det selv.
 ```
 
-<<<<<<< HEAD
 ## Navngivning af variable [#variable-naming]
-=======
-```smart header="Functional languages"
-It's interesting to note that there exist so-called [pure functional](https://en.wikipedia.org/wiki/Purely_functional_programming) programming languages, such as [Haskell](https://en.wikipedia.org/wiki/Haskell), that forbid changing variable values.
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
-
 Der er to begrænsninger for navngivning af variable i JavaScript:
 
-<<<<<<< HEAD
 1. Navnet må kun indeholde bogstaver, tal og symbolerne `$` og `_`.
 2. Den første karakter må ikke være et tal.
-=======
-Though it may seem a little odd at first sight, these languages are quite capable of serious development. More than that, there are areas like parallel computations where this limitation confers certain benefits.
-```
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 
 Gyldige navne er f.eks:
 
@@ -203,22 +178,12 @@ let 1a; // kan ikke starte med et tal
 let my-name; // en bindestreg er ikke tilladt i navnet
 ```
 
-<<<<<<< HEAD
 ```smart header="Store og små bogstaver betyder noget"
 Variable kaldet `apple` og `AppLE` -- er to forskellige variable.
-=======
-```smart header="Case matters"
-Variables named `apple` and `APPLE` are two different variables.
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 ```
 
-<<<<<<< HEAD
 ````smart header="Ikke-engelske karakterer er tilladt, men anbefales ikke"
 Du kan bruge karakterer fra hvilket som helst sprog - også kyrillisk oa, som f.eks:
-=======
-````smart header="Non-Latin letters are allowed, but not recommended"
-It is possible to use any language, including cyrillic letters, Chinese logograms and so on, like this:
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 
 ```js
 let имя = '...';
@@ -283,12 +248,7 @@ myBirthday = '01.01.2001'; // fejl, kan ikke tildele ny værdi til en konstant!
 
 Når en programmør vil være sikker på, at en værdi ikke bliver ændret kan han bruge `const` for derved også klart at signalere at den ikke må røres til andre der læser koden.
 
-<<<<<<< HEAD
-
 ### Bar store bogstaver til konstanter
-=======
-### Uppercase constants
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 
 Det er en udbredt praksis at bruge konstanter til værdier der kan være svære at huske eller forstå mens der udvikles.
 
@@ -317,23 +277,15 @@ Men, hvornår skal du bruge store bogstaver til konstanter og hvornår skal du s
 
 At være en "konstant" betyder, at indholdet aldrig kan ændres. Men, der er konstanter der kendes inden programmet afvikles (som hexadecimal værdien for farven rød) og der er konstanter der bliver regnet ud, når programmet startes, men ikke ændres så snart de er oprettet.
 
-<<<<<<< HEAD
 For eksempel:
-=======
-For instance:
 
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 ```js
 const pageLoadTime = /* tid det tog at hente siden */;
 ```
 
 Værdien af `pageLoadTime` kan ikke kendes inden siden hentes, så den navngives i camelcase. Men, det er stadig en konstant fordi den ikke kan ændres efterfølgende.
 
-<<<<<<< HEAD
 Med andre ord. Konstanter med store bogstaver (kapitæler) bruges kun til "hard-coded" værdier.  
-=======
-In other words, capital-named constants are only used as aliases for "hard-coded" values.
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
 ## Giv variable de rigtige navne
 

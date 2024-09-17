@@ -46,11 +46,7 @@ Udover regulære tal findes der også såkaldte "specielle numeriske værdier" d
     alert( "not a number" / 2 ); // NaN, sådan en division resulterer ikke i et tal
     ```
 
-<<<<<<< HEAD
     `NaN` hænger fast. Alle fremtidige oprerationer på `NaN` vil resultere i `NaN`:
-=======
-    `NaN` is sticky. Any further mathematical operation on `NaN` returns `NaN`:
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
     ```js run
     alert( NaN + 1 ); // NaN
@@ -58,11 +54,7 @@ Udover regulære tal findes der også såkaldte "specielle numeriske værdier" d
     alert( "not a number" / 2 - 1 ); // NaN
     ```
 
-<<<<<<< HEAD
-    Så, hvis der er et `NaN` et eller andet sted i udtrykket, så vil det påvirke hele beregningen.
-=======
-    So, if there's a `NaN` somewhere in a mathematical expression, it propagates to the whole result (there's only one exception to that: `NaN ** 0` is `1`).
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
+    Så, hvis der er et `NaN` et eller andet sted i udtrykket, så vil det påvirke hele beregningen (der er kun én undtagelse for dette: `NaN ** 0` giver `1`).
 
 ```smart header="Matematiske operatorer er sikre"
 Matematik er "sikkert" i JavaScript. Du kan gøre alt: dividere med nul, behandle ikke-nummeriske tekststrenge som tal, etc.
@@ -76,26 +68,20 @@ Du lærer mere om at arbejde med tal i kapitlet <info:number>.
 
 ## BigInt [#bigint-type]
 
-<<<<<<< HEAD
 I JavaScript kan datatypen "Number" ikke repræsentere heltal større end <code>(2<sup>53</sup>-1)</code> (det svarer til `9007199254740991`), eller mindre end <code>-(2<sup>53</sup>-1)</code> for negative tal. Dette skyldes en intern begrænsning.
 
-I de fleste tilfælde er det mere end rigeligt, men nogle gange har du brug for virkelig store tal, f.eks. til kryptografi eller microsekund-præcision i tidsstempler.
-=======
-In JavaScript, the "number" type cannot safely represent integer values larger than <code>(2<sup>53</sup>-1)</code> (that's `9007199254740991`), or less than <code>-(2<sup>53</sup>-1)</code> for negatives.
+For at være helt præcis kan “number”-typen gemme større heltal (op til <308>1.7976931348623157 * 10<sup>308</sup></code>), men uden for det sikre heltalsområde <code>±(2<sup>53</sup>-1)</code> vil der være en præcisionsfejl, fordi ikke alle cifre kan passe ind i den faste 64-bit lagring. Så en “omtrentlig” værdi kan blive gemt.
 
-To be really precise, the "number" type can store larger integers (up to <code>1.7976931348623157 * 10<sup>308</sup></code>), but outside of the safe integer range <code>±(2<sup>53</sup>-1)</code> there'll be a precision error, because not all digits fit into the fixed 64-bit storage. So an "approximate" value may be stored.
-
-For example, these two numbers (right above the safe range) are the same:
+For eksempel er disse to tal (lige over det sikre område) de samme:
 
 ```js
 console.log(9007199254740991 + 1); // 9007199254740992
 console.log(9007199254740991 + 2); // 9007199254740992
 ```
 
-So to say, all odd integers greater than <code>(2<sup>53</sup>-1)</code> can't be stored at all in the "number" type.
+Så at sige, kan alle ulige heltal større end (253-1) slet ikke gemmes i “number”-typen.
 
-For most purposes <code>±(2<sup>53</sup>-1)</code> range is quite enough, but sometimes we need the entire range of really big integers, e.g. for cryptography or microsecond-precision timestamps.
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
+Til de fleste formål er området <code>±(2<sup>53</sup>-1)</code> mere end tilstrækkeligt, men nogle gange har vi brug for hele området af virkelig store heltal, f.eks. til kryptografi eller tidsstempler med mikrosekund-præcision.
 
 `BigInt` datatypen er tilføjet sproget for nyligt til at repræsentere heltal af en vilkårlig længde.
 
@@ -238,13 +224,8 @@ Datatypen `symbol` bruges til at skabe unikke identifikationer for objekter. Jeg
 
 ## typeof operator [#type-typeof]
 
-<<<<<<< HEAD
 `typeof` operatoren returnere datatypen af det argument den modtager. Dette er brugbart hvis du vil arbejde mde værdier af forskellige typer, eller bare vil sikre, at en variabel er af en bestemt type.
-=======
-The `typeof` operator returns the type of the operand. It's useful when we want to process values of different types differently or just want to do a quick check.
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 
-<<<<<<< HEAD
 Den understøtter to former for syntaks:
 
 1. Som en operator: `typeof x`.
@@ -253,9 +234,6 @@ Den understøtter to former for syntaks:
 Sagt på en anden måde, den virker både med og uden paranteser. Resultatet er det samme.
 
 Et kald til `typeof x` returnerer en tekststreng med datatypens navn:
-=======
-A call to `typeof x` returns a string with the type name:
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
 ```js
 typeof undefined // "undefined"
@@ -285,70 +263,40 @@ typeof alert // "function"  (3)
 
 De sidste tre linjer kræver lidt yderligere forklaring:
 
-<<<<<<< HEAD
 1. `Math` er et indbygget objekt, der leverer matematiske operationer. Du lærer mere om det i kapitlet <info:number>. Her, skal det bare ses som et eksempel på et objekt.
 2. Resultatet af `typeof null` er `"object"`. Det er officielt anerkendt som en fejl i `typeof` opførsel. Det startede i de tidlige dage af JavaScript og er blevet på grund af kompatibilitet. Det er sikkert at `null` ikke er et objekt, men sin egen datatype ... men JavaScript ved det bare ikke.
 3. Resultatet af `typeof alert` er `"function"`, fordi `alert` er en funktion. Du lærer mere om funktioner i næste kapitel, hvor du vil se, at der ikke er nogen speciel "funktion" datatype  i JavaScript. Funktioner tilhører typen `object`. Men `typeof` behandler dem forskelligt og returnerer `"function"`. Det fører også tilbage til gamle dage. Teknisk set er det forkert, men kan være praktisk i det daglige.
 
-## Opsummering
-=======
-1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
-2. The result of `typeof null` is `"object"`. That's an officially recognized error in `typeof`, coming from very early days of JavaScript and kept for compatibility. Definitely, `null` is not an object. It is a special value with a separate type of its own. The behavior of `typeof` is wrong here.
-3. The result of `typeof alert` is `"function"`, because `alert` is a function. We'll study functions in the next chapters where we'll also see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently, returning `"function"`. That also comes from the early days of JavaScript. Technically, such behavior isn't correct, but can be convenient in practice.
 
-```smart header="The `typeof(x)` syntax"
-You may also come across another syntax: `typeof(x)`. It's the same as `typeof x`.
+```smart header="`typeof(x)` syntax"
+Du vil også kunne se en anden syntax: `typeof(x)`. Det gør det samme som `typeof x`.
 
-To put it clear: `typeof` is an operator, not a function. The parentheses here aren't a part of `typeof`. It's the kind of parentheses used for mathematical grouping.
+For klarhedens skyld: `typeof` er en operator, ikke en funktion. Parantesen der bruges her hører ikke til `typeof`. Det skal mere forstås som den slags parenteser der bruges til matematisk gruppering.
 
-Usually, such parentheses contain a mathematical expression, such as `(2 + 2)`, but here they contain only one argument `(x)`. Syntactically, they allow to avoid a space between the `typeof` operator and its argument, and some people like it.
+Normalt vil sådanne parenteser indeholde matematiske udtryk så som `(2 + 2)`, men her indeholder de kun ét argument `(x)`. Syntakstisk tillader de at man undlader et mellemrum mellem `typeof` operatoren og dens argument, og det er der nogle der foretrækker.
 
-Some people prefer `typeof(x)`, although the `typeof x` syntax is much more common.
+Så du vil se brugen af `typeof(x)`, men syntaksen `typeof x` er noget mere udbredt.
 ```
+## Opsummering
 
-## Summary
-<<<<<<< HEAD
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
+Der er 9 grundlæggende datatyper i JavaScript.
 
-Der er 8 grundlæggende datatyper i JavaScript.
-
-- `number` til alle slags tal: heltal og kommatal. Heltal er begrænset af <code>±(2<sup>53</sup>-1)</code>.
-- `bigint` er til heltal der er meget store.
-- `string` er til tekststrenge. En tekststreng kan have nul, en eller flere karakterer. Der er ikke en seperat datatype for enkelte karakterer..
-- `boolean` er til `true`/`false` værdier.
-- `null` for ukendte værdier -- en selvstændig datatype der kun kan have værdien `null`.
-- `undefined` for ikke tildelte værdier -- en selvstændig datatype der kun kan have værdien `undefined`.
-- `object` til mere komplekse datastrukturer.
-- `symbol` til unik identifikation.
+- Syv primitive datatyper:
+    - `number` til alle slags tal: heltal og kommatal, heltal er begrænset af <code>±(2<sup>53</sup>-1)</code>.
+    - `bigint` til heltal af vilkårlig længde.
+    - `string` til tekststrenge. En tekststreng kan have nul, en eller flere karakterer. Der er ikke en seperat datatype for enkelte karakterer.
+    - `boolean` til `true`/`false`.
+    - `null` for ukendte værdier -- en selvstændig datatype der kun kan have værdien `null`.
+    - `undefined` for ikke tildelte værdier -- en selvstændig datatype der kun kan have værdien `undefined`.
+    - `symbol` til unik identifikation.
+- Og en ikke-primitiv datatype:
+    - `object` til mere komplekse datastrukturer.
+    - `symbol` til unik identifikation.
 
 `typeof` operatoren tillader dig at se, hvilken datatype en variabel er.
 
-<<<<<<< HEAD
 - To måder: `typeof x` eller `typeof(x)`.
 - Returnerer en tekststreng med navnet på datatypen, i stil med `"string"`.
 - `null` returnerer `"object"` -- dette er en fejl i sproget, det er ikke et objekt.
-=======
-=======
-
-There are 8 basic data types in JavaScript.
-
-- Seven primitive data types:
-    - `number` for numbers of any kind: integer or floating-point, integers are limited by <code>±(2<sup>53</sup>-1)</code>.
-    - `bigint` for integer numbers of arbitrary length.
-    - `string` for strings. A string may have zero or more characters, there's no separate single-character type.
-    - `boolean` for `true`/`false`.
-    - `null` for unknown values -- a standalone type that has a single value `null`.
-    - `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
-    - `symbol` for unique identifiers.
-- And one non-primitive data type:
-    - `object` for more complex data structures.
-
-The `typeof` operator allows us to see which type is stored in a variable.
-
->>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
-- Usually used as `typeof x`, but `typeof(x)` is also possible.
-- Returns a string with the name of the type, like `"string"`.
-- For `null` returns `"object"` -- this is an error in the language, it's not actually an object.
->>>>>>> 7bb6066eb6ea3a030b875cdc75433c458f80997e
 
 I det næste kapitel vil jeg koncentrere mig om primitive værdier. Så snart du er fortrolig med dem vil jeg gå videre med objekter.
