@@ -88,16 +88,26 @@ I ældre scripts finder du ofte nøgleordet `var` i stedet for `let`:
 *!*var*/!* message = 'Hello';
 ```
 
+<<<<<<< HEAD
 Nøgleordet `var` gør *næsten* det samme som `let`. Det deklarere en variabel, men på en lidt anden, "old-school" måde.
 
 Der er små forskelle mellem `let` og `var`, men de har slet ingen betydning for os endnu. Du vil lære om dem senere i kapitlet <info:var>.
+=======
+The `var` keyword is *almost* the same as `let`. It also declares a variable but in a slightly different, "old-school" way.
+
+There are subtle differences between `let` and `var`, but they do not matter to us yet. We'll cover them in detail in the chapter <info:var>.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 ````
 
 ## Et eksempel fra virkeligheden
 
 Du kan måske nemmere forstå konceptet omkring variable, hvis du forestiller dig en "kasse" til data med et unikt klistermærke på.
 
+<<<<<<< HEAD
 For eksempel kan variablen `message` ses som en kasse kaldet `"message"` med værdien `"Hello!"` i:
+=======
+For instance, the variable `message` can be imagined as a box labelled `"message"` with the value `"Hello!"` in it:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ![](variable.png)
 
@@ -182,15 +192,24 @@ let my-name; // en bindestreg er ikke tilladt i navnet
 Variable kaldet `apple` og `AppLE` -- er to forskellige variable.
 ```
 
+<<<<<<< HEAD
 ````smart header="Ikke-engelske karakterer er tilladt, men anbefales ikke"
 Du kan bruge karakterer fra hvilket som helst sprog - også kyrillisk oa, som f.eks:
+=======
+````smart header="Non-Latin letters are allowed, but not recommended"
+It is possible to use any language, including Cyrillic letters, Chinese logograms and so on, like this:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js
 let имя = '...';
 let 我 = '...';
 ```
 
+<<<<<<< HEAD
 Teknisk set der er ikke fejl her - sådanne navne er tilladt. Men der er en international tradition for at bruge engelsk i navngin´vning af variable. Selv, hvis du laver mindre kodestykker kan de have en lang livetid foran sig og folk fra andre lande har måske behov for at læse det og kunne skrive det på tastaturet.
+=======
+Technically, there is no error here. Such names are allowed, but there is an international convention to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it sometime.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 ````
 
 ````warn header="Reserverede ord"
@@ -246,11 +265,19 @@ const myBirthday = '23.08.1973';
 myBirthday = '01.01.2001'; // fejl, kan ikke tildele ny værdi til en konstant!
 ```
 
+<<<<<<< HEAD
 Når en programmør vil være sikker på, at en værdi ikke bliver ændret kan han bruge `const` for derved også klart at signalere at den ikke må røres til andre der læser koden.
+=======
+When a programmer is sure that a variable will never change, they can declare it with `const` to guarantee and communicate that fact to everyone.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ### Bar store bogstaver til konstanter
 
+<<<<<<< HEAD
 Det er en udbredt praksis at bruge konstanter til værdier der kan være svære at huske eller forstå mens der udvikles.
+=======
+There is a widespread practice to use constants as aliases for difficult-to-remember values that are known before execution.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Sådanne konstanter bliver skrevet med store bogstaver og underscore.
 
@@ -275,7 +302,11 @@ Fordele:
 
 Men, hvornår skal du bruge store bogstaver til konstanter og hvornår skal du skrive dem i camelcase? Lad mig prøve at forklare det på denne måde:
 
+<<<<<<< HEAD
 At være en "konstant" betyder, at indholdet aldrig kan ændres. Men, der er konstanter der kendes inden programmet afvikles (som hexadecimal værdien for farven rød) og der er konstanter der bliver regnet ud, når programmet startes, men ikke ændres så snart de er oprettet.
+=======
+Being a "constant" just means that a variable's value never changes. But some constants are known before execution (like a hexadecimal value for red) and some constants are *calculated* in run-time, during the execution, but do not change after their initial assignment.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 For eksempel:
 
@@ -283,7 +314,11 @@ For eksempel:
 const pageLoadTime = /* tid det tog at hente siden */;
 ```
 
+<<<<<<< HEAD
 Værdien af `pageLoadTime` kan ikke kendes inden siden hentes, så den navngives i camelcase. Men, det er stadig en konstant fordi den ikke kan ændres efterfølgende.
+=======
+The value of `pageLoadTime` is not known before the page load, so it's named normally. But it's still a constant because it doesn't change after the assignment.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Med andre ord. Konstanter med store bogstaver (kapitæler) bruges kun til "hard-coded" værdier.  
 
@@ -293,18 +328,31 @@ Når vi nu taler om variable er der en anden meget vigtig pointe.
 
 Giv variable nogle meningsfulde navne. Giv dig gerne lidt tid til at tænke over dem, hvis det er krævet.
 
+<<<<<<< HEAD
 Navngivning af variable er en meget vigtig og faktisk lidt svær færdighed at mestre i programmering. Et hurtigt blik på variabelnavne viser ofte om det er en begynder eller en mere erfaren udvikler.
 
 I virkelige projekter bruges meget af tiden på at modificere og udvide den eksisterende kodebase, mere end at lave noget helt nyt fra bunden. Når du vender tilbage til en kode efter noget tid og arbejde med andet, er det nemmere at forstå og arbejde med, hvis det er navngivet ordenligt - når variable har gode navne.
+=======
+Variable naming is one of the most important and complex skills in programming. A glance at variable names can reveal which code was written by a beginner versus an experienced developer.
+
+In a real project, most of the time is spent modifying and extending an existing code base rather than writing something completely separate from scratch. When we return to some code after doing something else for a while, it's much easier to find information that is well-labelled. Or, in other words, when the variables have good names.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Brug noget tid på at tænke over det rigtige navn, inden du opretter din variabel. Du vil takke dig selv senere.
 
 Et par gode regler er:
 
+<<<<<<< HEAD
 - Skriv læsbare navne som `userName` eller `shoppingCart`.
 - Hold dig fra forkortelser eller helt små navne som `a`, `b`, `c`, med mindre du virkelig ved, hvad du laver.
 - Lav dem beskrivende men kortfattede. Dårlige navne er `data` og `value` - de siger ikke meget om indholdet. De er kun anbefalet, hvis det er åbenlyst i hvilken sammenhæng de skal læses og forstås.
 - Sæt dig fast på retningslinjer - alene eller i din gruppe. Hvis en besøgende på et website kaldes "user" så fortsæt med variable som `currentUser` og `newUser`, ikke `currentVisitor` og `newManInTown`.
+=======
+- Use human-readable names like `userName` or `shoppingCart`.
+- Stay away from abbreviations or short names like `a`, `b`, and `c`, unless you know what you're doing.
+- Make names maximally descriptive and concise. Examples of bad names are `data` and `value`. Such names say nothing. It's only okay to use them if the context of the code makes it exceptionally obvious which data or value the variable is referencing.
+- Agree on terms within your team and in your mind. If a site visitor is called a "user" then we should name related variables `currentUser` or `newUser` instead of `currentVisitor` or `newManInTown`.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Det lyder simpelt, ikke? Det er det faktisk også, men det kræver en del øvelse at skrive gode beskrivende men korte variabelnavne.
 
