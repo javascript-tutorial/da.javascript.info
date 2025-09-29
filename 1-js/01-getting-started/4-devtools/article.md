@@ -22,7 +22,7 @@ Udviklingsværktøjerne vil åbne med tabben KOnsol (Console) som standard.
 
 Det ser ud i stil med dette:
 
-![chrome](chrome.png)
+![chrome](chrome.webp)
 
 Det præcise udseende vil afhænge af din version af Chrome. Det skifter fra tid til anden men burde minde om billedet.
 
@@ -49,7 +49,11 @@ Udseendet og måden de virker på er ret ens. Så snart du kender til én af bro
 
 Safari (Mac browser, ikke understøttet af Windows/Linux) er lidt speciel her. Du er nød til først at aktivere "Udviklermenu" (Develop menu) først.
 
+<<<<<<< HEAD
 Åbn indstillingerne og gå til "Avanceret" (Advanced) pane. Her er der en checkbox nederst:
+=======
+Open Settings and go to the "Advanced" pane. There's a checkbox at the bottom:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ![safari](safari.png)
 
