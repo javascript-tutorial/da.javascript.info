@@ -49,11 +49,7 @@ Udseendet og måden de virker på er ret ens. Så snart du kender til én af bro
 
 Safari (Mac browser, ikke understøttet af Windows/Linux) er lidt speciel her. Du er nød til først at aktivere "Udviklermenu" (Develop menu) først.
 
-<<<<<<< HEAD
-Åbn indstillingerne og gå til "Avanceret" (Advanced) pane. Her er der en checkbox nederst:
-=======
-Open Settings and go to the "Advanced" pane. There's a checkbox at the bottom:
->>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
+Åbn indstillingerne og gå til "Avanceret" (Advanced) tab. Her er der en checkbox nederst:
 
 ![safari](safari.png)
 

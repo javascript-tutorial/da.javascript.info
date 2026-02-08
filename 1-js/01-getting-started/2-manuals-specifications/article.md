@@ -4,7 +4,7 @@ Denne bog er en *tutorial*. Den går efter at hjælpe dig med at lære dig sprog
 
 ## Specifikationer
 
-[ECMA-262 specificationen](https://www.ecma-international.org/publications/standards/Ecma-262.htm) indeholder den mest dybdegående, detaljerede og formaliserede information om JavaScript. Det er den der definerer selve sproget.
+[ECMA-262 specifikationen](https://www.ecma-international.org/publications/standards/Ecma-262.htm) indeholder den mest dybdegående, detaljerede og formaliserede information om JavaScript. Det er den der definerer selve sproget.
 
 Men, når det er skrevet så formelt er det også meget svært at forstå for en begynder. Så, hvis du skal bruge den mest pålidelige kilde til information om detaljer i sproget, så er specifikationen det rigtige sted. Men, det er ikek til hverdagsbrug.
 
