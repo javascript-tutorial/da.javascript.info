@@ -1,14 +1,14 @@
-# The "switch" statement
+# "switch" udtryk
 
-A `switch` statement can replace multiple `if` checks.
+Et `switch` udtryk kan erstatte flere `if`-kontroller.
 
-It gives a more descriptive way to compare a value with multiple variants.
+Det giver en mere beskrivende måde at sammenligne en værdi med flere varianter på.
 
-## The syntax
+## Syntaksen
 
-The `switch` has one or more `case` blocks and an optional default.
+`switch` har en eller flere `case` blokke og en valgfri `default`.
 
-It looks like this:
+Det ser sådan ud:
 
 ```js no-beautify
 switch(x) {
@@ -26,71 +26,71 @@ switch(x) {
 }
 ```
 
-- The value of `x` is checked for a strict equality to the value from the first `case` (that is, `value1`) then to the second (`value2`) and so on.
-- If the equality is found, `switch` starts to execute the code starting from the corresponding `case`, until the nearest `break` (or until the end of `switch`).
-- If no case is matched then the `default` code is executed (if it exists).
+- Værdien af `x` bliver tjekket for streng lighed med værdien fra den første `case` (det vil sige `value1`), derefter den anden (`value2`) og så videre.
+- Hvis ligheden findes, starter `switch` med at udføre koden fra den tilsvarende `case`, indtil den nærmeste `break` (eller indtil slutningen af `switch`).
+- Hvis ingen `case` matcher, bliver `default` koden udført (hvis den findes).
 
-## An example
+## Et eksempel
 
-An example of `switch` (the executed code is highlighted):
-
-```js run
-let a = 2 + 2;
-
-switch (a) {
-  case 3:
-    alert( 'Too small' );
-    break;
-*!*
-  case 4:
-    alert( 'Exactly!' );
-    break;
-*/!*
-  case 5:
-    alert( 'Too big' );
-    break;
-  default:
-    alert( "I don't know such values" );
-}
-```
-
-Here the `switch` starts to compare `a` from the first `case` variant that is `3`. The match fails.
-
-Then `4`. That's a match, so the execution starts from `case 4` until the nearest `break`.
-
-**If there is no `break` then the execution continues with the next `case` without any checks.**
-
-An example without `break`:
+Et eksempel på `switch` (den udførte kode er fremhævet):
 
 ```js run
 let a = 2 + 2;
 
 switch (a) {
   case 3:
-    alert( 'Too small' );
+    alert( 'For lille' );
+    break;
 *!*
   case 4:
-    alert( 'Exactly!' );
+    alert( 'Præcis!' );
+    break;
+*/!*
   case 5:
-    alert( 'Too big' );
+    alert( 'For stort' );
+    break;
   default:
-    alert( "I don't know such values" );
+    alert( "Jeg kender ikke sådanne værdier" );
+}
+```
+
+Her starter `switch` med at sammenligne `a` med den første `case` variant, som er `3`. Matchen fejler.
+
+Så `4`. Det er et match, så udførelsen starter fra `case 4` indtil den nærmeste `break`.
+
+**Hvis der ikke er nogen `break`, fortsætter udførelsen med den næste `case` uden nogen kontrol.**
+
+Et eksempel uden `break`:
+
+```js run
+let a = 2 + 2;
+
+switch (a) {
+  case 3:
+    alert( 'For lille' );
+*!*
+  case 4:
+    alert( 'Præcis!' );
+  case 5:
+    alert( 'For stort' );
+  default:
+    alert( "Jeg kender ikke sådanne værdier" );
 */!*
 }
 ```
 
-In the example above we'll see sequential execution of three `alert`s:
+I eksemplet ovenfor vil vi se sekventiel udførelse af tre `alert`:
 
 ```js
-alert( 'Exactly!' );
-alert( 'Too big' );
-alert( "I don't know such values" );
+alert( 'Præcis!' );
+alert( 'For stort' );
+alert( "Jeg kender ikke sådanne værdier" );
 ```
 
-````smart header="Any expression can be a `switch/case` argument"
-Both `switch` and `case` allow arbitrary expressions.
+````smart header="Alle udtryk kan være et `switch/case` argument"
+Både `switch` og `case` tillader vilkårlige udtryk.
 
-For example:
+For eksempel:
 
 ```js run
 let a = "1";
@@ -99,74 +99,74 @@ let b = 0;
 switch (+a) {
 *!*
   case b + 1:
-    alert("this runs, because +a is 1, exactly equals b+1");
+    alert("dette kører, fordi +a er 1, som præcis svarer til b+1");
     break;
 */!*
 
   default:
-    alert("this doesn't run");
+    alert("dette kører ikke");
 }
 ```
-Here `+a` gives `1`, that's compared with `b + 1` in `case`, and the corresponding code is executed.
+`+a` giver `1`, som sammenlignes med `b + 1` i `case`, og den tilsvarende kode udføres.
 ````
 
-## Grouping of "case"
+## Gruppering af "case"
 
-Several variants of `case` which share the same code can be grouped.
+Flere varianter af `case`, som deler den samme kode, kan grupperes.
 
-For example, if we want the same code to run for `case 3` and `case 5`:
+For eksempel, hvis vi ønsker at den samme kode skal køre for `case 3` og `case 5`:
 
 ```js run no-beautify
 let a = 3;
 
 switch (a) {
   case 4:
-    alert('Right!');
+    alert('Rigtigt!');
     break;
 
 *!*
   case 3: // (*) grouped two cases
   case 5:
-    alert('Wrong!');
-    alert("Why don't you take a math class?");
+    alert('Forkert!');
+    alert("Hvorfor tager du ikke et matematikhold?");
     break;
 */!*
 
   default:
-    alert('The result is strange. Really.');
+    alert('Resultatet er mærkeligt. Virkelig?!');
 }
 ```
 
-Now both `3` and `5` show the same message.
+Nu vil både `3` og `5` vise den samme besked.
 
-The ability to "group" cases is a side effect of how `switch/case` works without `break`. Here the execution of `case 3` starts from the line `(*)` and goes through `case 5`, because there's no `break`.
+Muligheden for at "gruppere" cases er en bivirkning af, hvordan `switch/case` fungerer uden `break`. Her starter udførelsen af `case 3` fra linjen `(*)` og fortsætter gennem `case 5`, fordi der ikke er noget `break`.
 
-## Type matters
+## Datatype betyder noget
 
-Let's emphasize that the equality check is always strict. The values must be of the same type to match.
+Lad os understrege, at lighedstjekket altid er strengt. Værdierne skal være af samme type for at matche.
 
-For example, let's consider the code:
+For eksempel, lad os se på koden:
 
 ```js run
-let arg = prompt("Enter a value?");
+let arg = prompt("Indtast en værdi?");
 switch (arg) {
   case '0':
   case '1':
-    alert( 'One or zero' );
+    alert( 'Et eller nul' );
     break;
 
   case '2':
-    alert( 'Two' );
+    alert( 'To' );
     break;
 
   case 3:
-    alert( 'Never executes!' );
+    alert( 'Kører aldrig!' );
     break;
   default:
-    alert( 'An unknown value' );
+    alert( 'En ukendt værdi' );
 }
 ```
 
-1. For `0`, `1`, the first `alert` runs.
-2. For `2` the second `alert` runs.
-3. But for `3`, the result of the `prompt` is a string `"3"`, which is not strictly equal `===` to the number `3`. So we've got a dead code in `case 3`! The `default` variant will execute.
+1. For `0`, `1`, kører den første `alert`.
+2. For `2` kører den anden `alert`.
+3. Men for `3` er resultatet af `prompt` en streng `"3"`, som ikke er strengt lig med `===` tallet `3`. Så vi har død kode i `case 3`! `default` varianten vil blive udført.
