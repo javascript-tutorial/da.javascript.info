@@ -2,19 +2,19 @@ importance: 4
 
 ---
 
-# Which values does the while loop show?
+# Hvilke værdier viser while-løkken?
 
-For every loop iteration, write down which value it outputs and then compare it with the solution.
+For hver iteration af løkken, skriv ned hvilken værdi den viser, og sammenlign derefter med løsningen.
 
-Both loops `alert` the same values, or not?
+Viser begge løkker de samme værdier, eller ikke?
 
-1. The prefix form `++i`:
+1. Prefix-formen `++i`:
 
     ```js
     let i = 0;
     while (++i < 5) alert( i );
     ```
-2. The postfix form `i++`
+2. Postfix-formen `i++`
 
     ```js
     let i = 0;

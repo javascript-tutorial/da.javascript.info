@@ -1,67 +1,67 @@
-# Loops: while and for
+# Løkker: while og for
 
-We often need to repeat actions.
+Vi har ofte brug for at gentage handlinger.
 
-For example, outputting goods from a list one after another or just running the same code for each number from 1 to 10.
+For eksempel at vise varer fra en liste én efter én eller bare køre den samme kode for hvert tal fra 1 til 10.
 
-*Loops* are a way to repeat the same code multiple times.
+*Løkker* er en måde at gentage den samme kode flere gange på.
 
-```smart header="The for..of and for..in loops"
-A small announcement for advanced readers.
+```smart header="for..of og for..in løkker"
+En lille meddelelse til avancerede læsere.
 
-This article covers only basic loops: `while`, `do..while` and `for(..;..;..)`.
+Denne artikel dækker kun grundlæggende løkker: `while`, `do..while` og `for(..;..;..)`.
 
-If you came to this article searching for other types of loops, here are the pointers:
+Hvis du kom til denne artikel for at søge efter andre typer løkker, er her nogle henvisninger:
 
-- See [for..in](info:object#forin) to loop over object properties.
-- See [for..of](info:array#loops) and [iterables](info:iterable) for looping over arrays and iterable objects.
+- Se [for..in](info:object#forin) for at løkke over objektets egenskaber.
+- Se [for..of](info:array#loops) og [iterables](info:iterable) for at løkke over arrays og iterable objekter.
 
-Otherwise, please read on.
+Ellers, fortsæt bare med at læse.
 ```
 
-## The "while" loop
+## "while" løkken
 
-The `while` loop has the following syntax:
+"while" løkken har følgende syntaks:
 
 ```js
-while (condition) {
-  // code
-  // so-called "loop body"
+while (betingelse) {
+  // kode
+  // såkaldt "loop body" eller løkkens krop
 }
 ```
 
-While the `condition` is truthy, the `code` from the loop body is executed.
+Mens `betingelsen` er sand, udføres `koden` fra løkkens krop.
 
-For instance, the loop below outputs `i` while `i < 3`:
+For eksempel viser løkken nedenfor `i`, mens `i < 3`:
 
 ```js run
 let i = 0;
-while (i < 3) { // shows 0, then 1, then 2
+while (i < 3) { // viser 0, så 1, så 2
   alert( i );
   i++;
 }
 ```
 
-A single execution of the loop body is called *an iteration*. The loop in the example above makes three iterations.
+En enkelt udførelse af løkkens krop kaldes *en iteration*. Løkken i eksemplet ovenfor laver tre iterationer.
 
-If `i++` was missing from the example above, the loop would repeat (in theory) forever. In practice, the browser provides ways to stop such loops, and in server-side JavaScript, we can kill the process.
+Hvis `i++` manglede i eksemplet ovenfor, ville løkken gentage sig (i teorien) for evigt. I praksis giver browseren måder at stoppe sådanne løkker på, og i server-side JavaScript kan vi dræbe processen.
 
-Any expression or variable can be a loop condition, not just comparisons: the condition is evaluated and converted to a boolean by `while`.
+Enhver udtryk eller variabel kan være en løkkebetingelse, ikke kun sammenligninger: betingelsen evalueres og konverteres til en boolean af `while`.
 
-For instance, a shorter way to write `while (i != 0)` is `while (i)`:
+For eksempel er en kortere måde at skrive `while (i != 0)` på `while (i)`:
 
 ```js run
 let i = 3;
 *!*
-while (i) { // when i becomes 0, the condition becomes falsy, and the loop stops
+while (i) { // når i bliver 0, bliver betingelsen falsy, og løkken stopper
 */!*
   alert( i );
   i--;
 }
 ```
 
-````smart header="Curly braces are not required for a single-line body"
-If the loop body has a single statement, we can omit the curly braces `{…}`:
+````smart header="Krøllede parenteser er ikke påkrævet for en enkeltlinjet krop"
+Hvis løkkens krop har en enkelt sætning, kan vi udelade de krøllede parenteser `{…}`:
 
 ```js run
 let i = 3;
@@ -71,9 +71,9 @@ while (i) alert(i--);
 ```
 ````
 
-## The "do..while" loop
+## "do..while" løkken
 
-The condition check can be moved *below* the loop body using the `do..while` syntax:
+Tjek af betingelsen kan flyttes *under* løkkens krop ved hjælp af `do..while` syntaksen:
 
 ```js
 do {
@@ -81,9 +81,9 @@ do {
 } while (condition);
 ```
 
-The loop will first execute the body, then check the condition, and, while it's truthy, execute it again and again.
+Løkken vil først udføre kroppen, derefter tjekke betingelsen, og mens den er sand, udføre den igen og igen.
 
-For example:
+For eksempel:
 
 ```js run
 let i = 0;
@@ -93,69 +93,69 @@ do {
 } while (i < 3);
 ```
 
-This form of syntax should only be used when you want the body of the loop to execute **at least once** regardless of the condition being truthy. Usually, the other form is preferred: `while(…) {…}`.
+Denne form for syntaks bør kun bruges, når du vil have løkkens krop til at køre **mindst én gang** uanset om betingelsen er sand. Normalt foretrækkes den anden form: `while(…) {…}`.
 
-## The "for" loop
+## "for" løkken
 
-The `for` loop is more complex, but it's also the most commonly used loop.
+"for" løkken er mere kompleks, men det er også den mest brugte løkke.
 
-It looks like this:
+Den ser sådan ud:
 
 ```js
-for (begin; condition; step) {
-  // ... loop body ...
+for (start; betingelse; trin) {
+  // ... løkkens krop ...
 }
 ```
 
-Let's learn the meaning of these parts by example. The loop below runs `alert(i)` for `i` from `0` up to (but not including) `3`:
+Lad os lære betydningen af disse dele ved hjælp af et eksempel. Løkken nedenfor kører `alert(i)` for `i` fra `0` op til (men ikke inklusive) `3`:
 
 ```js run
-for (let i = 0; i < 3; i++) { // shows 0, then 1, then 2
+for (let i = 0; i < 3; i++) { // viser 0, så 1, så 2
   alert(i);
 }
 ```
 
-Let's examine the `for` statement part-by-part:
+Lad os undersøge `for`-sætningen del for del:
 
 | part  |          |                                                                            |
 |-------|----------|----------------------------------------------------------------------------|
-| begin | `let i = 0`    | Executes once upon entering the loop.                                      |
-| condition | `i < 3`| Checked before every loop iteration. If false, the loop stops.              |
-| body | `alert(i)`| Runs again and again while the condition is truthy.                         |
-| step| `i++`      | Executes after the body on each iteration. |
+| start | `let i = 0`    | Udføres én gang ved indgangen til løkken.                                      |
+| betingelse | `i < 3`| Tjekkes før hver iteration af løkken. Hvis falsk, stopper løkken.              |
+| krop | `alert(i)`| Kører igen og igen, mens betingelsen er sand.                         |
+| trin| `i++`      | Udføres efter kroppen ved hver iteration. |
 
-The general loop algorithm works like this:
+Standarden for løkkens algoritme fungerer sådan her:
 
 ```
-Run begin
-→ (if condition → run body and run step)
-→ (if condition → run body and run step)
-→ (if condition → run body and run step)
+Run start
+→ (if betingelse → kør krop og kør trin)
+→ (if betingelse → kør krop og kør trin)
+→ (if betingelse → kør krop og kør trin)
 → ...
 ```
 
-That is, `begin` executes once, and then it iterates: after each `condition` test, `body` and `step` are executed.
+Det betyder, at `start` udføres én gang, og derefter itererer den: efter hver `betingelse` test, udføres `krop` og `trin`.
 
-If you are new to loops, it could help to go back to the example and reproduce how it runs step-by-step on a piece of paper.
+Hvis du er ny til løkker, kan det hjælpe at gå tilbage til eksemplet og genskabe, hvordan det kører trin-for-trin på et stykke papir.
 
-Here's exactly what happens in our case:
+Her er præcis, hvad der sker i vores tilfælde:
 
 ```js
 // for (let i = 0; i < 3; i++) alert(i)
 
-// run begin
+// kør start
 let i = 0
-// if condition → run body and run step
+// if condition → kør krop and kør trin
 if (i < 3) { alert(i); i++ }
-// if condition → run body and run step
+// if condition → kør krop and kør trin
 if (i < 3) { alert(i); i++ }
-// if condition → run body and run step
+// if condition → kør krop and kør trin
 if (i < 3) { alert(i); i++ }
-// ...finish, because now i == 3
+// ...slut, fordi nu er i == 3
 ```
 
-````smart header="Inline variable declaration"
-Here, the "counter" variable `i` is declared right in the loop. This is called an "inline" variable declaration. Such variables are visible only inside the loop.
+````smart header="Inline variabeldeklaration"
+Her erklæres "tællervariablen" `i` direkte i løkken. Det kaldes en "inline" variabeldeklaration. Sådanne variabler er kun synlige inde i løkken.
 
 ```js run
 for (*!*let*/!* i = 0; i < 3; i++) {
@@ -164,36 +164,36 @@ for (*!*let*/!* i = 0; i < 3; i++) {
 alert(i); // error, no such variable
 ```
 
-Instead of defining a variable, we could use an existing one:
+I stedet for at definere en variabel, kunne vi bruge en eksisterende:
 
 ```js run
 let i = 0;
 
-for (i = 0; i < 3; i++) { // use an existing variable
+for (i = 0; i < 3; i++) { // brug en eksisterende variabel
   alert(i); // 0, 1, 2
 }
 
-alert(i); // 3, visible, because declared outside of the loop
+alert(i); // 3, synlig, fordi erklæret uden for løkken
 ```
 ````
 
-### Skipping parts
+### Spring dele over
 
-Any part of `for` can be skipped.
+Enhver del af `for` kan springes over.
 
-For example, we can omit `begin` if we don't need to do anything at the loop start.
+For eksempel kan vi udelade `start`, hvis vi ikke behøver at gøre noget i begyndelsen af løkken.
 
-Like here:
+Som her:
 
 ```js run
-let i = 0; // we have i already declared and assigned
+let i = 0; // vi har allerede erklæret og tildelt i
 
-for (; i < 3; i++) { // no need for "begin"
+for (; i < 3; i++) { // ingen brug for "start"
   alert( i ); // 0, 1, 2
 }
 ```
 
-We can also remove the `step` part:
+Vi kan også fjerne `trin` delen:
 
 ```js run
 let i = 0;
@@ -203,32 +203,31 @@ for (; i < 3;) {
 }
 ```
 
-This makes the loop identical to `while (i < 3)`.
+Dette gør løkken identisk med `while (i < 3)`.
 
-We can actually remove everything, creating an infinite loop:
+Vi kan faktisk fjerne alt og skabe en uendelig løkke:
 
 ```js
 for (;;) {
-  // repeats without limits
+  // gentages uden begrænsninger
 }
 ```
 
-Please note that the two `for` semicolons `;` must be present. Otherwise, there would be a syntax error.
+Bemærk venligst, at de to `for` semikoloner `;` skal være til stede. Ellers opstår der en syntaksfejl.
 
-## Breaking the loop
+## Bryd ud af løkken
 
-Normally, a loop exits when its condition becomes falsy.
+Normalt afsluttes en løkke, når dens betingelse bliver falsk.
 
-But we can force the exit at any time using the special `break` directive.
-
-For example, the loop below asks the user for a series of numbers, "breaking" when no number is entered:
+Men vi kan tvinge afslutningen når som helst ved hjælp af den specielle `break`-direktiv.
+For eksempel spørger løkken nedenfor brugeren om en række tal og "bryder" ud, når der ikke indtastes noget tal:
 
 ```js run
 let sum = 0;
 
 while (true) {
 
-  let value = +prompt("Enter a number", '');
+  let value = +prompt("Indtast et tal", '');
 
 *!*
   if (!value) break; // (*)
@@ -240,32 +239,32 @@ while (true) {
 alert( 'Sum: ' + sum );
 ```
 
-The `break` directive is activated at the line `(*)` if the user enters an empty line or cancels the input. It stops the loop immediately, passing control to the first line after the loop. Namely, `alert`.
+`break` direktivet aktiveres på linjen `(*)`, hvis brugeren indtaster en tom linje eller annullerer input. Det stopper løkken øjeblikkeligt og overfører kontrollen til den første linje efter løkken, nemlig `alert`.
 
-The combination "infinite loop + `break` as needed" is great for situations when a loop's condition must be checked not in the beginning or end of the loop, but in the middle or even in several places of its body.
+Kombinationen "uendelig løkke + `break` efter behov" er fantastisk til situationer, hvor en løkkes betingelse skal kontrolleres ikke i begyndelsen eller slutningen af løkken, men midt i eller endda flere steder i dens krop.
 
-## Continue to the next iteration [#continue]
+## Fortsæt til næste iteration [#continue]
 
-The `continue` directive is a "lighter version" of `break`. It doesn't stop the whole loop. Instead, it stops the current iteration and forces the loop to start a new one (if the condition allows).
+`continue` direktivet er en "lettere version" af `break`. Det stopper ikke hele løkken. I stedet stopper det den nuværende iteration og tvinger løkken til at starte en ny (hvis betingelsen tillader det).
 
-We can use it if we're done with the current iteration and would like to move on to the next one.
+Vi kan bruge det, hvis vi er færdige med den nuværende iteration og gerne vil gå videre til den næste.
 
-The loop below uses `continue` to output only odd values:
+Løkken nedenfor bruger `continue` til kun at vise ulige værdier:
 
 ```js run no-beautify
 for (let i = 0; i < 10; i++) {
 
-  // if true, skip the remaining part of the body
+  // hvis true, spring resten af kroppen over
   *!*if (i % 2 == 0) continue;*/!*
 
   alert(i); // 1, then 3, 5, 7, 9
 }
 ```
 
-For even values of `i`, the `continue` directive stops executing the body and passes control to the next iteration of `for` (with the next number). So the `alert` is only called for odd values.
+For lige værdier af `i`, stopper `continue` direktivet udførelsen af kroppen og overfører kontrollen til næste iteration af `for` (med det næste tal). Så `alert` kaldes kun for ulige værdier.
 
-````smart header="The `continue` directive helps decrease nesting"
-A loop that shows odd values could look like this:
+````smart header="`continue` direktivet hjælper med at mindske indlejring"
+En løkke, der viser ulige værdier, kunne se sådan ud:
 
 ```js run
 for (let i = 0; i < 10; i++) {
@@ -277,15 +276,15 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-From a technical point of view, this is identical to the example above. Surely, we can just wrap the code in an `if` block instead of using `continue`.
+Fra et teknisk synspunkt er dette identisk med eksemplet ovenfor. Selvfølgelig kan vi bare pakke koden ind i en `if`-blok i stedet for at bruge `continue`.
 
-But as a side effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
+Men som en bivirkning skabte dette et ekstra niveau af indlejring (kaldet til `alert` inde i krøllede parenteser). Hvis koden inde i `if` er længere end et par linjer, kan det mindske den samlede læsbarhed.
 ````
 
-````warn header="No `break/continue` to the right side of '?'"
-Please note that syntax constructs that are not expressions cannot be used with the ternary operator `?`. In particular, directives such as `break/continue` aren't allowed there.
+````warn header="Ingen `break/continue` til højre for '?'"
+Bemærk venligst, at syntakskonstruktioner, der ikke er udtryk, ikke kan bruges med den ternære operator `?`. Især er direktiver som `break/continue` ikke tilladt der.
 
-For example, if we take this code:
+For eksempel, hvis vi tager denne kode:
 
 ```js
 if (i > 5) {
@@ -295,42 +294,42 @@ if (i > 5) {
 }
 ```
 
-...and rewrite it using a question mark:
+...og omskriver den ved hjælp af et spørgsmålstegn:
 
 ```js no-beautify
-(i > 5) ? alert(i) : *!*continue*/!*; // continue isn't allowed here
+(i > 5) ? alert(i) : *!*continue*/!*; // continue er ikke tilladt her
 ```
 
-...it stops working: there's a syntax error.
+...vil den stoppe med at fungere: der opstår en syntaksfejl.
 
-This is just another reason not to use the question mark operator `?` instead of `if`.
+Så her kan du ikke bruge spørgsmålstegnsoperatoren `?` i stedet for `if`.
 ````
 
-## Labels for break/continue
+## Labels til break/continue
 
-Sometimes we need to break out from multiple nested loops at once.
+Nogle gange har vi brug for at bryde ud af flere indlejrede løkker på én gang.
 
-For example, in the code below we loop over `i` and `j`, prompting for the coordinates `(i, j)` from `(0,0)` to `(2,2)`:
+For eksempel, i koden nedenfor løber vi over `i` og `j`, og spørger efter koordinaterne `(i, j)` fra `(0,0)` til `(2,2)`:
 
 ```js run no-beautify
 for (let i = 0; i < 3; i++) {
 
   for (let j = 0; j < 3; j++) {
 
-    let input = prompt(`Value at coords (${i},${j})`, '');
+    let input = prompt(`Værdi ved koordinaterne (${i},${j})`, '');
 
-    // what if we want to exit from here to Done (below)?
+    // hvad nu hvis vi vil afslutte her til 'Færdig' (nedenfor)?
   }
 }
 
-alert('Done!');
+alert('Færdig!');
 ```
 
-We need a way to stop the process if the user cancels the input.
+Vi har brug for en måde at stoppe processen, hvis brugeren annullerer input.
 
-The ordinary `break` after `input` would only break the inner loop. That's not sufficient -- labels, come to the rescue!
+Den almindelige `break` efter `input` ville kun bryde den indre løkke. Det er ikke tilstrækkeligt -- labels kommer til undsætning!
 
-A *label* is an identifier with a colon before a loop:
+En *label* er et identifikationsnavn med et kolon før en løkke:
 
 ```js
 labelName: for (...) {
@@ -338,74 +337,74 @@ labelName: for (...) {
 }
 ```
 
-The `break <labelName>` statement in the loop below breaks out to the label:
+`break <labelName>` udtrykket i løkken nedenfor bryder ud til labelen:
 
 ```js run no-beautify
 *!*outer:*/!* for (let i = 0; i < 3; i++) {
 
   for (let j = 0; j < 3; j++) {
 
-    let input = prompt(`Value at coords (${i},${j})`, '');
+    let input = prompt(`Værdi ved koordinaterne (${i},${j})`, '');
 
-    // if an empty string or canceled, then break out of both loops
+    // hvis en tom streng eller annulleret, så bryd ud af begge løkker
     if (!input) *!*break outer*/!*; // (*)
 
-    // do something with the value...
+    // gør noget med værdien...
   }
 }
 
-alert('Done!');
+alert('Færdig!');
 ```
 
-In the code above, `break outer` looks upwards for the label named `outer` and breaks out of that loop.
+I koden ovenfor leder `break outer` opad efter labelen med navnet `outer` og bryder ud af den løkke.
 
-So the control goes straight from `(*)` to `alert('Done!')`.
+Så kontrollen går direkte fra `(*)` til `alert('Færdig!')`.
 
-We can also move the label onto a separate line:
+Vi kan også flytte labelen til en separat linje:
 
 ```js no-beautify
 outer:
 for (let i = 0; i < 3; i++) { ... }
 ```
 
-The `continue` directive can also be used with a label. In this case, code execution jumps to the next iteration of the labeled loop.
+`continue` direktivet kan også bruges med en label. I dette tilfælde hopper kodeudførelsen til næste iteration af den mærkede løkke.
 
-````warn header="Labels do not allow to \"jump\" anywhere"
-Labels do not allow us to jump into an arbitrary place in the code.
+````warn header="Labels tillader ikke at \"hoppe\" hvor som helst hen"
+Labels tillader ikke, at vi kan hoppe til et vilkårligt sted i koden.
 
-For example, it is impossible to do this:
+For eksempel er det umuligt at gøre dette:
 
 ```js
-break label; // jump to the label below (doesn't work)
+break label; // hop til labelen nedenfor (virker ikke)
 
 label: for (...)
 ```
 
-A `break` directive must be inside a code block. Technically, any labelled code block will do, e.g.:
+`break` direktivet skal være inde i en kodeblok. Teknisk set kan enhver mærket kodeblok bruges, f.eks.:
 
 ```js
 label: {
   // ...
-  break label; // works
+  break label; // virker
   // ...
 }
 ```
 
-...Although, 99.9% of the time `break` is used inside loops, as we've seen in the examples above.
+...99.9% af tiden bruges `break` dog inde i løkker, som vi har set i eksemplerne ovenfor.
 
-A `continue` is only possible from inside a loop.
+Et `continue` er kun muligt inde i en løkke.
 ````
 
-## Summary
+## Opsummering
 
-We covered 3 types of loops:
+Vi har dækket 3 typer løkker:
 
-- `while` -- The condition is checked before each iteration.
-- `do..while` -- The condition is checked after each iteration.
-- `for (;;)` -- The condition is checked before each iteration, additional settings available.
+- `while` -- Betingelsen tjekkes før hver iteration.
+- `do..while` -- Betingelsen tjekkes efter hver iteration.
+- `for (;;)` -- Betingelsen tjekkes før hver iteration, yderligere indstillinger tilgængelige.
 
-To make an "infinite" loop, usually the `while(true)` construct is used. Such a loop, just like any other, can be stopped with the `break` directive.
+For at lave en "uendelig" løkke bruges normalt konstruktionen `while(true)`. En sådan løkke, ligesom enhver anden, kan stoppes med `break` direktivet.
 
-If we don't want to do anything in the current iteration and would like to forward to the next one, we can use the `continue` directive.
+Hvis vi ikke ønsker at gøre noget i den nuværende iteration og gerne vil gå videre til den næste, kan vi bruge `continue` direktivet.
 
-`break/continue` support labels before the loop. A label is the only way for `break/continue` to escape a nested loop to go to an outer one.
+`break/continue` understøtter labels før løkken. En label er den eneste måde for `break/continue` at undslippe en indlejret løkke for at gå til en ydre.

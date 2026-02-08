@@ -2,9 +2,9 @@ importance: 3
 
 ---
 
-# Last loop value
+# Sidste værdi i løkken
 
-What is the last value alerted by this code? Why?
+Hvad er den sidste værdi, der vises af denne kode? Hvorfor?
 
 ```js
 let i = 3;

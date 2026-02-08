@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Repeat until the input is correct
+# Gentag indtil input er korrekt
 
-Write a loop which prompts for a number greater than `100`. If the visitor enters another number -- ask them to input again.
+Skriv en løkke, der spørger efter et tal større end `100`. Hvis brugeren indtaster et andet tal, skal de blive bedt om at indtaste igen.
 
-The loop must ask for a number until either the visitor enters a number greater than `100` or cancels the input/enters an empty line.
+Løkken skal fortsætte med at spørge efter et tal, indtil brugeren enten indtaster et tal større end `100` eller annullerer inputtet/indtaster en tom linje.
 
-Here we can assume that the visitor only inputs numbers. There's no need to implement a special handling for a non-numeric input in this task.
+Her kan du antage, at brugeren kun indtaster tal. Der er ikke behov for at håndtere ikke-numerisk input i denne opgave.
 
 [demo]
