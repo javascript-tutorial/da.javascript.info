@@ -2,29 +2,29 @@
 
 [recent browser="new"]
 
-The nullish coalescing operator is written as two question marks `??`.
+Nullish coalescing operator skrives som to spørgsmålstegn `??`.
 
-As it treats `null` and `undefined` similarly, we'll use a special term here, in this article. For brevity, we'll say that a value is "defined" when it's neither `null` nor `undefined`.
+Da det behandler `null` og `undefined` på ens, bruger vi et særligt udtryk her i denne artikel. For korthedens skyld siger vi, at en værdi er "defineret", når den hverken er `null` eller `undefined`.
 
-The result of `a ?? b` is:
-- if `a` is defined, then `a`,
-- if `a` isn't defined, then `b`.
+Resultatet af `a ?? b` er:
+- hvis `a` er defineret, så er resultatet `a`,
+- hvis `a` ikke er defineret, så er resultatet `b`.
 
-In other words, `??` returns the first argument if it's not `null/undefined`. Otherwise, the second one.
+Med andre ord, `??` returnerer det første argument, hvis det ikke er `null/undefined`. Ellers returneres det andet argument.
 
-The nullish coalescing operator isn't anything completely new. It's just a nice syntax to get the first "defined" value of the two.
+Nullish coalescing operator er ikke noget helt nyt. Det er bare en pæn syntaks for at få den første "definerede" værdi af de to.
 
-We can rewrite `result = a ?? b` using the operators that we already know, like this:
+Vi kan omskrive `result = a ?? b` ved hjælp af de operatorer, vi allerede kender, som dette:
 
 ```js
 result = (a !== null && a !== undefined) ? a : b;
 ```
 
-Now it should be absolutely clear what `??` does. Let's see where it helps.
+Her bør det nu være helt klart, hvad `??` gør. Lad os se, hvor det hjælper.
 
-The common use case for `??` is to provide a default value.
+Den almindelige brug af `??` er at give en standardværdi.
 
-For example, here we show `user` if its value isn't `null/undefined`, otherwise `Anonymous`:
+For eksempel viser vi her `user`, hvis dens værdi ikke er `null/undefined`, ellers `Anonymous`:
 
 ```js run
 let user;
@@ -32,7 +32,7 @@ let user;
 alert(user ?? "Anonymous"); // Anonymous (user is undefined)
 ```
 
-Here's the example with `user` assigned to a name:
+Her er eksemplet med `user` tildelt et navn:
 
 ```js run
 let user = "John";
@@ -40,13 +40,13 @@ let user = "John";
 alert(user ?? "Anonymous"); // John (user is not null/undefined)
 ```
 
-We can also use a sequence of `??` to select the first value from a list that isn't `null/undefined`.
+Vi kan også bruge en sekvens af `??` til at vælge den første værdi fra en liste, der ikke er `null/undefined`.
 
-Let's say we have a user's data in variables `firstName`, `lastName` or `nickName`. All of them may be not defined, if the user decided not to fill in the corresponding values.
+Lad os sige, at vi har en brugers data i variablerne `firstName`, `lastName` eller `nickName`. Alle kan være ikke definerede, hvis brugeren besluttede ikke at udfylde de tilsvarende værdier.
 
-We'd like to display the user name using one of these variables, or show "Anonymous" if all of them are `null/undefined`.
+Vi vil gerne vise brugernavnet ved hjælp af en af disse variabler, eller vise "Anonymous", hvis alle er `null/undefined`.
 
-Let's use the `??` operator for that:
+Lad os bruge `??` operatoren til det:
 
 ```js run
 let firstName = null;
@@ -61,9 +61,9 @@ alert(firstName ?? lastName ?? nickName ?? "Anonymous"); // Supercoder
 
 ## Comparison with ||
 
-The OR `||` operator can be used in the same way as `??`, as it was described in the [previous chapter](info:logical-operators#or-finds-the-first-truthy-value).
+OR `||` operatoren kan bruges på samme måde som `??`, som det blev beskrevet i [forrige kapitel](info:logical-operators#or-finds-the-first-truthy-value).
 
-For example, in the code above we could replace `??` with `||` and still get the same result:
+For eksempel kunne vi i koden ovenfor erstatte `??` med `||` og stadig få det samme resultat:
 
 ```js run
 let firstName = null;
@@ -76,19 +76,18 @@ alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 */!*
 ```
 
-Historically, the OR `||` operator was there first. It's been there since the beginning of JavaScript, so developers were using it for such purposes for a long time.
+Historisk set var OR `||` operatoren der først. Den har været der siden begyndelsen af JavaScript, så udviklere har brugt den til sådanne formål i lang tid.
 
-On the other hand, the nullish coalescing operator `??` was added to JavaScript only recently, and the reason for that was that people weren't quite happy with `||`.
+På den anden side blev nullish coalescing operator `??` tilføjet til JavaScript først for nylig, og grunden til det var, at folk ikke var helt tilfredse med `||`.
 
-The important difference between them is that:
-- `||` returns the first *truthy* value.
-- `??` returns the first *defined* value.
+Den vigtige forskel mellem dem er, at:
+- `||` returnerer den første *truthy* værdi.
+- `??` returnerer den første *definerede* værdi.
 
-In other words, `||` doesn't distinguish between `false`, `0`, an empty string `""` and `null/undefined`. They are all the same -- falsy values. If any of these is the first argument of `||`, then we'll get the second argument as the result.
+Med andre ord skelner `||` ikke mellem `false`, `0`, en tom streng `""` og `null/undefined`. De er alle det samme -- falsy værdier. Hvis nogen af disse er det første argument til `||`, så får vi det andet argument som resultat.
+I praksis vil vi dog måske kun bruge standardværdien, når variablen er `null/undefined`. Det vil sige, når værdien virkelig er ukendt/ikke sat.
 
-In practice though, we may want to use default value only when the variable is `null/undefined`. That is, when the value is really unknown/not set.
-
-For example, consider this:
+For eksempel, overvej dette:
 
 ```js run
 let height = 0;
@@ -97,20 +96,20 @@ alert(height || 100); // 100
 alert(height ?? 100); // 0
 ```
 
-- The `height || 100` checks `height` for being a falsy value, and it's `0`, falsy indeed.
-    - so the result of `||` is the second argument, `100`.
-- The `height ?? 100` checks `height` for being `null/undefined`, and it's not,
-    - so the result is `height` "as is", that is `0`.
+- `height || 100` tjekker `height` for at være en falsy værdi, og det er `0`, falsy faktisk.
+    - så resultatet af `||` er det andet argument, `100`.
+- `height ?? 100` tjekker `height` for at være `null/undefined`, og det er det ikke,
+    - så resultatet er `height` "som det er", altså `0`.
 
-In practice, the zero height is often a valid value, that shouldn't be replaced with the default. So `??` does just the right thing.
+I praksis er nul højde ofte en gyldig værdi, som ikke bør erstattes med standardværdien. Så `??` gør lige det rigtige.
 
-## Precedence
+## Præcedens
 
-The precedence of the `??` operator is the same as `||`. They both equal `3` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table).
+Præcedens for `??` operatoren er den samme som `||`. De har begge værdien `3` i [MDN tabellen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table).
 
-That means that, just like `||`, the nullish coalescing operator `??` is evaluated before `=` and `?`, but after most other operations, such as `+`, `*`.
+Det betyder, at ligesom `||`, bliver nullish coalescing operatoren `??` evalueret før `=` og `?`, men efter de fleste andre operationer, såsom `+`, `*`.
 
-So we may need to add parentheses in expressions like this:
+Så vi kan have brug for at tilføje parenteser i udtryk som dette:
 
 ```js run
 let height = null;
@@ -122,29 +121,29 @@ let area = (height ?? 100) * (width ?? 50);
 alert(area); // 5000
 ```
 
-Otherwise, if we omit parentheses, then as `*` has the higher precedence than `??`, it would execute first, leading to incorrect results.
+Ellers, hvis vi udelader parenteser, så da `*` har højere præcedens end `??`, vil det blive udført først, hvilket fører til forkerte resultater.
 
 ```js
-// without parentheses
+// uden parenteser
 let area = height ?? 100 * width ?? 50;
 
 // ...works this way (not what we want):
 let area = height ?? (100 * width) ?? 50;
 ```
 
-### Using ?? with && or ||
+### Brug af ?? med && eller ||
 
-Due to safety reasons, JavaScript forbids using `??` together with `&&` and `||` operators, unless the precedence is explicitly specified with parentheses.
+Af sikkerhedsmæssige årsager forbyder JavaScript at bruge `??` sammen med `&&` og `||` operatorer, medmindre præcedensen eksplicit er angivet med parenteser.
 
-The code below triggers a syntax error:
+Koden nedenfor udløser en syntaksfejl:
 
 ```js run
 let x = 1 && 2 ?? 3; // Syntax error
 ```
 
-The limitation is surely debatable, it was added to the language specification with the purpose to avoid programming mistakes, when people start to switch from `||` to `??`.
+Begrændsningen er helt sikkert til diskussion. Den blev tilføjet til sprogspecifikationen med det formål at undgå programmeringsfejl, når folk begynder at skifte fra `||` til `??`.
 
-Use explicit parentheses to work around it:
+Brug eksplicitte parenteser for at omgå det:
 
 ```js run
 *!*
@@ -154,16 +153,16 @@ let x = (1 && 2) ?? 3; // Works
 alert(x); // 2
 ```
 
-## Summary
+## Opsummering
 
-- The nullish coalescing operator `??` provides a short way to choose the first "defined" value from a list.
+- Nullish coalescing operator `??` giver en kort måde at vælge den første "definerede" værdi fra en liste.
 
-    It's used to assign default values to variables:
+    Den bruges til at tildele standardværdier til variabler:
 
     ```js
-    // set height=100, if height is null or undefined
+    // sæt height=100, hvis height er null eller undefined
     height = height ?? 100;
     ```
 
-- The operator `??` has a very low precedence, only a bit higher than `?` and `=`, so consider adding parentheses when using it in an expression.
-- It's forbidden to use it with `||` or `&&` without explicit parentheses.
+- Operatoren `??` har en meget lav præcedens, kun lidt højere end `?` og `=`, så overvej at tilføje parenteser, når du bruger den i et udtryk.
+- Det er forbudt at bruge den sammen med `||` eller `&&` uden eksplicitte parenteser.
