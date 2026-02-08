@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Output even numbers in the loop
+# Udskriv lige tal i løkken
 
-Use the `for` loop to output even numbers from `2` to `10`.
+Brug `for`-løkken til at udskrive lige tal fra `2` til `10`.
 
 [demo]

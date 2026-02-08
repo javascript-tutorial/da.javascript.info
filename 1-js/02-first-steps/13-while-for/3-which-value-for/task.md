@@ -2,18 +2,18 @@ importance: 4
 
 ---
 
-# Which values get shown by the "for" loop?
+# Hvilken værdi vises af "for"-løkken?
 
-For each loop write down which values it is going to show. Then compare with the answer.
+For hver iteration af løkken, skriv ned hvilken værdi den viser, og sammenlign derefter med løsningen.
 
-Both loops `alert` same values or not?
+Viser begge løkker de samme værdier, eller ikke?
 
-1. The postfix form:
+1. Postfix-formen:
 
     ```js
     for (let i = 0; i < 5; i++) alert( i );
     ```
-2. The prefix form:
+2. Prefix-formen:
 
     ```js
     for (let i = 0; i < 5; ++i) alert( i );

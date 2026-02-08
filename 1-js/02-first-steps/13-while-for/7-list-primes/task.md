@@ -2,16 +2,16 @@ importance: 3
 
 ---
 
-# Output prime numbers
+# Udskriv primtal
 
-An integer number greater than `1` is called a [prime](https://en.wikipedia.org/wiki/Prime_number) if it cannot be divided without a remainder by anything except `1` and itself.
+Et helt tal større end `1` kaldes et [primtal](https://en.wikipedia.org/wiki/Prime_number), hvis det ikke kan deles uden rest af noget andet end `1` og sig selv.
 
-In other words, `n > 1` is a prime if it can't be evenly divided by anything except `1` and `n`.
+Med andre ord er `n > 1` et primtal, hvis det ikke kan deles jævnt af noget andet end `1` og `n`.
 
-For example, `5` is a prime, because it cannot be divided without a remainder by `2`, `3` and `4`.
+For eksempel er `5` et primtal, fordi det ikke kan deles uden rest af `2`, `3` og `4`.
 
-**Write the code which outputs prime numbers in the interval from `2` to `n`.**
+**Skriv koden, der udskriver primtal i intervallet fra `2` til `n`.**
 
-For `n = 10` the result will be `2,3,5,7`.
+For `n = 10` vil resultatet være `2,3,5,7`.
 
-P.S. The code should work for any `n`, not be hard-tuned for any fixed value.
+P.S. Koden skal fungere for enhver `n`, ikke være 'hard coded' til en bestemt værdi.

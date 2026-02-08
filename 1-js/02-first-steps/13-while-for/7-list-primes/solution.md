@@ -1,29 +1,29 @@
-There are many algorithms for this task.
+Der er mange algoritmer til denne opgave.
 
-Let's use a nested loop:
+Lad os bruge en indlejret løkke:
 
 ```js
-For each i in the interval {
-  check if i has a divisor from 1..i
-  if yes => the value is not a prime
-  if no => the value is a prime, show it
+For hvert i i intervallet {
+  tjek om i har en divisor fra 1..i
+  hvis ja => værdien er ikke et primtal
+  hvis nej => værdien er et primtal, vis det
 }
 ```
 
-The code using a label:
+Koden med en label:
 
 ```js run
 let n = 10;
 
 nextPrime:
-for (let i = 2; i <= n; i++) { // for each i...
+for (let i = 2; i <= n; i++) { // for hvert i...
 
-  for (let j = 2; j < i; j++) { // look for a divisor..
-    if (i % j == 0) continue nextPrime; // not a prime, go next i
+  for (let j = 2; j < i; j++) { // tjek for en divisor..
+    if (i % j == 0) continue nextPrime; // ikke et primtal, gå til næste i
   }
 
-  alert( i ); // a prime
+  alert( i ); // et primtal
 }
 ```
 
-There's a lot of space to optimize it. For instance, we could look for the divisors from `2` to square root of `i`. But anyway, if we want to be really efficient for large intervals, we need to change the approach and rely on advanced maths and complex algorithms like [Quadratic sieve](https://en.wikipedia.org/wiki/Quadratic_sieve), [General number field sieve](https://en.wikipedia.org/wiki/General_number_field_sieve) etc.
+Der er meget plads til optimering. For eksempel kunne vi lede efter divisorer fra `2` til kvadratroden af `i`. Men uanset hvad, hvis vi vil være virkelig effektive for store intervaller, skal vi ændre tilgangen og stole på avanceret matematik og komplekse algoritmer som [Quadratic sieve](https://en.wikipedia.org/wiki/Quadratic_sieve), [General number field sieve](https://en.wikipedia.org/wiki/General_number_field_sieve) osv.
