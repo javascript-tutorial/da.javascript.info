@@ -1,9 +1,8 @@
-**Yes, it will.**
+**Ja, det vil den.**
 
-Any string except an empty one (and `"0"` is not empty) becomes `true` in the logical context.
+Enhver streng undtagen en tom (og `"0"` er ikke tom) bliver til `true` i en logisk kontekst.
 
-We can run and check:
-
+Vi kan køre og tjekke:
 ```js run
 if ("0") {
   alert( 'Hello' );

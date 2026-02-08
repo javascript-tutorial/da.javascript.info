@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# if (a string with zero)
+# if (en tekststreng med nul)
 
-Will `alert` be shown?
+Vil `alert` blive vist?
 
 ```js
 if ("0") {

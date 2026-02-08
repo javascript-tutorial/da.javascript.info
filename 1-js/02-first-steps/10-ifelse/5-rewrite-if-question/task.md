@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Rewrite 'if' into '?'
+# Omskriv 'if' til '?'
 
-Rewrite this `if` using the conditional operator `'?'`:
+Omskriv denne `if` ved hjælp af den betingede operator `'?'`:
 
 ```js
 let result;
 
 if (a + b < 4) {
-  result = 'Below';
+  result = 'Under';
 } else {
   result = 'Over';
 }
