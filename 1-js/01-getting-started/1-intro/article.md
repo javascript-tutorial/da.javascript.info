@@ -2,7 +2,7 @@
 
 Lad os se, hvad der er så specielt ved JavaScript, hvad vi kan opnå med det, og hvilke andre teknologier der spiller godt sammen med det.
 
-## What is JavaScript?
+## Hvad er JavaScript?
 
 *JavaScript* blev oprindeligt skabt for at "gøre websider levende".
 
