@@ -1,24 +1,24 @@
-# Logical operators
+# Logiske operatorer
 
-There are four logical operators in JavaScript: `||` (OR), `&&` (AND), `!` (NOT), `??` (Nullish Coalescing). Here we cover the first three, the `??` operator is in the next article.
+Der er fire logiske operatorer i JavaScript: `||` (ELLER), `&&` (OG), `!` (IKKE), `??` (Nullish Coalescing). Her dækker vi de første tre, `??`-operatoren er i den næste artikel.
 
-Although they are called "logical", they can be applied to values of any type, not only boolean. Their result can also be of any type.
+Selvom de kaldes "logiske", kan de anvendes på værdier af enhver type, ikke kun boolean. Deres resultat kan også være af enhver type.
 
-Let's see the details.
+Lad os se detaljerne.
 
-## || (OR)
+## || (ELLER)
 
-The "OR" operator is represented with two vertical line symbols:
+"ELLER"-operatoren repræsenteres med to lodrette stregsymboler:
 
 ```js
 result = a || b;
 ```
 
-In classical programming, the logical OR is meant to manipulate boolean values only. If any of its arguments are `true`, it returns `true`, otherwise it returns `false`.
+I klassisk programmering er den logiske ELLER beregnet til kun at manipulere booleske værdier. Hvis nogen af dens argumenter er `true`, returnerer den `true`, ellers returnerer den `false`.
 
-In JavaScript, the operator is a little bit trickier and more powerful. But first, let's see what happens with boolean values.
+I JavaScript er operatoren lidt mere kompliceret og mere kraftfuld. Men først, lad os se hvad der sker med booleske værdier.
 
-There are four possible logical combinations:
+Der er fire mulige logiske kombinationer:
 
 ```js run
 alert( true || true );   // true
@@ -27,21 +27,21 @@ alert( true || false );  // true
 alert( false || false ); // false
 ```
 
-As we can see, the result is always `true` except for the case when both operands are `false`.
+Som vi kan se, er resultatet altid `true` undtagen i tilfælde, hvor begge operander er `false`.
 
-If an operand is not a boolean, it's converted to a boolean for the evaluation.
+Hvis en operand ikke er en boolean, konverteres den til en boolean for evalueringen.
 
-For instance, the number `1` is treated as `true`, the number `0` as `false`:
+For eksempel behandles tallet `1` som `true`, tallet `0` som `false`:
 
 ```js run
-if (1 || 0) { // works just like if( true || false )
-  alert( 'truthy!' );
+if (1 || 0) { // virker ligesom if( true || false )
+  alert( 'sand!' );
 }
 ```
 
-Most of the time, OR `||` is used in an `if` statement to test if *any* of the given conditions is `true`.
+For det meste bruges ELLER `||` i et `if`-udsagn til at teste, om *nogen* af de givne betingelser er `true`.
 
-For example:
+For eksempel:
 
 ```js run
 let hour = 9;
@@ -49,61 +49,61 @@ let hour = 9;
 *!*
 if (hour < 10 || hour > 18) {
 */!*
-  alert( 'The office is closed.' );
+  alert( 'Kontoret er lukket.' );
 }
 ```
 
-We can pass more conditions:
+Vi kan tilføje flere betingelser:
 
 ```js run
 let hour = 12;
 let isWeekend = true;
 
 if (hour < 10 || hour > 18 || isWeekend) {
-  alert( 'The office is closed.' ); // it is the weekend
+  alert( 'Kontoret er lukket.' ); // det er weekenden
 }
 ```
 
-## OR "||" finds the first truthy value [#or-finds-the-first-truthy-value]
+## OR "||" finder den første sandfærdige værdi [#or-finds-the-first-truthy-value]
 
-The logic described above is somewhat classical. Now, let's bring in the "extra" features of JavaScript.
+Den logik, der er beskrevet ovenfor, er noget klassisk. Nu bringer vi "ekstra" funktioner i JavaScript.
 
-The extended algorithm works as follows.
+Den udvidede algoritme fungerer som følger.
 
-Given multiple OR'ed values:
+Givet flere OR'ed værdier:
 
 ```js
 result = value1 || value2 || value3;
 ```
 
-The OR `||` operator does the following:
+OR `||` operatoren gør følgende:
 
-- Evaluates operands from left to right.
-- For each operand, converts it to boolean. If the result is `true`, stops and returns the original value of that operand.
-- If all operands have been evaluated (i.e. all were `false`), returns the last operand.
+- Evaluerer operander fra venstre mod højre.
+- For hver operand konverteres den til en boolean. Hvis resultatet er `true`, stopper den og returnerer den oprindelige værdi af den operand.
+- Hvis alle operander er blevet evalueret (dvs. alle var `false`), returneres den sidste operand.
 
-A value is returned in its original form, without the conversion.
+En værdi returneres i sin oprindelige form, uden konvertering.
 
-In other words, a chain of OR `||` returns the first truthy value or the last one if no truthy value is found.
+Med andre ord returnerer en kæde af OR `||` den første sandfærdige værdi eller den sidste, hvis ingen sandfærdig værdi findes.
 
-For instance:
+For eksempel:
 
 ```js run
-alert( 1 || 0 ); // 1 (1 is truthy)
+alert( 1 || 0 ); // 1 (1 er sandfærdig også kaldet "truthy")
 
-alert( null || 1 ); // 1 (1 is the first truthy value)
-alert( null || 0 || 1 ); // 1 (the first truthy value)
+alert( null || 1 ); // 1 (1 er den første sandfærdige værdi)
+alert( null || 0 || 1 ); // 1 (den første sandfærdige værdi)
 
-alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
+alert( undefined || null || 0 ); // 0 (alle falsy, returnerer den sidste værdi)
 ```
 
-This leads to some interesting usage compared to a "pure, classical, boolean-only OR".
+Dette fører til nogle interessante anvendelser sammenlignet med en "ren, klassisk, kun boolean-OR".
 
-1. **Getting the first truthy value from a list of variables or expressions.**
+1. **At få den første sandfærdige værdi fra en liste af variabler eller udtryk.**
 
-    For instance, we have `firstName`, `lastName` and `nickName` variables, all optional (i.e. can be undefined or have falsy values).
+    For eksempel har vi variablerne `firstName`, `lastName` og `nickName`, alle valgfrie (dvs. kan være undefined eller have falsy værdier).
 
-    Let's use OR `||` to choose the one that has the data and show it (or `"Anonymous"` if nothing set):
+    Lad os bruge OR `||` til at vælge den, der har data, og vise den (eller `"Anonymous"` hvis intet er sat):
 
     ```js run
     let firstName = "";
@@ -115,36 +115,36 @@ This leads to some interesting usage compared to a "pure, classical, boolean-onl
     */!*
     ```
 
-    If all variables were falsy, `"Anonymous"` would show up.
+    Hvis alle variabler var falsy, ville `"Anonymous"` blive vist.
 
-2. **Short-circuit evaluation.**
+2. **Kortslutningsevaluering (Short-circuit evaluation).**
 
-    Another feature of OR `||` operator is the so-called "short-circuit" evaluation.
+    En anden funktion ved OR `||` operatoren er den såkaldte "kortslutningsevaluering".
 
-    It means that `||` processes its arguments until the first truthy value is reached, and then the value is returned immediately, without even touching the other argument.
+    Det betyder, at `||` behandler sine argumenter, indtil den første sandfærdige værdi nås, og derefter returneres værdien straks, uden at røre ved det andet argument.
 
-    The importance of this feature becomes obvious if an operand isn't just a value, but an expression with a side effect, such as a variable assignment or a function call.
+    Det vigtige ved denne funktion bliver tydeligt, hvis en operand ikke bare er en værdi, men et udtryk med en bivirkning, såsom en variabeltildeling eller et funktionskald.
 
-    In the example below, only the second message is printed:
+    I eksemplet nedenfor udskrives kun den anden besked:
 
     ```js run no-beautify
     *!*true*/!* || alert("not printed");
     *!*false*/!* || alert("printed");
     ```
 
-    In the first line, the OR `||` operator stops the evaluation immediately upon seeing `true`, so the `alert` isn't run.
+    I den første linje stopper OR `||` operatoren evalueringen straks, når den ser `true`, så `alert` køres ikke.
 
-    Sometimes, people use this feature to execute commands only if the condition on the left part is falsy.
+    Nogle gange bruger folk denne funktion til kun at udføre kommandoer, hvis betingelsen i venstre del er falsy.
 
 ## && (AND)
 
-The AND operator is represented with two ampersands `&&`:
+AND operatoren repræsenteres med to ampersand `&&`:
 
 ```js
 result = a && b;
 ```
 
-In classical programming, AND returns `true` if both operands are truthy and `false` otherwise:
+I klassisk programmering returnerer AND `true`, hvis begge operander er sandfærdige, og `false` ellers:
 
 ```js run
 alert( true && true );   // true
@@ -153,45 +153,45 @@ alert( true && false );  // false
 alert( false && false ); // false
 ```
 
-An example with `if`:
+Et eksempel med `if`:
 
 ```js run
 let hour = 12;
 let minute = 30;
 
 if (hour == 12 && minute == 30) {
-  alert( 'The time is 12:30' );
+  alert( 'Klokken er 12:30' );
 }
 ```
 
-Just as with OR, any value is allowed as an operand of AND:
+På samme måde som med OR, er enhver værdi tilladt som operand for AND:
 
 ```js run
 if (1 && 0) { // evaluated as true && false
-  alert( "won't work, because the result is falsy" );
+  alert( "virker ikke, fordi resultatet er falsy" );
 }
 ```
 
 
-## AND "&&" finds the first falsy value
+## AND "&&" finder den første falsy værdi
 
-Given multiple AND'ed values:
+Givet flere AND'ed værdier:
 
 ```js
 result = value1 && value2 && value3;
 ```
 
-The AND `&&` operator does the following:
+AND `&&` operatoren gør følgende:
 
-- Evaluates operands from left to right.
-- For each operand, converts it to a boolean. If the result is `false`, stops and returns the original value of that operand.
-- If all operands have been evaluated (i.e. all were truthy), returns the last operand.
+- Evaluerer operander fra venstre mod højre.
+- For hver operand konverteres den til en boolean. Hvis resultatet er `false`, stopper den og returnerer den oprindelige værdi af den operand.
+- Hvis alle operander er blevet evalueret (dvs. alle var `true`), returneres den sidste operand.
 
-In other words, AND returns the first falsy value or the last value if none were found.
+Med andre ord returnerer AND den første falsy værdi eller den sidste værdi, hvis ingen blev fundet.
 
-The rules above are similar to OR. The difference is that AND returns the first *falsy* value while OR returns the first *truthy* one.
+Reglerne ovenfor ligner OR. Forskellen er, at AND returnerer den første *falsy* værdi, mens OR returnerer den første *truthy*.
 
-Examples:
+Eksempler:
 
 ```js run
 // if the first operand is truthy,
@@ -202,88 +202,88 @@ alert( 1 && 5 ); // 5
 // if the first operand is falsy,
 // AND returns it. The second operand is ignored
 alert( null && 5 ); // null
-alert( 0 && "no matter what" ); // 0
+alert( 0 && "uanset hvad" ); // 0
 ```
 
-We can also pass several values in a row. See how the first falsy one is returned:
+Vi kan også give flere værdier i træk. Se hvordan den første falsy værdi returneres:
 
 ```js run
 alert( 1 && 2 && null && 3 ); // null
 ```
 
-When all values are truthy, the last value is returned:
+Når alle værdier er truthy, returneres den sidste værdi:
 
 ```js run
-alert( 1 && 2 && 3 ); // 3, the last one
+alert( 1 && 2 && 3 ); // 3, den sidste
 ```
 
-````smart header="Precedence of AND `&&` is higher than OR `||`"
-The precedence of AND `&&` operator is higher than OR `||`.
+````smart header="Præcedens for AND `&&` er højere end OR `||`"
+Præcedensen for AND `&&` operatoren er højere end OR `||`.
 
-So the code `a && b || c && d` is essentially the same as if the `&&` expressions were in parentheses: `(a && b) || (c && d)`.
+Så koden `a && b || c && d` er i det væsentlige det samme, som hvis `&&`-udtryk var i parenteser: `(a && b) || (c && d)`.
 ````
 
-````warn header="Don't replace `if` with `||` or `&&`"
-Sometimes, people use the AND `&&` operator as a "shorter way to write `if`".
+````warn header="Erstat ikke `if` med `||` eller `&&`"
+Nogle gange bruger folk AND `&&` operatoren som en "kortere måde at skrive `if` på".
 
-For instance:
-
-```js run
-let x = 1;
-
-(x > 0) && alert( 'Greater than zero!' );
-```
-
-The action in the right part of `&&` would execute only if the evaluation reaches it. That is, only if `(x > 0)` is true.
-
-So we basically have an analogue for:
+For eksempel:
 
 ```js run
 let x = 1;
 
-if (x > 0) alert( 'Greater than zero!' );
+(x > 0) && alert( 'Større end nul!' );
 ```
 
-Although, the variant with `&&` appears shorter, `if` is more obvious and tends to be a little bit more readable. So we recommend using every construct for its purpose: use `if` if we want `if` and use `&&` if we want AND.
+Handlingen i højre del af `&&` vil kun blive udført, hvis evalueringen når dertil. Det vil sige, kun hvis `(x > 0)` er sand.
+
+Så vi har grundlæggende en analog til:
+
+```js run
+let x = 1;
+
+if (x > 0) alert( 'Større end nul!' );
+```
+
+Selvom varianten med `&&` virker kortere, er `if` mere tydelig og har en tendens til at være lidt mere læsbar. Derfor anbefaler vi at bruge hver konstruktion til sit formål: brug `if`, hvis vi vil have `if`, og brug `&&`, hvis vi vil have AND.
 ````
 
 
 ## ! (NOT)
 
-The boolean NOT operator is represented with an exclamation sign `!`.
+Boolean NOT operatoren repræsenteres med et udråbstegn `!`.
 
-The syntax is pretty simple:
+Syntaksen er ret simpel:
 
 ```js
 result = !value;
 ```
 
-The operator accepts a single argument and does the following:
+Operatoren accepterer et enkelt argument og gør følgende:
 
-1. Converts the operand to boolean type: `true/false`.
-2. Returns the inverse value.
+1. Konverterer operandet til boolean type: `true/false`.
+2. Returnerer den inverse værdi.
 
-For instance:
+For eksempel:
 
 ```js run
 alert( !true ); // false
 alert( !0 ); // true
 ```
 
-A double NOT `!!` is sometimes used for converting a value to boolean type:
+En dobbelt NOT `!!` bruges nogle gange til at konvertere en værdi til boolean type:
 
 ```js run
 alert( !!"non-empty string" ); // true
 alert( !!null ); // false
 ```
 
-That is, the first NOT converts the value to boolean and returns the inverse, and the second NOT inverses it again. In the end, we have a plain value-to-boolean conversion.
+Det første NOT konverterer værdien til boolean og returnerer den modsætning, og det andet NOT inverterer det igen. Til sidst har vi en simpel værdi-til-boolean konvertering.
 
-There's a little more verbose way to do the same thing -- a built-in `Boolean` function:
+Der er en lidt mere omstændelig måde at gøre det samme på -- en indbygget `Boolean` funktion:
 
 ```js run
 alert( Boolean("non-empty string") ); // true
 alert( Boolean(null) ); // false
 ```
 
-The precedence of NOT `!` is the highest of all logical operators, so it always executes first, before `&&` or `||`.
+Præcedensen for NOT `!` er den højeste af alle logiske operatorer, så den udføres altid først, før `&&` eller `||`.

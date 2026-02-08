@@ -2,8 +2,8 @@ importance: 3
 
 ---
 
-# Check the range between
+# Check afstanden inden for intervallet
 
-Write an `if` condition to check that `age` is between `14` and `90` inclusively.
+Skriv en `if` betingelse for at tjekke, at `age` er mellem `14` og `90` inklusivt.
 
-"Inclusively" means that `age` can reach the edges `14` or `90`.
+"Inklusivt" betyder, at `age` kan nå kanterne `14` og `90`.

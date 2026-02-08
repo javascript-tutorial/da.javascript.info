@@ -2,24 +2,24 @@ importance: 3
 
 ---
 
-# Check the login
+# Check login
 
-Write the code which asks for a login with `prompt`.
+Skriv koden, som spørger efter et login med `prompt`.
 
-If the visitor enters `"Admin"`, then `prompt` for a password, if the input is an empty line or `key:Esc` -- show "Canceled", if it's another string -- then show "I don't know you".
+Hvis brugeren indtaster `"Admin"`, så spørg efter en adgangskode med `prompt`, hvis input er en tom linje eller `key:Esc` -- vis "Canceled", hvis det er en anden streng -- vis "I don't know you".
 
-The password is checked as follows:
+Adgangskoden kontrolleres som følger:
 
-- If it equals "TheMaster", then show "Welcome!",
-- Another string -- show "Wrong password",
-- For an empty string or cancelled input, show "Canceled"
+- Hvis den er lig med "TheMaster", så vis "Welcome!",
+- En anden streng -- vis "Wrong password",
+- For en tom streng eller annulleret input, vis "Canceled"
 
-The schema:
+Skemaet:
 
 ![](ifelse_task.svg)
 
-Please use nested `if` blocks. Mind the overall readability of the code.
+Brug gerne indlejrede `if`-blokke. Vær opmærksom på den overordnede læsbarhed af koden.
 
-Hint:  passing an empty input to a prompt returns an empty string `''`. Pressing `key:ESC` during a prompt returns `null`.
+Hint:  at afgive en tom indtastning til en prompt returnerer en tom streng `''`. At trykke på `key:ESC` under en prompt returnerer `null`.
 
 [demo]
