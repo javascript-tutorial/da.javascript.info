@@ -10,12 +10,12 @@ null == "\n0\n" → false
 null === +"\n0\n" → false
 ```
 
-Some of the reasons:
+Nogle af grundene:
 
-1. Obviously, true.
-2. Dictionary comparison, hence false. `"a"` is smaller than `"p"`.
-3. Again, dictionary comparison, first char `"2"` is greater than the first char `"1"`.
-4. Values `null` and `undefined` equal each other only.
-5. Strict equality is strict. Different types from both sides lead to false.
-6. Similar to `(4)`, `null` only equals `undefined`.
-7. Strict equality of different types.
+1. Selvfølgelig sandt.
+2. Ordbogsammenligning, derfor falsk. `"a"` er mindre end `"p"`.
+3. Igen ordbogsammenligning, første tegn `"2"` er større end første tegn `"1"`.
+4. Værdierne `null` og `undefined` er kun lige med hinanden.
+5. Strengt lighedstjek er strengt. Forskellige typer fra begge sider fører til falsk.
+6. På samme måde som `(4)`, er `null` kun lig med `undefined`.
+7. Strengt lighedstjek af forskellige typer.
