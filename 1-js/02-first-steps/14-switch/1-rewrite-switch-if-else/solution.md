@@ -1,20 +1,20 @@
-To precisely match the functionality of `switch`, the `if` must use a strict comparison `'==='`.
+For at matche funktionaliteten af `switch` præcist, skal `if` bruge en streng sammenligning `'==='`.
 
-For given strings though, a simple `'=='` works too.
+For givne strenge fungerer en simpel `'=='` dog også.
 
 ```js no-beautify
 if(browser == 'Edge') {
-  alert("You've got the Edge!");
+  alert("Du bruger Edge!");
 } else if (browser == 'Chrome'
  || browser == 'Firefox'
  || browser == 'Safari'
  || browser == 'Opera') {
-  alert( 'Okay we support these browsers too' );
+  alert( 'Okay vi understøtter også disse browsere' );
 } else {
-  alert( 'We hope that this page looks ok!' );
+  alert( 'Vi håber, at denne side ser godt ud!' );
 }
 ```
 
-Please note: the construct `browser == 'Chrome' || browser == 'Firefox' …` is split into multiple lines for better readability.
+Bemærk: konstruktionen `browser == 'Chrome' || browser == 'Firefox' …` er opdelt i flere linjer for bedre læsbarhed.
 
-But the `switch` construct is still cleaner and more descriptive.
+Men `switch` konstruktionen er stadig renere og mere beskrivende.

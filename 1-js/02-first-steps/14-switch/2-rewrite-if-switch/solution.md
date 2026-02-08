@@ -1,4 +1,4 @@
-The first two checks turn into two `case`. The third check is split into two cases:
+De første to tjek bliver til to `case`. Det tredje tjek er opdelt i to cases:
 
 ```js run
 let a = +prompt('a?', '');
@@ -21,6 +21,6 @@ switch (a) {
 }
 ```
 
-Please note: the `break` at the bottom is not required. But we put it to make the code future-proof.
+Bemærk: `break` nederst er ikke påkrævet. Men vi sætter det for at gøre koden fremtidssikret.
 
-In the future, there is a chance that we'd want to add one more `case`, for example `case 4`. And if we forget to add a break before it, at the end of `case 3`, there will be an error. So that's a kind of self-insurance.
+I fremtiden er der en chance for, at du vil tilføje en mere `case`, for eksempel `case 4`. Og hvis du glemmer at tilføje et break før det, i slutningen af `case 3`, vil der opstå en fejl. Så det er en form for sikkerhed mod fejl i fremtiden.
