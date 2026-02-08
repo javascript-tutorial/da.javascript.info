@@ -1,1 +1,157 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="599" height="493" viewBox="0 0 599 493"><defs><style>@import url(https://fonts.googleapis.com/css?family=Open+Sans:bold,italic,bolditalic%7CPT+Mono);@font-face{font-family:&apos;PT Mono&apos;;font-weight:700;font-style:normal;src:local(&apos;PT MonoBold&apos;),url(/font/PTMonoBold.woff2) format(&apos;woff2&apos;),url(/font/PTMonoBold.woff) format(&apos;woff&apos;),url(/font/PTMonoBold.ttf) format(&apos;truetype&apos;)}</style></defs><g id="combined" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g id="ifelse_task.svg"><path id="Path-1218-Copy" fill="#C06334" fill-rule="nonzero" d="M529.5 326.5v93h8l-9.5 19-9.5-19h8v-90h-82v-3h85zM372.5 131.5v126h8l-9.5 19-9.5-19h8v-123h-82v-3h85z"/><g id="Rectangle-1-+-Корень" transform="translate(180 4)"><rect id="Rectangle-1" width="78" height="28" x="1" y="1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" rx="14"/><text id="Begin" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="21" y="20">Begin</tspan></text></g><g id="Rectangle-1-+-Корень-Copy-2" transform="translate(0 243)"><rect id="Rectangle-1" width="131" height="49" x="1" y="1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" rx="24.5"/><text id="Canceled" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="36.647" y="29">Canceled</tspan></text></g><g id="Rectangle-1-+-Корень-Copy-5" transform="translate(150 438)"><rect id="Rectangle-1" width="131" height="49" x="1" y="1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" rx="24.5"/><text id="Canceled" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="36.647" y="29">Canceled</tspan></text></g><g id="Rectangle-1-+-Корень-Copy-6" transform="translate(458 438)"><rect id="Rectangle-1" width="131" height="49" x="1" y="1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" rx="24.5"/><text id="Welcome!" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="34.953" y="29">Welcome!</tspan></text></g><g id="Rectangle-1-+-Корень-Copy-4" transform="translate(154 243)"><rect id="Rectangle-1" width="131" height="49" x="1" y="1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" rx="24.5"/><text id="I-don't-know-you" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="12.564" y="28">I don&apos;t know you</tspan></text></g><g id="Rectangle-1-+-Корень-Copy-7" transform="translate(296 438)"><rect id="Rectangle-1" width="147" height="49" x="1" y="1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" rx="24.5"/><text id="Wrong-password" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="17.803" y="29">Wrong password</tspan></text></g><path id="Line" fill="#C06334" fill-rule="nonzero" d="M222 35v23.049l8 .001-9.5 19-9.5-19 8-.001V35h3z"/><path id="Path-1218" fill="#C06334" fill-rule="nonzero" d="M131.691 131.367v3l-59.302-.001v85.181h8l-9.5 19-9.5-19h8v-88.18h62.302z"/><path id="Path-1218-Copy-2" fill="#C06334" fill-rule="nonzero" d="M281.691 326.367v3l-59.307-.001-.319 90.139 8 .029-9.567 18.966-9.433-19.033 8 .027.324-91.633.005-1.494h62.297z"/><g id="Rectangle-354-+-Каково-“официальное”" transform="translate(127 81)"><path id="Rectangle-354" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M93.61 1.144L185.161 52l-91.55 50.856L2.058 52 93.61 1.144z"/><text id="Who's-there?" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="51.305" y="55">Who&apos;s there?</tspan></text></g><g id="Rectangle-354-+-Каково-“официальное”-Copy" transform="translate(277 276)"><path id="Rectangle-354" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M93.61 1.144L185.161 52l-91.55 50.856L2.058 52 93.61 1.144z"/><text id="Password?" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="58.89" y="55">Password?</tspan></text></g><g id="Rectangle-356-+-Отмена" transform="translate(39 191)"><path id="Rectangle-356" fill="#FFF" d="M0 2h60v20H0z"/><text id="Cancel" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="7.5" y="15">Cancel</tspan></text></g><g id="Rectangle-356-+-Отмена-Copy" transform="translate(189 384)"><path id="Rectangle-356" fill="#FFF" d="M0 2h60v20H0z"/><text id="Cancel" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="7.5" y="15">Cancel</tspan></text></g><g id="Rectangle-356-Copy-+-“Админ”" transform="translate(341 191)"><path id="Rectangle-356-Copy" fill="#FFF" d="M0 2h60v20H0z"/><text id="Admin" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="7.703" y="15">Admin</tspan></text></g><g id="Rectangle-356-Copy-+-“Админ”-Copy" transform="translate(493 384)"><path id="Rectangle-356-Copy" fill="#FFF" d="M7 2h60v20H7z"/><text id="TheMaster" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x=".096" y="15">TheMaster</tspan></text></g><path id="Line" fill="#C06334" fill-rule="nonzero" d="M223 182v42.56h8l-9.5 19-9.5-19h8V182h3z"/><path id="Line-Copy-2" fill="#C06334" fill-rule="nonzero" d="M373 377v42.56h8l-9.5 19-9.5-19h8V377h3z"/><g id="Rectangle-356-Copy-2-+-“Админ”-Copy" transform="translate(191 191)"><path id="Rectangle-356-Copy-2" fill="#FFF" d="M0 2h60v20H0z"/><text id="Other" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="9.996" y="15">Other</tspan></text></g><g id="Rectangle-356-Copy-2-+-“Админ”-Copy-Copy" transform="translate(341 384)"><path id="Rectangle-356-Copy-2" fill="#FFF" d="M0 2h60v20H0z"/><text id="Other" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="9.996" y="15">Other</tspan></text></g></g></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 599 493">
+  <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #ee6b47;
+      }
+
+      .st1 {
+        fill: #fff;
+      }
+
+      .st1, .st2 {
+        fill-rule: evenodd;
+      }
+
+      .st3 {
+        fill: #8a704d;
+        font-family: OpenSans, 'Open Sans';
+        font-size: 14px;
+      }
+
+      .st3, .st4 {
+        isolation: isolate;
+      }
+
+      .st2 {
+        fill: #fff9eb;
+        stroke: #e8c48e;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="combined">
+    <g id="ifelse_task.svg">
+      <path id="Path-1218-Copy" class="st0" d="M529.5,326.5v93h8l-9.5,19-9.5-19h8v-90h-82v-3h85ZM372.5,131.5v126h8l-9.5,19-9.5-19h8v-123h-82v-3h85Z"/>
+      <g id="Rectangle-1-_x2B_-Корень">
+        <path id="Rectangle-1" class="st2" d="M195,5h50c7.73,0,14,6.27,14,14h0c0,7.73-6.27,14-14,14h-50c-7.73,0-14-6.27-14-14h0c0-7.73,6.27-14,14-14Z"/>
+        <g id="Begin" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(201 24)"><tspan x="0" y="0">Start</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g id="Rectangle-1-_x2B_-Корень-Copy-2">
+        <path id="Rectangle-11" class="st2" d="M25.5,244h82c13.53,0,24.5,10.97,24.5,24.5h0c0,13.53-10.97,24.5-24.5,24.5H25.5c-13.53,0-24.5-10.97-24.5-24.5h0c0-13.53,10.97-24.5,24.5-24.5Z"/>
+        <g id="Canceled" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(36.65 272)"><tspan x="0" y="0">Annulleret</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g id="Rectangle-1-_x2B_-Корень-Copy-5">
+        <path id="Rectangle-12" class="st2" d="M175.5,439h82c13.53,0,24.5,10.97,24.5,24.5h0c0,13.53-10.97,24.5-24.5,24.5h-82c-13.53,0-24.5-10.97-24.5-24.5h0c0-13.53,10.97-24.5,24.5-24.5Z"/>
+        <g id="Canceled1" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(186.65 467)"><tspan x="0" y="0">Annulleret</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g id="Rectangle-1-_x2B_-Корень-Copy-6">
+        <path id="Rectangle-13" class="st2" d="M483.5,439h82c13.53,0,24.5,10.97,24.5,24.5h0c0,13.53-10.97,24.5-24.5,24.5h-82c-13.53,0-24.5-10.97-24.5-24.5h0c0-13.53,10.97-24.5,24.5-24.5Z"/>
+        <g id="Welcome_x21_" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(485.09 467)"><tspan x="0" y="0">Velkommen!</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g id="Rectangle-1-_x2B_-Корень-Copy-4">
+        <path id="Rectangle-14" class="st2" d="M179.5,244h82c13.53,0,24.5,10.97,24.5,24.5h0c0,13.53-10.97,24.5-24.5,24.5h-82c-13.53,0-24.5-10.97-24.5-24.5h0c0-13.53,10.97-24.5,24.5-24.5Z"/>
+        <g id="I-don_x27_t-know-you" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(166.77 271)"><tspan x="0" y="0">Kender dig ikke</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g id="Rectangle-1-_x2B_-Корень-Copy-7">
+        <path id="Rectangle-15" class="st2" d="M321.5,439h98c13.53,0,24.5,10.97,24.5,24.5h0c0,13.53-10.97,24.5-24.5,24.5h-98c-13.53,0-24.5-10.97-24.5-24.5h0c0-13.53,10.97-24.5,24.5-24.5Z"/>
+        <g id="Wrong-password" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(314.15 467)"><tspan x="0" y="0">Forkert password</tspan></text>
+          </g>
+        </g>
+      </g>
+      <path id="Line" class="st0" d="M222,35v23.05h8l-9.5,19-9.5-19h8v-23.05s3,0,3,0Z"/>
+      <path id="Path-1218" class="st0" d="M131.69,131.37v3h-59.3v85.18h8l-9.5,19-9.5-19h8v-88.18h62.3Z"/>
+      <path id="Path-1218-Copy-2" class="st0" d="M281.69,326.37v3h-59.31l-.32,90.14,8,.03-9.57,18.97-9.43-19.03,8,.03.32-91.63v-1.49h62.3v-.02Z"/>
+      <g id="Rectangle-354-_x2B_-Каково-_x201C_официальное_x201D_">
+        <path id="Rectangle-354" class="st2" d="M129.06,133l91.55,50.86,91.55-50.86-91.55-50.86-91.55,50.86h0Z"/>
+        <g id="Who_x27_s-there_x3F_" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(178.72 136)"><tspan x="0" y="0">Hvem er du?</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g id="Rectangle-354-_x2B_-Каково-_x201C_официальное_x201D_-Copy">
+        <path id="Rectangle-3541" class="st2" d="M279.06,328l91.55,50.86,91.55-50.86-91.55-50.86-91.55,50.86h0Z"/>
+        <g id="Password_x3F_" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(336.03 331)"><tspan x="0" y="0">Password?</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g id="Rectangle-356-_x2B_-Отмена">
+        <path id="Rectangle-356" class="st1" d="M39,193h60v20h-60v-20Z"/>
+        <g id="Cancel" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(46.5 206)"><tspan x="0" y="0">Cancel</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g id="Rectangle-356-_x2B_-Отмена-Copy">
+        <path id="Rectangle-3561" class="st1" d="M189,386h60v20h-60v-20Z"/>
+        <g id="Cancel1" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(196.5 399)"><tspan x="0" y="0">Cancel</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g id="Rectangle-356-Copy-_x2B_-_x201C_Админ_x201D_">
+        <path id="Rectangle-356-Copy" class="st1" d="M341,193h60v20h-60v-20Z"/>
+        <g id="Admin" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(348.7 206)"><tspan x="0" y="0">Admin</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g id="Rectangle-356-Copy-_x2B_-_x201C_Админ_x201D_-Copy">
+        <path id="Rectangle-356-Copy1" class="st1" d="M500,386h60v20h-60v-20Z"/>
+        <g id="TheMaster" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(493.1 399)"><tspan x="0" y="0">TheMaster</tspan></text>
+          </g>
+        </g>
+      </g>
+      <path id="Line1" class="st0" d="M223,182v42.56h8l-9.5,19-9.5-19h8v-42.56h3Z"/>
+      <path id="Line-Copy-2" class="st0" d="M373,377v42.56h8l-9.5,19-9.5-19h8v-42.56h3Z"/>
+      <g id="Rectangle-356-Copy-2-_x2B_-_x201C_Админ_x201D_-Copy">
+        <path id="Rectangle-356-Copy-2" class="st1" d="M191,193h60v20h-60v-20Z"/>
+        <g id="Other" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(201 206)"><tspan x="0" y="0">Andet</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g id="Rectangle-356-Copy-2-_x2B_-_x201C_Админ_x201D_-Copy-Copy">
+        <path id="Rectangle-356-Copy-21" class="st1" d="M341,386h60v20h-60v-20Z"/>
+        <g id="Other1" class="st4">
+          <g class="st4">
+            <text class="st3" transform="translate(351 399)"><tspan x="0" y="0">Other</tspan></text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

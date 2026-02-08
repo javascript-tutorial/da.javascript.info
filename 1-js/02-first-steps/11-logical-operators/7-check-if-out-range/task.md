@@ -2,8 +2,8 @@ importance: 3
 
 ---
 
-# Check the range outside
+# Check afstanden uden for intervallet
 
-Write an `if` condition to check that `age` is NOT between `14` and `90` inclusively.
+Skriv en `if` betingelse for at tjekke, at `age` IKKE er mellem `14` og `90` inklusivt.
 
-Create two variants: the first one using NOT `!`, the second one -- without it.
+Lav to varianter: den første bruger NOT `!`, den anden -- uden det.
