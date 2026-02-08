@@ -2,14 +2,14 @@ importance: 2
 
 ---
 
-# Show the sign
+# Vis tegnet
 
-Using `if..else`, write the code which gets a number via `prompt` and then shows in `alert`:
+Brug `if..else`-konstruktionen til at skrive en kode, som modtager et tal via `prompt` og derefter, i en `alert` viser:
 
-- `1`, if the value is greater than zero,
-- `-1`, if less than zero,
-- `0`, if equals zero.
+- `1`, hvis værdien er større end nul,
+- `-1`, hvis mindre end nul,
+- `0`, er lig med nul.
 
-In this task we assume that the input is always a number.
+I denne opgave antager vi, at inputtet altid er et tal.
 
 [demo src="if_sign"]
