@@ -1,30 +1,30 @@
-# Comments
+# Kommentarer
 
-As we know from the chapter <info:structure>, comments can be single-line: starting with `//` and multiline: `/* ... */`.
+Som vi ved fra kapitlet <info:structure>, kan kommentarer være enkeltlinje: startende med `//` og flerlinje: `/* ... */`.
 
-We normally use them to describe how and why the code works.
+Vi bruger dem normalt til at beskrive, hvordan og hvorfor koden fungerer.
 
-At first sight, commenting might be obvious, but novices in programming often use them wrongly.
+Ved første øjekast kan kommentering virke indlysende, men begyndere i programmering bruger dem ofte forkert.
 
-## Bad comments
+## Dårlige kommentarer
 
-Novices tend to use comments to explain "what is going on in the code". Like this:
+Begyndere har en tendens til at bruge kommentarer til at forklare "hvad der foregår i koden". Som dette:
 
 ```js
-// This code will do this thing (...) and that thing (...)
-// ...and who knows what else...
-very;
-complex;
-code;
+// Denne kode vil gøre denne ting (...) og den ting (...)
+// ...og hvem ved hvad ellers...
+meget;
+kompleks;
+kode;
 ```
 
-But in good code, the amount of such "explanatory" comments should be minimal. Seriously, the code should be easy to understand without them.
+Men i god kode bør mængden af sådanne "forklarende" kommentarer være minimal. Seriøst, koden bør være let at forstå uden dem.
 
-There's a great rule about that: "if the code is so unclear that it requires a comment, then maybe it should be rewritten instead".
+Der er en god regel om det: "hvis koden er så uklar, at den kræver en kommentar, så bør den måske omskrives i stedet".
 
-### Recipe: factor out functions
+### Opskrift: udtræk funktioner
 
-Sometimes it's beneficial to replace a code piece with a function, like here:
+Nogle gange er det gavnligt at erstatte et kodeafsnit med en funktion, som her:
 
 ```js
 function showPrimes(n) {
@@ -32,7 +32,7 @@ function showPrimes(n) {
   for (let i = 2; i < n; i++) {
 
 *!*
-    // check if i is a prime number
+    // Tjek om i er et primtal
     for (let j = 2; j < i; j++) {
       if (i % j == 0) continue nextPrime;
     }
@@ -43,7 +43,7 @@ function showPrimes(n) {
 }
 ```
 
-The better variant, with a factored out function `isPrime`:
+Den bedre variant, med en udtrukket funktion `isPrime`:
 
 
 ```js
@@ -65,21 +65,21 @@ function isPrime(n) {
 }
 ```
 
-Now we can understand the code easily. The function itself becomes the comment. Such code is called *self-descriptive*.
+Nu kan vi nemmere forstå koden. Funktionen i sig selv bliver kommentaren. Sådan kode kaldes *selvbeskrivende*.
 
-### Recipe: create functions
+### Opskrift: opret funktioner
 
-And if we have a long "code sheet" like this:
+Og hvis vi har et langt "kodeark" som dette:
 
 ```js
-// here we add whiskey
+// her tilsætter vi whiskey
 for(let i = 0; i < 10; i++) {
   let drop = getWhiskey();
   smell(drop);
   add(drop, glass);
 }
 
-// here we add juice
+// her tilsætter vi juice
 for(let t = 0; t < 3; t++) {
   let tomato = getTomato();
   examine(tomato);
@@ -90,7 +90,7 @@ for(let t = 0; t < 3; t++) {
 // ...
 ```
 
-Then it might be a better variant to refactor it into functions like:
+så er det måske en bedre idé at omstrukturere (refactor) det til funktioner som:
 
 ```js
 addWhiskey(glass);
@@ -111,70 +111,69 @@ function addJuice(container) {
 }
 ```
 
-Once again, functions themselves tell what's going on. There's nothing to comment. And also the code structure is better when split. It's clear what every function does, what it takes and what it returns.
+Altså, funktioner fortæller selv, hvad der foregår. Der er ikke noget at kommentere. Kodestrukturen er ofte bedre, når den er opdelt. Det er klart, hvad hver funktion gør, hvad den tager, og hvad den returnerer.
 
-In reality, we can't totally avoid "explanatory" comments. There are complex algorithms. And there are smart "tweaks" for purposes of optimization. But generally we should try to keep the code simple and self-descriptive.
+I virkeligheden kan vi ikke helt undgå "forklarende" kommentarer. Der findes komplekse algoritmer. Og der findes smarte "justeringer" med henblik på optimering. Men generelt bør vi forsøge at holde koden simpel og selvbeskrivende.
 
-## Good comments
+## Gode kommentarer
 
-So, explanatory comments are usually bad. Which comments are good?
+Så, forklarende kommentarer er normalt dårlige. Hvilke kommentarer er så gode?
 
-Describe the architecture
-: Provide a high-level overview of components, how they interact, what's the control flow in various situations... In short -- the bird's eye view of the code. There's a special language [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) to build high-level architecture diagrams explaining the code. Definitely worth studying.
+Beskriv arkitekturen
+: Giv et overblik over komponenterne, hvordan de interagerer, hvad kontrolflowet er i forskellige situationer... Kort sagt -- fugleperspektivet på koden. Der findes et specielt sprog [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) til at bygge højniveau arkitekturdiagrammer, der forklarer koden. Absolut værd at studere.
 
-Document function parameters and usage
-: There's a special syntax [JSDoc](http://en.wikipedia.org/wiki/JSDoc) to document a function: usage, parameters, returned value.
+Dokumenter funktionsparametre og brug
+: Der findes en speciel syntaks [JSDoc](http://en.wikipedia.org/wiki/JSDoc) til at dokumentere en funktion: brug, parametre, returneret værdi.
 
-For instance:
+For eksempel:
 ```js
 /**
- * Returns x raised to the n-th power.
+ * Returner x hævet til n-te potens.
  *
- * @param {number} x The number to raise.
- * @param {number} n The power, must be a natural number.
- * @return {number} x raised to the n-th power.
+ * @param {number} x Tallet der skal hæves.
+ * @param {number} n Potensen, skal være et naturligt tal.
+ * @return {number} x hævet til n-te potens.
  */
 function pow(x, n) {
   ...
 }
 ```
 
-Such comments allow us to understand the purpose of the function and use it the right way without looking in its code.
+Sådanne kommentarer gør det muligt for os at forstå formålet med funktionen og bruge den på den rigtige måde uden at kigge i dens kode.
 
-By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
+For resten kan mange editorer som [WebStorm](https://www.jetbrains.com/webstorm/) også forstå dem og bruge dem til at give autocomplete og nogle automatiske kodekontroller.
+Der findes også værktøjer som [JSDoc 3](https://github.com/jsdoc/jsdoc), der kan generere HTML-dokumentation ud fra kommentarerne. Du kan læse mere om JSDoc på <https://jsdoc.app>.
 
-Also, there are tools like [JSDoc 3](https://github.com/jsdoc/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <https://jsdoc.app>.
+Hvorfor er opgaven løst på denne måde?
+: Det, der er skrevet, er vigtigt. Men det, der *ikke* er skrevet, kan være endnu vigtigere for at forstå, hvad der foregår. Hvorfor er opgaven løst præcis på denne måde? Koden giver ikke nødvendigvis noget svar i sig selv.
 
-Why is the task solved this way?
-: What's written is important. But what's *not* written may be even more important to understand what's going on. Why is the task solved exactly this way? The code gives no answer.
+    Hvis der er mange måder at løse opgaven på, hvorfor denne? Især når det ikke er den mest oplagte.
 
-    If there are many ways to solve the task, why this one? Especially when it's not the most obvious one.
+    Uden sådanne kommentarer er følgende situation mulig:
+    1. Du (eller din kollega) åbner koden, der er skrevet for noget tid siden, og ser, at den er "mindre optimal".
+    2. Du tænker: "Hvor dum var jeg dengang, og hvor meget klogere er jeg nu", og omskriver ved hjælp af den "mere oplagte og korrekte" variant.
+    3. ...Trangen til at omskrive var god. Men i processen ser du, at den "mere oplagte" løsning faktisk mangler noget. Du husker endda svagt hvorfor, fordi du allerede prøvede det for længe siden. Du går tilbage til den korrekte variant, men tiden var spildt.
 
-    Without such comments the following situation is possible:
-    1. You (or your colleague) open the code written some time ago, and see that it's "suboptimal".
-    2. You think: "How stupid I was then, and how much smarter I'm now", and rewrite using the "more obvious and correct" variant.
-    3. ...The urge to rewrite was good. But in the process you see that the "more obvious" solution is actually lacking. You even dimly remember why, because you already tried it long ago. You revert to the correct variant, but the time was wasted.
+    Kommentarer der forklarer løsningen er meget vigtige. De hjælper med at fortsætte udviklingen på den rigtige måde.
 
-    Comments that explain the solution are very important. They help to continue development the right way.
+Eventuelle subtile funktioner i koden? Hvor de bruges?
+: Hvis koden har noget subtilt og kontraintuitivt, er det bestemt værd at kommentere.
 
-Any subtle features of the code? Where they are used?
-: If the code has anything subtle and counter-intuitive, it's definitely worth commenting.
+## Opsummering
 
-## Summary
+En vigtig indikator for en god udvikler er kommentarer: deres tilstedeværelse og endda deres fravær.
 
-An important sign of a good developer is comments: their presence and even their absence.
+Gode kommentarer gør det muligt for os at vedligeholde koden godt, vende tilbage til den efter en pause og bruge den mere effektivt.
 
-Good comments allow us to maintain the code well, come back to it after a delay and use it more effectively.
+**Kommenter dette:**
 
-**Comment this:**
+- Overordnet arkitektur, højniveau overblik.
+- Funktionsbrug.
+- Vigtige løsninger, især når de ikke er umiddelbart indlysende.
 
-- Overall architecture, high-level view.
-- Function usage.
-- Important solutions, especially when not immediately obvious.
+**Undgå kommentarer:**
 
-**Avoid comments:**
+- Der fortæller "hvordan koden virker" og "hvad den gør".
+- Sæt dem kun ind, hvis det er umuligt at gøre koden så simpel og selvbeskrivende, at den ikke kræver dem.
 
-- That tell "how code works" and "what it does".
-- Put them in only if it's impossible to make the code so simple and self-descriptive that it doesn't require them.
-
-Comments are also used for auto-documenting tools like JSDoc3: they read them and generate HTML-docs (or docs in another format).
+Kommentarer bruges også til automatiske dokumentationsværktøjer som JSDoc3: de læser dem og genererer HTML-dokumentation (eller dokumentation i et andet format).
