@@ -1,3 +1,3 @@
-# Code quality
+# Kvalitet af kode
 
-This chapter explains coding practices that we'll use further in the development. 
+Dette kapitel forklarer kodningspraksis, som vi vil bruge videre i udviklingen. 

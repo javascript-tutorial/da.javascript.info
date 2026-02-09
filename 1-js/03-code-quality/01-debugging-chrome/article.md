@@ -1,195 +1,195 @@
-# Debugging in the browser
+# Debugging i browseren
 
-Before writing more complex code, let's talk about debugging.
+Før vi skriver mere kompleks kode, lad os tale om debugging.
 
-[Debugging](https://en.wikipedia.org/wiki/Debugging) is the process of finding and fixing errors within a script. All modern browsers and most other environments support debugging tools -- a special UI in developer tools that makes debugging much easier. It also allows to trace the code step by step to see what exactly is going on.
+[Debugging](https://en.wikipedia.org/wiki/Debugging) (aflusning) er processen med at finde og rette fejl i et script. Alle moderne browsere og de fleste andre miljøer understøtter debugging-værktøjer -- en særlig brugerflade i udviklerværktøjer, der gør debugging meget nemmere. Det tillader også at spore koden trin for trin for at se, hvad der præcist foregår.
 
-We'll be using Chrome here, because it has enough features, most other browsers have a similar process.
+Vi vil bruge Chrome her, fordi det har nok funktioner, de fleste andre browsere har en lignende proces.
 
-## The "Sources" panel
+## "Sources" panelet
 
-Your Chrome version may look a little bit different, but it still should be obvious what's there.
+Din version af Chrome kan se en smule anderledes ud, men det burde stadig være indlysende, hvad der er der.
 
-- Open the [example page](debugging/index.html) in Chrome.
-- Turn on developer tools with `key:F12` (Mac: `key:Cmd+Opt+I`).
-- Select the `Sources` panel.
+- Åbn [eksempelsiden](debugging/index.html) i Chrome.
+- Tænd udviklerværktøjer med `key:F12` (Mac: `key:Cmd+Opt+I`).
+- Vælg `Sources` panelet.
 
-Here's what you should see if you are doing it for the first time:
+Her er, hvad du bør se, hvis det er første gang, du gør det:
 
 ![](chrome-open-sources.svg)
 
-The toggler button <span class="devtools" style="background-position:-172px -98px"></span> opens the tab with files.
+Toggle-knappen <span class="devtools" style="background-position:-172px -98px"></span> åbner fanen med filer.
 
-Let's click it and select `hello.js` in the tree view. Here's what should show up:
+Klik på den og vælg `hello.js` i trævisningen. Her er, hvad der bør vises:
 
 ![](chrome-tabs.svg)
 
-The Sources panel has 3 parts:
+"Sources" panelet har 3 dele:
 
-1. The **File Navigator** pane lists HTML, JavaScript, CSS and other files, including images that are attached to the page. Chrome extensions may appear here too.
-2. The **Code Editor** pane shows the source code.
-3. The **JavaScript Debugging** pane is for debugging, we'll explore it soon.
+1. **File Navigator** panelet  viser HTML, JavaScript, CSS og andre filer, inklusive billeder, der er knyttet til siden. Chrome-udvidelser kan også vises her.
+2. **Code Editor** panelet viser kildekoden.
+3. **JavaScript Debugging** panelet er til debugging, det vil vi udforske snart.
 
-Now you could click the same toggler <span class="devtools" style="background-position:-172px -122px"></span> again to hide the resources list and give the code some space.
+Du kan klikke på den samme toggle-knap <span class="devtools" style="background-position:-172px -122px"></span> igen for at skjule ressourcelisten og give koden mere plads.
 
 ## Console
 
-If we press `key:Esc`, then a console opens below. We can type commands there and press `key:Enter` to execute.
+Hvis vi trykker på `key:Esc`, åbnes en konsol nedenfor. Vi kan skrive kommandoer der og trykke på `key:Enter` for at udføre dem.
 
-After a statement is executed, its result is shown below.
+Efter en kommandolinje er udført, vises resultatet nedenfor.
 
-For example, here `1+2` results in `3`, while the function call `hello("debugger")` returns nothing, so the result is `undefined`:
+For eksempel her resulterer `1+2` i `3`, mens funktionskaldet `hello("debugger")` ikke returnerer noget, så resultatet er `undefined`:
 
 ![](chrome-sources-console.svg)
 
 ## Breakpoints
 
-Let's examine what's going on within the code of the [example page](debugging/index.html). In `hello.js`, click at line number `4`. Yes, right on the `4` digit, not on the code.
+Lad os undersøge, hvad der foregår i koden på [eksempelsiden](debugging/index.html). I `hello.js` skal du klikke på linjenummer `4`. Ja, lige på tallet `4`, ikke på koden.
 
-Congratulations! You've set a breakpoint. Please also click on the number for line `8`.
+Tillykke! Du har sat et breakpoint. Klik også på nummeret for linje `8`.
 
-It should look like this (blue is where you should click):
+Det skulle se sådan ud (blåt er hvor du skal klikke):
 
 ![](chrome-sources-breakpoint.svg)
 
-A *breakpoint* is a point of code where the debugger will automatically pause the JavaScript execution.
+Et *breakpoint* er et punkt i koden, hvor debuggeren automatisk vil pause JavaScript-udførelsen.
 
-While the code is paused, we can examine current variables, execute commands in the console etc. In other words, we can debug it.
+Mens koden er pauset, kan vi undersøge aktuelle variabler, udføre kommandoer i konsollen osv. Med andre ord kan vi debugge den.
 
-We can always find a list of breakpoints in the right panel. That's useful when we have many breakpoints in various files. It allows us to:
-- Quickly jump to the breakpoint in the code (by clicking on it in the right panel).
-- Temporarily disable the breakpoint by unchecking it.
-- Remove the breakpoint by right-clicking and selecting Remove.
-- ...And so on.
+Vi kan altid finde en liste over breakpoints i højre panel. Det er nyttigt, når vi har mange breakpoints i forskellige filer. Det giver os mulighed for at:
+- Hurtigt hoppe til breakpointet i koden (ved at klikke på det i højre panel).
+- Midlertidigt deaktivere breakpointet ved at fjerne markeringen.
+- Fjerne breakpointet ved at højreklikke og vælge Fjern.
+- ...Og så videre.
 
-```smart header="Conditional breakpoints"
-*Right click* on the line number allows to create a *conditional* breakpoint. It only triggers when the given expression, that you should provide when you create it, is truthy.
+```smart header="Betingede breakpoints"
+*Højreklik* på linjenummeret giver mulighed for at oprette et *betinget* breakpoint. Det udløses kun, når det givne udtryk, som du skal angive, når du opretter det, er sandt.
 
-That's handy when we need to stop only for a certain variable value or for certain function parameters.
+Det er praktisk, når vi kun skal stoppe for en bestemt variabelværdi eller for visse funktionsparametre.
 ```
 
-## The command "debugger"
+## Kommandoen "debugger"
 
-We can also pause the code by using the `debugger` command in it, like this:
+Vi kan også pause koden ved at bruge `debugger`-kommandoen i den, sådan her:
 
 ```js
 function hello(name) {
   let phrase = `Hello, ${name}!`;
 
 *!*
-  debugger;  // <-- the debugger stops here
+  debugger;  // <-- debuggeren stopper her
 */!*
 
   say(phrase);
 }
 ```
 
-Such command works only when the development tools are open, otherwise the browser ignores it.
+Denne kommando virker kun, når udviklingsværktøjerne er åbne, ellers ignorerer browseren den.
 
-## Pause and look around
+## Tag en pause og kig dig omkring
 
-In our example, `hello()` is called during the page load, so the easiest way to activate the debugger (after we've set the breakpoints) is to reload the page. So let's press `key:F5` (Windows, Linux) or `key:Cmd+R` (Mac).
+I vores eksempel bliver `hello()` kaldt under sideindlæsningen, så den nemmeste måde at aktivere debuggeren på (efter at vi har sat breakpoints) er at genindlæse siden. Så lad os trykke på `key:F5` (Windows, Linux) eller `key:Cmd+R` (Mac).
 
-As the breakpoint is set, the execution pauses at the 4th line:
+Da breakpointet er sat, pauser udførelsen ved linje 4:
 
 ![](chrome-sources-debugger-pause.svg)
 
-Please open the informational dropdowns to the right (labeled with arrows). They allow you to examine the current code state:
+Åben de forskellige informationsdropdowns til højre (markeret med pile). De giver dig mulighed for at undersøge den aktuelle tilstand af koden:
 
-1. **`Watch` -- shows current values for any expressions.**
+1. **`Watch` -- viser aktuelle værdier for enhver udtryk.**
 
-    You can click the plus `+` and input an expression. The debugger will show its value, automatically recalculating it in the process of execution.
+    Du kan klikke på plus `+` og indtaste et udtryk. Debuggeren vil vise dets værdi og automatisk genberegne det under udførelsen.
 
-2. **`Call Stack` -- shows the nested calls chain.**
+2. **`Call Stack` -- viser den indlejrede stak af kald til funktioner.**
 
-    At the current moment the debugger is inside `hello()` call, called by a script in `index.html` (no function there, so it's called "anonymous").
+    På nuværende tidspunkt er debuggeren inde i kaldet til `hello()`, som blev kaldt af et script i `index.html` (ingen funktion der, så det kaldes "anonymous").
 
-    If you click on a stack item (e.g. "anonymous"), the debugger jumps to the corresponding code, and all its variables can be examined as well.
-3. **`Scope` -- current variables.**
+    Hvis du klikker på et stak-element (f.eks. "anonymous"), hopper debuggeren til den tilsvarende kode, og alle dens variabler kan også undersøges.
+3. **`Scope` -- aktuelle variable.**
 
-    `Local` shows local function variables. You can also see their values highlighted right over the source.
+    `Local` viser lokale variable. Du kan også se deres værdier fremhævet lige over kilden.
 
-    `Global` has global variables (out of any functions).
+    `Global` viser globale variable (uden for funktioner).
 
-    There's also `this` keyword there that we didn't study yet, but we'll do that soon.
+    Der er også `this`-nøgleordet der, som vi endnu ikke har studeret, men det vil vi gøre snart.
 
-## Tracing the execution
+## Spor udførelsen
 
-Now it's time to *trace* the script.
+Nu er det tid til at *spore* (trace) scriptet.
 
-There are buttons for it at the top of the right panel. Let's engage them.
+Der er knapper til det øverst i højre panel. Lad os aktivere dem.
 <!-- https://github.com/ChromeDevTools/devtools-frontend/blob/master/front_end/Images/src/largeIcons.svg -->
-<span class="devtools" style="background-position:-146px -168px"></span> -- "Resume": continue the execution, hotkey `key:F8`.
-: Resumes the execution. If there are no additional breakpoints, then the execution just continues and the debugger loses control.
+<span class="devtools" style="background-position:-146px -168px"></span> -- "Resume": fortsæt udførelsen, genvejstast `key:F8`.
+: Fortsætter udførelsen. Hvis der ikke er flere breakpoints, fortsætter udførelsen bare, og debuggeren mister kontrollen.
 
-    Here's what we can see after a click on it:
+    Her er hvad vi ser efter et klik på den:
 
     ![](chrome-sources-debugger-trace-1.svg)
 
-    The execution has resumed, reached another breakpoint inside `say()` and paused there. Take a look at the "Call Stack" at the right. It has increased by one more call. We're inside `say()` now.
+    Udførelsen er fortsat, nåede et andet breakpoint inde i `say()` og er sat på pause der. Tag et kig på "Call Stack" til højre. Den er øget med et kald mere. Vi er inde i `say()` nu.
 
-<span class="devtools" style="background-position:-200px -190px"></span> -- "Step": run the next command, hotkey `key:F9`.
-: Run the next statement. If we click it now, `alert` will be shown.
+<span class="devtools" style="background-position:-200px -190px"></span> -- "Step": kør den næste kommando, genvejstast `key:F9`.
+: Kør den næste sætning. Hvis vi klikker på den nu, vises `alert`.
 
-    Clicking this again and again will step through all script statements one by one.
+    Hvis vi klikker på denne igen og igen, vil den gennemgå alle scriptsætninger én efter én.
 
-<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": run the next command, but *don't go into a function*, hotkey `key:F10`.
-: Similar to the previous "Step" command, but behaves differently if the next statement is a function call (not a built-in, like `alert`, but a function of our own).
+<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": kør den næste kommando, men *gå ikke ind i en funktion*, genvejstast `key:F10`.
+: Ligner den tidligere "Step" kommando, men opfører sig anderledes, hvis den næste sætning er et funktionskald (ikke en indbygget, som `alert`, men en funktion vi selv har skrevet).
 
-    If we compare them, the "Step" command goes into a nested function call and pauses the execution at its first line, while "Step over" executes the nested function call invisibly to us, skipping the function internals.
+    Hvis vi sammenligner dem, går "Step" kommandoen ind i et indlejret funktionskald og sætter udførelsen på pause ved dets første linje, mens "Step over" udfører det indlejrede funktionskald usynligt for os og springer funktionens indre over.
 
-    The execution is then paused immediately after that function call.
+    Udførelsen sættes derefter på pause umiddelbart efter det funktionskald.
 
-    That's good if we're not interested to see what happens inside the function call.
+    Dette er godt, hvis vi ikke er interesserede i at se, hvad der sker inde i funktionskaldet.
 
 <span class="devtools" style="background-position:-4px -194px"></span> -- "Step into", hotkey `key:F11`.
-: That's similar to "Step", but behaves differently in case of asynchronous function calls. If you're only starting to learn JavaScript, then you can ignore the difference, as we don't have asynchronous calls yet.
+: Den minder om "Step", men opfører sig anderledes i tilfælde af asynkrone funktionskald. Hvis du kun er begyndt at lære JavaScript, kan du ignorere forskellen, da vi endnu ikke har asynkrone kald.
 
-    For the future, just note that "Step" command ignores async actions, such as `setTimeout` (scheduled function call), that execute later. The "Step into" goes into their code, waiting for them if necessary. See [DevTools manual](https://developers.google.com/web/updates/2018/01/devtools#async) for more details.
+    For nuværende så husk at "Step" komandoen ignorerer asynkrone handlinger, såsom `setTimeout` (planlagt funktionskald), der udføres senere. "Step into" går ind i deres kode og venter på dem, hvis nødvendigt. Se [DevTools manual](https://developers.google.com/web/updates/2018/01/devtools#async) for flere detaljer.
 
-<span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": continue the execution till the end of the current function, hotkey `key:Shift+F11`.
-: Continue the execution and stop it at the very last line of the current function. That's handy when we accidentally entered a nested call using <span class="devtools" style="background-position:-200px -190px"></span>, but it does not interest us, and we want to continue to its end as soon as possible.
+<span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": fortsætter afvikling af koden til slutningen af den nuværende funktion, genvejstast `key:Shift+F11`.
+: Fortsæt udførelsen og stop ved den aller sidste linje i den nuværende funktion. Det er praktisk, når vi ved et uheld er trådt ind i et indlejret kald ved hjælp af <span class="devtools" style="background-position:-200px -190px"></span>, men det interesserer os ikke, og vi vil fortsætte til slutningen så hurtigt som muligt.
 
-<span class="devtools" style="background-position:-61px -74px"></span> -- enable/disable all breakpoints.
-: That button does not move the execution. Just a mass on/off for breakpoints.
+<span class="devtools" style="background-position:-61px -74px"></span> -- aktiver/deaktiver alle breakpoints.
+: Denne knap flytter ikke udførelsen. Den tænder eller slukker bare for alle breakpoints på én gang.
 
-<span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable automatic pause in case of an error.
-: When enabled, if the developer tools is open, an error during the script execution automatically pauses it. Then we can analyze variables in the debugger to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+<span class="devtools" style="background-position:-90px -146px"></span> -- aktiver/deaktiver automatisk pause ved en fejl.
+: Når den er aktiveret, hvis udviklerværktøjerne er åbne, pauser en fejl under scriptudførelsen automatisk det. Så kan vi analysere variabler i debuggeren for at se, hvad der gik galt. Så hvis vores script dør med en fejl, kan vi åbne debuggeren, aktivere denne mulighed og genindlæse siden for at se, hvor det dør, og hvad konteksten er på det tidspunkt.
 
-```smart header="Continue to here"
-Right click on a line of code opens the context menu with a great option called "Continue to here".
+```smart header="Fortsæt hertil"
+Højreklik på en kodelinje åbner kontekstmenuen med en fantastisk mulighed kaldet "Fortsæt hertil".
 
-That's handy when we want to move multiple steps forward to the line, but we're too lazy to set a breakpoint.
+Det er praktisk, når vi vil flytte flere trin frem til linjen, men vi er for dovne til at sætte et breakpoint.
 ```
 
 ## Logging
 
-To output something to console from our code, there's `console.log` function.
+For at skrive noget til konsollen fra vores kode, findes der funktionen `console.log`.
 
-For instance, this outputs values from `0` to `4` to console:
+For eksempel udskriver dette værdierne fra `0` til `4` til konsollen:
 
 ```js run
-// open console to see
+// åbn konsollen for at se output
 for (let i = 0; i < 5; i++) {
-  console.log("value,", i);
+  console.log("værdi,", i);
 }
 ```
 
-Regular users don't see that output, it is in the console. To see it, either open the Console panel of developer tools or press `key:Esc` while in another panel: that opens the console at the bottom.
+Brugere af sitet ser ikke dette output, det er i konsollen. For at se det, skal du enten åbne Konsol-panelet i udviklerværktøjerne eller trykke på `key:Esc`, mens du er i et andet panel: det åbner konsollen nederst.
 
-If we have enough logging in our code, then we can see what's going on from the records, without the debugger.
+Hvis vi har nok logning i vores kode, kan vi se, hvad der sker ud fra registreringerne, uden debuggeren. Det er en god måde at debugge på, når vi ikke har brug for at se alle variabler og spore koden trin for trin.
 
-## Summary
+## Opsummering
 
-As we can see, there are three main ways to pause a script:
-1. A breakpoint.
-2. The `debugger` statements.
-3. An error (if dev tools are open and the button <span class="devtools" style="background-position:-90px -146px"></span> is "on").
+Som vi kan se, er der tre hovedmåder at sætte et script på pause:
+1. Et breakpoint.
+2. `debugger`-udsagn.
+3. En fejl (hvis udviklerværktøjerne er åbne, og knappen <span class="devtools" style="background-position:-90px -146px"></span> er "tændt").
 
-When paused, we can debug: examine variables and trace the code to see where the execution goes wrong.
+Når scriptet er sat på pause, kan vi debugge: undersøge variabler og spore koden for at se, hvor udførelsen går galt.
 
-There are many more options in developer tools than covered here. The full manual is at <https://developers.google.com/web/tools/chrome-devtools>.
+Der er mange flere muligheder i udviklerværktøjerne end dem, der er dækket her. Den fulde manual findes på <https://developers.google.com/web/tools/chrome-devtools>.
 
-The information from this chapter is enough to begin debugging, but later, especially if you do a lot of browser stuff, please go there and look through more advanced capabilities of developer tools.
+Oplysningerne fra dette kapitel er nok til at begynde at debugge, men senere, især hvis du arbejder meget med browserrelaterede ting, bør du gå derhen og kigge på mere avancerede funktioner i udviklerværktøjerne.
 
-Oh, and also you can click at various places of dev tools and just see what's showing up. That's probably the fastest route to learn dev tools. Don't forget about the right click and context menus!
+Åh, og du kan også klikke forskellige steder i udviklerværktøjerne og bare se, hvad der vises. Det er sandsynligvis den hurtigste måde at lære udviklerværktøjerne på. Glem ikke højreklik og kontekstmenuer!
