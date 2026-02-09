@@ -1,8 +1,8 @@
-# Function expressions
+# Funktionsudtryk
 
-In JavaScript, a function is not a "magical language structure", but a special kind of value.
+I JavaScript er en funktion ikke en "magisk sproglig struktur", men en særlig slags værdi.
 
-The syntax that we used before is called a *Function Declaration*:
+Den syntaks, vi brugte før, kaldes en *Funktionsdeklaration*:
 
 ```js
 function sayHi() {
@@ -10,87 +10,88 @@ function sayHi() {
 }
 ```
 
-There is another syntax for creating a function that is called a *Function Expression*.
+Der findes en anden syntaks til at oprette en funktion, som kaldes et *Funktionsudtryk*.
 
-It allows us to create a new function in the middle of any expression.
+Det tillader os at oprette en ny funktion midt i en hvilken som helst udtryk.
 
-For example:
+For eksempel:
 
 ```js
 let sayHi = function() {
-  alert( "Hello" );
+  alert( "Hej" );
 };
 ```
 
-Here we can see a variable `sayHi` getting a value, the new function, created as `function() { alert("Hello"); }`.
+Her kan vi se en variabel `sayHi` få en værdi som er den nye funktion, oprettet som `function() { alert("Hej"); }`.
 
-As the function creation happens in the context of the assignment expression (to the right side of `=`), this is a *Function Expression*.
+Da funktionen oprettes i kontekst af en tildeling (til højre for `=`), er dette et *Funktionsudtryk*.
 
-Please note, there's no name after the `function` keyword. Omitting a name is allowed for Function Expressions.
+Læg mærke til, at der ikke er noget navn efter `function`-nøgleordet. At udelade et navn er tilladt for Funktionsudtryk.
 
-Here we immediately assign it to the variable, so the meaning of these code samples is the same: "create a function and put it into the variable `sayHi`".
+Her tildeler vi den straks til variablen, så betydningen af disse kodeeksempler er den samme: "opret en funktion og læg den i variablen `sayHi`".
 
-In more advanced situations, that we'll come across later, a function may be created and immediately called or scheduled for a later execution, not stored anywhere, thus remaining anonymous.
+I mere avancerede situationer, som vi vil støde på senere, kan en funktion oprettes og straks kaldes eller planlægges til senere udførelse, uden at blive gemt nogen steder, og dermed forblive anonym.
 
-## Function is a value
+## Funktion er en værdi
 
-Let's reiterate: no matter how the function is created, a function is a value. Both examples above store a function in the `sayHi` variable.
+Lad os gentage: uanset hvordan funktionen oprettes, er en funktion en værdi. Begge eksempler ovenfor gemmer en funktion i variablen `sayHi`.
 
-We can even print out that value using `alert`:
+Vi kan endda udskrive den værdi ved hjælp af `alert`:
 
 ```js run
 function sayHi() {
-  alert( "Hello" );
+  alert( "Hej" );
 }
 
 *!*
-alert( sayHi ); // shows the function code
+alert( sayHi ); // viser funktionens kode
 */!*
 ```
 
-Please note that the last line does not run the function, because there are no parentheses after `sayHi`. There are programming languages where any mention of a function name causes its execution, but JavaScript is not like that.
+Vær opmærksom på, at den sidste linje ikke kører funktionen, fordi der ikke er nogen parenteser efter `sayHi`. Der findes programmeringssprog, hvor enhver omtale af et funktionsnavn forårsager dens udførelse, men JavaScript er ikke sådan.
 
-In JavaScript, a function is a value, so we can deal with it as a value. The code above shows its string representation, which is the source code.
+I JavaScript er en funktion en værdi, så vi kan behandle den som en værdi. Koden ovenfor viser dens strengrepræsentation, som er kildekoden.
 
-Surely, a function is a special value, in the sense that we can call it like `sayHi()`.
+Med det sagt er en funktion en særlig værdi, i den forstand at vi kan kalde den som `sayHi()`.
 
-But it's still a value. So we can work with it like with other kinds of values.
+Men det er stadig en værdi. Så vi kan arbejde med den ligesom med andre slags værdier.
 
-We can copy a function to another variable:
+Vi kan kopiere en funktion til en anden variabel:
 
 ```js run no-beautify
-function sayHi() {   // (1) create
-  alert( "Hello" );
+function sayHi() {   // (1) opret
+  alert( "Hej" );
 }
 
-let func = sayHi;    // (2) copy
+let func = sayHi;    // (2) kopier
 
-func(); // Hello     // (3) run the copy (it works)!
-sayHi(); // Hello    //     this still works too (why wouldn't it)
+func(); // Hej     // (3) kør kopien (det virker)!
+sayHi(); // Hej    //     dette virker stadig også (hvorfor skulle det ikke)
 ```
 
-Here's what happens above in detail:
+Her er en detaljeret gennemgang af, hvad der sker ovenfor:
 
-1. The Function Declaration `(1)` creates the function and puts it into the variable named `sayHi`.
-2. Line `(2)` copies it into the variable `func`. Please note again: there are no parentheses after `sayHi`. If there were, then `func = sayHi()` would write  *the result of the call* `sayHi()` into `func`, not *the function* `sayHi` itself.
-3. Now the function can be called as both `sayHi()` and `func()`.
+1. Funktionsdeklarationen `(1)` opretter funktionen og lægger den i variablen med navnet `sayHi`.
+2. Linje `(2)` kopierer den til variablen `func`. Bemærk igen: der er ingen parenteser efter `sayHi`. Hvis der var, ville `func = sayHi()` skrive *resultatet af kaldet* `sayHi()` ind i `func`, ikke *funktionen* `sayHi` selv.
+3. Nu kan funktionen kaldes både som `sayHi()` og `func()`.
 
-We could also have used a Function Expression to declare `sayHi`, in the first line:
+Vi kunne også have brugt et Funktionsudtryk til at erklære `sayHi` i den første linje:
 
 ```js
-let sayHi = function() { // (1) create
-  alert( "Hello" );
+let sayHi = function() { // (1) opret
+  alert( "Hej" );
 };
 
 let func = sayHi;  //(2)
 // ...
 ```
 
-Everything would work the same.
+Alt vil fungere på samme måde.
 
 
-````smart header="Why is there a semicolon at the end?"
-You might wonder, why do Function Expressions have a semicolon `;` at the end, but Function Declarations do not:
+````smart header="Hvorfor er der et semikolon til sidst?"
+Du undrer dig måske over, hvorfor Funktionsudtryk har et semikolon `;` til sidst, men Funktionsdeklarationer ikke har:
+
 
 ```js
 function sayHi() {
@@ -102,27 +103,27 @@ let sayHi = function() {
 }*!*;*/!*
 ```
 
-The answer is simple: a Function Expression is created here as `function(…) {…}` inside the assignment statement: `let sayHi = …;`. The semicolon `;` is recommended at the end of the statement, it's not a part of the function syntax.
+Svaret er simpelt: et Funktionsudtryk oprettes her som `function(…) {…}` inde i tildeling: `let sayHi = …;`. Semikolonet `;` anbefales i slutningen af sætningen, det er ikke en del af funktionssyntaksen.
 
-The semicolon would be there for a simpler assignment, such as `let sayHi = 5;`, and it's also there for a function assignment.
+Et semikolon vil være der for en enklere tildeling, såsom `let sayHi = 5;`, og det er også på samme måde være der for en funktionstildeling.
 ````
 
-## Callback functions
+## Callback-funktioner
 
-Let's look at more examples of passing functions as values and using function expressions.
+Lad os se flere eksempler på at videregive funktioner som værdier og bruge funktionsudtryk.
 
-We'll write a function `ask(question, yes, no)` with three parameters:
+Vi vil skrive en funktion `ask(question, yes, no)` med tre parametre:
 
 `question`
-: Text of the question
+: Teksten til spørgsmålet
 
 `yes`
-: Function to run if the answer is "Yes"
+: Funktion, der skal køres, hvis svaret er "Ja"
 
 `no`
-: Function to run if the answer is "No"
+: Funktion, der skal køres, hvis svaret er "Nej"
 
-The function should ask the `question` and, depending on the user's answer, call `yes()` or `no()`:
+Funktionen skal stille `question` og, afhængigt af brugerens svar, kalde `yes()` eller `no()`:
 
 ```js run
 *!*
@@ -133,24 +134,24 @@ function ask(question, yes, no) {
 */!*
 
 function showOk() {
-  alert( "You agreed." );
+  alert( "Du er enig." );
 }
 
 function showCancel() {
-  alert( "You canceled the execution." );
+  alert( "Du annullerede udførelsen." );
 }
 
-// usage: functions showOk, showCancel are passed as arguments to ask
-ask("Do you agree?", showOk, showCancel);
+// brug: funktionerne showOk, showCancel videregives som argumenter til ask
+ask("Er du enig?", showOk, showCancel);
 ```
 
-In practice, such functions are quite useful. The major difference between a real-life `ask` and the example above is that real-life functions use more complex ways to interact with the user than a simple `confirm`. In the browser, such functions usually draw a nice-looking question window. But that's another story.
+I praksis er sådanne funktioner ret nyttige. Den største forskel mellem en virkelig `ask` og eksemplet ovenfor er, at virkelige funktioner bruger mere komplekse måder at interagere med brugeren på end en simpel `confirm`. I browseren tegner sådanne funktioner normalt et flot spørgsmålsvindue. Men det er en anden historie.
 
-**The arguments `showOk` and `showCancel` of `ask` are called *callback functions* or just *callbacks*.**
+**Argumenterne `showOk` og `showCancel` til `ask` kaldes *callback-funktioner* eller bare *callbacks*.**
 
-The idea is that we pass a function and expect it to be "called back" later if necessary. In our case, `showOk` becomes the callback for "yes" answer, and `showCancel` for "no" answer.
+Idéen er, at vi videregiver en funktion og forventer, at den bliver "kaldt tilbage" senere, hvis det er nødvendigt. I vores tilfælde bliver `showOk` callback'en for "ja"-svaret, og `showCancel` for "nej"-svaret.
 
-We can use Function Expressions to write an equivalent, shorter function:
+Vi kan bruge Funktionsudtryk til at skrive en ækvivalent, kortere funktion:
 
 ```js run no-beautify
 function ask(question, yes, no) {
@@ -160,140 +161,140 @@ function ask(question, yes, no) {
 
 *!*
 ask(
-  "Do you agree?",
-  function() { alert("You agreed."); },
-  function() { alert("You canceled the execution."); }
+  "Er du enig?",
+  function() { alert("Du er enig."); },
+  function() { alert("Du annullerede udførelsen."); }
 );
 */!*
 ```
 
-Here, functions are declared right inside the `ask(...)` call. They have no name, and so are called *anonymous*. Such functions are not accessible outside of `ask` (because they are not assigned to variables), but that's just what we want here.
+Her er funktionerne erklæret inde i selve `ask(...)` kaldet. De har ikke noget navn, og kaldes derfor *anonyme*. Sådanne funktioner er ikke tilgængelige uden for `ask` (fordi de ikke er tildelt til variabler), men det er netop det, vi ønsker her.
 
-Such code appears in our scripts very naturally, it's in the spirit of JavaScript.
+Sådan kode optræder meget naturligt i vores scripts, det er i JavaScripts ånd.
 
-```smart header="A function is a value representing an \"action\""
-Regular values like strings or numbers represent the *data*.
+```smart header="En funktion er en værdi, der repræsenterer en \"handling\""
+Regulære værdier som strenge eller tal repræsenterer *data*.
 
-A function can be perceived as an *action*.
+En funktion kan opfattes som en *handling*.
 
-We can pass it between variables and run when we want.
+Vi kan videregive den mellem variabler og køre den, når vi ønsker.
 ```
 
 
-## Function Expression vs Function Declaration
+## Funktionsudtryk vs Funktionsdeklaration
 
-Let's formulate the key differences between Function Declarations and Expressions.
+Lad os formulere de vigtigste forskelle mellem Funktionsdeklarationer og Udtryk.
 
-First, the syntax: how to differentiate between them in the code.
+Først syntaksen: hvordan man skelner mellem dem i koden.
 
-- *Function Declaration:* a function, declared as a separate statement, in the main code flow:
+- *Funktionsdeklaration:* en funktion, der erklæres som en separat sætning i hovedkodeflowet:
 
     ```js
-    // Function Declaration
+    // Funktionsdeklaration
     function sum(a, b) {
       return a + b;
     }
     ```
-- *Function Expression:* a function, created inside an expression or inside another syntax construct. Here, the function is created on the right side of the "assignment expression" `=`:
+- *Funktionsudtryk:* en funktion, der oprettes inde i et udtryk eller inde i en anden syntaks-konstruktion. Her oprettes funktionen på højre side af "tildelingsudtrykket" `=`:
 
     ```js
-    // Function Expression
+    // Funktionsudtryk
     let sum = function(a, b) {
       return a + b;
     };
     ```
 
-The more subtle difference is *when* a function is created by the JavaScript engine.
+Den mere subtile forskel er *hvornår* en funktion oprettes af JavaScript-motoren.
 
-**A Function Expression is created when the execution reaches it and is usable only from that moment.**
+**Et funktionsudtryk oprettes, når udførelsen når det, og det kan kun bruges fra det øjeblik.**
 
-Once the execution flow passes to the right side of the assignment `let sum = function…` -- here we go, the function is created and can be used (assigned, called, etc. ) from now on.
+Når udførelsesflowet passerer til højre side af tildelingen `let sum = function…` -- sker det. Funktionen oprettes og kan bruges (tildeles, kaldes osv.) fra nu af.
 
-Function Declarations are different.
+Funktionsdeklarationer er anderledes.
 
-**A Function Declaration can be called earlier than it is defined.**
+**En funktionsdeklaration kan kaldes tidligere, end den er defineret.**
 
-For example, a global Function Declaration is visible in the whole script, no matter where it is.
+For eksempel er en global Funktionsdeklaration synlig i hele scriptet, uanset hvor den er.
 
-That's due to internal algorithms. When JavaScript prepares to run the script, it first looks for global Function Declarations in it and creates the functions. We can think of it as an "initialization stage".
+Det skyldes interne algoritmer. Når JavaScript forbereder sig på at køre scriptet, leder det først efter globale Funktionsdeklarationer i det og opretter funktionerne. Vi kan tænke på det som en "initialiseringsfase".
 
-And after all Function Declarations are processed, the code is executed. So it has access to these functions.
+Og efter at alle Funktionsdeklarationer er behandlet, udføres koden. Så den har adgang til disse funktioner.
 
-For example, this works:
+For eksempel virker dette:
 
 ```js run refresh untrusted
 *!*
-sayHi("John"); // Hello, John
+sayHi("John"); // Hej, John
 */!*
 
 function sayHi(name) {
-  alert( `Hello, ${name}` );
+  alert( `Hej, ${name}` );
 }
 ```
 
-The Function Declaration `sayHi` is created when JavaScript is preparing to start the script and is visible everywhere in it.
+Funktionsdeklarationen `sayHi` oprettes, når JavaScript forbereder sig på at starte scriptet, og den er synlig overalt i det.
 
-...If it were a Function Expression, then it wouldn't work:
+...Hvis det var et Funktionsudtryk, ville det ikke virke:
 
 ```js run refresh untrusted
 *!*
-sayHi("John"); // error!
+sayHi("John"); // fejl!
 */!*
 
-let sayHi = function(name) {  // (*) no magic any more
-  alert( `Hello, ${name}` );
+let sayHi = function(name) {  // (*) magien ophører
+  alert( `Hej, ${name}` );
 };
 ```
 
-Function Expressions are created when the execution reaches them. That would happen only in the line `(*)`. Too late.
+Funktionsudtryk oprettes, når udførelsen når dem. Det ville kun ske i linjen `(*)`. For sent.
 
-Another special feature of Function Declarations is their block scope.
+En anden særlig egenskab ved Funktionsdeklarationer er deres blokscope.
 
-**In strict mode, when a Function Declaration is within a code block, it's visible everywhere inside that block. But not outside of it.**
+**I strict mode, når en Funktionsdeklaration er inden for en kodeblok, er den synlig overalt inde i den blok. Men ikke uden for den.**
 
-For instance, let's imagine that we need to declare a function `welcome()` depending on the `age` variable that we get during runtime. And then we plan to use it some time later.
+Lad os for eksempel forestille os, at vi skal erklære en funktion `welcome()` afhængigt af variablen `age`, som vi får under kørsel. Og som vi planlægger at bruge igen senere.
 
-If we use Function Declaration, it won't work as intended:
+Hvis vi bruger Funktionsdeklaration, vil det ikke virke som forventet:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Hvor gammel er du?", 18);
 
-// conditionally declare a function
+// betinget erklæring af en funktion
 if (age < 18) {
 
   function welcome() {
-    alert("Hello!");
+    alert("Hej!");
   }
 
 } else {
 
   function welcome() {
-    alert("Greetings!");
+    alert("Velkommen!");
   }
 
 }
 
-// ...use it later
+// ...bruges senere
 *!*
-welcome(); // Error: welcome is not defined
+welcome(); // Fejl: welcome er ikke defineret
 */!*
 ```
 
-That's because a Function Declaration is only visible inside the code block in which it resides.
+Det skyldes, at en Funktionsdeklaration kun er synlig inden for den kodeblok, den befinder sig i (if-betingelsen).
 
-Here's another example:
+Her er et andet eksempel:
 
 ```js run
 let age = 16; // take 16 as an example
 
 if (age < 18) {
 *!*
-  welcome();               // \   (runs)
+  welcome();               // \   (kører)
 */!*
                            //  |
   function welcome() {     //  |
-    alert("Hello!");       //  |  Function Declaration is available
-  }                        //  |  everywhere in the block where it's declared
+    alert("Hej!");       //  |  Funktionsdeklarationen er tilgængelig
+  }                        //  |  overalt i den blok, hvor den er erklæret
                            //  |
 *!*
   welcome();               // /   (runs)
@@ -306,35 +307,35 @@ if (age < 18) {
   }
 }
 
-// Here we're out of curly braces,
-// so we can not see Function Declarations made inside of them.
+// Nu er vi uden for krøllede parenteser,
+// så vi kan ikke se Funktionsdeklarationer lavet inden for dem.
 
 *!*
-welcome(); // Error: welcome is not defined
+welcome(); // Fejl: welcome er ikke defineret
 */!*
 ```
 
-What can we do to make `welcome` visible outside of `if`?
+Hvad kan vi gøre for at gøre `welcome` synlig uden for `if`?
 
-The correct approach would be to use a Function Expression and assign `welcome` to the variable that is declared outside of `if` and has the proper visibility.
+Den korrekte tilgang ville være at bruge et Funktionsudtryk og tildele `welcome` til den variabel, der er erklæret uden for `if` og har den rette synlighed.
 
-This code works as intended:
+Denne kode fungerer som forventet:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Hvor gammel er du?", 18);
 
 let welcome;
 
 if (age < 18) {
 
   welcome = function() {
-    alert("Hello!");
+    alert("Hej!");
   };
 
 } else {
 
   welcome = function() {
-    alert("Greetings!");
+    alert("Velkommen!");
   };
 
 }
@@ -344,14 +345,14 @@ welcome(); // ok now
 */!*
 ```
 
-Or we could simplify it even further using a question mark operator `?`:
+Eller vi kan forenkle det endnu mere ved at bruge spørgsmålstegnsoperatoren `?`:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Hvor gammel er du?", 18);
 
 let welcome = (age < 18) ?
-  function() { alert("Hello!"); } :
-  function() { alert("Greetings!"); };
+  function() { alert("Hej!"); } :
+  function() { alert("Velkommen!"); };
 
 *!*
 welcome(); // ok now
@@ -359,22 +360,22 @@ welcome(); // ok now
 ```
 
 
-```smart header="When to choose Function Declaration versus Function Expression?"
-As a rule of thumb, when we need to declare a function, the first thing to consider is Function Declaration syntax. It gives more freedom in how to organize our code, because we can call such functions before they are declared.
+```smart header="Hvornår skal du vælge Funktionsdeklaration versus Funktionsudtryk?"
+Som en tommelfingerregel, når vi skal erklære en funktion, er det første, vi skal overveje, Funktionsdeklarationssyntaksen. Den giver mere frihed i, hvordan vi organiserer vores kode, fordi vi kan kalde sådanne funktioner, før de er erklæret.
 
-That's also better for readability, as it's easier to look up `function f(…) {…}` in the code than `let f = function(…) {…};`. Function Declarations are more "eye-catching".
+Det er også bedre for læsbarheden, da det er nemmere at finde `function f(…) {…}` i koden end `let f = function(…) {…};`. Funktionsdeklarationer er mere "iøjnefaldende".
 
-...But if a Function Declaration does not suit us for some reason, or we need a conditional declaration (we've just seen an example), then Function Expression should be used.
+...Men hvis en Funktionsdeklaration ikke passer til os af en eller anden grund, eller vi har brug for en betinget erklæring (vi har lige set et eksempel), så skal Funktionsudtryk bruges.
 ```
 
-## Summary
+## Opsummering
 
-- Functions are values. They can be assigned, copied or declared in any place of the code.
-- If the function is declared as a separate statement in the main code flow, that's called a "Function Declaration".
-- If the function is created as a part of an expression, it's called a "Function Expression".
-- Function Declarations are processed before the code block is executed. They are visible everywhere in the block.
-- Function Expressions are created when the execution flow reaches them.
+- Funktioner er værdier. De kan tildeles, kopieres eller erklæres hvor som helst i koden.
+- Hvis funktionen erklæres som en separat erklæring i hovedkodeflowet, kaldes det en "Funktionsdeklaration".
+- Hvis funktionen oprettes som en del af et udtryk, kaldes det et "Funktionsudtryk".
+- Funktionsdeklarationer behandles, før kodeblokken udføres. De er synlige overalt i blokken.
+- Funktionsudtryk oprettes, når udførelsesflowet når dem.
 
-In most cases when we need to declare a function, a Function Declaration is preferable, because it is visible prior to the declaration itself. That gives us more flexibility in code organization, and is usually more readable.
+I de fleste tilfælde, når vi skal erklære en funktion, er en Funktionsdeklaration at foretrække, fordi den er synlig før selve erklæringen. Det giver os mere fleksibilitet i kodeorganiseringen og er normalt mere læseligt.
 
-So we should use a Function Expression only when a Function Declaration is not fit for the task. We've seen a couple of examples of that in this chapter, and will see more in the future.
+Så vi bør kun bruge et Funktionsudtryk, når en Funktionsdeklaration ikke passer til opgaven. Vi har set et par eksempler på det i dette kapitel og vil se flere i fremtiden.
