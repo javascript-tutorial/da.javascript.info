@@ -1,51 +1,51 @@
-# JavaScript specials
+# Særlige kendetegn ved JavaScript
 
-This chapter briefly recaps the features of JavaScript that we've learned by now, paying special attention to subtle moments.
+Dette kapitel opsummerer kort de funktioner i JavaScript, som vi har lært indtil nu, med særlig opmærksomhed på subtile øjeblikke.
 
-## Code structure
+## Kodestruktur
 
-Statements are delimited with a semicolon:
+Udsagn afsluttes med et semikolon:
 
 ```js run no-beautify
 alert('Hello'); alert('World');
 ```
 
-Usually, a line-break is also treated as a delimiter, so that would also work:
+Normalt behandles et linjeskift også som en afgrænser, så det ville også fungere:
 
 ```js run no-beautify
 alert('Hello')
 alert('World')
 ```
 
-That's called "automatic semicolon insertion". Sometimes it doesn't work, for instance:
+Dette kaldes "automatisk semikolonindsættelse". Nogle gange virker det ikke, for eksempel:
 
 ```js run
-alert("There will be an error after this message")
+alert("Der vil være en fejl efter denne besked")
 
 [1, 2].forEach(alert)
 ```
 
-Most codestyle guides agree that we should put a semicolon after each statement.
+De fleste guider anbefaler, at vi bør sætte et semikolon efter hvert udsagn, men det er ikke et krav, og det er op til dig at beslutte, om du vil bruge dem eller ej.
 
-Semicolons are not required after code blocks `{...}` and syntax constructs with them like loops:
+Semikoloner er ikke påkrævet efter kodeblokke `{...}` og syntaks-konstruktioner med dem som løkker:
 
 ```js
 function f() {
-  // no semicolon needed after function declaration
+  // ingen semikolon nødvendig efter funktionsdeklaration
 }
 
 for(;;) {
-  // no semicolon needed after the loop
+  // ingen semikolon nødvendig efter løkken
 }
 ```
 
-...But even if we can put an "extra" semicolon somewhere, that's not an error. It will be ignored.
+...Men selv hvis vi kan sætte et "ekstra" semikolon et sted, er det ikke en fejl. Det vil blive ignoreret.
 
-More in: <info:structure>.
+Mere information: <info:structure>.
 
 ## Strict mode
 
-To fully enable all features of modern JavaScript, we should start scripts with `"use strict"`.
+For fuldt ud at aktivere alle funktioner i moderne JavaScript, kan man starte scripts med `"use strict"`.
 
 ```js
 'use strict';
@@ -53,143 +53,143 @@ To fully enable all features of modern JavaScript, we should start scripts with 
 ...
 ```
 
-The directive must be at the top of a script or at the beginning of a function body.
+Dette direktiv skal være øverst i et script eller i begyndelsen af en funktionskrop.
 
-Without `"use strict"`, everything still works, but some features behave in the old-fashioned, "compatible" way. We'd generally prefer the modern behavior.
+Uden `"use strict"` fungerer alt stadig, men nogle funktioner opfører sig på den gammeldags, "kompatible" måde. Vi foretrækker generelt den moderne opførsel.
 
-Some modern features of the language (like classes that we'll study in the future) enable strict mode implicitly.
+Nogle moderne funktioner i sproget (som klasser, som vi vil studere i fremtiden) aktiverer implicit strict mode.
 
-More in: <info:strict-mode>.
+Mere information: <info:strict-mode>.
 
-## Variables
+## Variable
 
-Can be declared using:
+Kan deklareres med:
 
 - `let`
-- `const` (constant, can't be changed)
-- `var` (old-style, will see later)
+- `const` (konstant, kan ikke ændres)
+- `var` (gammel stil, vil se senere)
 
-A variable name can include:
-- Letters and digits, but the first character may not be a digit.
-- Characters `$` and `_` are normal, on par with letters.
-- Non-Latin alphabets and hieroglyphs are also allowed, but commonly not used.
+Et variabelnavn kan indeholde:
+- Bogstaver og cifre, men det første tegn må ikke være et ciffer.
+- Tegnene `$` og `_` er normale, på lige fod med bogstaver.
+- Ikke-latinske alfabeter og hieroglyffer er også tilladt, men bruges almindeligvis ikke.
 
-Variables are dynamically typed. They can store any value:
+Variable er dynamiske datatyper. De kan gemme enhver værdi:
 
 ```js
 let x = 5;
 x = "John";
 ```
 
-There are 8 data types:
+Der er 8 datatyper:
 
-- `number` for both floating-point and integer numbers,
-- `bigint` for integer numbers of arbitrary length,
-- `string` for strings,
-- `boolean` for logical values: `true/false`,
-- `null` -- a type with a single value `null`, meaning "empty" or "does not exist",
-- `undefined` -- a type with a single value `undefined`, meaning "not assigned",
-- `object` and `symbol` -- for complex data structures and unique identifiers, we haven't learnt them yet.
+- `number` for både flydende og heltal,
+- `bigint` for heltal af vilkårlig længde,
+- `string` for tekststrenge,
+- `boolean` for logiske værdier: `true/false`,
+- `null` -- en datatype med en enkelt værdi `null`, der betyder "tom" eller "findes ikke",
+- `undefined` -- en datatype med en enkelt værdi `undefined`, der betyder "ikke tildelt",
+- `object` og `symbol` -- for komplekse datastrukturer og unikke identifikatorer, som vi endnu ikke har lært.
 
-The `typeof` operator returns the type for a value, with two exceptions:
+Operatoren `typeof` returnerer typen for en værdi, med to undtagelser:
 ```js
-typeof null == "object" // error in the language
-typeof function(){} == "function" // functions are treated specially
+typeof null == "object" // en "gammel fejl" i sproget
+typeof function(){} == "function" // funktioner behandles specielt
 ```
 
-More in: <info:variables> and <info:types>.
+Mere information: <info:variables> og <info:types>.
 
-## Interaction
+## Interaktion
 
-We're using a browser as a working environment, so basic UI functions will be:
+Vi bruger browseren som arbejdsområde, så grundlæggende UI-funktioner vil være:
 
 [`prompt(question, [default])`](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt)
-: Ask a `question`, and return either what the visitor entered or `null` if they clicked "cancel".
+: Stil et `spørgsmål`, og returner enten det, som besøgende indtastede, eller `null`, hvis de klikkede på "anuller".
 
 [`confirm(question)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)
-: Ask a `question` and suggest to choose between Ok and Cancel. The choice is returned as `true/false`.
+: Stil et `spørgsmål`, og foreslå at vælge mellem Ok og Annuller. Valget returneres som `true/false`.
 
 [`alert(message)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)
-: Output a `message`.
+: Vis en `besked`.
 
-All these functions are *modal*, they pause the code execution and prevent the visitor from interacting with the page until they answer.
+Alle disse funktioner er *modale*, de pauser kodeudførelsen og forhindrer besøgende i at interagere med siden, indtil de svarer.
 
-For instance:
+For eksempel:
 
 ```js run
-let userName = prompt("Your name?", "Alice");
-let isTeaWanted = confirm("Do you want some tea?");
+let userName = prompt("Hvad er dit navn?", "Karsten");
+let isTeaWanted = confirm("Vil du have noget te?");
 
-alert( "Visitor: " + userName ); // Alice
-alert( "Tea wanted: " + isTeaWanted ); // true
+alert( "Besøgende: " + userName ); // Karsten
+alert( "Te ønskes: " + isTeaWanted ); // true eller false
 ```
 
-More in: <info:alert-prompt-confirm>.
+Mere information: <info:alert-prompt-confirm>.
 
-## Operators
+## Operatorer
 
-JavaScript supports the following operators:
+JavaScript understøtter følgende operatorer:
 
-Arithmetical
-: Regular: `* + - /`, also `%` for the remainder and `**` for power of a number.
+Aritmetiske
+: Almindelige: `* + - /`, også `%` for rest og `**` for potens af et tal.
 
-    The binary plus `+` concatenates strings. And if any of the operands is a string, the other one is converted to string too:
+    Den binære plus `+` sammenkæder strenge. Og hvis en af operanderne er en streng, konverteres den anden også til en streng:
 
     ```js run
     alert( '1' + 2 ); // '12', string
     alert( 1 + '2' ); // '12', string
     ```
 
-Assignments
-: There is a simple assignment: `a = b` and combined ones like `a *= 2`.
+Tildelingsoperatorer
+: Der er en simpel tildeling: `a = b` og kombinerede som `a *= 2`.
 
-Bitwise
-: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) when they are needed.
+Bitvise operatorer
+: Bitvise operatorer arbejder med 32-bit heltal på det laveste, bit-niveau: se [dokumentationen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators), når de er nødvendige.
 
-Conditional
-: The only operator with three parameters: `cond ? resultA : resultB`. If `cond` is truthy, returns `resultA`, otherwise `resultB`.
+Betinget operator
+: Den eneste operator med tre parametre: `cond ? resultA : resultB`. Hvis `cond` er sand, returneres `resultA`, ellers `resultB`.
 
-Logical operators
-: Logical AND `&&` and OR `||` perform short-circuit evaluation and then return the value where it stopped (not necessary `true`/`false`). Logical NOT `!` converts the operand to boolean type and returns the inverse value.
+Logiske operatorer
+: Logisk OG `&&` og ELLER `||` udfører short circuit-evaluering og returnerer derefter værdien, hvor den stoppede (ikke nødvendigvis `true`/`false`). Logisk IKKE `!` konverterer operanden til boolesk type og returnerer den inverse værdi.
 
-Nullish coalescing operator
-: The `??` operator provides a way to choose a defined value from a list of variables. The result of `a ?? b` is `a` unless it's `null/undefined`, then `b`.
+Nullish coalescing-operator
+: `??`-operatoren giver en måde at vælge en defineret værdi fra en liste af variabler. Resultatet af `a ?? b` er `a`, medmindre det er `null/undefined`, så er det `b`.
 
-Comparisons
-: Equality check `==` for values of different types converts them to a number (except `null` and `undefined` that equal each other and nothing else), so these are equal:
+Sammenligninger
+: Lighedstjek `==` for værdier af forskellige typer konverterer dem til et tal (undtagen `null` og `undefined`, der er lige med hinanden og ikke noget andet), så disse er lige:
 
     ```js run
     alert( 0 == false ); // true
     alert( 0 == '' ); // true
     ```
 
-    Other comparisons convert to a number as well.
+    Andre sammenligninger konverterer også til et tal.
 
-    The strict equality operator `===` doesn't do the conversion: different types always mean different values for it.
+    Den strenge lighedoperator `===` foretager ikke konverteringen: forskellige typer betyder altid forskellige værdier for den.
 
-    Values `null` and `undefined` are special: they equal `==` each other and don't equal anything else.
+    Værdierne `null` og `undefined` er specielle: de er `==` lige med hinanden og ikke med noget andet.
 
-    Greater/less comparisons compare strings character-by-character, other types are converted to a number.
+    Større/mindre sammenligninger sammenligner strenge tegn for tegn, andre typer konverteres til et tal.
 
-Other operators
-: There are few others, like a comma operator.
+Andre operatorer
+: Der er få andre, som komma-operatoren.
 
-More in: <info:operators>, <info:comparison>, <info:logical-operators>, <info:nullish-coalescing-operator>.
+Mere information: <info:operators>, <info:comparison>, <info:logical-operators>, <info:nullish-coalescing-operator>.
 
-## Loops
+## Løkker
 
-- We covered 3 types of loops:
+- Vi har dækket 3 typer løkker:
 
     ```js
     // 1
-    while (condition) {
+    while (betingelse) {
       ...
     }
 
     // 2
     do {
       ...
-    } while (condition);
+    } while (betingelse);
 
     // 3
     for(let i = 0; i < 10; i++) {
@@ -197,43 +197,43 @@ More in: <info:operators>, <info:comparison>, <info:logical-operators>, <info:nu
     }
     ```
 
-- The variable declared in `for(let...)` loop is visible only inside the loop. But we can also omit `let` and reuse an existing variable.
-- Directives `break/continue` allow to exit the whole loop/current iteration. Use labels to break nested loops.
+- Variablen, der erklæres i `for(let...)` løkken, er kun synlig inden for løkken. Men vi kan også udelade `let` og genbruge en eksisterende variabel.
+- Direktiverne `break/continue` tillader at afslutte hele løkken/den aktuelle iteration. Brug labels til at bryde ud af indlejrede løkker.
 
-Details in: <info:while-for>.
+Mere information: <info:while-for>.
 
-Later we'll study more types of loops to deal with objects.
+Senere vil vi studere flere typer løkker til at håndtere objekter.
 
-## The "switch" construct
+## "switch"-konstruktionen
 
-The "switch" construct can replace multiple `if` checks. It uses `===` (strict equality) for comparisons.
+"switch"-konstruktionen kan erstatte flere `if`-kontroller. Den bruger `===` (streng lighed) til sammenligninger.
 
-For instance:
+For eksempel:
 
 ```js run
-let age = prompt('Your age?', 18);
+let age = prompt('Din alder?', 18);
 
 switch (age) {
   case 18:
-    alert("Won't work"); // the result of prompt is a string, not a number
+    alert("Virker ikke"); // resultatet af prompt er en streng, ikke et tal
     break;
 
   case "18":
-    alert("This works!");
+    alert("Virker!");
     break;
 
   default:
-    alert("Any value not equal to one above");
+    alert("Enhver værdi, der ikke er lig med en af ovenstående");
 }
 ```
 
-Details in: <info:switch>.
+Mere information: <info:switch>.
 
-## Functions
+## Funktioner
 
-We covered three ways to create a function in JavaScript:
+Vi har dækket tre måder at oprette en funktion i JavaScript:
 
-1. Function Declaration: the function in the main code flow
+1. Funktionsdeklaration: funktionen i hovedkodeflowet
 
     ```js
     function sum(a, b) {
@@ -243,7 +243,7 @@ We covered three ways to create a function in JavaScript:
     }
     ```
 
-2. Function Expression: the function in the context of an expression
+2. Funktionsudtryk: funktionen i konteksten af et udtryk
 
     ```js
     let sum = function(a, b) {
@@ -253,32 +253,33 @@ We covered three ways to create a function in JavaScript:
     };
     ```
 
-3. Arrow functions:
+3. Arrow functions (pilefunktioner):
 
     ```js
-    // expression on the right side
+    // Udtrykket på højre side
     let sum = (a, b) => a + b;
 
-    // or multi-line syntax with { ... }, need return here:
+    // eller flersidet syntaks med { ... }, skal bruge return her:
     let sum = (a, b) => {
       // ...
       return a + b;
     }
 
-    // without arguments
-    let sayHi = () => alert("Hello");
+    // uden argumenter - skal bruge ()
+    let sayHi = () => alert("Hej");
 
-    // with a single argument
+    // med et enkelt argument
     let double = n => n * 2;
     ```
 
 
-- Functions may have local variables: those declared inside its body or its parameter list. Such variables are only visible inside the function.
-- Parameters can have default values: `function sum(a = 1, b = 2) {...}`.
-- Functions always return something. If there's no `return` statement, then the result is `undefined`.
+- Funktioner kan have lokale variabler: dem, der erklæres inde i dens krop eller i dens parameterliste. Sådanne variabler er kun synlige inde i funktionen.
+- Parametre kan have standardværdier: `function sum(a = 1, b = 2) {...}`.
+- Funktioner returnerer altid noget. Hvis der ikke er nogen `return`-sætning, er resultatet `undefined`.
 
-Details: see <info:function-basics>, <info:arrow-functions-basics>.
+Mere information: se <info:function-basics>, <info:arrow-functions-basics>.
 
-## More to come
 
-That was a brief list of JavaScript features. As of now we've studied only basics. Further in the tutorial you'll find more specials and advanced features of JavaScript.
+## Der kommer mere...
+
+Ovenstående er en kort liste over JavaScript-funktioner. Indtil videre har vi kun studeret det grundlæggende. Senere i vejledningen vil du finde flere specialfunktioner og og avanceret funktionalitet i JavaScript.
