@@ -1,147 +1,147 @@
-# Automated testing with Mocha
+# Automatisk testning med Mocha
 
-Automated testing will be used in further tasks, and it's also widely used in real projects.
+Automatisk testning vil blive brugt i de følgende opgaver, og det er også bredt anvendt i rigtige projekter.
 
-## Why do we need tests?
+## Hvorfor har vi brug for tests?
 
-When we write a function, we can usually imagine what it should do: which parameters give which results.
+Når vi skriver en funktion, kan vi normalt forestille os, hvad den skal gøre: hvilke parametre giver hvilke resultater.
 
-During development, we can check the function by running it and comparing the outcome with the expected one. For instance, we can do it in the console.
+Under udviklingen kan vi kontrollere funktionen ved at køre den og sammenligne resultatet med det forventede. Dette kan vi for eksempel gøre i konsollen.
 
-If something is wrong -- then we fix the code, run again, check the result -- and so on till it works.
+Hvis noget er galt -- så retter vi koden, kører igen, tjekker resultatet -- og så videre, indtil det virker.
 
-But such manual "re-runs" are imperfect.
+Men sådanne manuelle "genkørsler" er ufuldkomne.
 
-**When testing a code by manual re-runs, it's easy to miss something.**
+**Når man tester kode ved manuelle genkørsler, er det let at overse noget.**
 
-For instance, we're creating a function `f`. Wrote some code, testing: `f(1)` works, but `f(2)` doesn't work. We fix the code and now `f(2)` works. Looks complete? But we forgot to re-test `f(1)`. That may lead to an error.
+Et eksempel kunne være at vi oprettede en funktion `f`. Skrev noget kode, testede: `f(1)` virker, men `f(2)` virker ikke. Vi retter koden, og nu virker `f(2)`. Ser det komplet ud? Men vi glemte at teste `f(1)` igen. Det kan føre til en fejl.
 
-That's very typical. When we develop something, we keep a lot of possible use cases in mind. But it's hard to expect a programmer to check all of them manually after every change. So it becomes easy to fix one thing and break another one.
+Det er meget typisk. Når vi udvikler noget, har vi mange mulige brugsscenarier i tankerne. Men det er svært at forvente, at en programmør manuelt tjekker dem alle efter hver ændring. Så det bliver let at rette én ting og bryde en anden.
 
-**Automated testing means that tests are written separately, in addition to the code. They run our functions in various ways and compare results with the expected.**
+**Automatiseret testning betyder, at tests skrives separat, ud over koden. De kører vores funktioner på forskellige måder og sammenligner resultater med det forventede.**
 
 ## Behavior Driven Development (BDD)
 
-Let's start with a technique named [Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development) or, in short, BDD.
+Lad os starte med en teknik kaldet [Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development) eller, kort sagt, BDD.
 
-**BDD is three things in one: tests AND documentation AND examples.**
+**BDD er tre ting i én: tests OG dokumentation OG eksempler.**
 
-To understand BDD, we'll examine a practical case of development.
+For at forstå BDD vil vi undersøge et praktisk udviklingseksempel.
 
-## Development of "pow": the spec
+## Udvikling af "pow": specifikationen
 
-Let's say we want to make a function `pow(x, n)` that raises `x` to an integer power `n`. We assume that `n≥0`.
+Lad os sige, at vi vil lave en funktion `pow(x, n)`, der hæver `x` til en potens af `n`. Vi antager, at `n≥0`.
 
-That task is just an example: there's the `**` operator in JavaScript that can do that, but here we concentrate on the development flow that can be applied to more complex tasks as well.
+Den opgave er bare et eksempel: der findes operatoren `**` i JavaScript, der kan gøre det, men her koncentrerer vi os om udviklingsflowet, som også kan anvendes til mere komplekse opgaver.
 
-Before creating the code of `pow`, we can imagine what the function should do and describe it.
+Inden vi skriver koden til `pow`, kan vi forestille os, hvad funktionen skal gøre, og beskrive det.
 
-Such description is called a *specification* or, in short, a spec, and contains descriptions of use cases together with tests for them, like this:
+Sådan en beskrivelse kaldes en *specifikation* eller, kort sagt, en spec, og indeholder beskrivelser af brugsscenarier sammen med tests for dem, som dette:
 
 ```js
 describe("pow", function() {
 
-  it("raises to n-th power", function() {
+  it("hæver til n-te potens", function() {
     assert.equal(pow(2, 3), 8);
   });
 
 });
 ```
 
-A spec has three main building blocks that you can see above:
+En spec har tre hovedbyggesten, som du kan se ovenfor:
 
 `describe("title", function() { ... })`
-: What functionality we're describing? In our case we're describing the function `pow`. Used to group "workers" -- the `it` blocks.
+: Hvilken funktionalitet beskriver vi? I vores tilfælde beskriver vi funktionen `pow`. Bruges til at gruppere "arbejdere" -- `it`-blokkene.
 
-`it("use case description", function() { ... })`
-: In the title of `it` we *in a human-readable way* describe the particular use case, and the second argument is a function that tests it.
+`it("beskrivelse af brugsscenarie", function() { ... })`
+: I titlen af `it` beskriver vi *på en menneskeligt læsbar måde* det specifikke brugsscenarie, og det andet argument er en funktion, der tester det.
 
 `assert.equal(value1, value2)`
-: The code inside `it` block, if the implementation is correct, should execute without errors.
+: Koden inde i `it`-blokken, hvis implementeringen er korrekt, skal køre uden fejl.
 
-    Functions `assert.*` are used to check whether `pow` works as expected. Right here we're using one of them -- `assert.equal`, it compares arguments and yields an error if they are not equal. Here it checks that the result of `pow(2, 3)` equals `8`. There are other types of comparisons and checks, that we'll add later.
+    Funktionen `assert.*` bruges til at tjekke, om `pow` fungerer som forventet. Her bruger vi en af dem -- `assert.equal`, den sammenligner argumenter og giver en fejl, hvis de ikke er ens. Her tjekker den, at resultatet af `pow(2, 3)` er lig med `8`. Der findes andre typer sammenligninger og tjek, som vi vil tilføje senere.
 
-The specification can be executed, and it will run the test specified in `it` block. We'll see that later.
+Specifikationen kan køres, og den vil køre testen specificeret i `it`-blokken. Det vil vi se senere.
 
-## The development flow
+## Udviklingsflowet
 
-The flow of development usually looks like this:
+Udviklingsflowet ser normalt sådan ud:
 
-1. An initial spec is written, with tests for the most basic functionality.
-2. An initial implementation is created.
-3. To check whether it works, we run the testing framework [Mocha](https://mochajs.org/) (more details soon) that runs the spec. While the functionality is not complete, errors are displayed. We make corrections until everything works.
-4. Now we have a working initial implementation with tests.
-5. We add more use cases to the spec, probably not yet supported by the implementations. Tests start to fail.
-6. Go to 3, update the implementation till tests give no errors.
-7. Repeat steps 3-6 till the functionality is ready.
+1. En indelende specifikation skrives, med tests for den mest grundlæggende funktionalitet.
+2. En indledende implementering oprettes.
+3. For at tjekke om det virker, kører vi testframeworket [Mocha](https://mochajs.org/) (mere om det snart), som kører specifikationen. Mens funktionaliteten ikke er komplet, vises fejl. Vi laver rettelser indtil alt virker.
+4. Nu har vi en fungerende indledende implementering med tests.
+5. Vi tilføjer flere brugsscenarier til specifikationen, sandsynligvis endnu ikke understøttet af implementeringerne. Tests begynder at fejle.
+6. Gå til 3, opdater implementeringen indtil tests ikke giver fejl.
+7. Gentag trin 3-6 indtil funktionaliteten er klar.
 
-So, the development is *iterative*. We write the spec, implement it, make sure tests pass, then write more tests, make sure they work etc. At the end we have both a working implementation and tests for it.
+Så udviklingen er *iterativ*. Vi skriver specifikationen, implementerer den, sikrer os at testene passerer, skriver flere tests, sikrer os at de virker osv. Til sidst har vi både en fungerende implementering og tests for den.
 
-Let's see this development flow in our practical case.
+Lad os se dette udviklingsflow i vores praktiske tilfælde.
 
-The first step is already complete: we have an initial spec for `pow`. Now, before making the implementation, let's use a few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
+Det første trin er allerede fuldført: vi har en indledende specifikation for `pow`. Nu, før vi laver implementeringen, lad os bruge nogle JavaScript-biblioteker til at køre testene, bare for at se, at de virker (de vil alle fejle).
 
-## The spec in action
+## Specifikationen i aktion
 
-Here in the tutorial we'll be using the following JavaScript libraries for tests:
+Her i vejledningen vil vi bruge følgende JavaScript-biblioteker til tests:
 
-- [Mocha](https://mochajs.org/) -- the core framework: it provides common testing functions including `describe` and `it` and the main function that runs tests.
-- [Chai](https://www.chaijs.com/) -- the library with many assertions. It allows to use a lot of different assertions, for now we need only `assert.equal`.
-- [Sinon](https://sinonjs.org/) -- a library to spy over functions, emulate built-in functions and more, we'll need it much later.
+- [Mocha](https://mochajs.org/) -- kerneframeworket: det leverer almindelige testfunktioner inklusive `describe` og `it` samt hovedfunktionen, der kører testene.
+- [Chai](https://www.chaijs.com/) -- biblioteket med mange påstande (asserts). Det tillader brug af mange forskellige påstande, for nu har vi kun brug for `assert.equal`.
+- [Sinon](https://sinonjs.org/) -- et bibliotek til at spionere på funktioner, emulere indbyggede funktioner og mere, det får vi brug for meget senere.
 
-These libraries are suitable for both in-browser and server-side testing. Here we'll consider the browser variant.
+Disse biblioteker er velegnede til både browser- og server-side testning. Her vil vi se på browser-varianten.
 
-The full HTML page with these frameworks and `pow` spec:
+Den fulde HTML-side med disse frameworks og `pow`-specifikationen:
 
 ```html src="index.html"
 ```
 
-The page can be divided into five parts:
+Siden kan opdeles i fem dele:
 
-1. The `<head>` -- add third-party libraries and styles for tests.
-2. The `<script>` with the function to test, in our case -- with the code for `pow`.
-3. The tests -- in our case an external script `test.js` that has `describe("pow", ...)` from above.
-4. The HTML element `<div id="mocha">` will be used by Mocha to output results.
-5. The tests are started by the command `mocha.run()`.
+1. `<head>` -- tilføj tredjepartsbiblioteker og stilarter til tests.
+2. `<script>` med funktionen, der skal testes, i vores tilfælde -- med koden til `pow`.
+3. Testene -- i vores tilfælde et eksternt script `test.js`, der har `describe("pow", ...)` fra ovenfor.
+4. HTML-elementet `<div id="mocha">` vil blive brugt af Mocha til at vise resultater.
+5. Testene startes med kommandoen `mocha.run()`.
 
-The result:
+Resultatet:
 
 [iframe height=250 src="pow-1" border=1 edit]
 
-As of now, the test fails, there's an error. That's logical: we have an empty function code in `pow`, so `pow(2,3)` returns `undefined` instead of `8`.
+For nu vil testen fejle - der er en fejl. Det er logisk: vi har en tom funktionskode i `pow`, så `pow(2,3)` returnerer `undefined` i stedet for `8`.
 
-For the future, let's note that there are more high-level test-runners, like [karma](https://karma-runner.github.io/) and others, that make it easy to autorun many different tests.
+For fremtiden, lad os bemærke, at der findes mere avancerede test-runners, som [karma](https://karma-runner.github.io/) og andre, der gør det nemt at autorun mange forskellige tests.
 
-## Initial implementation
+## Indledende implementering
 
-Let's make a simple implementation of `pow`, for tests to pass:
+Lad os lave en simpel implementering af `pow`, så testene passerer:
 
 ```js
 function pow(x, n) {
-  return 8; // :) we cheat!
+  return 8; // :) vi kan snyde!
 }
 ```
 
-Wow, now it works!
+Wow, nu virker det!
 
 [iframe height=250 src="pow-min" border=1 edit]
 
-## Improving the spec
+## Forbedring af specifikationen
 
-What we've done is definitely a cheat. The function does not work: an attempt to calculate `pow(3,4)` would give an incorrect result, but tests pass.
+Det, vi har gjort, er bestemt snyd. Funktionen virker ikke: et forsøg på at beregne `pow(3,4)` ville give et forkert resultat, men testene passerer.
 
-...But the situation is quite typical, it happens in practice. Tests pass, but the function works wrong. Our spec is imperfect. We need to add more use cases to it.
+...Men situationen er ret typisk, det sker i praksis. Testene passerer, men funktionen virker forkert. Vores specifikation er ufuldstændig. Vi skal tilføje flere brugsscenarier til den.
 
-Let's add one more test to check that `pow(3, 4) = 81`.
+Lad os tilføje en test mere for at tjekke, at `pow(3, 4) = 81`.
 
-We can select one of two ways to organize the test here:
+Vi kan vælge en af to måder at organisere testen på her:
 
-1. The first variant -- add one more `assert` into the same `it`:
+1. Den første variant -- tilføj en mere `assert` i samme `it`:
 
     ```js
     describe("pow", function() {
 
-      it("raises to n-th power", function() {
+      it("hæver til n-te potens", function() {
         assert.equal(pow(2, 3), 8);
     *!*
         assert.equal(pow(3, 4), 81);
@@ -150,43 +150,43 @@ We can select one of two ways to organize the test here:
 
     });
     ```
-2. The second -- make two tests:
+2. Den anden -- lav to tests:
 
     ```js
     describe("pow", function() {
 
-      it("2 raised to power 3 is 8", function() {
+      it("2 hævet til tredje potens er 8", function() {
         assert.equal(pow(2, 3), 8);
       });
 
-      it("3 raised to power 4 is 81", function() {
+      it("3 hævet til fjerde potens er 81", function() {
         assert.equal(pow(3, 4), 81);
       });
 
     });
     ```
 
-The principal difference is that when `assert` triggers an error, the `it` block immediately terminates. So, in the first variant if the first `assert` fails, then we'll never see the result of the second `assert`.
+Den grundlæggende forskel er, at når `assert` udløser en fejl, afsluttes `it`-blokken straks. Så i den første variant, hvis den første `assert` fejler, vil vi aldrig se resultatet af den anden `assert`.
 
-Making tests separate is useful to get more information about what's going on, so the second variant is better.
+At gøre testene separate er nyttigt for at få mere information om, hvad der foregår, så den anden variant er bedre.
 
-And besides that, there's one more rule that's good to follow.
+Og derudover er der en regel mere, som er god at følge.
 
-**One test checks one thing.**
+**En test tjekker én ting.**
 
-If we look at the test and see two independent checks in it, it's better to split it into two simpler ones.
+Hvis vi ser på testen og ser to uafhængige tjek i den, er det bedre at opdele den i to enklere.
 
-So let's continue with the second variant.
+Så lad os fortsætte med den anden variant.
 
-The result:
+Resultatet:
 
 [iframe height=250 src="pow-2" edit border="1"]
 
-As we could expect, the second test failed. Sure, our function always returns `8`, while the `assert` expects `81`.
+Som vi kunne forvente, fejlede den anden test. Selvfølgelig returnerer vores funktion altid `8`, mens `assert` forventer `81`.
 
-## Improving the implementation
+## Forbedring af implementeringen
 
-Let's write something more real for tests to pass:
+Lad os skrive noget mere rigtigt, så testene passerer:
 
 ```js
 function pow(x, n) {
@@ -200,14 +200,14 @@ function pow(x, n) {
 }
 ```
 
-To be sure that the function works well, let's test it for more values. Instead of writing `it` blocks manually, we can generate them in `for`:
+For at være sikre på, at funktionen virker godt, lad os teste den for flere værdier. I stedet for at skrive `it`-blokke manuelt, kan vi generere dem i en `for`:
 
 ```js
 describe("pow", function() {
 
   function makeTest(x) {
     let expected = x * x * x;
-    it(`${x} in the power 3 is ${expected}`, function() {
+    it(`${x} i i tredje potens er ${expected}`, function() {
       assert.equal(pow(x, 3), expected);
     });
   }
@@ -219,26 +219,26 @@ describe("pow", function() {
 });
 ```
 
-The result:
+Resultatet:
 
 [iframe height=250 src="pow-3" edit border="1"]
 
-## Nested describe
+## Indlejret describe
 
-We're going to add even more tests. But before that let's note that the helper function `makeTest` and `for` should be grouped together. We won't need `makeTest` in other tests, it's needed only in `for`: their common task is to check how `pow` raises into the given power.
+Vi vil tilføje endnu flere tests. Men før det, lad os bemærke, at hjælpefunktionen `makeTest` og `for` bør grupperes sammen. Vi får ikke brug for `makeTest` i andre tests, den er kun nødvendig i `for`: deres fælles opgave er at tjekke, hvordan `pow` hæver til den givne potens.
 
-Grouping is done with a nested `describe`:
+Gruppering gøres med en indlejret `describe`:
 
 ```js
 describe("pow", function() {
 
 *!*
-  describe("raises x to power 3", function() {
+  describe("hæver x til tredje potens", function() {
 */!*
 
     function makeTest(x) {
       let expected = x * x * x;
-      it(`${x} in the power 3 is ${expected}`, function() {
+      it(`${x} i i tredje potens er ${expected}`, function() {
         assert.equal(pow(x, 3), expected);
       });
     }
@@ -251,29 +251,29 @@ describe("pow", function() {
   });
 */!*
 
-  // ... more tests to follow here, both describe and it can be added
+  // ... flere tests følger her, både describe og it kan tilføjes
 });
 ```
 
-The nested `describe` defines a new "subgroup" of tests. In the output we can see the titled indentation:
+Den indlejrede `describe` definerer en ny "undergruppe" af tests. I outputtet kan vi se den titlerede indrykning:
 
 [iframe height=250 src="pow-4" edit border="1"]
 
-In the future we can add more `it` and `describe` on the top level with helper functions of their own, they won't see `makeTest`.
+I fremtiden kan vi tilføje flere `it` og `describe` på topniveau med hjælpefunktioner af deres egne, de vil ikke se `makeTest`.
 
 ````smart header="`before/after` and `beforeEach/afterEach`"
-We can setup `before/after` functions that execute before/after running tests, and also `beforeEach/afterEach` functions that execute before/after *every* `it`.
+Vi kan opsætte `before/after` funktioner, der kører før/efter testene, og også `beforeEach/afterEach` funktioner, der kører før/efter *hver* `it`.
 
-For instance:
+For eksempel:
 
 ```js no-beautify
 describe("test", function() {
 
-  before(() => alert("Testing started – before all tests"));
-  after(() => alert("Testing finished – after all tests"));
+  before(() => alert("Testning startet – før alle tests"));
+  after(() => alert("Testning færdig – efter alle tests"));
 
-  beforeEach(() => alert("Before a test – enter a test"));
-  afterEach(() => alert("After a test – exit a test"));
+  beforeEach(() => alert("Før en test – ind i en test"));
+  afterEach(() => alert("Efter en test – ud af en test"));
 
   it('test 1', () => alert(1));
   it('test 2', () => alert(2));
@@ -281,46 +281,46 @@ describe("test", function() {
 });
 ```
 
-The running sequence will be:
+Afviklingen vil være:
 
 ```
-Testing started – before all tests (before)
-Before a test – enter a test (beforeEach)
+Testning startet – før alle tests (before)
+Før en test – ind i en test (beforeEach)
 1
-After a test – exit a test   (afterEach)
-Before a test – enter a test (beforeEach)
+Efter en test – ud af en test   (afterEach)
+Før en test – ind i en test (beforeEach)
 2
-After a test – exit a test   (afterEach)
-Testing finished – after all tests (after)
+Efter en test – ud af en test   (afterEach)
+Testning færdig – efter alle tests (after)
 ```
 
 [edit src="beforeafter" title="Open the example in the sandbox."]
 
-Usually, `beforeEach/afterEach` and `before/after` are used to perform initialization, zero out counters or do something else between the tests (or test groups).
+Normalt bruges `beforeEach/afterEach` og `before/after` til at udføre initialisering, nulstille tællere eller gøre noget andet mellem testene (eller testgrupperne).
 ````
 
-## Extending the spec
+## Udvidelse af specifikationen
 
-The basic functionality of `pow` is complete. The first iteration of the development is done. When we're done celebrating and drinking champagne -- let's go on and improve it.
+Den grundlæggende funktionalitet af `pow` er færdig. Den første iteration af udviklingen er færdig. Når vi er færdige med at fejre og drikke champagne -- lad os gå videre og forbedre den.
 
-As it was said, the function `pow(x, n)` is meant to work with positive integer values `n`.
+Som det blev sagt, er funktionen `pow(x, n)` beregnet til at arbejde med positive heltal `n`.
 
-To indicate a mathematical error, JavaScript functions usually return `NaN`. Let's do the same for invalid values of `n`.
+For at indikere en matematisk fejl returnerer JavaScript-funktioner normalt `NaN`. Lad os gøre det samme for ugyldige værdier af `n`.
 
-Let's first add the behavior to the spec(!):
+Lad os først tilføje adfærden til specifikationen(!):
 
 ```js
 describe("pow", function() {
 
   // ...
 
-  it("for negative n the result is NaN", function() {
+  it("for negativt n er resultatet NaN", function() {
 *!*
     assert.isNaN(pow(2, -1));
 */!*
   });
 
-  it("for non-integer n the result is NaN", function() {
+  it("for ikke-heltal n er resultatet NaN", function() {
 *!*
     assert.isNaN(pow(2, 1.5));    
 */!*
@@ -329,26 +329,26 @@ describe("pow", function() {
 });
 ```
 
-The result with new tests:
+Resultatet med de nye tests:
 
 [iframe height=530 src="pow-nan" edit border="1"]
 
-The newly added tests fail, because our implementation does not support them. That's how BDD is done: first we write failing tests, and then make an implementation for them.
+De nyligt tilføjede tests fejler, fordi vores implementering ikke understøtter dem. Sådan gør man BDD: først skriver vi fejlede tests, og så laver vi en implementering for dem.
 
-```smart header="Other assertions"
-Please note the assertion `assert.isNaN`: it checks for `NaN`.
+```smart header="Andre assertions"
+Bemærk påstanden `assert.isNaN`: den tjekker for `NaN`.
 
-There are other assertions in [Chai](https://www.chaijs.com/) as well, for instance:
+Der er også andre påstande i [Chai](https://www.chaijs.com/) for eksempel:
 
-- `assert.equal(value1, value2)` -- checks the equality  `value1 == value2`.
-- `assert.strictEqual(value1, value2)` -- checks the strict equality `value1 === value2`.
-- `assert.notEqual`, `assert.notStrictEqual` -- inverse checks to the ones above.
-- `assert.isTrue(value)` -- checks that `value === true`
-- `assert.isFalse(value)` -- checks that `value === false`
-- ...the full list is in the [docs](https://www.chaijs.com/api/assert/)
+- `assert.equal(value1, value2)` -- tjekker ligheden  `value1 == value2`.
+- `assert.strictEqual(value1, value2)` -- tjekker den strenge lighed `value1 === value2`.
+- `assert.notEqual`, `assert.notStrictEqual` -- inverse tjek til de ovenstående.
+- `assert.isTrue(value)` -- tjekker at `value === true`
+- `assert.isFalse(value)` -- tjekker at `value === false`
+- ...den fulde liste findes i [dokumentationen](https://www.chaijs.com/api/assert/)
 ```
 
-So we should add a couple of lines to `pow`:
+Så vi bør tilføje et par linjer til `pow`:
 
 ```js
 function pow(x, n) {
@@ -367,43 +367,43 @@ function pow(x, n) {
 }
 ```
 
-Now it works, all tests pass:
+Nu virker det, alle tests består:
 
 [iframe height=300 src="pow-full" edit border="1"]
 
-[edit src="pow-full" title="Open the full final example in the sandbox."]
+[edit src="pow-full" title="Åbn det fulde endelige eksempel i sandkassen."]
 
-## Summary
+## Opsummering
 
-In BDD, the spec goes first, followed by implementation. At the end we have both the spec and the code.
+I BDD går specifikationen først, efterfulgt af implementeringen. Til sidst har vi både specifikationen og koden.
 
-The spec can be used in three ways:
+Specifikationen kan bruges på tre måder:
 
-1. As **Tests** - they guarantee that the code works correctly.
-2. As **Docs** -- the titles of `describe` and `it` tell what the function does.
-3. As **Examples** -- the tests are actually working examples showing how a function can be used.
+1. Som **Tests** - de garanterer, at koden fungerer korrekt.
+2. Som **Dokumentation** -- titlerne på `describe` og `it` fortæller, hvad funktionen gør.
+3. Som **Eksempler** -- testene er faktisk fungerende eksempler, der viser, hvordan en funktion kan bruges.
 
-With the spec, we can safely improve, change, even rewrite the function from scratch and make sure it still works right.
+Med specifikationen kan vi trygt forbedre, ændre eller endda omskrive funktionen fra bunden og sikre, at den stadig fungerer korrekt.
 
-That's especially important in large projects when a function is used in many places. When we change such a function, there's just no way to manually check if every place that uses it still works right.
+Det er især vigtigt i store projekter, hvor en funktion bruges mange steder. Når vi ændrer en sådan funktion, er der simpelthen ingen måde manuelt at kontrollere, om alle steder, der bruger den, stadig fungerer korrekt.
 
-Without tests, people have two ways:
+Uden tests har folk to muligheder:
 
-1. To perform the change, no matter what. And then our users meet bugs, as we probably fail to check something manually.
-2. Or, if the punishment for errors is harsh, as there are no tests, people become afraid to modify such functions, and then the code becomes outdated, no one wants to get into it. Not good for development.
+1. At udføre ændringen uanset hvad. Og så møder vores brugere fejl, da vi sandsynligvis ikke får tjekket noget manuelt.
+2. Eller, hvis straffen for fejl er hård, da der ikke er tests, bliver folk bange for at ændre sådanne funktioner, og så bliver koden forældet, ingen vil røre ved den. Ikke godt for udviklingen.
 
-**Automatic testing helps to avoid these problems!**
+**Automatiske tests hjælper med at undgå disse problemer!**
 
-If the project is covered with tests, there's just no such problem. After any changes, we can run tests and see a lot of checks made in a matter of seconds.
+Hvis projektet er dækket af tests, findes der simpelthen ikke sådan et problem. Efter enhver ændring kan vi køre tests og se mange kontroller udført på få sekunder.
 
-**Besides, a well-tested code has better architecture.**
+**Derudover har en veltestet kode bedre arkitektur.**
 
-Naturally, that's because auto-tested code is easier to modify and improve. But there's also another reason.
+Naturligvis er det fordi auto-testet kode er nemmere at ændre og forbedre. Men der er også en anden grund.
 
-To write tests, the code should be organized in such a way that every function has a clearly described task, well-defined input and output. That means a good architecture from the beginning.
+For at skrive tests skal koden være organiseret på en sådan måde, at hver funktion har en klart beskrevet opgave, veldefineret input og output. Det betyder en god arkitektur fra starten.
 
-In real life that's sometimes not that easy. Sometimes it's difficult to write a spec before the actual code, because it's not yet clear how it should behave. But in general writing tests makes development faster and more stable.
+I virkeligheden er det nogle gange ikke så let. Nogle gange er det svært at skrive en specifikation før den faktiske kode, fordi det endnu ikke er klart, hvordan den skal opføre sig. Men generelt gør skrivning af tests udviklingen hurtigere og mere stabil.
 
-Later in the tutorial you will meet many tasks with tests baked-in. So you'll see more practical examples.
+Senere i vejledningen vil du møde mange opgaver med indbyggede tests. Så du vil se flere praktiske eksempler.
 
-Writing tests requires good JavaScript knowledge. But we're just starting to learn it. So, to settle down everything, as of now you're not required to write tests, but you should already be able to read them even if they are a little bit more complex than in this chapter.
+At skrive tests kræver god JavaScript-viden. Men vi er lige begyndt at lære det. Så for at få det hele på plads, er du indtil videre ikke forpligtet til at skrive tests, men du bør allerede kunne læse dem, selvom de er en smule mere komplekse end i dette kapitel.
