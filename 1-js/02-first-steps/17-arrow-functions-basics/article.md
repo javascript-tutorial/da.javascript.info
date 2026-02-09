@@ -1,29 +1,28 @@
-# Arrow functions, the basics
+# Pilefunktioner (Arrow functions), grundlæggende
 
-There's another very simple and concise syntax for creating functions, that's often better than Function Expressions.
+Der findes en anden meget enkel og kortfattet syntaks til at oprette funktioner, som ofte er bedre end Funktionsudtryk.
 
-It's called "arrow functions", because it looks like this:
-
+Det kaldes "arrow funktionens" (pilefunktioner), fordi det ser sådan ud:
 ```js
-let func = (arg1, arg2, ..., argN) => expression;
+let func = (arg1, arg2, ..., argN) => udtryk;
 ```
 
-This creates a function `func` that accepts arguments `arg1..argN`, then evaluates the `expression` on the right side with their use and returns its result.
+Dette skaber en funktion `func`, der accepterer argumenter `arg1..argN`, evaluerer derefter `udtryk` på højre side med deres brug og returnerer resultatet.
 
-In other words, it's the shorter version of:
+Med andre ord er det den kortere version af:
 
 ```js
 let func = function(arg1, arg2, ..., argN) {
-  return expression;
+  return udtryk;
 };
 ```
 
-Let's see a concrete example:
+Lad os se et konkret eksempel:
 
 ```js run
 let sum = (a, b) => a + b;
 
-/* This arrow function is a shorter form of:
+/* Denne pilefunktion er en kortere form for:
 
 let sum = function(a, b) {
   return a + b;
@@ -33,22 +32,22 @@ let sum = function(a, b) {
 alert( sum(1, 2) ); // 3
 ```
 
-As you can see, `(a, b) => a + b` means a function that accepts two arguments named `a` and `b`. Upon the execution, it evaluates the expression `a + b` and returns the result.
+Som du kan se, betyder `(a, b) => a + b` en funktion, der accepterer to argumenter med navnene `a` og `b`. Ved udførelsen evaluerer den udtrykket `a + b` og returnerer resultatet.
 
-- If we have only one argument, then parentheses around parameters can be omitted, making that even shorter.
+- Hvis vi kun har ét argument, kan parenteserne omkring parametrene udelades, hvilket gør det endnu kortere.
 
-    For example:
+    For eksempel:
 
     ```js run
     *!*
     let double = n => n * 2;
-    // roughly the same as: let double = function(n) { return n * 2 }
+    // det samme som: let double = function(n) { return n * 2 }
     */!*
 
     alert( double(3) ); // 6
     ```
 
-- If there are no arguments, parentheses are empty, but they must be present:
+- Hvis der ikke er nogen argumenter, er parenteserne tomme, men de skal være til stede:
 
     ```js run
     let sayHi = () => alert("Hello!");
@@ -56,56 +55,56 @@ As you can see, `(a, b) => a + b` means a function that accepts two arguments na
     sayHi();
     ```
 
-Arrow functions can be used in the same way as Function Expressions.
+Pilefunktioner kan bruges på samme måde som Funktionsudtryk.
 
-For instance, to dynamically create a function:
+For eksempel, for dynamisk at oprette en funktion:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Hvor gammel er du?", 18);
 
 let welcome = (age < 18) ?
-  () => alert('Hello!') :
-  () => alert("Greetings!");
+  () => alert('Hej!') :
+  () => alert("Velkommen!");
 
 welcome();
 ```
 
-Arrow functions may appear unfamiliar and not very readable at first, but that quickly changes as the eyes get used to the structure.
+Pilefunktioner kan virke uvante og ikke særlig læsbare i starten, men det ændrer sig hurtigt, når øjnene vænner sig til strukturen.
 
-They are very convenient for simple one-line actions, when we're just too lazy to write many words.
+De er meget praktiske til simple en-linjers handlinger, når vi bare er for dovne til at skrive mange ord.
 
-## Multiline arrow functions
+## Multilinje pilefunktioner
 
-The arrow functions that we've seen so far were very simple. They took arguments from the left of `=>`, evaluated and returned the right-side expression with them.
+De pilefunktioner, vi har set indtil videre, var meget simple. De tog argumenter fra venstre side af `=>`, evaluerede og returnerede udtrykket på højre side med dem.
 
-Sometimes we need a more complex function, with multiple expressions and statements. In that case, we can enclose them in curly braces. The major difference is that curly braces require a `return` within them to return a value (just like a regular function does).
+Nogle gange har vi brug for en mere kompleks funktion med flere udtryk og sætninger. I så fald kan vi omslutte dem med krøllede parenteser. Den store forskel er, at krøllede parenteser kræver en `return` inden i dem for at returnere en værdi (lige som en almindelig funktion gør).
 
-Like this:
+Som dette:
 
 ```js run
-let sum = (a, b) => {  // the curly brace opens a multiline function
+let sum = (a, b) => {  // de krøllede parenteser åbner en multiline funktion
   let result = a + b;
 *!*
-  return result; // if we use curly braces, then we need an explicit "return"
+  return result; // hvis vi bruger krøllede parenteser, så skal vi have en eksplicit "return"
 */!*
 };
 
 alert( sum(1, 2) ); // 3
 ```
 
-```smart header="More to come"
-Here we praised arrow functions for brevity. But that's not all!
+```smart header="Mere senere"
+Her roste vi pilefunktioner for deres kortfattethed. Men det er ikke alt!
 
-Arrow functions have other interesting features.
+Pilefunktioner har andre interessante egenskaber.
 
-To study them in-depth, we first need to get to know some other aspects of JavaScript, so we'll return to arrow functions later in the chapter <info:arrow-functions>.
+For at studere dem i dybden, skal vi først lære nogle andre aspekter af JavaScript at kende, så vi vender tilbage til pilefunktioner senere i kapitlet <info:arrow-functions>.
 
-For now, we can already use arrow functions for one-line actions and callbacks.
+For nu kan du dog allerede bruge pilefunktioner til en-linjers handlinger og callbacks.
 ```
 
-## Summary
+## Opsummering
 
-Arrow functions are handy for simple actions, especially for one-liners. They come in two flavors:
+Pilefunktioner er praktiske til simple handlinger, især for en-linjers funktioner. De findes i to varianter:
 
-1. Without curly braces: `(...args) => expression` -- the right side is an expression: the function evaluates it and returns the result. Parentheses can be omitted, if there's only a single argument, e.g. `n => n*2`.
-2. With curly braces: `(...args) => { body }` -- brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
+1. Uden krøllede parenteser: `(...args) => expression` -- højre side er et udtryk: funktionen evaluerer det og returnerer resultatet. Parenteser kan udelades, hvis der kun er et enkelt argument, f.eks. `n => n*2`.
+2. Med krøllede parenteser: `(...args) => { body }` -- parenteser tillader os at skrive flere sætninger inde i funktionen, men vi skal have en eksplicit `return` for at returnere noget.

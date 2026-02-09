@@ -1,7 +1,7 @@
 
-# Rewrite with arrow functions
+# Omskriv med pilefunktioner
 
-Replace Function Expressions with arrow functions in the code below:
+Erstat Funktionsudtryk med pilefunktioner i koden nedenfor:
 
 ```js run
 function ask(question, yes, no) {
@@ -11,7 +11,7 @@ function ask(question, yes, no) {
 
 ask(
   "Do you agree?",
-  function() { alert("You agreed."); },
-  function() { alert("You canceled the execution."); }
+  function() { alert("Du er enig."); },
+  function() { alert("Du annullerede udførelsen."); }
 );
 ```
