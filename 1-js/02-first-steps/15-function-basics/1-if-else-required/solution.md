@@ -1,3 +1,3 @@
-No difference!
+Der er ingen forskel!
 
-In both cases, `return confirm('Did parents allow you?')` executes exactly when the `if` condition is falsy.
+I begge tilfælde udføres `return confirm('Har du dine forældres tilladelse?')` præcis når `if`-betingelsen er falsk.

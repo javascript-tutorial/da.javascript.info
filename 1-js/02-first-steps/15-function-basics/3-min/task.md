@@ -2,11 +2,11 @@ importance: 1
 
 ---
 
-# Function min(a, b)
+# Funktionen min(a, b)
 
-Write a function `min(a,b)` which returns the least of two numbers `a` and `b`.
+Skriv en funktion `min(a,b)`, som returnerer det mindste af to tal `a` og `b`.
 
-For instance:
+For eksempel:
 
 ```js
 min(2, 5) == 2
