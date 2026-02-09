@@ -1,18 +1,18 @@
-# Functions
+# Funktioner
 
-Quite often we need to perform a similar action in many places of the script.
+Meget ofte har vi brug for at udføre en lignende handling mange steder i scriptet.
 
-For example, we need to show a nice-looking message when a visitor logs in, logs out and maybe somewhere else.
+For eksempel har vi brug for at vise en pæn besked, når en besøgende logger ind, logger ud og måske et andet sted.
 
-Functions are the main "building blocks" of the program. They allow the code to be called many times without repetition.
+Funktioner er programmets vigtigste "byggesten". De tillader, at koden kan kaldes mange gange uden gentagelse.
 
-We've already seen examples of built-in functions, like `alert(message)`, `prompt(message, default)` and `confirm(question)`. But we can create functions of our own as well.
+Vi har allerede set eksempler på indbyggede funktioner, som `alert(message)`, `prompt(message, default)` og `confirm(question)`. Men vi kan også oprette vores egne funktioner.
 
-## Function Declaration
+## Funktionsdeklaration
 
-To create a function we can use a *function declaration*.
+For at oprette en funktion kan vi bruge en *funktionsdeklaration*.
 
-It looks like this:
+Det ser sådan ud:
 
 ```js
 function showMessage() {
@@ -20,7 +20,7 @@ function showMessage() {
 }
 ```
 
-The `function` keyword goes first, then goes the *name of the function*, then a list of *parameters* between the parentheses (comma-separated, empty in the example above, we'll see examples later) and finally the code of the function, also named "the function body", between curly braces.
+Nøgleordet `function` kommer først, derefter navnet på funktionen, så en liste af parametre mellem parenteserne (kommasepareret, tom i eksemplet ovenfor, vi vil se eksempler senere) og til sidst koden i funktionen, også kaldet "funktionskroppen", mellem krøllede parenteser.
 
 ```js
 function name(parameter1, parameter2, ... parameterN) {
@@ -28,13 +28,13 @@ function name(parameter1, parameter2, ... parameterN) {
 }
 ```
 
-Our new function can be called by its name: `showMessage()`.
+Vores nye funktion kan kaldes ved sit navn: `showMessage()`.
 
-For instance:
+For eksempel:
 
 ```js run
 function showMessage() {
-  alert( 'Hello everyone!' );
+  alert( 'Hej allesammen!' );
 }
 
 *!*
@@ -43,106 +43,106 @@ showMessage();
 */!*
 ```
 
-The call `showMessage()` executes the code of the function. Here we will see the message two times.
+Kaldet `showMessage()` udfører koden i funktionen. Her vil vi se beskeden to gange.
 
-This example clearly demonstrates one of the main purposes of functions: to avoid code duplication.
+Dette eksempel demonstrerer tydeligt et af hovedformålene med funktioner: at undgå kodegentagelse.
 
-If we ever need to change the message or the way it is shown, it's enough to modify the code in one place: the function which outputs it.
+Hvis vi nogensinde har brug for at ændre beskeden eller måden den vises på, er det nok at ændre koden ét sted: funktionen, der viser den.
 
-## Local variables
+## Lokale variabler
 
-A variable declared inside a function is only visible inside that function.
+En variabel, der er erklæret inde i en funktion, er kun synlig inde i den funktion.
 
-For example:
+For eksempel:
 
 ```js run
 function showMessage() {
 *!*
-  let message = "Hello, I'm JavaScript!"; // local variable
+  let message = "Hej, jeg er JavaScript!"; // lokal variabel
 */!*
 
   alert( message );
 }
 
-showMessage(); // Hello, I'm JavaScript!
+showMessage(); // Hej, jeg er JavaScript!
 
-alert( message ); // <-- Error! The variable is local to the function
+alert( message ); // <-- Fejl! Variablen er lokal for funktionen
 ```
 
-## Outer variables
+## Ydre variabler
 
-A function can access an outer variable as well, for example:
+En funktion kan også få adgang til en ydre variabel, for eksempel:
 
 ```js run no-beautify
 let *!*userName*/!* = 'John';
 
 function showMessage() {
-  let message = 'Hello, ' + *!*userName*/!*;
+  let message = 'Hej, ' + *!*userName*/!*;
   alert(message);
 }
 
-showMessage(); // Hello, John
+showMessage(); // Hej, John
 ```
 
-The function has full access to the outer variable. It can modify it as well.
+Funktionen har fuld adgang til den ydre variabel. Den kan også ændre den.
 
-For instance:
+For eksempel:
 
 ```js run
 let *!*userName*/!* = 'John';
 
 function showMessage() {
-  *!*userName*/!* = "Bob"; // (1) changed the outer variable
+  *!*userName*/!* = "Bob"; // (1) ændrede den ydre variabel
 
-  let message = 'Hello, ' + *!*userName*/!*;
+  let message = 'Hej, ' + *!*userName*/!*;
   alert(message);
 }
 
-alert( userName ); // *!*John*/!* before the function call
+alert( userName ); // *!*John*/!* før funktionenskaldet
 
 showMessage();
 
-alert( userName ); // *!*Bob*/!*, the value was modified by the function
+alert( userName ); // *!*Bob*/!*, værdien blev ændret af funktionen
 ```
 
-The outer variable is only used if there's no local one.
+Den ydre variabel bruges kun, hvis der ikke findes en lokal med samme navn.
 
-If a same-named variable is declared inside the function then it *shadows* the outer one. For instance, in the code below the function uses the local `userName`. The outer one is ignored:
+Hvis en variabel med samme navn erklæres inde i funktionen, så *overskygger* den den ydre. For eksempel, i koden nedenfor bruger funktionen den lokale `userName`. Den ydre ignoreres:
 
 ```js run
 let userName = 'John';
 
 function showMessage() {
 *!*
-  let userName = "Bob"; // declare a local variable
+  let userName = "Bob"; // erklær en lokal variabel
 */!*
 
-  let message = 'Hello, ' + userName; // *!*Bob*/!*
+  let message = 'Hej, ' + userName; // *!*Bob*/!*
   alert(message);
 }
 
-// the function will create and use its own userName
+// Funktionen vil oprette og bruge sin egen lokale userName
 showMessage();
 
-alert( userName ); // *!*John*/!*, unchanged, the function did not access the outer variable
+alert( userName ); // *!*John*/!*, uændret, funktionen tilgik ikke den ydre variabel
 ```
 
-```smart header="Global variables"
-Variables declared outside of any function, such as the outer `userName` in the code above, are called *global*.
+```smart header="Globale variabler"
+Variabler erklæret uden for en funktion, som den ydre `userName` i koden ovenfor, kaldes *globale*.
 
-Global variables are visible from any function (unless shadowed by locals).
+Globale variabler er synlige fra enhver funktion (medmindre de overskygges af lokale).
 
-It's a good practice to minimize the use of global variables. Modern code has few or no globals. Most variables reside in their functions. Sometimes though, they can be useful to store project-level data.
+Det er en god praksis at minimere brugen af globale variabler. Moderne kode har få eller ingen globale. De fleste variabler befinder sig i deres funktioner. Nogle gange kan de dog være nyttige til at gemme data på projekt-niveau.
 ```
 
-## Parameters
+## Parametre og argumenter
 
-We can pass arbitrary data to functions using parameters.
+Vi kan sende vilkårlige data til funktioner ved hjælp af parametre.
 
-In the example below, the function has two parameters: `from` and `text`.
+I eksemplet nedenfor har funktionen to parametre: `from` og `text`.
 
 ```js run
-function showMessage(*!*from, text*/!*) { // parameters: from, text
+function showMessage(*!*from, text*/!*) { // parametre: from, text
   alert(from + ': ' + text);
 }
 
@@ -150,15 +150,15 @@ function showMessage(*!*from, text*/!*) { // parameters: from, text
 *!*showMessage('Ann', "What's up?");*/!* // Ann: What's up? (**)
 ```
 
-When the function is called in lines `(*)` and `(**)`, the given values are copied to local variables `from` and `text`. Then the function uses them.
+Når funktionen kaldes i linjerne `(*)` og `(**)`, kopieres de givne værdier til lokale variabler `from` og `text`. Derefter bruger funktionen dem.
 
-Here's one more example: we have a variable `from` and pass it to the function. Please note: the function changes `from`, but the change is not seen outside, because a function always gets a copy of the value:
+Her er et eksempel mere: vi har en variabel `from` og sender den til funktionen. Bemærk venligst: funktionen ændrer `from`, men ændringen ses ikke udenfor, fordi en funktion altid får en kopi af værdien:
 
 ```js run
 function showMessage(from, text) {
 
 *!*
-  from = '*' + from + '*'; // make "from" look nicer
+  from = '*' + from + '*'; // gør "from" pænere
 */!*
 
   alert( from + ': ' + text );
@@ -172,77 +172,77 @@ showMessage(from, "Hello"); // *Ann*: Hello
 alert( from ); // Ann
 ```
 
-When a value is passed as a function parameter, it's also called an *argument*.
+Når en værdi sendes som en funktionsparameter, kaldes den et *argument*.
 
-In other words, to put these terms straight:
+Med andre ord, for at gøre disse termer klare:
 
-- A parameter is the variable listed inside the parentheses in the function declaration (it's a declaration time term).
-- An argument is the value that is passed to the function when it is called (it's a call time term).
+- En parameter er variablen, der er angivet inde i parenteserne i funktionsdeklarationen (det er en deklarationstidsterm).
+- Et argument er den værdi, der sendes til funktionen, når den kaldes (det er en kaldetidsterm).
 
-We declare functions listing their parameters, then call them passing arguments.
+Vi erklærer funktioner ved at liste deres parametre, og kalder dem derefter ved at sende argumenter.
 
-In the example above, one might say: "the function `showMessage` is declared with two parameters, then called with two arguments: `from` and `"Hello"`".
+I eksemplet ovenfor kan man sige: "funktionen `showMessage` erklæres med to parametre, og kaldes derefter med to argumenter: `from` og `"Hello"`".
 
 
-## Default values
+## Standardværdier
 
-If a function is called, but an argument is not provided, then the corresponding value becomes `undefined`.
+Hvis en funktion kaldes, men et argument ikke gives, bliver den tilsvarende værdi `undefined`.
 
-For instance, the aforementioned function `showMessage(from, text)` can be called with a single argument:
+For eksempel kan den førnævnte funktion `showMessage(from, text)` kaldes med et enkelt argument:
 
 ```js
 showMessage("Ann");
 ```
 
-That's not an error. Such a call would output `"*Ann*: undefined"`. As the value for `text` isn't passed, it becomes `undefined`.
+Dette er ikke en fejl. Et sådant kald ville give outputtet `"*Ann*: undefined"`. Da værdien for `text` ikke er givet, bliver den `undefined`.
 
-We can specify the so-called "default" (to use if omitted) value for a parameter in the function declaration, using `=`:
+Vi kan angive den såkaldte "standard" (som bruges hvis udeladt) værdi for en parameter i funktionsdeklarationen ved hjælp af `=`:
 
 ```js run
-function showMessage(from, *!*text = "no text given"*/!*) {
+function showMessage(from, *!*text = "ingen tekst givet"*/!*) {
   alert( from + ": " + text );
 }
 
-showMessage("Ann"); // Ann: no text given
+showMessage("Ann"); // Ann: ingen tekst givet
 ```
 
-Now if the `text` parameter is not passed, it will get the value `"no text given"`.
+Hvis `text`-parameteren ikke gives, får den værdien `"ingen tekst givet"`.
 
-The default value also jumps in if the parameter exists, but strictly equals `undefined`, like this:
+Standardværdien træder også i kraft, hvis parameteren eksisterer, men er strengt lig med `undefined`, som dette:
 
 ```js
-showMessage("Ann", undefined); // Ann: no text given
+showMessage("Ann", undefined); // Ann: ingen tekst givet
 ```
 
-Here `"no text given"` is a string, but it can be a more complex expression, which is only evaluated and assigned if the parameter is missing. So, this is also possible:
+Her er `"ingen tekst givet"` en streng, men det kan være et mere komplekst udtryk, som kun evalueres og tildeles, hvis parameteren mangler. Så dette er også muligt:
 
 ```js run
 function showMessage(from, text = anotherFunction()) {
-  // anotherFunction() only executed if no text given
-  // its result becomes the value of text
+  // anotherFunction() kaldes kun, hvis der ikke gives tekst
+  // dens resultat bliver værdien af text
 }
 ```
 
-```smart header="Evaluation of default parameters"
-In JavaScript, a default parameter is evaluated every time the function is called without the respective parameter.
+```smart header="Evaluering af standardparametre"
+I JavaScript evalueres en standardparameter hver gang funktionen kaldes uden den respektive parameter.
 
-In the example above, `anotherFunction()` isn't called at all, if the `text` parameter is provided.
+I eksemplet ovenfor kaldes `anotherFunction()` slet ikke, hvis `text`-parameteren gives.
 
-On the other hand, it's independently called every time when `text` is missing.
+På den anden side kaldes den uafhængigt hver gang, når `text` mangler.
 ```
 
-````smart header="Default parameters in old JavaScript code"
-Several years ago, JavaScript didn't support the syntax for default parameters. So people used other ways to specify them.
+````smart header="Standardværdier i gammel JavaScript-kode"
+For flere år siden understøttede JavaScript ikke syntaksen for standardværdier. Så folk brugte andre måder til at angive dem på.
 
-Nowadays, we can come across them in old scripts.
+I dag kan vi stadig støde på dem i gamle scripts.
 
-For example, an explicit check for `undefined`:
+For eksempel, en eksplicit kontrol for `undefined`:
 
 ```js
 function showMessage(from, text) {
 *!*
   if (text === undefined) {
-    text = 'no text given';
+    text = 'ingen tekst givet';
   }
 */!*
 
@@ -250,69 +250,68 @@ function showMessage(from, text) {
 }
 ```
 
-...Or using the `||` operator:
+...Eller ved at bruge `||` operatoren:
 
 ```js
 function showMessage(from, text) {
-  // If the value of text is falsy, assign the default value
-  // this assumes that text == "" is the same as no text at all
-  text = text || 'no text given';
+  // Hvis værdien af text er falsk, tildel standardværdien
+  // dette antager, at text == "" er det samme som ingen tekst overhovedet
+  text = text || 'ingen tekst givet';
   ...
 }
 ```
 ````
 
 
-### Alternative default parameters
+### Alternative standardværdier for parametre
 
-Sometimes it makes sense to assign default values for parameters at a later stage after the function declaration.
+Nogle gange giver det mening at tildele standardværdier til parametre på et senere tidspunkt efter funktionsdeklarationen.
 
-We can check if the parameter is passed during the function execution, by comparing it with `undefined`:
+Vi kan kontrollere, om argumentet er givet under funktionsudførelsen, ved at sammenligne den med `undefined`:
 
 ```js run
 function showMessage(text) {
   // ...
 
-*!*
-  if (text === undefined) { // if the parameter is missing
-    text = 'empty message';
+  if (text === undefined) { // hvis argumentet mangler
+    text = 'tom besked';
   }
 */!*
 
   alert(text);
 }
 
-showMessage(); // empty message
+showMessage(); // tom besked
 ```
 
-...Or we could use the `||` operator:
+...Eller vi kunne bruge `||` operatoren:
 
 ```js
 function showMessage(text) {
-  // if text is undefined or otherwise falsy, set it to 'empty'
-  text = text || 'empty';
+  // hvis text er undefined eller på anden måde falsk, sæt den til 'tom'
+  text = text || 'tom';
   ...
 }
 ```
 
-Modern JavaScript engines support the [nullish coalescing operator](info:nullish-coalescing-operator) `??`, it's better when most falsy values, such as `0`, should be considered "normal":
+Moderne JavaScript motorer understøtter [nullish coalescing operator](info:nullish-coalescing-operator) `??`, det er bedre, når de fleste falske værdier, såsom `0`, skal betragtes som "normale":
 
 ```js run
 function showCount(count) {
-  // if count is undefined or null, show "unknown"
-  alert(count ?? "unknown");
+  // hvis count er undefined eller null, vis "ukendt"
+  alert(count ?? "ukendt");
 }
 
 showCount(0); // 0
-showCount(null); // unknown
-showCount(); // unknown
+showCount(null); // ukendt
+showCount(); // ukendt
 ```
 
-## Returning a value
+## Returnering af en værdi
 
-A function can return a value back into the calling code as the result.
+En funktion kan returnere en værdi tilbage til den kaldende kode som resultatet.
 
-The simplest example would be a function that sums two values:
+Det simpleste eksempel ville være en funktion, der summerer to værdier:
 
 ```js run no-beautify
 function sum(a, b) {
@@ -323,9 +322,9 @@ let result = sum(1, 2);
 alert( result ); // 3
 ```
 
-The directive `return` can be in any place of the function. When the execution reaches it, the function stops, and the value is returned to the calling code (assigned to `result` above).
+Direktivet `return` kan være placeret hvor som helst i funktionen. Når udførelsen når det, stopper funktionen, og værdien returneres til den kaldende kode (tildelt til `result` ovenfor).
 
-There may be many occurrences of `return` in a single function. For instance:
+Der kan være mange forekomster af `return` i en enkelt funktion. For eksempel:
 
 ```js run
 function checkAge(age) {
@@ -335,21 +334,21 @@ function checkAge(age) {
 */!*
   } else {
 *!*
-    return confirm('Do you have permission from your parents?');
+    return confirm('Har du tilladelse fra dine forældre?');
 */!*
   }
 }
 
-let age = prompt('How old are you?', 18);
+let age = prompt('Hvor gammel er du?', 18);
 
 if ( checkAge(age) ) {
-  alert( 'Access granted' );
+  alert( 'Adgang givet' );
 } else {
-  alert( 'Access denied' );
+  alert( 'Adgang nægtet' );
 }
 ```
 
-It is possible to use `return` without a value. That causes the function to exit immediately.
+Det er muligt at bruge `return` uden en værdi. Det får funktionen til at afslutte øjeblikkeligt.
 
 For example:
 
@@ -361,23 +360,23 @@ function showMovie(age) {
 */!*
   }
 
-  alert( "Showing you the movie" ); // (*)
+  alert( "Viser filmen" ); // (*)
   // ...
 }
 ```
 
-In the code above, if `checkAge(age)` returns `false`, then `showMovie` won't proceed to the `alert`.
+I koden ovenfor, hvis `checkAge(age)` returnerer `false`, så vil `showMovie` ikke fortsætte til `alert`.
 
-````smart header="A function with an empty `return` or without it returns `undefined`"
-If a function does not return a value, it is the same as if it returns `undefined`:
+````smart header="En funktion med en tom `return` eller uden den returnerer `undefined`"
+Hvis en funktion ikke returnerer en værdi, er det det samme som om den returnerer `undefined`:
 
 ```js run
-function doNothing() { /* empty */ }
+function doNothing() { /* tom */ }
 
 alert( doNothing() === undefined ); // true
 ```
 
-An empty `return` is also the same as `return undefined`:
+En tom `return` er også det samme som `return undefined`:
 
 ```js run
 function doNothing() {
@@ -388,92 +387,91 @@ alert( doNothing() === undefined ); // true
 ```
 ````
 
-````warn header="Never add a newline between `return` and the value"
-For a long expression in `return`, it might be tempting to put it on a separate line, like this:
+````warn header="Tilføj aldrig et linjeskift mellem `return` og værdien"
+Hvis du har et langt udtryk i `return`, kan det være fristende at placere det på en separat linje, som dette:
 
 ```js
 return
- (some + long + expression + or + whatever * f(a) + f(b))
+ (et + langt + udtryk + eller + hvad + som + helst * f(a) + f(b))
 ```
-That doesn't work, because JavaScript assumes a semicolon after `return`. That'll work the same as:
+Det virker ikke, fordi JavaScript antager et semikolon efter `return`. Det vil fungere på samme måde som:
 
 ```js
-return*!*;*/!*
- (some + long + expression + or + whatever * f(a) + f(b))
+return;
+ (et + langt + udtryk + eller + hvad + som + helst * f(a) + f(b));
 ```
 
-So, it effectively becomes an empty return.
+Så det opfattes som en tom return.
 
-If we want the returned expression to wrap across multiple lines, we should start it at the same line as `return`. Or at least put the opening parentheses there as follows:
+Hvis vi ønsker, at det returnerede udtryk skal strække sig over flere linjer, bør vi starte det på samme linje som `return`. Eller i det mindste placere den åbne parentes der som følger:
 
 ```js
 return (
-  some + long + expression
-  + or +
-  whatever * f(a) + f(b)
+  et + langt + udtryk
+  + eller +
+  hvad + som + helst * f(a) + f(b)
   )
 ```
-And it will work just as we expect it to.
+det vil fungere præcis som forventet.
 ````
 
-## Naming a function [#function-naming]
+## Navngivning af en funktion [#function-naming]
 
-Functions are actions. So their name is usually a verb. It should be brief, as accurate as possible and describe what the function does, so that someone reading the code gets an indication of what the function does.
+Funktioner er handlinger. Derfor er deres navn som regel et verbum. Det bør være kort, så præcist som muligt og beskrive, hvad funktionen gør, så en person, der læser koden, får en idé om, hvad funktionen gør.
 
-It is a widespread practice to start a function with a verbal prefix which vaguely describes the action. There must be an agreement within the team on the meaning of the prefixes.
+Det er en udbredt praksis at starte en funktion med et verbalt præfiks, der vagt beskriver handlingen. Der skal være en aftale inden for teamet om betydningen af præfikserne.
 
-For instance, functions that start with `"show"` usually show something.
+For eksempel viser funktioner, der starter med `"show"`, som regel noget.
+Funktioner, der starter med...
 
-Function starting with...
+- `"get…"` -- returnere en værdi,
+- `"calc…"` -- beregner noget,
+- `"create…"` -- opretter noget,
+- `"check…"` -- kontrollerer noget og returnerer en boolean, osv.
 
-- `"get…"` -- return a value,
-- `"calc…"` -- calculate something,
-- `"create…"` -- create something,
-- `"check…"` -- check something and return a boolean, etc.
-
-Examples of such names:
+Eksempler på sådanne navne:
 
 ```js no-beautify
-showMessage(..)     // shows a message
-getAge(..)          // returns the age (gets it somehow)
-calcSum(..)         // calculates a sum and returns the result
-createForm(..)      // creates a form (and usually returns it)
-checkPermission(..) // checks a permission, returns true/false
+showMessage(..)     // viser en besked
+getAge(..)          // returnerer alderen (henter den på en eller anden måde)
+calcSum(..)         // beregner en sum og returnerer resultatet
+createForm(..)      // opretter en formular (og returnerer den som regel)
+checkPermission(..) // kontrollerer en tilladelse, returnerer true/false
 ```
 
-With prefixes in place, a glance at a function name gives an understanding what kind of work it does and what kind of value it returns.
+Med præfikser på plads giver et hurtigt blik på et funktionsnavn en forståelse af, hvilken slags arbejde det udfører, og hvilken slags værdi det returnerer.
 
-```smart header="One function -- one action"
-A function should do exactly what is suggested by its name, no more.
+```smart header="En funktion -- en handling"
+En funktion bør gøre præcis det, som dens navn antyder, ikke mere.
 
-Two independent actions usually deserve two functions, even if they are usually called together (in that case we can make a 3rd function that calls those two).
+To uafhængige handlinger fortjener som regel to funktioner, selvom de ofte kaldes sammen (i så fald kan vi lave en tredje funktion, der kalder de to andre).
 
-A few examples of breaking this rule:
+Nogle eksempler på at bryde denne regel:
 
-- `getAge` -- would be bad if it shows an `alert` with the age (should only get).
-- `createForm` -- would be bad if it modifies the document, adding a form to it (should only create it and return).
-- `checkPermission` -- would be bad if it displays the `access granted/denied` message (should only perform the check and return the result).
+- `getAge` -- ville være dårligt, hvis den viser en `alert` med alderen (bør kun hente).
+- `createForm` -- ville være dårligt, hvis den ændrer dokumentet ved at tilføje en formular (bør kun oprette den og returnere).
+- `checkPermission` -- ville være dårligt, hvis den viser beskeden `adgang givet/afvist` (bør kun udføre kontrollen og returnere resultatet).
 
-These examples assume common meanings of prefixes. You and your team are free to agree on other meanings, but usually they're not much different. In any case, you should have a firm understanding of what a prefix means, what a prefixed function can and cannot do. All same-prefixed functions should obey the rules. And the team should share the knowledge.
+Disse eksempler antager almindelige betydninger af præfikser. Du og dit team er frie til at blive enige om andre betydninger, men som regel er de ikke meget forskellige. Under alle omstændigheder bør du have en fast forståelse af, hvad et præfiks betyder, hvad en præfikset funktion kan og ikke kan gøre. Alle funktioner med samme præfiks bør overholde reglerne. Og teamet bør dele denne viden.
 ```
 
-```smart header="Ultrashort function names"
-Functions that are used *very often* sometimes have ultrashort names.
+```smart header="Ultrakorte funktionsnavne"
+Funktioner, der bruges *meget ofte*, har nogle gange ultrakorte navne.
 
-For example, the [jQuery](https://jquery.com/) framework defines a function with `$`. The [Lodash](https://lodash.com/) library has its core function named `_`.
+For eksempel definerer [jQuery](https://jquery.com/) frameworket en funktion med `$`. [Lodash](https://lodash.com/) biblioteket har sin kernefunktion navngivet `_`.
 
-These are exceptions. Generally function names should be concise and descriptive.
+Disse er undtagelser. Generelt bør funktionsnavne være korte og beskrivende.
 ```
 
-## Functions == Comments
+## Funktioner == Kommentarer
 
-Functions should be short and do exactly one thing. If that thing is big, maybe it's worth it to split the function into a few smaller functions. Sometimes following this rule may not be that easy, but it's definitely a good thing.
+Funktioner bør være korte og gøre præcis én ting. Hvis den ting er stor, kan det være værd at opdele funktionen i nogle få mindre funktioner. Nogle gange er det ikke så let at følge denne regel, men det er bestemt en god ting at bestræbe sig på.
 
-A separate function is not only easier to test and debug -- its very existence is a great comment!
+En separat funktion er ikke kun nemmere at teste og fejlfinde – dens eksistens er også en fremragende kommentar!
 
-For instance, compare the two functions `showPrimes(n)` below. Each one outputs [prime numbers](https://en.wikipedia.org/wiki/Prime_number) up to `n`.
+For eksempel, sammenlign de to funktioner `showPrimes(n)` nedenfor. Hver af dem udskriver [primtal](https://en.wikipedia.org/wiki/Prime_number) op til `n`.
 
-The first variant uses a label:
+Den første variant bruger en label:
 
 ```js
 function showPrimes(n) {
@@ -483,12 +481,12 @@ function showPrimes(n) {
       if (i % j == 0) continue nextPrime;
     }
 
-    alert( i ); // a prime
+    alert( i ); // et primtal
   }
 }
 ```
 
-The second variant uses an additional function `isPrime(n)` to test for primality:
+Den anden variant bruger en ekstra funktion `isPrime(n)` til at teste for primalitet:
 
 ```js
 function showPrimes(n) {
@@ -496,7 +494,7 @@ function showPrimes(n) {
   for (let i = 2; i < n; i++) {
     *!*if (!isPrime(i)) continue;*/!*
 
-    alert(i);  // a prime
+    alert(i);  // et primtal
   }
 }
 
@@ -508,32 +506,32 @@ function isPrime(n) {
 }
 ```
 
-The second variant is easier to understand, isn't it? Instead of the code piece we see a name of the action (`isPrime`). Sometimes people refer to such code as *self-describing*.
+Den anden variant er nemmere at forstå, ikke sandt? I stedet for et stykke kode ser vi et navn på handlingen (`isPrime`). Nogle gange omtaler folk sådan kode som *selvbeskrivende*.
 
-So, functions can be created even if we don't intend to reuse them. They structure the code and make it readable.
+Så funktioner kan oprettes, selvom vi ikke har til hensigt at genbruge dem. De er også med til at strukturere koden og gøre den læsbar.
 
-## Summary
+## Opsummering
 
-A function declaration looks like this:
+En funktionsdeklaration ser sådan ud:
 
 ```js
-function name(parameters, delimited, by, comma) {
-  /* code */
+function name(parametre, adskilt, med, komma) {
+  /* kode */
 }
 ```
 
-- Values passed to a function as parameters are copied to its local variables.
-- A function may access outer variables. But it works only from inside out. The code outside of the function doesn't see its local variables.
-- A function can return a value. If it doesn't, then its result is `undefined`.
+- Værdier, der sendes til en funktion som argumenter, kopieres til dens lokale variabler.
+- En funktion kan få adgang til ydre variable. Men det virker kun indefra og ud. Koden uden for funktionen ser ikke dens lokale variabler.
+- En funktion kan returnere en værdi. Hvis den ikke gør det, er resultatet `undefined`.
 
-To make the code clean and easy to understand, it's recommended to use mainly local variables and parameters in the function, not outer variables.
+For at gøre koden ren og let at forstå, anbefales det at bruge hovedsageligt lokale variabler og parametre i funktionen, ikke ydre variabler.
 
-It is always easier to understand a function which gets parameters, works with them and returns a result than a function which gets no parameters, but modifies outer variables as a side effect.
+Det er altid nemmere at forstå en funktion, der får argumenter, arbejder med dem og returnerer et resultat, end en funktion, der ikke får parametre, men ændrer ydre variabler som en bivirkning.
 
-Function naming:
+Navngivning af funktioner:
 
-- A name should clearly describe what the function does. When we see a function call in the code, a good name instantly gives us an understanding what it does and returns.
-- A function is an action, so function names are usually verbal.
-- There exist many well-known function prefixes like `create…`, `show…`, `get…`, `check…` and so on. Use them to hint what a function does.
+- Et navn bør klart beskrive, hvad funktionen gør. Når vi ser et funktionskald i koden, giver et godt navn os straks en forståelse af, hvad det gør og returnerer.
+- En funktion er en handling, så funktionsnavne er normalt verbale.
+- Der findes mange velkendte funktionspræfikser som `create…`, `show…`, `get…`, `check…` og så videre. Brug dem til at antyde, hvad en funktion gør.
 
-Functions are the main building blocks of scripts. Now we've covered the basics, so we actually can start creating and using them. But that's only the beginning of the path. We are going to return to them many times, going more deeply into their advanced features.
+Funktioner er hovedbyggestenene i scripts. Nu hvor vi har dækket det grundlæggende, kan vi faktisk begynde at oprette og bruge dem. Men det er kun begyndelsen på vejen. Vi vil vende tilbage til dem mange gange og gå mere i dybden med deres avancerede funktioner.
