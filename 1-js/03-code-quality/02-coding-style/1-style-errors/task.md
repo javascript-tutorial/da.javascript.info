@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# Bad style
+# Rodet kodestil
 
-What's wrong with the code style below?
+Hvad er der galt med kodestilen nedenfor?
 
 ```js no-beautify
 function pow(x,n)
@@ -17,7 +17,7 @@ function pow(x,n)
 let x=prompt("x?",''), n=prompt("n?",'')
 if (n<=0)
 {
-  alert(`Power ${n} is not supported, please enter an integer number greater than zero`);
+  alert(`Opløftning i ${n} potens er ikke understøttet, indtast venligst et helt tal større end nul`);
 }
 else
 {
@@ -25,4 +25,4 @@ else
 }
 ```
 
-Fix it.
+Kan du fikse det?
