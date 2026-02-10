@@ -1,17 +1,17 @@
-# Constructor, operator "new"
+# Constructor, operatoren "new"
 
-The regular `{...}` syntax allows us to create one object. But often we need to create many similar objects, like multiple users or menu items and so on.
+Den almindelige `{...}` syntaks tillader os at skabe et enkelt objekt. Men ofte har vi brug for at skabe mange lignende objekter, som flere brugere eller menupunkter og så videre.
 
-That can be done using constructor functions and the `"new"` operator.
+Det kan gøres ved hjælp af konstruktørfunktioner og `"new"` operatoren.
 
-## Constructor function
+## Constructor funktion (konstruktør)
 
-Constructor functions technically are regular functions. There are two conventions though:
+Konstruktørfunktioner er teknisk set almindelige funktioner. Der er dog to konventioner:
 
-1. They are named with capital letter first.
-2. They should be executed only with `"new"` operator.
+1. De navngives med stort begyndelsesbogstav.
+2. De bør kun køres med `"new"` operatoren.
 
-For instance:
+For eksempel:
 
 ```js run
 function User(name) {
@@ -27,31 +27,31 @@ alert(user.name); // Jack
 alert(user.isAdmin); // false
 ```
 
-When a function is executed with `new`, it does the following steps:
+Når en funktion køres med `new`, udfører den følgende trin:
 
-1. A new empty object is created and assigned to `this`.
-2. The function body executes. Usually it modifies `this`, adds new properties to it.
-3. The value of `this` is returned.
+1. Et nyt tomt objekt oprettes og tildeles til `this`.
+2. Funktionskroppen udføres. Normalt ændrer den `this`, tilføjer nye egenskaber til det.
+3. Værdien af `this` returneres.
 
-In other words, `new User(...)` does something like:
+Med andre ord gør `new User(...)` noget i retning af:
 
 ```js
 function User(name) {
 *!*
-  // this = {};  (implicitly)
+  // this = {};  (implicit)
 */!*
 
-  // add properties to this
+  // tilføj egenskaber til this
   this.name = name;
   this.isAdmin = false;
 
 *!*
-  // return this;  (implicitly)
+  // returner this;  (implicit)
 */!*
 }
 ```
 
-So `let user = new User("Jack")` gives the same result as:
+Så `let user = new User("Jack")` giver det samme resultat som:
 
 ```js
 let user = {
@@ -60,149 +60,148 @@ let user = {
 };
 ```
 
-Now if we want to create other users, we can call `new User("Ann")`, `new User("Alice")` and so on. Much shorter than using literals every time, and also easy to read.
+Nu, hvis vi vil skabe andre brugere, kan vi kalde `new User("Ann")`, `new User("Alice")` og så videre. Meget kortere end at bruge litteraler hver gang, og også nemt at læse.
 
-That's the main purpose of constructors -- to implement reusable object creation code.
+Det er hovedformålet med konstruktører -- at implementere genanvendelig kode til objektoprettelse.
 
-Let's note once again -- technically, any function (except arrow functions, as they don't have `this`) can be used as a constructor. It can be run with `new`, and it will execute the algorithm above. The "capital letter first" is a common agreement, to make it clear that a function is to be run with `new`.
+Lad os igen bemærke -- teknisk set kan enhver funktion (undtagen arrow-funktioner, da de ikke har `this`) bruges som en konstruktør. Den kan køres med `new`, og den vil udføre algoritmen ovenfor. "Stort begyndelsesbogstav" er en almindelig aftale for at gøre det klart, at en funktion skal køres med `new`.
 
 ````smart header="new function() { ... }"
-If we have many lines of code all about creation of a single complex object, we can wrap them in an immediately called constructor function, like this:
+Hvis vi har mange linjer kode, der handler om oprettelse af et enkelt komplekst objekt, kan vi pakke dem ind i en straks kaldt konstruktørfunktion, sådan her:
 
 ```js
-// create a function and immediately call it with new
+// opret en funktion og kald den straks med new
 let user = new function() { 
   this.name = "John";
   this.isAdmin = false;
 
-  // ...other code for user creation
-  // maybe complex logic and statements
-  // local variables etc
+  // ...anden kode til oprettelse af bruger
+  // måske kompleks logik og udsagn
+  // lokale variabler osv
 };
 ```
 
-This constructor can't be called again, because it is not saved anywhere, just created and called. So this trick aims to encapsulate the code that constructs the single object, without future reuse.
+Denne konstruktør kan ikke kaldes igen, fordi den ikke er gemt nogen steder, bare oprettet og kaldt. Så dette trick sigter mod at indkapsle koden, der konstruerer det enkelte objekt, uden fremtidig genbrug.
 ````
 
 ## Constructor mode test: new.target
 
-```smart header="Advanced stuff"
-The syntax from this section is rarely used, skip it unless you want to know everything.
+```smart header="Avanceret stuff"
+Syntaxen fra denne sektion bruges sjældent, spring den over medmindre du vil vide alt.
 ```
 
-Inside a function, we can check whether it was called with `new` or without it, using a special `new.target` property.
+Inde i en funktion kan vi tjekke, om den blev kaldt med `new` eller uden, ved hjælp af en speciel `new.target` egenskab.
 
-It is undefined for regular calls and equals the function if called with `new`:
+Den er `undefined` for almindelige kald og er lig med funktionen, hvis den kaldes med `new`:
 
 ```js run
 function User() {
   alert(new.target);
 }
 
-// without "new":
+// uden "new":
 *!*
 User(); // undefined
 */!*
 
-// with "new":
+// med "new":
 *!*
 new User(); // function User { ... }
 */!*
 ```
 
-That can be used inside the function to know whether it was called with `new`, "in constructor mode", or without it, "in regular mode".
+Det kan bruges inde i funktionen til at vide, om den blev kaldt med `new`, "i konstruktørtilstand", eller uden, "i almindelig tilstand".
 
-We can also make both `new` and regular calls to do the same, like this:
+Vi kan også få både `new` og almindelige kald til at gøre det samme, sådan her:
 
 ```js run
 function User(name) {
-  if (!new.target) { // if you run me without new
-    return new User(name); // ...I will add new for you
+  if (!new.target) { // hvis du kører mig uden new
+    return new User(name); // ...jeg vil tilføje new for dig
   }
 
   this.name = name;
 }
 
-let john = User("John"); // redirects call to new User
+let john = User("John"); // omdirigerer kald til new User
 alert(john.name); // John
 ```
 
-This approach is sometimes used in libraries to make the syntax more flexible. So that people may call the function with or without `new`, and it still works.
+Denne tilgang bruges nogle gange i biblioteker for at gøre syntaksen mere fleksibel. Så folk kan kalde funktionen med eller uden `new`, og det fungerer stadig.
+Det er nok ikke en god idé at bruge det overalt, fordi udeladelse af `new` gør det lidt mindre tydeligt, hvad der foregår. Med `new` ved vi alle, at det nye objekt bliver oprettet.
 
-Probably not a good thing to use everywhere though, because omitting `new` makes it a bit less obvious what's going on. With `new` we all know that the new object is being created.
+## Returnering fra konstruktører
 
-## Return from constructors
+Normalt har konstruktører ikke en `return`-sætning. Deres opgave er at skrive alt nødvendigt ind i `this`, og det bliver automatisk resultatet.
 
-Usually, constructors do not have a `return` statement. Their task is to write all necessary stuff into `this`, and it automatically becomes the result.
+Men hvis der er en `return`-sætning, så er reglen simpel:
 
-But if there is a `return` statement, then the rule is simple:
+- Hvis `return` kaldes med et objekt, så returneres objektet i stedet for `this`.
+- Hvis `return` kaldes med en primitiv, ignoreres primitivværdien.
 
-- If `return` is called with an object, then the object is returned instead of `this`.
-- If `return` is called with a primitive, it's ignored.
+Med andre ord, `return` med et objekt returnerer det objekt, i alle andre tilfælde returneres `this`.
 
-In other words, `return` with an object returns that object, in all other cases `this` is returned.
-
-For instance, here `return` overrides `this` by returning an object:
+For eksempel, her overskriver `return` `this` ved at returnere et objekt:
 
 ```js run
 function BigUser() {
 
   this.name = "John";
 
-  return { name: "Godzilla" };  // <-- returns this object
+  return { name: "Godzilla" };  // <-- returnerer dette objekt
 }
 
-alert( new BigUser().name );  // Godzilla, got that object
+alert( new BigUser().name );  // Godzilla, modtog objektet
 ```
 
-And here's an example with an empty `return` (or we could place a primitive after it, doesn't matter):
+Her er et eksempel med en tom `return` (eller vi kunne placere en primitiv efter det, det er ligegyldigt):
 
 ```js run
 function SmallUser() {
 
   this.name = "John";
 
-  return; // <-- returns this
+  return; // <-- returnerer this
 }
 
 alert( new SmallUser().name );  // John
 ```
 
-Usually constructors don't have a `return` statement. Here we mention the special behavior with returning objects mainly for the sake of completeness.
+Normalt har konstruktører ikke en `return`-sætning. Her nævner vi den specielle opførsel med at returnere objekter primært for fuldstændighedens skyld.
 
-````smart header="Omitting parentheses"
-By the way, we can omit parentheses after `new`:
+````smart header="Udeladelse af parenteser"
+Forresten, vi kan udelade parenteser efter `new`:
 
 ```js
-let user = new User; // <-- no parentheses
+let user = new User; // <-- ingen parenteser
 // same as
 let user = new User();
 ```
 
-Omitting parentheses here is not considered a "good style", but the syntax is permitted by specification.
+At udelade parenteser her betragtes ikke som en "god stil", men syntaksen er tilladt ifølge specifikationen.
 ````
 
-## Methods in constructor
+## Metoder i konstruktør
 
-Using constructor functions to create objects gives a great deal of flexibility. The constructor function may have parameters that define how to construct the object, and what to put in it.
+At bruge konstruktørfunktioner til at oprette objekter giver en stor grad af fleksibilitet. Konstruktørfunktionen kan have parametre, der definerer, hvordan objektet skal konstrueres, og hvad der skal puttes i det.
 
-Of course, we can add to `this` not only properties, but methods as well.
+Selvfølgelig kan vi tilføje til `this` ikke kun egenskaber, men også metoder.
 
-For instance, `new User(name)` below creates an object with the given `name` and the method `sayHi`:
+For eksempel opretter `new User(name)` nedenfor et objekt med det givne `name` og metoden `sayHi`:
 
 ```js run
 function User(name) {
   this.name = name;
 
   this.sayHi = function() {
-    alert( "My name is: " + this.name );
+    alert( "Mit navn er: " + this.name );
   };
 }
 
 *!*
 let john = new User("John");
 
-john.sayHi(); // My name is: John
+john.sayHi(); // Mit navn er: John
 */!*
 
 /*
@@ -213,19 +212,19 @@ john = {
 */
 ```
 
-To create complex objects, there's a more advanced syntax, [classes](info:classes), that we'll cover later.
+Til oprettelse af komplekse objekter er der en mere avanceret syntaks, [klasser](info:classes), som vi vil dække senere.
 
-## Summary
+## Opsummering
 
-- Constructor functions or, briefly, constructors, are regular functions, but there's a common agreement to name them with capital letter first.
-- Constructor functions should only be called using `new`. Such a call implies a creation of empty `this` at the start and returning the populated one at the end.
+- Konstruktørfunktioner, eller kort sagt konstruktører (constructors på engelsk), er almindelige funktioner, men der er en fælles aftale om at navngive dem med stort begyndelsesbogstav.
+- Konstruktørfunktioner bør kun kaldes ved hjælp af `new`. Et sådant kald indebærer oprettelsen af et tomt `this` i starten og returneringen af det udfyldte objekt til sidst.
 
-We can use constructor functions to make multiple similar objects.
+Vi kan bruge konstruktørfunktioner til at lave flere lignende objekter.
 
-JavaScript provides constructor functions for many built-in language objects: like `Date` for dates, `Set` for sets and others that we plan to study.
+JavaScript leverer konstruktørfunktioner til mange indbyggede sproglige objekter: som `Date` til datoer, `Set` til mængder og andre, som vi planlægger at studere.
 
-```smart header="Objects, we'll be back!"
-In this chapter we only cover the basics about objects and constructors. They are essential for learning more about data types and functions in the next chapters.
+```smart header="Objekter, vi kommer tilbage!"
+I dette kapitel dækker vi kun det grundlæggende om objekter og konstruktører. De er essentielle for at lære mere om datatyper og funktioner i de næste kapitler.
 
-After we learn that, we return to objects and cover them in-depth in the chapters <info:prototypes> and <info:classes>.
+Efter vi har lært det, vender vi tilbage til objekter og dækker dem grundigt i kapitlerne <info:prototypes> og <info:classes>.
 ```

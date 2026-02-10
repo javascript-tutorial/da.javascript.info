@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Create new Calculator
+# Opret en ny lommeregner
 
-Create a constructor function `Calculator` that creates objects with 3 methods:
+Opret en konstruktørfunktion `Calculator`, der skaber objekter med 3 metoder:
 
-- `read()` prompts for two values and saves them as object properties with names `a` and `b` respectively.
-- `sum()` returns the sum of these properties.
-- `mul()` returns the multiplication product of these properties.
+- `read()` spørger efter to værdier og gemmer dem som egenskaber med navnene `a` og `b`.
+- `sum()` returnerer summen af disse egenskaber.
+- `mul()` returnerer produktet af disse egenskaber.
 
-For instance:
+For eksempel:
 
 ```js
 let calculator = new Calculator();
