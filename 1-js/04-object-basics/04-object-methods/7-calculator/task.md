@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Create a calculator
+# Lav en lommeregner
 
-Create an object `calculator` with three methods:
+Opret et objekt `calculator` med tre metoder:
 
-- `read()` prompts for two values and saves them as object properties with names `a` and `b` respectively.
-- `sum()` returns the sum of saved values.
-- `mul()` multiplies saved values and returns the result.
+- `read()` spørger efter to værdier og gemmer dem som egenskaber med navnene `a` og `b`.
+- `sum()` returnerer summen af de gemte værdier.
+- `mul()` multiplicerer de gemte værdier og returnerer resultatet.
 
 ```js
 let calculator = {
-  // ... your code ...
+  // ... din kode ...
 };
 
 calculator.read();

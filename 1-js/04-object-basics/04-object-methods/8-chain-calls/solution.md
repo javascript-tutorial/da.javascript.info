@@ -1,4 +1,4 @@
-The solution is to return the object itself from every call.
+Løsningen er at returnere objektet selv fra hvert kald.
 
 ```js run demo
 let ladder = {
@@ -23,10 +23,10 @@ let ladder = {
   }
 };
 
-ladder.up().up().down().showStep().down().showStep(); // shows 1 then 0
+ladder.up().up().down().showStep().down().showStep(); // Viser 1 og derefter 0
 ```
 
-We also can write a single call per line. For long chains it's more readable:
+Vi kan også skrive et enkelt kald per linje. For lange kæder er det mere læsbart:
 
 ```js
 ladder
