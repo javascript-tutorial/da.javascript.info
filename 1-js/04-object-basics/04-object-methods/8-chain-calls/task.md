@@ -2,9 +2,9 @@ importance: 2
 
 ---
 
-# Chaining
+# Kæder
 
-There's a `ladder` object that allows you to go up and down:
+Der er et `ladder` objekt, der tillader dig at gå op og ned:
 
 ```js
 let ladder = {
@@ -15,13 +15,13 @@ let ladder = {
   down() { 
     this.step--;
   },
-  showStep: function() { // shows the current step
+  showStep: function() { // viser det nuværende trin
     alert( this.step );
   }
 };
 ```
 
-Now, if we need to make several calls in sequence, we can do it like this:
+Nu, hvis vi skal lave flere kald i rækkefølge, kan vi gøre det sådan her:
 
 ```js
 ladder.up();
@@ -32,10 +32,10 @@ ladder.down();
 ladder.showStep(); // 0
 ```
 
-Modify the code of `up`, `down`, and `showStep` to make the calls chainable, like this:
+Modificer `up`, `down` og `showStep` metoderne, så kald kan kædes sammen, som dette:
 
 ```js
-ladder.up().up().down().showStep().down().showStep(); // shows 1 then 0
+ladder.up().up().down().showStep().down().showStep(); // viser 1 og derefter 0
 ```
 
-Such an approach is widely used across JavaScript libraries.
+Sådan en tilgang er bredt anvendt i JavaScript-biblioteker.

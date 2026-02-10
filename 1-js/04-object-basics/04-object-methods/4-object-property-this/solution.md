@@ -1,6 +1,6 @@
-**Answer: an error.**
+**Svar: en fejl.**
 
-Try it:
+Prøv det:
 ```js run
 function makeUser() {
   return {
@@ -11,29 +11,29 @@ function makeUser() {
 
 let user = makeUser();
 
-alert( user.ref.name ); // Error: Cannot read property 'name' of undefined
+alert( user.ref.name ); // Fejl: Kan ikke læse egenskaben 'name' af undefined
 ```
 
-That's because rules that set `this` do not look at object definition. Only the moment of call matters.
+Dette sker fordi reglerne, der sætter `this`, ikke ser på objektdefinitionen. Kun øjeblikket for kaldet betyder noget.
 
-Here the value of `this` inside `makeUser()` is `undefined`, because it is called as a function, not as a method with "dot" syntax.
+Her er værdien af `this` inde i `makeUser()` `undefined`, fordi det kaldes som en funktion, ikke som en metode med "dot" syntaks.
 
-The value of `this` is one for the whole function, code blocks and object literals do not affect it.
+Værdien af `this` er den samme for hele funktionen, kodeblokke og objektlitteraler påvirker det ikke.
 
-So `ref: this` actually takes current `this` of the function.
+Så `ref: this` tager faktisk den nuværende `this` fra funktionen.
 
-We can rewrite the function and return the same `this` with `undefined` value: 
+Vi kan omskrive funktionen og returnere den samme `this` med værdien `undefined`: 
 
 ```js run
 function makeUser(){
-  return this; // this time there's no object literal
+  return this; // denne gang er der ikke noget object literal, så "this" er det samme som i funktionen
 }
 
-alert( makeUser().name ); // Error: Cannot read property 'name' of undefined
+alert( makeUser().name ); // Fejl: Kan ikke læse egenskaben 'name' af undefined
 ```
-As you can see the result of `alert( makeUser().name )` is the same as the result of `alert( user.ref.name )` from the previous example.
+Som du kan se, er resultatet af `alert( makeUser().name )` det samme som resultatet af `alert( user.ref.name )` fra det tidligere eksempel.
 
-Here's the opposite case:
+Her er det modsatte tilfælde:
 
 ```js run
 function makeUser() {
@@ -52,4 +52,4 @@ let user = makeUser();
 alert( user.ref().name ); // John
 ```
 
-Now it works, because `user.ref()` is a method. And the value of `this` is set to the object before dot `.`.
+Nu virker det, fordi `user.ref()` er en metode. Og værdien af `this` sættes til objektet før punktum `.`.
