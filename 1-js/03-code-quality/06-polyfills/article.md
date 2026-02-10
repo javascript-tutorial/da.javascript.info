@@ -1,89 +1,89 @@
 
-# Polyfills and transpilers
+# Polyfills og transpilers
 
-The JavaScript language steadily evolves. New proposals to the language appear regularly, they are analyzed and, if considered worthy, are appended to the list at <https://tc39.github.io/ecma262/> and then progress to the [specification](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/).
+Sproget JavaScript udvikler sig konstant. Nye forslag til sproget dukker regelmæssigt op, de bliver analyseret og, hvis de anses for værdige, tilføjes de til listen på <https://tc39.github.io/ecma262/> og går derefter videre til [specifikationen](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/).
 
-Teams behind JavaScript engines have their own ideas about what to implement first. They may decide to implement proposals that are in draft and postpone things that are already in the spec, because they are less interesting or just harder to do.
+Teams bag JavaScript-motorer har deres egne idéer om, hvad der skal implementeres først. De kan beslutte at implementere forslag, der stadig er i udkast, og udsætte ting, der allerede er i specifikationen, fordi de er mindre interessante eller bare sværere at gøre.
 
-So it's quite common for an engine to implement only part of the standard.
+Derfor er det ganske almindeligt, at en motor kun implementerer en del af standarden.
 
-A good page to see the current state of support for language features is <https://compat-table.github.io/compat-table/es6/> (it's big, we have a lot to study yet).
+En god side til at se den aktuelle støtte for sprogfunktioner er <https://compat-table.github.io/compat-table/es6/> (den er stor, vi har stadig meget at studere).
 
-As programmers, we'd like to use most recent features. The more good stuff - the better!
+Som programmører vil vi gerne bruge de nyeste funktioner. Jo flere gode ting - jo bedre!
 
-On the other hand, how to make our modern code work on older engines that don't understand recent features yet?
+På den anden side, hvordan får vi vores moderne kode til at fungere på ældre motorer, der endnu ikke forstår de nyeste funktioner?
 
-There are two tools for that:
+Der er to værktøjer til det:
 
 1. Transpilers.
 2. Polyfills.
 
-Here, in this chapter, our purpose is to get the gist of how they work, and their place in web development.
+Her, i dette kapitel, er vores formål at få en idé om, hvordan de fungerer, og deres plads i webudvikling.
 
 ## Transpilers
 
-A [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler) is a special piece of software that translates source code to another source code. It can parse ("read and understand") modern code and rewrite it using older syntax constructs, so that it'll also work in outdated engines.
+En [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler) er et specielt stykke software, der oversætter kildekode til en anden kildekode. Den kan analysere ("læse og forstå") moderne kode og omskrive den ved hjælp af ældre syntaks-konstruktioner, så den også fungerer i forældede motorer.
 
-E.g. JavaScript before year 2020 didn't have the "nullish coalescing operator" `??`. So, if a visitor uses an outdated browser, it may fail to understand the code like `height = height ?? 100`.
+F.eks. havde JavaScript før år 2020 ikke "nullish coalescing operator" `??`. Så hvis en besøgende bruger en forældet browser, kan den fejle i at forstå koden som `height = height ?? 100`.
 
-A transpiler would analyze our code and rewrite `height ?? 100` into `(height !== undefined && height !== null) ? height : 100`.
+En transpiler ville analysere vores kode og omskrive `height ?? 100` til `(height !== undefined && height !== null) ? height : 100`.
 
 ```js
-// before running the transpiler
+// før kørsel af transpiler
 height = height ?? 100;
 
-// after running the transpiler
+// efter kørsel af transpiler
 height = (height !== undefined && height !== null) ? height : 100;
 ```
 
-Now the rewritten code is suitable for older JavaScript engines.
+Nu er den omskrevne kode egnet til ældre JavaScript-motorer.
 
-Usually, a developer runs the transpiler on their own computer, and then deploys the transpiled code to the server.
+Som regel kører en udvikler transpiler på sin egen computer og uploader derefter den transpilerede kode til serveren.
 
-Speaking of names, [Babel](https://babeljs.io) is one of the most prominent transpilers out there.
+Når vi taler om navne, er [Babel](https://babeljs.io) en af de mest fremtrædende transpilers derude.
 
-Modern project build systems, such as [webpack](https://webpack.js.org/), provide a means to run a transpiler automatically on every code change, so it's very easy to integrate into the development process.
+Moderne projektbygge-systemer, såsom [Vite](https://vite.dev/), giver mulighed for at køre en transpiler automatisk ved hver kodeændring, så det er meget nemt at integrere i udviklingsprocessen.
 
 ## Polyfills
 
-New language features may include not only syntax constructs and operators, but also built-in functions.
+Nye sprogfunktioner kan inkludere ikke kun syntaks-konstruktioner og operatorer, men også indbyggede funktioner.
 
-For example, `Math.trunc(n)` is a function that "cuts off" the decimal part of a number, e.g `Math.trunc(1.23)` returns `1`.
+For eksempel, `Math.trunc(n)` er en funktion, der "skærer" decimaldelen af et tal væk, f.eks. `Math.trunc(1.23)` returnerer `1`.
 
-In some (very outdated) JavaScript engines, there's no `Math.trunc`, so such code will fail.
+I nogle (meget forældede) JavaScript-motorer findes der ikke `Math.trunc`, så sådan kode vil fejle.
 
-As we're talking about new functions, not syntax changes, there's no need to transpile anything here. We just need to declare the missing function.
+Da vi taler om nye funktioner, ikke syntaksændringer, er der ikke behov for at transpile noget her. Vi skal bare erklære den manglende funktion.
 
-A script that updates/adds new functions is called "polyfill". It "fills in" the gap and adds missing implementations.
+Et script, der opdaterer/tilføjer nye funktioner, kaldes en "polyfill". Det "fylder hullet ud" og tilføjer manglende implementeringer.
 
-For this particular case, the polyfill for `Math.trunc` is a script that implements it, like this:
+For dette særlige tilfælde er polyfillen for `Math.trunc` et script, der implementerer det, sådan her:
 
 ```js
-if (!Math.trunc) { // if no such function
-  // implement it
+if (!Math.trunc) { // hvis funktionen ikke findes
+  // implementer den
   Math.trunc = function(number) {
-    // Math.ceil and Math.floor exist even in ancient JavaScript engines
-    // they are covered later in the tutorial
+    // Math.ceil og Math.floor findes selv i gamle JavaScript-motorer
+    // de dækkes senere i tutorialen
     return number < 0 ? Math.ceil(number) : Math.floor(number);
   };
 }
 ```
 
-JavaScript is a highly dynamic language. Scripts may add/modify any function, even built-in ones.
+JavaScript er et meget dynamisk sprog. Scripts kan tilføje/ændre enhver funktion, selv indbyggede.
 
-One interesting polyfill library is [core-js](https://github.com/zloirock/core-js), which supports a wide range of features and allows you to include only the ones you need.
+Et interessant polyfill-bibliotek er [core-js](https://github.com/zloirock/core-js), som understøtter en bred vifte af funktioner og giver dig mulighed for kun at inkludere dem, du har brug for.
 
-## Summary
+## Opsummering
 
-In this chapter we'd like to motivate you to study modern and even "bleeding-edge" language features, even if they aren't yet well-supported by JavaScript engines.
+I dette kapitel vil vi gerne motivere dig til at studere moderne og endda "bleeding-edge" sprogfunktioner, selvom de endnu ikke er godt understøttet af JavaScript-motorer.
 
-Just don't forget to use a transpiler (if using modern syntax or operators) and polyfills (to add functions that may be missing). They'll ensure that the code works.
+Glem bare ikke at bruge en transpiler (hvis du bruger moderne syntaks eller operatorer) og polyfills (for at tilføje funktioner, der måske mangler). De sikrer, at koden fungerer.
 
-For example, later when you're familiar with JavaScript, you can setup a code build system based on [webpack](https://webpack.js.org/) with the [babel-loader](https://github.com/babel/babel-loader) plugin.
+For eksempel, senere når du er fortrolig med JavaScript, kan du opsætte et kodebygge-system baseret på [Vite](https://vite.dev/) der bruger  [esbuild](https://github.com/evanw/esbuild) plugin'et.
 
-Good resources that show the current state of support for various features:
-- <https://compat-table.github.io/compat-table/es6/> - for pure JavaScript.
-- <https://caniuse.com/> - for browser-related functions.
+Gode ressourcer, der viser den aktuelle støtte for forskellige funktioner:
+- <https://compat-table.github.io/compat-table/es6/> - for ren JavaScript.
+- <https://caniuse.com/> - for browser-relaterede funktioner.
 
-P.S. Google Chrome is usually the most up-to-date with language features, try it if a tutorial demo fails. Most tutorial demos work with any modern browser though.
+P.S. Google Chrome er normalt den mest opdaterede med sprogfunktioner, prøv den, hvis en tutorial-demo fejler. De fleste tutorial-demos fungerer dog med enhver moderne browser.
 
