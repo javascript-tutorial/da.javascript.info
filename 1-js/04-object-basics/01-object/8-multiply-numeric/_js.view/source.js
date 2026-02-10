@@ -1,13 +1,13 @@
 let menu = {
   width: 200,
   height: 300,
-  title: "My menu"
+  title: "Min menu"
 };
 
 
 function multiplyNumeric(obj) {
   
-  /* your code */
+  /* din kode */
 
 }
 

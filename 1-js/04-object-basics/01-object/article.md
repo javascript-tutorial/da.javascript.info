@@ -1,60 +1,60 @@
 
-# Objects
+# Objekter
 
-As we know from the chapter <info:types>, there are eight data types in JavaScript. Seven of them are called "primitive", because their values contain only a single thing (be it a string or a number or whatever).
+Som vi ved fra kapitlet <info:types>, er der otte datatyper i JavaScript. Syv af dem kaldes "primitive", fordi deres værdier kun indeholder en enkelt ting (det være sig en streng eller et tal eller hvad som helst).
 
-In contrast, objects are used to store keyed collections of various data and more complex entities. In JavaScript, objects penetrate almost every aspect of the language. So we must understand them first before going in-depth anywhere else.
+Modsat dem er objekter brugt til at gemme samlinger af forskellige data og mere komplekse enheder. I JavaScript gennemsyrer objekter næsten alle aspekter af sproget. Så vi skal forstå dem først, før vi går i dybden med noget andet.
 
-An object can be created with figure brackets `{…}` with an optional list of *properties*. A property is a "key: value" pair, where `key` is a string (also called a "property name"), and `value` can be anything.
+Et objekt kan oprettes med krøllede parenteser `{…}` med en valgfri liste af *egenskaber*. En egenskab er et "nøgle: værdi" par (key/value), hvor `nøgle` er en streng (også kaldet et "egenskabsnavn"), og `værdi` kan være hvad som helst.
 
-We can imagine an object as a cabinet with signed files. Every piece of data is stored in its file by the key. It's easy to find a file by its name or add/remove a file.
+Vi kan forestille os et objekt som et skab med underskrevne filer. Hver datadel gemmes i sin fil efter nøglen. Det er nemt at finde en fil efter dens navn eller tilføje/fjerne en fil.
 
 ![](object.svg)
 
-An empty object ("empty cabinet") can be created using one of two syntaxes:
+Et tomt objekt ("tomt skab") kan oprettes ved hjælp af en af to syntakser:
 
 ```js
-let user = new Object(); // "object constructor" syntax
-let user = {};  // "object literal" syntax
+let user = new Object(); // "objekt konstruktør" syntaks
+let user = {};  // "objekt literal" syntaks
 ```
 
 ![](object-user-empty.svg)
 
-Usually, the figure brackets `{...}` are used. That declaration is called an *object literal*.
+Normalt bruges krøllede parenteser `{...}`. Den erklæring kaldes en *objekt literal* - på dansk "objekt bogstaveligt".
 
-## Literals and properties
+## Literals og egenskaber
 
-We can immediately put some properties into `{...}` as "key: value" pairs:
+Vi kan straks putte nogle egenskaber (kaldet properties) ind i `{...}` som "nøgle: værdi" par:
 
 ```js
-let user = {     // an object
-  name: "John",  // by key "name" store value "John"
-  age: 30        // by key "age" store value 30
+let user = {     // et objekt
+  name: "John",  // under nøglen "name" gem værdien "John"
+  age: 30        // under nøglen "age" gem værdien 30
 };
 ```
 
-A property has a key (also known as "name" or "identifier") before the colon `":"` and a value to the right of it.
+En egenskab har en nøgle (engelsk "key") (også kendt som "navn" eller "identifikator") før kolon `":"` og en værdi til højre for den.
 
-In the `user` object, there are two properties:
+I `user` objektet er der to egenskaber:
 
-1. The first property has the name `"name"` and the value `"John"`.
-2. The second one has the name `"age"` and the value `30`.
+1. Den første egenskab har navnet `"name"` og værdien `"John"`.
+2. Den anden har navnet `"age"` og værdien `30`.
 
-The resulting `user` object can be imagined as a cabinet with two signed files labeled "name" and "age".
+Det resulterende `user` objekt kan forestilles som et skab med to underskrevne filer mærket "name" og "age".
 
 ![user object](object-user.svg)
 
-We can add, remove and read files from it at any time.
+Vi kan tilføje, fjerne og læse filer fra det når som helst.
 
-Property values are accessible using the dot notation:
+Egenskabsværdier er tilgængelige ved hjælp af punktnotation:
 
 ```js
-// get property values of the object:
+// hent værdier for egenskaber fra objektet:
 alert( user.name ); // John
 alert( user.age ); // 30
 ```
 
-The value can be of any type. Let's add a boolean one:
+Værdien kan være af enhver type. Lad os tilføje en boolean:
 
 ```js
 user.isAdmin = true;
@@ -62,7 +62,7 @@ user.isAdmin = true;
 
 ![user object 2](object-user-isadmin.svg)
 
-To remove a property, we can use the `delete` operator:
+For at fjerne en egenskab kan vi bruge `delete` operatoren:
 
 ```js
 delete user.age;
@@ -70,42 +70,42 @@ delete user.age;
 
 ![user object 3](object-user-delete.svg)
 
-We can also use multiword property names, but then they must be quoted:
+Vi kan også bruge egenskabsnavne med flere ord, men så skal de være i anførselstegn:
 
 ```js
 let user = {
   name: "John",
   age: 30,
-  "likes birds": true  // multiword property name must be quoted
+  "elsker fugle": true  // egenskaber der indeholder flere ord skal være i anførselstegn
 };
 ```
 
 ![](object-user-props.svg)
 
 
-The last property in the list may end with a comma:
+Den sidste egenskab i listen må ende med et komma, det er helt lovligt:
 ```js
 let user = {
   name: "John",
   age: 30*!*,*/!*
 }
 ```
-That is called a "trailing" or "hanging" comma. Makes it easier to add/remove/move around properties, because all lines become alike.
+Dette kaldes en "trailing" eller "hængende" komma. Det gør det nemmere at tilføje/fjerne/flytte egenskaber, fordi alle linjer bliver ens.
 
-## Square brackets
+## Firkantede parenteser
 
-For multiword properties, the dot access doesn't work:
+For egenskaber med flere ord virker punktnotation ikke:
 
 ```js run
 // this would give a syntax error
 user.likes birds = true
 ```
 
-JavaScript doesn't understand that. It thinks that we address `user.likes`, and then gives a syntax error when comes across unexpected `birds`.
+JavaScript forstår ikke den sætning. Det tror, at vi adresserer `user.elsker`, og så giver det en syntaksfejl, når det støder på det uventede `fugle`.
 
-The dot requires the key to be a valid variable identifier. That implies: contains no spaces, doesn't start with a digit and doesn't include special characters (`$` and `_` are allowed).
+Punktnotation kræver, at nøglen er en gyldig identifikator. Det indebærer: indeholder ingen mellemrum, starter ikke med et tal og indeholder ikke specialtegn (`$` og `_` er tilladt).
 
-There's an alternative "square bracket notation" that works with any string:
+Der findes et alternativ, "firkantede parenteser" notation (engelsk "square bracket notation"), som virker med enhver streng:
 
 ```js run
 let user = {};
@@ -120,9 +120,9 @@ alert(user["likes birds"]); // true
 delete user["likes birds"];
 ```
 
-Now everything is fine. Please note that the string inside the brackets is properly quoted (any type of quotes will do).
+Nu virker det. Bemærk, at strengen inde i parenteserne er korrekt sat i anførselstegn (enhver type anførselstegn kan bruges).
 
-Square brackets also provide a way to obtain the property name as the result of any expression -- as opposed to a literal string -- like from a variable as follows:
+Firkantede parenteser giver også en måde at få egenskabsnavnet som resultatet af et vilkårligt udtryk – i modsætning til en bogstavelig streng – for eksempel fra en variabel som følger:
 
 ```js
 let key = "likes birds";
@@ -131,9 +131,9 @@ let key = "likes birds";
 user[key] = true;
 ```
 
-Here, the variable `key` may be calculated at run-time or depend on the user input. And then we use it to access the property. That gives us a great deal of flexibility.
+Her kan variablen `key` blive beregnet under kørsel eller afhænge af brugerinput. Og så bruger vi den til at få adgang til egenskaben. Det giver os en stor fleksibilitet.
 
-For instance:
+For eksempel:
 
 ```js run
 let user = {
@@ -141,13 +141,13 @@ let user = {
   age: 30
 };
 
-let key = prompt("What do you want to know about the user?", "name");
+let key = prompt("Hvad vil du vide om brugeren?", "name");
 
-// access by variable
-alert( user[key] ); // John (if enter "name")
+// adgang via variabel
+alert( user[key] ); // John (hvis der indtastes "name")
 ```
 
-The dot notation cannot be used in a similar way:
+Punktnotation kan ikke bruges på en lignende måde:
 
 ```js run
 let user = {
@@ -159,40 +159,40 @@ let key = "name";
 alert( user.key ) // undefined
 ```
 
-### Computed properties
+### Beregnede egenskaber
 
-We can use square brackets in an object literal, when creating an object. That's called *computed properties*.
+Vi kan bruge firkantede parenteser i en objektbogstav, når vi opretter et objekt. Det kaldes *beregnede egenskaber* (engelsk "computed properties").
 
-For instance:
+For eksempel:
 
 ```js run
-let fruit = prompt("Which fruit to buy?", "apple");
+let fruit = prompt("Hvilken frugt vil du købe?", "apple");
 
 let bag = {
 *!*
-  [fruit]: 5, // the name of the property is taken from the variable fruit
+  [fruit]: 5, // navnet på egenskaben tages fra variablen fruit
 */!*
 };
 
 alert( bag.apple ); // 5 if fruit="apple"
 ```
 
-The meaning of a computed property is simple: `[fruit]` means that the property name should be taken from `fruit`.
+Meningen med en beregnet egenskab er enkel: `[fruit]` betyder, at navnet på egenskaben skal tages fra `fruit`.
 
-So, if a visitor enters `"apple"`, `bag` will become `{apple: 5}`.
+Så hvis en besøgende indtaster `"apple"`, vil `bag` blive `{apple: 5}`.
 
-Essentially, that works the same as:
+I bund og grund fungerer det på samme måde som:
 ```js run
-let fruit = prompt("Which fruit to buy?", "apple");
+let fruit = prompt("Hvilken frugt vil du købe?", "apple");
 let bag = {};
 
-// take property name from the fruit variable
+// tag egenskabsnavnet fra variablen fruit
 bag[fruit] = 5;
 ```
 
-...But looks nicer.
+...Men ser pænere ud.
 
-We can use more complex expressions inside square brackets:
+Vi kan bruge mere komplekse udtryk inde i firkantede parenteser:
 
 ```js
 let fruit = 'apple';
@@ -201,13 +201,13 @@ let bag = {
 };
 ```
 
-Square brackets are much more powerful than dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+Firkantede parenteser er meget mere kraftfulde end punktnotation. De tillader alle egenskabsnavne og variabler. Men de er også mere besværlige at skrive.
 
-So most of the time, when property names are known and simple, the dot is used. And if we need something more complex, then we switch to square brackets.
+Så det meste af tiden, når egenskabsnavne er kendte og simple, bruges punktnotation. Og hvis vi har brug for noget mere komplekst, så skifter vi til firkantede parenteser.
 
-## Property value shorthand
+## Egenskaber og "shorthand"
 
-In real code, we often use existing variables as values for property names.
+I kode bruger vi ofte eksisterende variabler som værdier for egenskabsnavne.
 
 For instance:
 
@@ -216,7 +216,7 @@ function makeUser(name, age) {
   return {
     name: name,
     age: age,
-    // ...other properties
+    // ...andre egenskaber
   };
 }
 
@@ -224,37 +224,37 @@ let user = makeUser("John", 30);
 alert(user.name); // John
 ```
 
-In the example above, properties have the same names as variables. The use-case of making a property from a variable is so common, that there's a special *property value shorthand* to make it shorter.
+I eksemplet ovenfor har egenskaberne samme navne som variablerne. Brugssituationen med at lave en egenskab ud fra en variabel er så almindelig, at der findes en særlig *property value shorthand* for at gøre det kortere.
 
-Instead of `name:name` we can just write `name`, like this:
+I stedet for `name:name` kan vi bare skrive `name`, sådan her:
 
 ```js
 function makeUser(name, age) {
 *!*
   return {
-    name, // same as name: name
-    age,  // same as age: age
+    name, // samme som name: name
+    age,  // samme som age: age
     // ...
   };
 */!*
 }
 ```
 
-We can use both normal properties and shorthands in the same object:
+Vi kan bruge både normale egenskaber og shorthand i det samme objekt:
 
 ```js
 let user = {
-  name,  // same as name:name
+  name,  // samme som name:name
   age: 30
 };
 ```
 
 
-## Property names limitations
+## Begrænsninger ved egenskabsnavne
 
-As we already know, a variable cannot have a name equal to one of the language-reserved words like "for", "let", "return" etc.
+Som vi allerede ved, kan en variabel ikke have et navn, der er lig med et af sprogets reserverede ord som "for", "let", "return" osv.
 
-But for an object property, there's no such restriction:
+Men for en objekt-egenskab er der ingen sådan begrænsning:
 
 ```js run
 // these properties are all right
@@ -267,107 +267,107 @@ let obj = {
 alert( obj.for + obj.let + obj.return );  // 6
 ```
 
-In short, there are no limitations on property names. They can be any strings or symbols (a special type for identifiers, to be covered later).
+Kort fortalt, er der ingen begrænsninger for egenskabsnavne. De kan være enhver streng eller symbol (en særlig type for identifikatorer, som vi vil dække senere).
 
-Other types are automatically converted to strings.
+Andre typer konverteres automatisk til strenge.
 
-For instance, a number `0` becomes a string `"0"` when used as a property key:
+For eksempel bliver et tal `0` til en streng `"0"`, når det bruges som en egenskabsnøgle:
 
 ```js run
 let obj = {
-  0: "test" // same as "0": "test"
+  0: "test" // samme som "0": "test"
 };
 
-// both alerts access the same property (the number 0 is converted to string "0")
+// begge alerts tilgår den samme egenskab (tallet 0 konverteres til strengen "0")
 alert( obj["0"] ); // test
-alert( obj[0] ); // test (same property)
+alert( obj[0] ); // test (samme egenskab)
 ```
 
-There's a minor gotcha with a special property named `__proto__`. We can't set it to a non-object value:
+Der er en helt særlig lille undtagelse med en særlig egenskab ved navn `__proto__`. Vi kan ikke sætte den til en ikke-objektværdi:
 
 ```js run
 let obj = {};
-obj.__proto__ = 5; // assign a number
-alert(obj.__proto__); // [object Object] - the value is an object, didn't work as intended
+obj.__proto__ = 5; // tildel et tal
+alert(obj.__proto__); // [object Object] - værdien er et objekt, virkede ikke som forventet
 ```
 
-As we see from the code, the assignment to a primitive `5` is ignored.
+Som vi kan se fra koden, ignoreres tildelingen til en primitiv `5`.
 
-We'll cover the special nature of `__proto__` in [subsequent chapters](info:prototype-inheritance), and suggest the [ways to fix](info:prototype-methods) such behavior.
+Vi vil dække den særlige natur af `__proto__` i [efterfølgende kapitler](info:prototype-inheritance), og foreslå [måder at rette](info:prototype-methods) sådan adfærd på.
 
-## Property existence test, "in" operator
+## Test af eksistensen af en egenskab, "in" operator
 
-A notable feature of objects in JavaScript, compared to many other languages, is that it's possible to access any property. There will be no error if the property doesn't exist!
+En særlig egenskab ved objekter i JavaScript, sammenlignet med mange andre sprog, er, at det er muligt at tilgå enhver egenskab. Der opstår ingen fejl, hvis egenskaben ikke findes!
 
-Reading a non-existing property just returns `undefined`. So we can easily test whether the property exists:
+At læse en ikke-eksisterende egenskab returnerer blot `undefined`. Så vi kan nemt teste, om egenskaben findes:
 
 ```js run
 let user = {};
 
-alert( user.noSuchProperty === undefined ); // true means "no such property"
+alert( user.noSuchProperty === undefined ); // true betyder at "no such property" egenskaben ikke findes
 ```
 
-There's also a special operator `"in"` for that.
+Der findes også en særlig operator `"in"` til det formål.
 
-The syntax is:
+Syntaksen er:
 ```js
 "key" in object
 ```
 
-For instance:
+For eksempel:
 
 ```js run
 let user = { name: "John", age: 30 };
 
-alert( "age" in user ); // true, user.age exists
-alert( "blabla" in user ); // false, user.blabla doesn't exist
+alert( "age" in user ); // true, user.age findes
+alert( "blabla" in user ); // false, user.blabla findes ikke
 ```
 
-Please note that on the left side of `in` there must be a *property name*. That's usually a quoted string.
+Bemærk at der skal stå et *egenskabsnavn* til venstre for `in`. Det er som regel en citeret streng.
 
-If we omit quotes, that means a variable should contain the actual name to be tested. For instance:
+Hvis vi udelader citationstegn, betyder det, at en variabel skal indeholde det faktiske navn, der skal testes. For eksempel:
 
 ```js run
 let user = { age: 30 };
 
 let key = "age";
-alert( *!*key*/!* in user ); // true, property "age" exists
+alert( key in user ); // true, egenskaben "age" findes
 ```
 
-Why does the `in` operator exist? Isn't it enough to compare against `undefined`?
+Hvorfor findes `in` operatoren? Er det ikke nok at sammenligne med `undefined`?
 
-Well, most of the time the comparison with `undefined` works fine. But there's a special case when it fails, but `"in"` works correctly.
+Det fungerer som regel fint at sammenligne med `undefined`. Men der er en særlig situation, hvor det fejler, men hvor `"in"` virker korrekt.
 
-It's when an object property exists, but stores `undefined`:
+Det er når en objekt-egenskab findes, men indeholder `undefined`:
 
 ```js run
 let obj = {
   test: undefined
 };
 
-alert( obj.test ); // it's undefined, so - no such property?
+alert( obj.test ); // Den er undefined, så - ingen sådan egenskab?
 
-alert( "test" in obj ); // true, the property does exist!
+alert( "test" in obj ); // true, egenskaben findes faktisk!
 ```
 
-In the code above, the property `obj.test` technically exists. So the `in` operator works right.
+I koden ovenfor eksisterer egenskaben `obj.test` teknisk set. Så `in` operatoren fungerer korrekt.
 
-Situations like this happen very rarely, because `undefined` should not be explicitly assigned. We mostly use `null` for "unknown" or "empty" values. So the `in` operator is an exotic guest in the code.
+Situationer som denne opstår meget sjældent, fordi `undefined` ikke bør tildeles eksplicit. Vi bruger for det meste `null` for "ukendte" eller "tomme" værdier. Så `in` operatoren er en eksotisk gæst i koden.
 
 
-## The "for..in" loop [#forin]
+## "for..in" løkken [#forin]
 
-To walk over all keys of an object, there exists a special form of the loop: `for..in`. This is a completely different thing from the `for(;;)` construct that we studied before.
+For at gennemløbe alle nøgler i et objekt, findes der en særlig form for løkke: `for..in`. Dette er en helt anden ting end `for(;;)`-konstruktionen, som vi studerede tidligere.
 
-The syntax:
+Syntaksen:
 
 ```js
 for (key in object) {
-  // executes the body for each key among object properties
+  // Udfører koden for hver nøgle blandt objektets egenskaber
 }
 ```
 
-For instance, let's output all properties of `user`:
+For eksempel, lad os udskrive alle egenskaber af `user`:
 
 ```js run
 let user = {
@@ -377,82 +377,83 @@ let user = {
 };
 
 for (let key in user) {
-  // keys
+  // nøgle
   alert( key );  // name, age, isAdmin
-  // values for the keys
+  // værdier for nøglerne
   alert( user[key] ); // John, 30, true
 }
 ```
 
-Note that all "for" constructs allow us to declare the looping variable inside the loop, like `let key` here.
+Bemærk at alle "for" konstruktioner tillader os at erklære løkkevariablen inde i løkken, som `let key` her.
 
-Also, we could use another variable name here instead of `key`. For instance, `"for (let prop in obj)"` is also widely used.
+Vi kunne også bruge et andet variabelnavn her i stedet for `key`. For eksempel er `"for (let prop in obj)"` også meget brugt.
 
-### Ordered like an object
+### Ordnet som et objekt
 
-Are objects ordered? In other words, if we loop over an object, do we get all properties in the same order they were added? Can we rely on this?
+Er objekter ordnet? Med andre ord, hvis vi løber igennem et objekt, får vi så alle egenskaber i den samme rækkefølge, som de blev tilføjet? Kan vi stole på dette?
 
-The short answer is: "ordered in a special fashion": integer properties are sorted, others appear in creation order. The details follow.
+Det korte svar er at de er "ordnet på en særlig måde": heltals-egenskaber sorteres, andre vises i oprettelsesrækkefølge. Detaljerne følger.
 
-As an example, let's consider an object with the phone codes:
+Som et eksempel, lad os betragte et objekt med telefonkoder:
 
 ```js run
 let codes = {
   "49": "Germany",
   "41": "Switzerland",
   "44": "Great Britain",
+  "45": "Denmark",
   // ..,
   "1": "USA"
 };
 
 *!*
 for (let code in codes) {
-  alert(code); // 1, 41, 44, 49
+  alert(code); // 1, 41, 44, 45, 49
 }
 */!*
 ```
 
-The object may be used to suggest a list of options to the user. If we're making a site mainly for a German audience then we probably want `49` to be the first.
+Objektet kan være ment til at foreslå en liste af muligheder til brugeren. Hvis vi laver et site primært for et tysk publikum, så vil vi sandsynligvis have `49` som den første.
 
-But if we run the code, we see a totally different picture:
+Men hvis vi kører koden, ser vi et helt andet billede:
 
-- USA (1) goes first
-- then Switzerland (41) and so on.
+- USA (1) går først
+- derefter Schweiz (41) og så videre.
 
-The phone codes go in the ascending sorted order, because they are integers. So we see `1, 41, 44, 49`.
+Telefonkoderne vises i stigende sorteret rækkefølge, fordi de er heltal. Så vi ser `1, 41, 44, 45, 49`.
 
-````smart header="Integer properties? What's that?"
-The "integer property" term here means a string that can be converted to-and-from an integer without a change.
+````smart header="Heltals-egenskaber? Hvad er det?"
+Begrebet "heltals-egenskab" her betyder en streng, der kan konverteres til og fra et heltal uden ændring.
 
-So, `"49"` is an integer property name, because when it's transformed to an integer number and back, it's still the same. But `"+49"` and `"1.2"` are not:
+Så `"49"` er et heltals-egenskabsnavn, fordi når det omdannes til et heltal og tilbage, er det stadig det samme. Men `"+49"` og `"1.2"` er ikke:
 
 ```js run
-// Number(...) explicitly converts to a number
-// Math.trunc is a built-in function that removes the decimal part
-alert( String(Math.trunc(Number("49"))) ); // "49", same, integer property
-alert( String(Math.trunc(Number("+49"))) ); // "49", not same "+49" ⇒ not integer property
-alert( String(Math.trunc(Number("1.2"))) ); // "1", not same "1.2" ⇒ not integer property
+// Number(...) Eksplicit konverterer til et tal
+// Math.trunc er en indbygget funktion, der fjerner decimaldelen
+alert( String(Math.trunc(Number("49"))) ); // "49", Samme, heltals-egenskab
+alert( String(Math.trunc(Number("+49"))) ); // "49", ikke samme "+49" ⇒ ikke heltals-egenskab
+alert( String(Math.trunc(Number("1.2"))) ); // "1", ikke samme "1.2" ⇒ ikke heltals-egenskab
 ```
 ````
 
-...On the other hand, if the keys are non-integer, then they are listed in the creation order, for instance:
+...Modsat, hvis nøglerne ikke er heltal, så vises de i oprettelsesrækkefølge, for eksempel:
 
 ```js run
 let user = {
   name: "John",
   surname: "Smith"
 };
-user.age = 25; // add one more
+user.age = 25; // tilføj en mere
 
 *!*
-// non-integer properties are listed in the creation order
+// nøgler der ikke er direkte konverterbare til heltal vises i oprettelsesrækkefølge
 */!*
 for (let prop in user) {
   alert( prop ); // name, surname, age
 }
 ```
 
-So, to fix the issue with the phone codes, we can "cheat" by making the codes non-integer. Adding a plus `"+"` sign before each code is enough.
+Så, hvis vi vil løse problemet med telefonkoderne, kan vi "snyde" ved at gøre koderne ikke-heltal. At tilføje et plus `"+"` tegn før hver kode er nok.
 
 Like this:
 
@@ -461,43 +462,44 @@ let codes = {
   "+49": "Germany",
   "+41": "Switzerland",
   "+44": "Great Britain",
+  "+45": "Denmark",
   // ..,
   "+1": "USA"
 };
 
 for (let code in codes) {
-  alert( +code ); // 49, 41, 44, 1
+  alert( +code ); // 49, 41, 44, 45, 1
 }
 ```
 
-Now it works as intended.
+Nu virker det som forventet.
 
-## Summary
+## Opsummering
 
-Objects are associative arrays with several special features.
+Objekter er associative arrays med flere særlige egenskaber.
 
-They store properties (key-value pairs), where:
-- Property keys must be strings or symbols (usually strings).
-- Values can be of any type.
+De gemmer egenskaber (nøgle-værdi par), hvor:
+- Egenskabsnøgler skal være strenge eller symboler (normalt strenge).
+- Værdier kan være af enhver type.
 
-To access a property, we can use:
-- The dot notation: `obj.property`.
-- Square brackets notation `obj["property"]`. Square brackets allow taking the key from a variable, like `obj[varWithKey]`.
+For at tilgå en egenskab kan vi bruge:
+- Punktnotation: `obj.property`.
+- Firkantede parenteser notation `obj["property"]`. Firkantede parenteser tillader at tage nøglen fra en variabel, som `obj[varWithKey]`.
 
-Additional operators:
-- To delete a property: `delete obj.prop`.
-- To check if a property with the given key exists: `"key" in obj`.
-- To iterate over an object: `for (let key in obj)` loop.
+Yderligere operatorer:
+- For at slette en egenskab: `delete obj.prop`.
+- For at tjekke om en egenskab med den givne nøgle findes: `"key" in obj`.
+- For at iterere over et objekt: `for (let key in obj)` løkke.
 
-What we've studied in this chapter is called a "plain object", or just `Object`.
+Det, vi har studeret i dette kapitel, kaldes et "almindeligt objekt" eller bare `Object`.
 
-There are many other kinds of objects in JavaScript:
+Der findes mange andre slags objekter i JavaScript:
 
-- `Array` to store ordered data collections,
-- `Date` to store the information about the date and time,
-- `Error` to store the information about an error.
-- ...And so on.
+- `Array` til at gemme ordnede datasamlinger,
+- `Date` til at gemme information om dato og tid,
+- `Error` til at gemme information om en fejl.
+- ...Og så videre.
 
-They have their special features that we'll study later. Sometimes people say something like "Array type" or "Date type", but formally they are not types of their own, but belong to a single "object" data type. And they extend it in various ways.
+De har deres særlige egenskaber, som vi vil studere senere. Nogle gange siger folk noget som "Array type" eller "Date type", men formelt er de ikke egne typer, men tilhører en enkelt "object" datatyper. Og de udvider den på forskellige måder.
 
-Objects in JavaScript are very powerful. Here we've just scratched the surface of a topic that is really huge. We'll be closely working with objects and learning more about them in further parts of the tutorial.
+Objekter i JavaScript er meget kraftfulde. Her har vi kun ridset overfladen af et emne, der er virkelig stort. Vi vil arbejde tæt med objekter og lære mere om dem i videre dele af tutorialen.

@@ -2,18 +2,18 @@ importance: 5
 
 ---
 
-# Check for emptiness
+# Tjek for tomhed
 
-Write the function `isEmpty(obj)` which returns `true` if the object has no properties, `false` otherwise.
+Skriv funktionen `isEmpty(obj)`, som returnerer `true`, hvis objektet ikke har nogen egenskaber, ellers `false`.
 
-Should work like that:
+Det skal fungere sådan her:
 
 ```js
 let schedule = {};
 
 alert( isEmpty(schedule) ); // true
 
-schedule["8:30"] = "get up";
+schedule["8:30"] = "stå op";
 
 alert( isEmpty(schedule) ); // false
 ```

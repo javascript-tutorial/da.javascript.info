@@ -1,1 +1,1 @@
-Just loop over the object and `return false` immediately if there's at least one property.
+Du kan bare løbe igennem objektet og `return false` med det samme, hvis der er mindst én egenskab. 
