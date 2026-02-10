@@ -1,38 +1,38 @@
-# Garbage collection
+# Oprydning af affald (Garbage collection)
 
-Memory management in JavaScript is performed automatically and invisibly to us. We create primitives, objects, functions... All that takes memory.
+Håndtering af hukommelse i JavaScript udføres automatisk og usynligt for os. Vi opretter primitive værdier, objekter, funktioner... Alt det optager hukommelse.
 
-What happens when something is not needed any more? How does the JavaScript engine discover it and clean it up?
+Hvad sker der, når noget ikke længere er nødvendigt? Hvordan opdager JavaScript-motoren det og rydder op?
 
-## Reachability
+## Tilgængelighed (Reachability)
 
-The main concept of memory management in JavaScript is *reachability*.
+Hovedkonceptet i hukommelsesstyring i JavaScript er *tilgængelighed*.
 
-Simply put, "reachable" values are those that are accessible or usable somehow. They are guaranteed to be stored in memory.
+Kort sagt er "tilgængelige" værdier dem, der på en eller anden måde er tilgængelige eller brugbare. De er garanteret at blive gemt i hukommelsen.
 
-1. There's a base set of inherently reachable values, that cannot be deleted for obvious reasons.
+1. Der findes et grundlæggende sæt af iboende tilgængelige værdier, som ikke kan slettes af åbenlyse grunde.
 
-    For instance:
+    For eksempel:
 
-    - The currently executing function, its local variables and parameters.
-    - Other functions on the current chain of nested calls, their local variables and parameters.
-    - Global variables.
-    - (there are some other, internal ones as well)
+    - Den aktuelt kørende funktion, dens lokale variable og parametre.
+    - Andre funktioner i den nuværende kæde af indlejrede kald, deres lokale variabler og parametre.
+    - Globale variabler.
+    - (der er også nogle andre, interne)
 
-    These values are called *roots*.
+    Disse værdier kaldes *roots*.
 
-2. Any other value is considered reachable if it's reachable from a root by a reference or by a chain of references.
+2. Alle andre værdier betragtes som tilgængelige, hvis de kan nås fra en root direkte via en reference eller en kæde af referencer.
 
-    For instance, if there's an object in a global variable, and that object has a property referencing another object, *that* object is considered reachable. And those that it references are also reachable. Detailed examples to follow.
+    For eksempel, hvis der er et objekt i en global variabel, og det objekt har en egenskab, der refererer til et andet objekt, betragtes *det* objekt som tilgængeligt. Og dem, det refererer til, er også tilgængelige. Detaljerede eksempler følger.
 
-There's a background process in the JavaScript engine that is called [garbage collector](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). It monitors all objects and removes those that have become unreachable.
+Der kører en proces i baggrunden i JavaScript-motoren, der kaldes [garbage collector](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). Den overvåger alle objekter og fjerner dem, der er blevet utilgængelige.
 
-## A simple example
+## Et simpelt eksempel
 
-Here's the simplest example:
+Her er det simpleste eksempel:
 
 ```js
-// user has a reference to the object
+// user har en reference til objektet
 let user = {
   name: "John"
 };
@@ -40,9 +40,9 @@ let user = {
 
 ![](memory-user-john.svg)
 
-Here the arrow depicts an object reference. The global variable `"user"` references the object `{name: "John"}` (we'll call it John for brevity). The `"name"` property of John stores a primitive, so it's painted inside the object.
+Her viser pilen en objektreference. Den globale variabel `"user"` refererer til objektet `{name: "John"}` (vi kalder det John for korthedens skyld). `"name"`-egenskaben af John indeholder en primitiv, så den er "malet inde i objektet".
 
-If the value of `user` is overwritten, the reference is lost:
+Hvis værdien af `user` overskrives, mistes referencen:
 
 ```js
 user = null;
@@ -50,14 +50,14 @@ user = null;
 
 ![](memory-user-john-lost.svg)
 
-Now John becomes unreachable. There's no way to access it, no references to it. Garbage collector will junk the data and free the memory.
+Nu bliver John utilgængelig. Der er ingen måde at få adgang til det på, ingen referencer til det. Garbage collector vil rydde op i dataene og frigøre hukommelsen.
 
-## Two references
+## To referencer
 
-Now let's imagine we copied the reference from `user` to `admin`:
+Lad os nu forestille os, at vi kopierede referencen fra `user` til `admin`:
 
 ```js
-// user has a reference to the object
+// user har en reference til objektet
 let user = {
   name: "John"
 };
@@ -69,16 +69,16 @@ let admin = user;
 
 ![](memory-user-john-admin.svg)
 
-Now if we do the same:
+Nu, hvis vi gør det samme:
 ```js
 user = null;
 ```
 
-...Then the object is still reachable via `admin` global variable, so it must stay in memory. If we overwrite `admin` too, then it can be removed.
+... så er objektet stadig tilgængeligt via den globale variabel `admin`, så det skal blive i hukommelsen. Hvis vi også overskriver `admin`, kan det fjernes.
 
-## Interlinked objects
+## Sammenkædede objekter
 
-Now a more complex example. The family:
+Nu et mere komplekst eksempel - familien:
 
 ```js
 function marry(man, woman) {
@@ -98,15 +98,15 @@ let family = marry({
 });
 ```
 
-Function `marry` "marries" two objects by giving them references to each other and returns a new object that contains them both.
+Funktionen `marry` "gifter" to objekter ved at give dem referencer til hinanden og returnerer et nyt objekt, der indeholder dem begge.
 
-The resulting memory structure:
+Den resulterende hukommelsesstruktur:
 
 ![](family.svg)
 
-As of now, all objects are reachable.
+Som det er nu, er alle objekter tilgængelige.
 
-Now let's remove two references:
+Lad os nu fjerne to referencer:
 
 ```js
 delete family.father;
@@ -115,98 +115,98 @@ delete family.mother.husband;
 
 ![](family-delete-refs.svg)
 
-It's not enough to delete only one of these two references, because all objects would still be reachable.
+Det er ikke nok kun at slette en af disse to referencer, fordi alle objekter stadig ville være tilgængelige.
 
-But if we delete both, then we can see that John has no incoming reference any more:
+Men hvis vi sletter begge, kan vi se, at John ikke længere har nogen indkommende referencer:
 
 ![](family-no-father.svg)
 
-Outgoing references do not matter. Only incoming ones can make an object reachable. So, John is now unreachable and will be removed from the memory with all its data that also became unaccessible.
+Udgående referencer betyder ikke noget. Kun indkommende kan gøre et objekt tilgængeligt. Så John er nu utilgængelig og vil blive fjernet fra hukommelsen sammen med alle dets data, der også blev utilgængelige.
 
-After garbage collection:
+Efter garbage collection:
 
 ![](family-no-father-2.svg)
 
-## Unreachable island
+## Utilgængelig ø
 
-It is possible that the whole island of interlinked objects becomes unreachable and is removed from the memory.
+Det er muligt, at hele øen af sammenkædede objekter bliver utilgængelig og fjernet fra hukommelsen.
 
-The source object is the same as above. Then:
+Selve kildeobjektet er det samme som ovenfor. Derefter sletter vi referencen til det:
 
 ```js
 family = null;
 ```
 
-The in-memory picture becomes:
+Billedet af den indre hukommelse bliver nu:
 
 ![](family-no-family.svg)
 
-This example demonstrates how important the concept of reachability is.
+Dette eksempel demonstrerer, hvor vigtigt begrebet tilgængelighed er.
 
-It's obvious that John and Ann are still linked, both have incoming references. But that's not enough.
+Det er indlysende, at John og Ann stadig er forbundet, begge har indkommende referencer. Men det er ikke nok.
 
-The former `"family"` object has been unlinked from the root, there's no reference to it any more, so the whole island becomes unreachable and will be removed.
+Det tidligere `"family"`-objekt er blevet afkoblet fra roden, der er ikke længere nogen reference til det, så hele øen bliver utilgængelig og vil blive fjernet.
 
-## Internal algorithms
+## Interne algoritmer
 
-The basic garbage collection algorithm is called "mark-and-sweep".
+Den grundlæggende garbage collection-algoritme kaldes "mark-and-sweep".
 
-The following "garbage collection" steps are regularly performed:
+Følgende "garbage collection"-trin udføres regelmæssigt:
 
-- The garbage collector takes roots and "marks" (remembers) them.
-- Then it visits and "marks" all references from them.
-- Then it visits marked objects and marks *their* references. All visited objects are remembered, so as not to visit the same object twice in the future.
-- ...And so on until every reachable (from the roots) references are visited.
-- All objects except marked ones are removed.
+- Garbage collectoren tager rødderne (roots) og "markerer" (husker) dem.
+- Derefter besøger den og "markerer" alle referencer fra dem.
+- Derefter besøger den markerede objekter og markerer *deres* referencer. Alle besøgte objekter huskes, så de ikke besøges to gange i fremtiden.
+- ...Og så videre, indtil alle tilgængelige (fra rødderne) referencer er besøgt.
+- Alle objekter undtagen de markerede fjernes.
 
-For instance, let our object structure look like this:
+For eksempel, lad vores objektstruktur se sådan ud:
 
 ![](garbage-collection-1.svg)
 
-We can clearly see an "unreachable island" to the right side. Now let's see how "mark-and-sweep" garbage collector deals with it.
+Vi kan tydeligt se en "utilgængelig ø" til højre. Lad os nu se, hvordan "mark-and-sweep" garbage collectoren håndterer det.
 
-The first step marks the roots:
+Det første trin markerer rødderne:
 
 ![](garbage-collection-2.svg)
 
-Then we follow their references and mark referenced objects:
+Derefter følger vi deres referencer og markerer de refererede objekter:
 
 ![](garbage-collection-3.svg)
 
-...And continue to follow further references, while possible:
+...Og fortsætter med at følge yderligere referencer, så længe det er muligt:
 
 ![](garbage-collection-4.svg)
 
-Now the objects that could not be visited in the process are considered unreachable and will be removed:
+Nu betragtes de objekter, der ikke kunne besøges i processen, som utilgængelige og vil blive fjernet:
 
 ![](garbage-collection-5.svg)
 
-We can also imagine the process as spilling a huge bucket of paint from the roots, that flows through all references and marks all reachable objects. The unmarked ones are then removed.
+Vi kan også forestille os processen som at spilde en stor spand maling fra rødderne, der flyder gennem alle referencer og markerer alle tilgængelige objekter. De umarkerede fjernes derefter.
 
-That's the concept of how garbage collection works. JavaScript engines apply many optimizations to make it run faster and not introduce any delays into the code execution.
+Dette er konceptet for, hvordan garbage collection fungerer. JavaScript-motorer anvender mange optimeringer for at få det til at køre hurtigere og undgå at introducere forsinkelser i kodeudførelsen.
 
-Some of the optimizations:
+Nogle af optimeringerne:
 
-- **Generational collection** -- objects are split into two sets: "new ones" and "old ones". In typical code, many objects have a short life span: they appear, do their job and die fast, so it makes sense to track new objects and clear the memory from them if that's the case. Those that survive for long enough, become "old" and are examined less often.
-- **Incremental collection** -- if there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine splits the whole set of existing objects into multiple parts. And then clear these parts one after another. There are many small garbage collections instead of a total one. That requires some extra bookkeeping between them to track changes, but we get many tiny delays instead of a big one.
-- **Idle-time collection** -- the garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
+- **Generational collection** -- objekter opdeles i to sæt: "nye" og "gamle". I typisk kode har mange objekter en kort levetid: de optræder, udfører deres opgave og dør hurtigt, så det giver mening at spore nye objekter og rydde hukommelsen for dem, hvis det er tilfældet. De, der overlever længe nok, bliver "gamle" og undersøges sjældnere.
+- **Incremental collection** -- hvis der er mange objekter, og vi prøver at gennemgå og markere hele objektmængden på én gang, kan det tage noget tid og introducere synlige forsinkelser i udførelsen. Så motoren opdeler hele mængden af eksisterende objekter i flere dele. Og rydder derefter disse dele én efter én. Der er mange små garbage collections i stedet for én total. Det kræver noget ekstra bogføring imellem dem for at spore ændringer, men vi får mange små forsinkelser i stedet for én stor.
+- **Idle-time collection** -- garbage collectoren prøver kun at køre, mens CPU'en er inaktiv, for at reducere den mulige effekt på udførelsen.
 
-There exist other optimizations and flavours of garbage collection algorithms. As much as I'd like to describe them here, I have to hold off, because different engines implement different tweaks and techniques. And, what's even more important, things change as engines develop, so studying deeper "in advance", without a real need is probably not worth that. Unless, of course, it is a matter of pure interest, then there will be some links for you below.
+Der findes andre optimeringer og varianter af garbage collection-algoritmer. Vi kunne bruge mere tid på at beskrive dem, men stopper for nu. Forskellige motorer implementerer også forskellige justeringer og teknikker. Og, hvad der er endnu vigtigere, ting ændrer sig, efterhånden som motorer udvikler sig, så at studere dybere "på forhånd", uden et reelt behov, er sandsynligvis ikke det værd. Medmindre det selvfølgelig er et spørgsmål om ren interesse, så vil der være nogle links til dig nedenfor.
 
-## Summary
+## Opsummering
 
-The main things to know:
+De vigtigste ting at vide:
 
-- Garbage collection is performed automatically. We cannot force or prevent it.
-- Objects are retained in memory while they are reachable.
-- Being referenced is not the same as being reachable (from a root): a pack of interlinked objects can become unreachable as a whole, as we've seen in the example above.
+- Garbage collection udføres automatisk. Vi kan ikke tvinge eller forhindre det.
+- Objekter bevares i hukommelsen, så længe de er tilgængelige.
+- At blive refereret er ikke det samme som at være tilgængelig (fra en rod): en gruppe af indbyrdes forbundne objekter kan blive utilgængelige som helhed, som vi har set i eksemplet ovenfor.
 
-Modern engines implement advanced algorithms of garbage collection.
+Moderne motorer implementerer avancerede algoritmer for garbage collection.
 
-A general book "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones et al) covers some of them.
+En generel bog "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones et al) dækker nogle af dem.
 
-If you are familiar with low-level programming, more detailed information about V8's garbage collector is in the article [A tour of V8: Garbage Collection](https://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+Hvis du en dag bliver fortrolig med lavniveauprogrammering, findes mere detaljerede oplysninger om V8's garbage collector i artiklen [A tour of V8: Garbage Collection](https://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
 
-The [V8 blog](https://v8.dev/) also publishes articles about changes in memory management from time to time. Naturally, to learn more about garbage collection, you'd better prepare by learning about V8 internals in general and read the blog of [Vyacheslav Egorov](https://mrale.ph) who worked as one of the V8 engineers. I'm saying: "V8", because it is best covered by articles on the internet. For other engines, many approaches are similar, but garbage collection differs in many aspects.
+[V8-bloggen](https://v8.dev/) offentliggør også artikler om ændringer i hukommelsesstyring fra tid til anden. Naturligvis, for at lære mere om garbage collection, bør du forberede dig ved at lære om V8-internals generelt og læse bloggen af [Vyacheslav Egorov](https://mrale.ph), som arbejdede som en af V8-ingeniørerne. Jeg siger: "V8", fordi det er bedst dækket af artikler på internettet. For andre motorer er mange tilgange lignende, men garbage collection adskiller sig på mange måder.
 
-In-depth knowledge of engines is good when you need low-level optimizations. It would be wise to plan that as the next step after you're familiar with the language.
+Dyb kendskab til motorer er godt, når du har brug for lavniveauoptimeringer. Det kan være klogt at planlægge det som det næste skridt, efter du er fortrolig med selve sproget.
