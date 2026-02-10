@@ -1,1 +1,73 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="359" height="143" viewBox="0 0 359 143"><defs><style>@import url(https://fonts.googleapis.com/css?family=Open+Sans:bold,italic,bolditalic%7CPT+Mono);@font-face{font-family:&apos;PT Mono&apos;;font-weight:700;font-style:normal;src:local(&apos;PT MonoBold&apos;),url(/font/PTMonoBold.woff2) format(&apos;woff2&apos;),url(/font/PTMonoBold.woff) format(&apos;woff&apos;),url(/font/PTMonoBold.ttf) format(&apos;truetype&apos;)}</style></defs><g id="combined" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g id="variable-copy-value.svg"><g id="noun_1211_cc-+-Message" transform="translate(11 6)"><g id="noun_1211_cc"><path id="Shape" fill="#DBAF88" d="M17 37.196h112.558v42.95c0 .373-.079.862-.279 1.294-.2.433-16.574 35.56-16.574 35.56V62.64l16.854-25.444L148 9H35.44L17 37.196zM17 66V38L2 66"/><g id="Rectangle-5-+-&quot;World!&quot;" transform="translate(15)"><path id="Rectangle-5" fill="#FBF2EC" stroke="#AF6E24" stroke-width="2" d="M18.861 1.809l53.14 56.985L55.14 74.52 1.999 17.533 18.86 1.81z"/><text id="&quot;Hello!&quot;" fill="#AF6E24" font-family="OpenSans-Bold, Open Sans" font-size="14" font-weight="bold" transform="rotate(47 38.202 38.946)"><tspan x="2.822" y="43.482">&quot;Hello!&quot;</tspan></text></g><path id="Shape" fill="#DBAF88" d="M0 68v54.73c0 3.42 1.484 5.27 4.387 5.27h100.086c3.122 0 5.527-2.548 5.527-3.476V68H0z"/></g><text id="message" fill="#FFF" font-family="OpenSans-Bold, Open Sans" font-size="18" font-weight="bold"><tspan x="17" y="105">message</tspan></text></g><g id="Group" transform="translate(210 6)"><path id="Shape" fill="#DBAF88" d="M17 37.196h113.417v42.95c0 .373-.08.862-.28 1.294-.202.433-16.702 35.56-16.702 35.56V62.64l16.983-25.444L149 9H35.582L17 37.196z"/><path id="Shape" fill="#DBAF88" d="M18 66V38L2 66"/><g id="Rectangle-5-+-&quot;World!&quot;" transform="translate(15)"><path id="Rectangle-5" fill="#FBF2EC" stroke="#AF6E24" stroke-width="2" d="M19.117 1.8l53.867 56.994-17.101 15.734L2.016 17.534 19.117 1.799z"/><text id="&quot;Hello!&quot;" fill="#AF6E24" font-family="OpenSans-Bold, Open Sans" font-size="14" font-weight="bold" transform="rotate(47 38.162 37.693)"><tspan x="2.782" y="42.23">&quot;Hello!&quot;</tspan></text></g><path id="Shape" fill="#DBAF88" d="M0 68v54.73c0 3.42 1.497 5.27 4.427 5.27h100.996c3.15 0 5.577-2.548 5.577-3.476V68H0z"/><text id="phrase" fill="#FFF" font-family="OpenSans-Bold, Open Sans" font-size="18" font-weight="bold"><tspan x="25" y="105">phrase</tspan></text></g></g></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 359 143">
+  <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #fbf2ec;
+        stroke: #af6e24;
+        stroke-width: 2px;
+      }
+
+      .st0, .st1 {
+        fill-rule: evenodd;
+      }
+
+      .st2, .st3, .st4 {
+        isolation: isolate;
+      }
+
+      .st3 {
+        fill: #fff;
+        font-size: 18px;
+      }
+
+      .st3, .st4 {
+        font-family: OpenSans-Bold, 'Open Sans';
+        font-weight: 700;
+      }
+
+      .st4 {
+        fill: #af6e24;
+        font-size: 14px;
+      }
+
+      .st1 {
+        fill: #dbaf88;
+      }
+    </style>
+  </defs>
+  <g id="combined">
+    <g id="variable-copy-value.svg">
+      <g id="noun_x5F_1211_x5F_cc-_x2B_-Message">
+        <g id="noun_1211_cc">
+          <path id="Shape" class="st1" d="M28,43.2h112.56v42.95c0,.37-.08.86-.28,1.29-.2.43-16.57,35.56-16.57,35.56v-54.36l16.85-25.44,18.44-28.2H46.44l-18.44,28.2ZM28,72v-28l-15,28"/>
+          <g id="Rectangle-5-_x2B_-_x22_World_x21__x22_">
+            <path id="Rectangle-5" class="st0" d="M44.86,7.81l53.14,56.98-16.86,15.73L28,23.53l16.86-15.72h0Z"/>
+            <g id="_x22_Hello_x21__x22_" class="st2">
+              <text class="st4" transform="translate(45.76 32.16) rotate(47)"><tspan x="0" y="0">&quot;Hej!&quot;</tspan></text>
+            </g>
+          </g>
+          <path id="Shape1" data-name="Shape" class="st1" d="M11,74v54.73c0,3.42,1.48,5.27,4.39,5.27h100.09c3.12,0,5.53-2.55,5.53-3.48v-56.52H11Z"/>
+        </g>
+        <g id="message" class="st2">
+          <text class="st3" transform="translate(28 111)"><tspan x="0" y="0">message</tspan></text>
+        </g>
+      </g>
+      <g id="Group">
+        <path id="Shape2" data-name="Shape" class="st1" d="M227,43.2h113.42v42.95c0,.37-.08.86-.28,1.29-.2.43-16.7,35.56-16.7,35.56v-54.36l16.98-25.44,18.58-28.2h-113.42l-18.58,28.2Z"/>
+        <path id="Shape3" data-name="Shape" class="st1" d="M228,72v-28l-16,28"/>
+        <g id="Rectangle-5-_x2B_-_x22_World_x21__x22_1" data-name="Rectangle-5-_x2B_-_x22_World_x21__x22_">
+          <path id="Rectangle-51" data-name="Rectangle-5" class="st0" d="M244.12,7.8l53.87,56.99-17.1,15.73-53.87-56.99,17.1-15.74h0Z"/>
+          <g id="_x22_Hello_x21__x22_1" data-name="_x22_Hello_x21__x22_" class="st2">
+            <text class="st4" transform="translate(244.71 30.91) rotate(47)"><tspan x="0" y="0">&quot;Hej!&quot;</tspan></text>
+          </g>
+        </g>
+        <path id="Shape4" data-name="Shape" class="st1" d="M210,74v54.73c0,3.42,1.5,5.27,4.43,5.27h101c3.15,0,5.58-2.55,5.58-3.48v-56.52h-111Z"/>
+        <g id="phrase" class="st2">
+          <text class="st3" transform="translate(235 111)"><tspan x="0" y="0">phrase</tspan></text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
