@@ -1,3 +1,3 @@
-# Data types
+# Data typer
 
-More data structures and more in-depth study of the types.
+Mere om datastrukturer og en mere dybdegående undersøgelse af typerne.
