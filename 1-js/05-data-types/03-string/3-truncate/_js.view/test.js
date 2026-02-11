@@ -1,15 +1,15 @@
-describe("truncate", function() {
-  it("truncate the long string to the given length (including the ellipsis)", function() {
+describe("truncate", function () {
+  it("Afkort den lange streng til den givne længde (inklusive ellipsen)", function () {
     assert.equal(
-      truncate("What I'd like to tell on this topic is:", 20),
-      "What I'd like to te…"
+      truncate("Det jeg vil fortælle om emnet er følgende:", 20),
+      "Det jeg vil fortæll…"
     );
   });
 
-  it("doesn't change short strings", function() {
+  it("Ændrer ikke korte strenge", function () {
     assert.equal(
-      truncate("Hi everyone!", 20),
-      "Hi everyone!"
+      truncate("Hej alle sammen!", 20),
+      "Hej alle sammen!"
     );
   });
 

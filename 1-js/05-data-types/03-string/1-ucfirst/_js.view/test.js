@@ -1,9 +1,9 @@
-describe("ucFirst", function() {
-  it('Uppercases the first symbol', function() {
+describe("ucFirst", function () {
+  it('Stort begyndelsesbogstav', function () {
     assert.strictEqual(ucFirst("john"), "John");
   });
 
-  it("Doesn't die on an empty string", function() {
+  it("Fejler ikke ved en tom streng", function () {
     assert.strictEqual(ucFirst(""), "");
   });
 });

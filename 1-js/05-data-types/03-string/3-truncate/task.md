@@ -2,16 +2,16 @@ importance: 5
 
 ---
 
-# Truncate the text
+# Afkort teksten
 
-Create a function `truncate(str, maxlength)` that checks the length of the `str` and, if it exceeds `maxlength` -- replaces the end of `str` with the ellipsis character `"…"`, to make its length equal to `maxlength`.
+Opret en funktion `truncate(str, maxlength)`, der tjekker længden af `str` og, hvis den overskrider `maxlength` -- erstatter slutningen af `str` med ellipsis-tegnet `"…"`, så dens længde bliver lig med `maxlength`.
 
-The result of the function should be the truncated (if needed) string.
+Resultatet af funktionen skal være den afkortede (hvis nødvendigt) streng.
 
-For instance:
+For eksempel:
 
 ```js
-truncate("What I'd like to tell on this topic is:", 20) == "What I'd like to te…"
+truncate("Det jeg vil fortælle om emnet er følgende:", 20) == "Det jeg vil fortæll…"
 
-truncate("Hi everyone!", 20) == "Hi everyone!"
+truncate("Hej alle sammen!", 20) == "Hej alle sammen!"
 ```
