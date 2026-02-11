@@ -1,24 +1,24 @@
 
-Try running it:
+Prøv at køre det:
 
 ```js run
-let str = "Hello";
+let str = "Hej";
 
 str.test = 5; // (*)
 
 alert(str.test);
 ```
 
-Depending on whether you have `use strict` or not, the result may be:
-1. `undefined` (no strict mode)
-2. An error (strict mode).
+Afhængigt af om du har `use strict` eller ej, kan resultatet være:
+1. `undefined` (ingen strict mode)
+2. En fejl (strict mode).
 
-Why? Let's replay what's happening at line `(*)`:
+Hvorfor? Lad os gennemgå, hvad der sker på linje `(*)`:
 
-1. When a property of `str` is accessed, a "wrapper object" is created.
-2. In strict mode, writing into it is an error.
-3. Otherwise, the operation with the property is carried on, the object gets the `test` property, but after that the "wrapper object" disappears, so in the last line `str` has no trace of the property.
+1. Når en egenskab af `str` tilgås, oprettes der et "wrapper-objekt".
+2. I strict mode er det en fejl at skrive til det.
+3. Ellers fortsætter operationen med egenskaben, objektet får `test`-egenskaben, men efterfølgende forsvinder "wrapper-objektet", så i den sidste linje har `str` ingen spor af egenskaben.
 
-**This example clearly shows that primitives are not objects.**
+**Dette eksempel viser tydeligt, at primitivtyper ikke er objekter.**
 
-They can't store additional data.
+De kan ikke gemme yderligere data.
