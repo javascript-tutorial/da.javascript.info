@@ -2,14 +2,14 @@ importance: 2
 
 ---
 
-# A random integer from min to max
+# Et tilfældigt heltal fra min til max
 
-Create a function `randomInteger(min, max)` that generates a random *integer* number from `min` to `max` including both `min` and `max` as possible values.
+Skriv en funktion `randomInteger(min, max)` der genererer et tilfældigt *heltal* fra `min` til `max` inklusive både `min` og `max` som mulige værdier.
 
-Any number from the interval `min..max` must appear with the same probability.
+Enhver værdi fra intervallet `min..max` skal have samme sandsynlighed.
 
 
-Examples of its work:
+Eksempler på hvordan den skal virke:
 
 ```js
 alert( randomInteger(1, 5) ); // 1
@@ -17,4 +17,4 @@ alert( randomInteger(1, 5) ); // 3
 alert( randomInteger(1, 5) ); // 5
 ```
 
-You can use the solution of the [previous task](info:task/random-min-max) as the base.
+Du kan bruge løsningen fra [forrige opgave](info:task/random-min-max) som base.

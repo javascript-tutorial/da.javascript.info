@@ -2,10 +2,10 @@ importance: 5
 
 ---
 
-# Sum numbers from the visitor
+# Læg to tal sammen fra brugeren
 
-Create a script that prompts the visitor to enter two numbers and then shows their sum.
+Opret et script, der beder brugeren om at indtaste to tal og derefter viser deres sum.
 
 [demo]
 
-P.S. There is a gotcha with types.
+P.S. Der er en lille detalje med datatyper.

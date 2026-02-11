@@ -2,21 +2,21 @@ importance: 4
 
 ---
 
-# Why 6.35.toFixed(1) == 6.3?
+# Hvorfor er 6.35.toFixed(1) == 6.3?
 
-According to the documentation `Math.round` and `toFixed` both round to the nearest number: `0..4` lead down while `5..9` lead up.
+Ifølge dokumentationen afrunder både `Math.round` og `toFixed` til det nærmeste tal: `0..4` runder ned, mens `5..9` runder op.
 
-For instance:
+For eksempel:
 
 ```js run
 alert( 1.35.toFixed(1) ); // 1.4
 ```
 
-In the similar example below, why is `6.35` rounded to `6.3`, not `6.4`?
+I det lignende eksempel nedenfor, hvorfor afrundes `6.35` til `6.3` og ikke `6.4`?
 
 ```js run
 alert( 6.35.toFixed(1) ); // 6.3
 ```
 
-How to round `6.35` the right way?
+Hvordan kan vi runde `6.35` korrekt?
 
