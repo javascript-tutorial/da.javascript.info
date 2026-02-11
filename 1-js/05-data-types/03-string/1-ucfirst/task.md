@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Uppercase the first character
+# Stort begyndelsesbogstav
 
-Write a function `ucFirst(str)` that returns the string `str` with the uppercased first character, for instance:
+Skriv en funktion `ucFirst(str)`, der returnerer strengen `str` med stort begyndelsesbogstav, for eksempel:
 
 ```js
 ucFirst("john") == "John";

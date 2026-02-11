@@ -2,11 +2,11 @@ importance: 4
 
 ---
 
-# Extract the money
+# Udtræk beløbet
 
-We have a cost in the form `"$120"`. That is: the dollar sign goes first, and then the number.
+Vi har en pris i formen `"$120"`. Det vil sige: dollartegnet kommer først, og derefter tallet.
 
-Create a function `extractCurrencyValue(str)` that would extract the numeric value from such string and return it. 
+Opret en funktion `extractCurrencyValue(str)`, der udtrækker den numeriske værdi fra sådan en streng og returnerer den. 
 
 The example:
 
