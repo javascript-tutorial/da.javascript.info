@@ -1,6 +1,6 @@
-That's because `i` would never equal `10`.
+Det er fordi `i` aldrig ville være præcis `10`.
 
-Run it to see the *real* values of `i`:
+Kør det for at se de *rigtige* værdier af `i`:
 
 ```js run
 let i = 0;
@@ -10,8 +10,8 @@ while (i < 11) {
 }
 ```
 
-None of them is exactly `10`.
+Ingen af dem er præcis `10`.
 
-Such things happen because of the precision losses when adding fractions like `0.2`.
+Sådanne ting sker på grund af præcisionstab, når man lægger brøker som `0.2` sammen.
 
-Conclusion: evade equality checks when working with decimal fractions.
+Konklusion: undgå lighedschecks, når du arbejder med decimale brøker.

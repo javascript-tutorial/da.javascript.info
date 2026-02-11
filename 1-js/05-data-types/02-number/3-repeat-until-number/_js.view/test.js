@@ -1,36 +1,36 @@
-beforeEach(function() {
+beforeEach(function () {
   sinon.stub(window, "prompt");
 });
 
-afterEach(function() {
+afterEach(function () {
   prompt.restore();
 });
 
-describe("readNumber", function() {
+describe("readNumber", function () {
 
-  it("if a number, returns it", function() {
+  it("hvis et tal, returnerer det", function () {
     prompt.returns("123");
     assert.strictEqual(readNumber(), 123);
   });
 
-  it("if 0, returns it", function() {
+  it("hvis 0, returnerer det", function () {
     prompt.returns("0");
     assert.strictEqual(readNumber(), 0);
   });
 
-  it("continues the loop until meets a number", function() {
-    prompt.onCall(0).returns("not a number");
-    prompt.onCall(1).returns("not a number again");
+  it("fortsætter løkken indtil et tal indtastes", function () {
+    prompt.onCall(0).returns("ikke et tal");
+    prompt.onCall(1).returns("ikke et tal igen");
     prompt.onCall(2).returns("1");
     assert.strictEqual(readNumber(), 1);
   });
 
-  it("if an empty line, returns null", function() {
+  it("hvis en tom linje, returnerer null", function () {
     prompt.returns("");
     assert.isNull(readNumber());
   });
 
-  it("if cancel, returns null", function() {
+  it("hvis annuller, returnerer null", function () {
     prompt.returns(null);
     assert.isNull(readNumber());
   });

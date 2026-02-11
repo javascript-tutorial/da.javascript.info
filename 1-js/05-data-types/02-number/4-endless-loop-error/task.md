@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# An occasional infinite loop
+# En lejlighedsvist uendeligt løkke
 
-This loop is infinite. It never ends. Why?
+Denne løkke er uendelig. Den slutter aldrig. Hvorfor?
 
 ```js
 let i = 0;

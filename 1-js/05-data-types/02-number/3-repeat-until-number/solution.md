@@ -4,7 +4,7 @@ function readNumber() {
   let num;
 
   do {
-    num = prompt("Enter a number please?", 0);
+    num = prompt("Indtast et tal, tak", 0);
   } while ( !isFinite(num) );
 
   if (num === null || num === '') return null;
@@ -12,12 +12,12 @@ function readNumber() {
   return +num;
 }
 
-alert(`Read: ${readNumber()}`);
+alert(`Indtastet: ${readNumber()}`);
 ```
 
-The solution is a little bit more intricate that it could be because we need to handle `null`/empty lines.
+Løsningen er lidt mere indviklet, end den kunne være, fordi vi skal håndtere `null`/tomme linjer.
 
-So we actually accept the input until it is a "regular number". Both `null` (cancel) and empty line also fit that condition, because in numeric form they are `0`.
+Så vi bliver ved med at acceptere input, indtil det er et "almindeligt tal". Både `null` (annuller) og tomme linjer passer også til den betingelse, fordi de i numerisk form er `0`.
 
-After we stopped, we need to treat `null` and empty line specially (return `null`), because converting them to a number would return `0`.
+Efter vi er stoppet, skal vi behandle `null` og tomme linjer specielt (returnere `null`), fordi konvertering til et tal ville returnere `0`.
 

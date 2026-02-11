@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Repeat until the input is a number
+# Gentag indtil input er et tal
 
-Create a function `readNumber` which prompts for a number until the visitor enters a valid numeric value.
+Opret en funktion `readNumber`, som beder om et tal, indtil brugeren indtaster en gyldig numerisk værdi.
 
-The resulting value must be returned as a number.
+Den resulterende værdi skal returneres som et tal.
 
-The visitor can also stop the process by entering an empty line or pressing "CANCEL". In that case, the function should return `null`.
+Brugeren kan også stoppe processen ved at indtaste en tom linje eller trykke på "ANNULLER". I så fald skal funktionen returnere `null`.
 
 [demo]
 
