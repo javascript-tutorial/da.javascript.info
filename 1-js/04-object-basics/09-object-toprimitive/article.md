@@ -1,117 +1,117 @@
 
-# Object to primitive conversion
+# Konvertering fra objekt til primitiv
 
-What happens when objects are added `obj1 + obj2`, subtracted `obj1 - obj2` or printed using `alert(obj)`?
+Hvad sker der når objekter lægges sammen `obj1 + obj2`, trækkes fra hinanden `obj1 - obj2` eller udskrives med `alert(obj)`?
 
-JavaScript doesn't allow you to customize how operators work on objects. Unlike some other programming languages, such as Ruby or C++, we can't implement a special object method to handle addition (or other operators).
+JavaScript tillader ikke, at man tilpasser, hvordan operatorer fungerer på objekter. I modsætning til nogle andre programmeringssprog, såsom Ruby eller C++, kan vi ikke implementere en særlig objektmetode til at håndtere addition (eller andre operatorer).
 
-In case of such operations, objects are auto-converted to primitives, and then the operation is carried out over these primitives and results in a primitive value.
+I tilfælde af sådanne operationer konverteres objekter automatisk til primitivtyper, og derefter udføres operationen på disse primitive værdier, hvilket resulterer i en primitiv værdi.
 
-That's an important limitation: the result of `obj1 + obj2` (or another math operation) can't be another object!
+Dette er en vigtig begrænsning: resultatet af `obj1 + obj2` (eller en anden matematisk operation) kan ikke være et andet objekt!
 
-E.g. we can't make objects representing vectors or matrices (or achievements or whatever), add them and expect a "summed" object as the result. Such architectural feats are automatically "off the board".
+For eksempel kan vi ikke lave objekter, der repræsenterer vektorer eller matricer (eller præstationer eller hvad som helst), lægge dem sammen og forvente et "summeret" objekt som resultat. Sådanne arkitektoniske bedrifter er automatisk "smidt af bordet".
 
-So, because we can't technically do much here, there's no maths with objects in real projects. When it happens, with rare exceptions, it's because of a coding mistake.
+Så, fordi vi teknisk set ikke kan gøre meget her, er der ingen matematik med objekter i udviklede projekter. Hvis det sker, med sjældne undtagelser, er det på grund af en kodningsfejl.
 
-In this chapter we'll cover how an object converts to primitive and how to customize it.
+I dette kapitel vil vi dække, hvordan et objekt konverteres til en primitiv værdi, og hvordan man kan tilpasse det.
 
-We have two purposes:
+Vi har to formål:
 
-1. It will allow us to understand what's going on in case of coding mistakes, when such an operation happened accidentally.
-2. There are exceptions, where such operations are possible and look good. E.g. subtracting or comparing dates (`Date` objects). We'll come across them later.
+1. Det vil give os mulighed for at forstå, hvad der sker i tilfælde af kodningsfejl, når en sådan operation sker ved et uheld.
+2. Der er undtagelser, hvor sådanne operationer er mulige og ser godt ud. F.eks. subtraktion eller sammenligning af datoer (`Date` objekter). Vi vil støde på dem senere.
 
-## Conversion rules
+## Regler for konvertering
 
-In the chapter <info:type-conversions> we've seen the rules for numeric, string and boolean conversions of primitives. But we left a gap for objects. Now, as we know about methods and symbols it becomes possible to fill it.
+I kapitlet <info:type-conversions> har vi set reglerne for numeriske, string- og boolean-konverteringer af primitive værdier. Men vi efterlod et hul for objekter. Nu, hvor vi kender til metoder og symboler, bliver det muligt at udfylde det.
 
-1. There's no conversion to boolean. All objects are `true` in a boolean context, as simple as that. There exist only numeric and string conversions.
-2. The numeric conversion happens when we subtract objects or apply mathematical functions. For instance, `Date` objects (to be covered in the chapter <info:date>) can be subtracted, and the result of `date1 - date2` is the time difference between two dates.
-3. As for the string conversion -- it usually happens when we output an object with `alert(obj)` and in similar contexts.
+1. Der er ingen konvertering til boolean. Alle objekter er `true` i en boolean-kontekst, så enkelt er det. Der findes kun numeriske og string-konverteringer.
+2. Den numeriske konvertering sker, når vi trækker objekter fra hinanden eller anvender matematiske funktioner. For eksempel kan `Date`-objekter (som vil blive dækket i kapitlet <info:date>) trækkes fra hinanden, og resultatet af `date1 - date2` er tidsforskellen mellem to datoer.
+3. Hvad angår string-konvertering -- det sker normalt, når vi udskriver et objekt med `alert(obj)` og i lignende kontekster.
 
-We can implement string and numeric conversion by ourselves, using special object methods.
+Vi kan implementere string- og numerisk konvertering selv ved hjælp af specielle objektmetoder.
 
-Now let's get into technical details, because it's the only way to cover the topic in-depth.
+Lad os gå ind i de tekniske detaljer, fordi det er den eneste måde at dække emnet grundigt på.
 
 ## Hints
 
-How does JavaScript decide which conversion to apply?
+Hvordan beslutter JavaScript, hvilken konvertering der skal anvendes?
 
-There are three variants of type conversion, that happen in various situations. They're called "hints", as described in the [specification](https://tc39.github.io/ecma262/#sec-toprimitive):
+Der er tre variationer af typekonvertering, der sker i forskellige situationer. De kaldes "hints", som beskrevet i [specifikationen](https://tc39.github.io/ecma262/#sec-toprimitive):
 
 `"string"`
-: For an object-to-string conversion, when we're doing an operation on an object that expects a string, like `alert`:
+: For en objekt-til-string konvertering, når vi udfører en operation på et objekt, der forventer en string, som `alert`:
 
     ```js
     // output
     alert(obj);
 
-    // using object as a property key
+    // bruger objekt som en egenskabsnøgle
     anotherObj[obj] = 123;
     ```
 
 `"number"`
-: For an object-to-number conversion, like when we're doing maths:
+: For en objekt-til-number konvertering, når vi udfører matematiske operationer:
 
     ```js
-    // explicit conversion
+    // eksplicit konvertering
     let num = Number(obj);
 
-    // maths (except binary plus)
+    // matematik (undtagen binær plus)
     let n = +obj; // unary plus
     let delta = date1 - date2;
 
-    // less/greater comparison
+    // mindre/større sammenligning
     let greater = user1 > user2;
     ```
 
-    Most built-in mathematical functions also include such conversion.
+    De fleste indbyggede matematiske funktioner inkluderer også sådan en konvertering.
 
 `"default"`
-: Occurs in rare cases when the operator is "not sure" what type to expect.
+: Opstår i sjældne tilfælde, når operatoren "ikke er sikker" på, hvilken type der forventes.
 
-    For instance, binary plus `+` can work both with strings (concatenates them) and numbers (adds them). So if a binary plus gets an object as an argument, it uses the `"default"` hint to convert it.
+    For eksempel kan binær plus `+` både arbejde med strenge (sammenkæder dem) og tal (adderer dem). Så hvis en binær plus får et objekt som argument, bruger den `"default"` hintet til at konvertere det.
 
-    Also, if an object is compared using `==` with a string, number or a symbol, it's also unclear which conversion should be done, so the `"default"` hint is used.
+    Altså, hvis et objekt sammenlignes med `==` med en streng, et tal eller et symbol, er det også uklart, hvilken konvertering der skal udføres, så `"default"` hintet bruges.
 
     ```js
-    // binary plus uses the "default" hint
+    // binær plus bruger "default" hintet
     let total = obj1 + obj2;
 
-    // obj == number uses the "default" hint
+    // obj == number bruger "default" hintet
     if (user == 1) { ... };
     ```
 
-    The greater and less comparison operators, such as `<` `>`, can work with both strings and numbers too. Still, they use the `"number"` hint, not `"default"`. That's for historical reasons.
+    Større og mindre sammenligningsoperatorer, såsom `<` `>`, kan også arbejde med både strenge og tal. Alligevel bruger de `"number"` hintet, ikke `"default"`. Det er af historiske årsager.
 
-In practice though, things are a bit simpler.
+I praksis er tingene dog lidt enklere.
 
-All built-in objects except for one case (`Date` object, we'll learn it later) implement `"default"` conversion the same way as `"number"`. And we probably should do the same.
+Alle indbyggede objekter undtagen én sag (`Date` objektet, vi vil lære det senere) implementerer `"default"` konvertering på samme måde som `"number"`. Og det bør vi sandsynligvis også gøre.
 
-Still, it's important to know about all 3 hints, soon we'll see why.
+Det er dog stadig vigtigt at kende til alle 3 hints, snart vil vi se hvorfor.
 
-**To do the conversion, JavaScript tries to find and call three object methods:**
+**For at udføre konverteringen prøver JavaScript at finde og kalde tre objektmetoder:**
 
-1. Call `obj[Symbol.toPrimitive](hint)` - the method with the symbolic key `Symbol.toPrimitive` (system symbol), if such method exists,
-2. Otherwise if hint is `"string"`
-    - try calling `obj.toString()` or `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try calling `obj.valueOf()` or `obj.toString()`, whatever exists.
+1. Kald `obj[Symbol.toPrimitive](hint)` - metoden med det symbolske nøgle `Symbol.toPrimitive` (systemsymbol), hvis en sådan metode findes,
+2. Ellers, hvis hint er `"string"`
+    - prøv at kalde `obj.toString()` eller `obj.valueOf()`, alt efter hvad der findes.
+3. Ellers, hvis hint er `"number"` eller `"default"`
+    - prøv at kalde `obj.valueOf()` eller `obj.toString()`, alt efter hvad der findes.
 
 ## Symbol.toPrimitive
 
-Let's start from the first method. There's a built-in symbol named `Symbol.toPrimitive` that should be used to name the conversion method, like this:
+Lad os starte med den første metode. Der er et indbygget symbol kaldet `Symbol.toPrimitive`, som skal bruges til at navngive konverteringsmetoden, som dette:
 
 ```js
 obj[Symbol.toPrimitive] = function(hint) {
-  // here goes the code to convert this object to a primitive
-  // it must return a primitive value
-  // hint = one of "string", "number", "default"
+  // her går koden til at konvertere dette objekt til en primitiv værdi
+  // det skal returnere en primitiv værdi
+  // hint = en af "string", "number", "default"
 };
 ```
 
-If the method `Symbol.toPrimitive` exists, it's used for all hints, and no more methods are needed.
+Hvis metoden `Symbol.toPrimitive` findes, bruges den til alle hints, og ingen flere metoder er nødvendige.
 
-For instance, here `user` object implements it:
+For eksempel, her implementerer `user` objektet det:
 
 ```js run
 let user = {
@@ -124,31 +124,31 @@ let user = {
   }
 };
 
-// conversions demo:
+// Konverteringsdemo:
 alert(user); // hint: string -> {name: "John"}
 alert(+user); // hint: number -> 1000
 alert(user + 500); // hint: default -> 1500
 ```
 
-As we can see from the code, `user` becomes a self-descriptive string or a money amount, depending on the conversion. The single method `user[Symbol.toPrimitive]` handles all conversion cases.
+Som vi kan se fra koden, bliver `user` til en selvbeskrivende streng eller et pengebeløb, afhængigt af konverteringen. Den enkelte metode `user[Symbol.toPrimitive]` håndterer alle konverteringstilfælde.
 
 ## toString/valueOf
 
-If there's no `Symbol.toPrimitive` then JavaScript tries to find methods `toString` and `valueOf`:
+Hvis der ikke findes `Symbol.toPrimitive`, forsøger JavaScript at finde metoderne `toString` og `valueOf`:
 
-- For the `"string"` hint: call `toString` method, and if it doesn't exist or if it returns an object instead of a primitive value, then call `valueOf` (so `toString` has the priority for string conversions).
-- For other hints: call `valueOf`, and if it doesn't exist or if it returns an object instead of a primitive value, then call `toString` (so `valueOf` has the priority for maths).
+- For et `"string"` hint: kald `toString` metoden, og hvis den ikke findes eller hvis den returnerer et objekt i stedet for en primitiv værdi, så kald `valueOf` (så `toString` har prioritet for strengkonverteringer).
+- For andre hints: kald `valueOf`, og hvis den ikke findes eller hvis den returnerer et objekt i stedet for en primitiv værdi, så kald `toString` (så `valueOf` har prioritet for matematik).
 
-Methods `toString` and `valueOf` come from ancient times. They are not symbols (symbols did not exist that long ago), but rather "regular" string-named methods. They provide an alternative "old-style" way to implement the conversion.
+Metoderne `toString` og `valueOf` stammer fra gamle dage. De er ikke symboler (symboler eksisterede ikke for så længe siden), men snarere "almindelige" metoder med strengnavne. De giver en alternativ "gammeldags" måde at implementere konverteringen på.
 
-These methods must return a primitive value. If `toString` or `valueOf` returns an object, then it's ignored (same as if there were no method).
+Disse metoder skal returnere en primitiv værdi. Hvis `toString` eller `valueOf` returnerer et objekt, ignoreres det (som om metoden ikke fandtes).
 
-By default, a plain object has following `toString` and `valueOf` methods:
+Som standard har et almindeligt objekt følgende `toString` og `valueOf` metoder:
 
-- The `toString` method returns a string `"[object Object]"`.
-- The `valueOf` method returns the object itself.
+- `toString` metoden returnerer en streng `"[object Object]"`.
+- `valueOf` metoden returnerer objektet selv.
 
-Here's the demo:
+Her er en demo:
 
 ```js run
 let user = {name: "John"};
@@ -157,13 +157,13 @@ alert(user); // [object Object]
 alert(user.valueOf() === user); // true
 ```
 
-So if we try to use an object as a string, like in an `alert` or so, then by default we see `[object Object]`.
+Så hvis vi prøver at bruge et objekt som en streng, som i en `alert` eller lignende, så ser vi som standard `[object Object]`.
 
-The default `valueOf` is mentioned here only for the sake of completeness, to avoid any confusion. As you can see, it returns the object itself, and so is ignored. Don't ask me why, that's for historical reasons. So we can assume it doesn't exist.
+Standard `valueOf` er nævnt her kun for fuldstændighedens skyld, for at undgå forvirring. Som du kan se, returnerer den objektet selv, og derfor ignoreres det. Spørg mig ikke hvorfor - det er af historiske årsager. Så vi kan antage, at det ikke eksisterer.
 
-Let's implement these methods to customize the conversion.
+Lad os implementere disse metoder for at tilpasse konverteringen.
 
-For instance, here `user` does the same as above using a combination of `toString` and `valueOf` instead of `Symbol.toPrimitive`:
+For eksempel gør `user` det samme som ovenfor ved hjælp af en kombination af `toString` og `valueOf` i stedet for `Symbol.toPrimitive`:
 
 ```js run
 let user = {
@@ -175,7 +175,7 @@ let user = {
     return `{name: "${this.name}"}`;
   },
 
-  // for hint="number" or "default"
+  // for hint="number" eller "default"
   valueOf() {
     return this.money;
   }
@@ -187,9 +187,9 @@ alert(+user); // valueOf -> 1000
 alert(user + 500); // valueOf -> 1500
 ```
 
-As we can see, the behavior is the same as the previous example with `Symbol.toPrimitive`.
+Som vi kan se er adfærden den samme som i det tidligere eksempel med `Symbol.toPrimitive`.
 
-Often we want a single "catch-all" place to handle all primitive conversions. In this case, we can implement `toString` only, like this:
+Ofte ønsker vi et enkelt "catch-all" sted at håndtere alle primitive konverteringer. I dette tilfælde kan vi implementere kun `toString`, sådan her:
 
 ```js run
 let user = {
@@ -204,47 +204,47 @@ alert(user); // toString -> John
 alert(user + 500); // toString -> John500
 ```
 
-In the absence of `Symbol.toPrimitive` and `valueOf`, `toString` will handle all primitive conversions.
+Ved fraværet af `Symbol.toPrimitive` og `valueOf` vil `toString` håndtere alle primitive konverteringer.
 
-### A conversion can return any primitive type
+### En konvertering kan returnere enhver primitiv type
 
-The important thing to know about all primitive-conversion methods is that they do not necessarily return the "hinted" primitive.
+Det vigtige at vide om alle primitive-konverteringsmetoder er, at de ikke nødvendigvis returnerer den "angivne" primitive.
 
-There is no control whether `toString` returns exactly a string, or whether `Symbol.toPrimitive` method returns a number for the hint `"number"`.
+Der er ingen kontrol over, om `toString` returnerer præcis en streng, eller om `Symbol.toPrimitive`-metoden returnerer et tal for hintet `"number"`.
 
-The only mandatory thing: these methods must return a primitive, not an object.
+Det eneste obligatoriske: disse metoder skal returnere en primitiv, ikke et objekt.
 
-```smart header="Historical notes"
-For historical reasons, if `toString` or `valueOf` returns an object, there's no error, but such value is ignored (like if the method didn't exist). That's because in ancient times there was no good "error" concept in JavaScript.
+```smart header="Historiske noter"
+Af historiske årsager, hvis `toString` eller `valueOf` returnerer et objekt, opstår der ingen fejl, men en sådan værdi ignoreres (som om metoden ikke eksisterede). Det skyldes, at der i gamle dage ikke fandtes et godt "fejl"-begreb i JavaScript.
 
-In contrast, `Symbol.toPrimitive` is stricter, it *must* return a primitive, otherwise there will be an error.
+Til sammenligning er `Symbol.toPrimitive` strengere, den *skal* returnere en primitiv, ellers opstår der en fejl.
 ```
 
-## Further conversions
+## Yderligere konverteringer
 
-As we know already, many operators and functions perform type conversions, e.g. multiplication `*` converts operands to numbers.
+Som vi allerede ved, udfører mange operatorer og funktioner typekonverteringer, f.eks. konverterer multiplikation `*` operander til tal.
 
-If we pass an object as an argument, then there are two stages of calculations:
-1. The object is converted to a primitive (using the rules described above).
-2. If necessary for further calculations, the resulting primitive is also converted.
+Hvis vi sender et objekt som argument, er der to trin i beregningerne:
+1. Objektet konverteres til en primitiv (ved hjælp af reglerne beskrevet ovenfor).
+2. Hvis det er nødvendigt for yderligere beregninger, konverteres den resulterende primitiv også.
 
-For instance:
+For eksempel:
 
 ```js run
 let obj = {
-  // toString handles all conversions in the absence of other methods
+  // toString håndterer alle konverteringer i fraværet af andre metoder
   toString() {
     return "2";
   }
 };
 
-alert(obj * 2); // 4, object converted to primitive "2", then multiplication made it a number
+alert(obj * 2); // 4, objekt konverteret til primitiv "2", derefter multiplikation gjorde det til et tal
 ```
 
-1. The multiplication `obj * 2` first converts the object to primitive (that's a string `"2"`).
-2. Then `"2" * 2` becomes `2 * 2` (the string is converted to number).
+1. Multiplikationen `obj * 2` konverterer først objektet til en primitiv (det er en streng `"2"`).
+2. Derefter bliver `"2" * 2` til `2 * 2` (strengen konverteres til et tal).
 
-Binary plus will concatenate strings in the same situation, as it gladly accepts a string:
+Binær plus vil sammenkæde strenge i samme situation, da den gerne accepterer en streng:
 
 ```js run
 let obj = {
@@ -253,28 +253,28 @@ let obj = {
   }
 };
 
-alert(obj + 2); // "22" ("2" + 2), conversion to primitive returned a string => concatenation
+alert(obj + 2); // "22" ("2" + 2), konvertering til primitiv returnerede en streng => sammenkædning
 ```
 
-## Summary
+## Opsummering
 
-The object-to-primitive conversion is called automatically by many built-in functions and operators that expect a primitive as a value.
+Objekt-til-primitiv konvertering kaldes automatisk af mange indbyggede funktioner og operatorer, der forventer en primitiv som værdi.
 
-There are 3 types (hints) of it:
-- `"string"` (for `alert` and other operations that need a string)
-- `"number"` (for maths)
-- `"default"` (few operators, usually objects implement it the same way as `"number"`)
+Der er 3 typer (hints) af den:
+- `"string"` (for `alert` og andre operationer, der har brug for en streng)
+- `"number"` (for matematiske operationer)
+- `"default"` (få operatorer, normalt implementerer objekter det på samme måde som `"number"`)
 
-The specification describes explicitly which operator uses which hint.
+Specifikationen beskriver eksplicit, hvilken operator der bruger hvilket hint.
 
-The conversion algorithm is:
+Konverteringsalgoritmen er:
 
-1. Call `obj[Symbol.toPrimitive](hint)` if the method exists,
-2. Otherwise if hint is `"string"`
-    - try calling `obj.toString()` or `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try calling `obj.valueOf()` or `obj.toString()`, whatever exists.
+1. Kald `obj[Symbol.toPrimitive](hint)`, hvis metoden findes,
+2. Ellers, hvis hint er `"string"`
+    - prøv at kalde `obj.toString()` eller `obj.valueOf()`, hvad der end findes.
+3. Ellers, hvis hint er `"number"` eller `"default"`
+    - prøv at kalde `obj.valueOf()` eller `obj.toString()`, hvad der end findes.
 
-All these methods must return a primitive to work (if defined).
+Alle disse metoder skal returnere en primitiv for at fungere (hvis defineret).
 
-In practice, it's often enough to implement only `obj.toString()` as a "catch-all" method for string conversions that should return a "human-readable" representation of an object, for logging or debugging purposes.
+I praksis er det ofte nok kun at implementere `obj.toString()` som en "catch-all" metode for strengkonverteringer, der skal returnere en "menneskeligt læsbar" repræsentation af et objekt, til logging eller debugging formål.
