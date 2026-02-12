@@ -1,97 +1,97 @@
 
-# Map and Set
+# Map og Set
 
-Till now, we've learned about the following complex data structures:
+Op til nu har vi lært om følgende komplekse datastrukturer:
 
-- Objects are used for storing keyed collections.
-- Arrays are used for storing ordered collections.
+- Objekter bruges til at gemme samlinger baseret på nøgler.
+- Arrays bruges til at gemme ordnede samlinger.
 
-But that's not enough for real life. That's why `Map` and `Set` also exist.
+Men det er ikke nødvendigvis nok til komplekse opgaver. Derfor findes `Map` og `Set` også.
 
 ## Map
 
-[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) is a collection of keyed data items, just like an `Object`. But the main difference is that `Map` allows keys of any type.
+[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) er en samling af nøgle-baserede dataelementer, ligesom et `Object`. Men den største forskel er, at `Map` tillader nøgler af enhver type.
 
-Methods and properties are:
+Metoder og egenskaber er:
 
-- [`new Map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- creates the map.
-- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- stores the value by the key.
-- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- returns the value by the key, `undefined` if `key` doesn't exist in map.
-- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- returns `true` if the `key` exists, `false` otherwise.
-- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- removes the element (the key/value pair) by the key.
-- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- removes everything from the map.
-- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- returns the current element count.
+- [`new Map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- opretter et map.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- gemmer værdien under nøglen.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- returnerer værdien for nøglen, `undefined` hvis `key` ikke findes i mappen.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- returnerer `true` hvis `key` findes, ellers `false`.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- fjerner elementet (nøgle/værdi-parret) for nøglen.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- fjerner alt fra et map.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- returnerer det aktuelle antal elementer.
 
-For instance:
+For eksempel:
 
 ```js run
 let map = new Map();
 
-map.set('1', 'str1');   // a string key
-map.set(1, 'num1');     // a numeric key
-map.set(true, 'bool1'); // a boolean key
+map.set('1', 'str1');   // en streng nøgle
+map.set(1, 'num1');     // en numerisk nøgle
+map.set(true, 'bool1'); // en boolesk nøgle
 
-// remember the regular Object? it would convert keys to string
-// Map keeps the type, so these two are different:
+// husker du den almindelige Object? den ville konvertere nøgler til strenge
+// Map beholder typen, så disse to er forskellige:
 alert( map.get(1)   ); // 'num1'
 alert( map.get('1') ); // 'str1'
 
 alert( map.size ); // 3
 ```
 
-As we can see, unlike objects, keys are not converted to strings. Any type of key is possible.
+Som vi kan se, i modsætning til objekter, konverteres nøgler ikke til strenge. Enhver type nøgle er mulig.
 
-```smart header="`map[key]` isn't the right way to use a `Map`"
-Although `map[key]` also works, e.g. we can set `map[key] = 2`, this is treating `map` as a plain JavaScript object, so it implies all corresponding limitations (only string/symbol keys and so on).
+```smart header="`map[key]` er ikke den rigtige måde at bruge et `Map` på"
+Selvom `map[key]` også virker, f.eks. kan vi sætte `map[key] = 2`, behandler det `map` som et almindeligt JavaScript-objekt, så det indebærer alle tilsvarende begrænsninger (kun streng-/symbolnøgler osv.).
 
-So we should use `map` methods: `set`, `get` and so on.
+Så vi bør bruge `map`-metoderne: `set`, `get` osv.
 ```
 
-**Map can also use objects as keys.**
+**Map kan også bruge objekter som nøgle.**
 
-For instance:
+For eksempel:
 
 ```js run
 let john = { name: "John" };
 
-// for every user, let's store their visits count
+// for hver bruger, lad os gemme deres besøgstælling
 let visitsCountMap = new Map();
 
-// john is the key for the map
+// john er nøglen for mappen
 visitsCountMap.set(john, 123);
 
 alert( visitsCountMap.get(john) ); // 123
 ```
 
-Using objects as keys is one of the most notable and important `Map` features. The same does not count for `Object`. String as a key in `Object` is fine, but we can't use another `Object` as a key in `Object`.
+At kunne bruge objekter som nøgler er et af de mest bemærkelsesværdige og vigtige `Map` funktioner - det kan du nemlig ikke i almindelige `Object`. Strenge som nøgler i `Object` er fint, men vi kan ikke bruge et andet `Object` som nøgle i `Object`.
 
-Let's try:
+Lad os prøve at gøre det i et almindeligt `Object`:
 
 ```js run
 let john = { name: "John" };
 let ben = { name: "Ben" };
 
-let visitsCountObj = {}; // try to use an object
+let visitsCountObj = {}; // Opret et obejkt
 
-visitsCountObj[ben] = 234; // try to use ben object as the key
-visitsCountObj[john] = 123; // try to use john object as the key, ben object will get replaced
+visitsCountObj[ben] = 234; // prøv at bruge ben objektet som nøgle
+visitsCountObj[john] = 123; // prøv at bruge john objektet som nøgle, ben objektet vil blive erstattet
 
 *!*
-// That's what got written!
+// Dette er hvad der rent faktisk skrives!
 alert( visitsCountObj["[object Object]"] ); // 123 
 */!*
 ```
 
-As `visitsCountObj` is an object, it converts all `Object` keys, such as `john` and `ben` above, to same string `"[object Object]"`. Definitely not what we want.
+Da `visitsCountObj` er et objekt, konverterer det alle `Object` nøgler, såsom `john` og `ben` ovenfor, til samme streng `"[object Object]"`. Det er bestemt ikke, hvad vi ønsker.
 
-```smart header="How `Map` compares keys"
-To test keys for equivalence, `Map` uses the algorithm [SameValueZero](https://tc39.github.io/ecma262/#sec-samevaluezero). It is roughly the same as strict equality `===`, but the difference is that `NaN` is considered equal to `NaN`. So `NaN` can be used as the key as well.
+```smart header="Hvordan `Map` sammenligner nøgler"
+For at teste nøgler for lighed bruger `Map` algoritmen [SameValueZero](https://tc39.github.io/ecma262/#sec-samevaluezero). Den er omtrent den samme som streng lighed `===`, men forskellen er, at `NaN` betragtes som lig med `NaN`. Så `NaN` kan også bruges som nøgle.
 
-This algorithm can't be changed or customized.
+Denne algoritme kan ikke ændres eller tilpasses.
 ```
 
-````smart header="Chaining"
-Every `map.set` call returns the map itself, so we can "chain" the calls:
+````smart header="Sammenkædning af `map.set`"
+Hvert `map.set` kald returnerer selve map-objektet, så du kan "kæde" kaldene sammen:
 
 ```js
 map.set('1', 'str1')
@@ -102,13 +102,13 @@ map.set('1', 'str1')
 
 ## Iteration over Map
 
-For looping over a `map`, there are 3 methods:
+For at gennemløbe et `map`, findes der 3 metoder:
 
-- [`map.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/keys) -- returns an iterable for keys,
-- [`map.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/values) -- returns an iterable for values,
-- [`map.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/entries) -- returns an iterable for entries `[key, value]`, it's used by default in `for..of`.
+- [`map.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/keys) -- returnerer en iterable for nøgler,
+- [`map.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/values) -- returnerer en iterable for værdier,
+- [`map.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/entries) -- returnerer en iterable for entries `[key, value]`, den bruges som standard i `for..of`.
 
-For instance:
+For eksempel:
 
 ```js run
 let recipeMap = new Map([
@@ -117,41 +117,41 @@ let recipeMap = new Map([
   ['onion',    50]
 ]);
 
-// iterate over keys (vegetables)
+// iterer over keys (grøntsager)
 for (let vegetable of recipeMap.keys()) {
   alert(vegetable); // cucumber, tomatoes, onion
 }
 
-// iterate over values (amounts)
+// iterer over values (mængder)
 for (let amount of recipeMap.values()) {
   alert(amount); // 500, 350, 50
 }
 
-// iterate over [key, value] entries
-for (let entry of recipeMap) { // the same as of recipeMap.entries()
-  alert(entry); // cucumber,500 (and so on)
+// iterer over [nøgle, værdi] par
+for (let entry of recipeMap) { // det samme somrecipeMap.entries()
+  alert(entry); // cucumber,500 (og så videre)
 }
 ```
 
-```smart header="The insertion order is used"
-The iteration goes in the same order as the values were inserted. `Map` preserves this order, unlike a regular `Object`.
+```smart header="Indsættelsesrækkefølgen bruges"
+Iteration sker i samme rækkefølge som værdierne blev indsat. `Map` bevarer denne rækkefølge, i modsætning til et almindeligt `Object`.
 ```
 
-Besides that, `Map` has a built-in `forEach` method, similar to `Array`:
+Derudover har `Map` en indbygget `forEach` metode, ligesom `Array`:
 
 ```js
-// runs the function for each (key, value) pair
+// kører funktionen for hver (nøgle, værdi) par
 recipeMap.forEach( (value, key, map) => {
   alert(`${key}: ${value}`); // cucumber: 500 etc
 });
 ```
 
-## Object.entries: Map from Object
+## Object.entries: Map fra Object
 
-When a `Map` is created, we can pass an array (or another iterable) with key/value pairs for initialization, like this:
+Når et `Map` oprettes kan vi videregive et array (eller noget andet itererbart) med nøgle/værdi-par for initialisering, som dette:
 
 ```js run
-// array of [key, value] pairs
+// array af [nøgle, værdi] par
 let map = new Map([
   ['1',  'str1'],
   [1,    'num1'],
@@ -161,9 +161,9 @@ let map = new Map([
 alert( map.get('1') ); // str1
 ```
 
-If we have a plain object, and we'd like to create a `Map` from it, then we can use built-in method [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) that returns an array of key/value pairs for an object exactly in that format.
+Hvis vi har et almindeligt objekt, og vi gerne vil oprette et `Map` fra det, kan vi bruge den indbyggede metode [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries), som returnerer et array af nøgle/værdi-par for et objekt præcis i det format.
 
-So we can create a map from an object like this:
+Så vi kan oprette et map fra et objekt som dette:
 
 ```js run
 let obj = {
@@ -178,14 +178,14 @@ let map = new Map(Object.entries(obj));
 alert( map.get('name') ); // John
 ```
 
-Here, `Object.entries` returns the array of key/value pairs: `[ ["name","John"], ["age", 30] ]`. That's what `Map` needs.
+Her returnerer `Object.entries` arrayet af nøgle/værdi-par: `[ ["name","John"], ["age", 30] ]`. Det er præcis, hvad `Map` har brug for.
 
 
-## Object.fromEntries: Object from Map
+## Object.fromEntries: Object fra Map
 
-We've just seen how to create `Map` from a plain object with `Object.entries(obj)`.
+Vi har lige set, hvordan man opretter `Map` fra et almindeligt objekt med `Object.entries(obj)`.
 
-There's `Object.fromEntries` method that does the reverse: given an array of `[key, value]` pairs, it creates an object from them:
+Der findes en metode `Object.fromEntries`, som gør det modsatte: givet et array af `[nøgle, værdi]` par, opretter den et objekt ud fra dem:
 
 ```js run
 let prices = Object.fromEntries([
@@ -199,11 +199,11 @@ let prices = Object.fromEntries([
 alert(prices.orange); // 2
 ```
 
-We can use `Object.fromEntries` to get a plain object from `Map`.
+Vi kan bruge `Object.fromEntries` til at få et almindeligt objekt fra `Map`.
 
-E.g. we store the data in a `Map`, but we need to pass it to a 3rd-party code that expects a plain object.
+F.eks. gemmer vi data i en `Map`, men vi skal videregive det til tredjepartskode, der forventer et almindeligt objekt.
 
-Here we go:
+Her er hvordan:
 
 ```js run
 let map = new Map();
@@ -215,39 +215,39 @@ map.set('meat', 4);
 let obj = Object.fromEntries(map.entries()); // make a plain object (*)
 */!*
 
-// done!
+// Færdig!
 // obj = { banana: 1, orange: 2, meat: 4 }
 
 alert(obj.orange); // 2
 ```
 
-A call to `map.entries()` returns an iterable of key/value pairs, exactly in the right format for `Object.fromEntries`.
+Et kald til `map.entries()` returnerer et itererbart objekt af nøgle/værdi-par, præcis i det rigtige format til `Object.fromEntries`.
 
-We could also make line `(*)` shorter:
+Vi kunne også gøre linje `(*)` kortere:
 ```js
-let obj = Object.fromEntries(map); // omit .entries()
+let obj = Object.fromEntries(map); // udelad .entries()
 ```
 
-That's the same, because `Object.fromEntries` expects an iterable object as the argument. Not necessarily an array. And the standard iteration for `map` returns same key/value pairs as `map.entries()`. So we get a plain object with same key/values as the `map`.
+Det er det samme, fordi `Object.fromEntries` forventer et itererbart objekt som argument. Ikke nødvendigvis et array. Og standarditeration for `map` returnerer de samme nøgle/værdi-par som `map.entries()`. Så vi får et almindeligt objekt med samme nøgle/værdier som `map`.
 
 ## Set
 
-A [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) is a special type collection - "set of values" (without keys), where each value may occur only once.
+Et [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) er en speciel type samling - "mængde af værdier" (uden nøgler), hvor hver værdi kun kan forekomme én gang.
 
-Its main methods are:
+Dens hovedmetoder er:
 
-- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- creates the set, and if an `iterable` object is provided (usually an array), copies values from it into the set.
-- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- adds a value, returns the set itself.
-- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
-- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- returns `true` if the value exists in the set, otherwise `false`.
-- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- removes everything from the set.
-- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- is the elements count.
+- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- opretter sættet, og hvis et `iterable` objekt er angivet (normalt et array), kopierer værdierne fra det ind i sættet.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- tilføjer en værdi, returnerer sættet selv.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- fjerner værdien, returnerer `true` hvis `value` eksisterede på tidspunktet for kaldet, ellers `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- returnerer `true` hvis værdien findes i sættet, ellers `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- fjerner alt fra sættet.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- er antallet af elementer.
 
-The main feature is that repeated calls of `set.add(value)` with the same value don't do anything. That's the reason why each value appears in a `Set` only once.
+Hovedfunktionen er, at gentagne kald til `set.add(value)` med samme værdi ikke gør noget. Det er grunden til, at hver værdi kun optræder én gang i et `Set`.
 
-For example, we have visitors coming, and we'd like to remember everyone. But repeated visits should not lead to duplicates. A visitor must be "counted" only once.
+For eksempel har vi besøgende, og vi vil gerne huske alle. Men gentagne besøg skal ikke føre til dubletter. En besøgende skal kun "tælles" én gang.
 
-`Set` is just the right thing for that:
+`Set` er lige det rigtige til det:
 
 ```js run
 let set = new Set();
@@ -256,76 +256,76 @@ let john = { name: "John" };
 let pete = { name: "Pete" };
 let mary = { name: "Mary" };
 
-// visits, some users come multiple times
+// besøg, nogle brugere kommer flere gange
 set.add(john);
 set.add(pete);
 set.add(mary);
 set.add(john);
 set.add(mary);
 
-// set keeps only unique values
+// set tæller kun unikke værdier
 alert( set.size ); // 3
 
 for (let user of set) {
-  alert(user.name); // John (then Pete and Mary)
+  alert(user.name); // John (derefter Pete og Mary)
 }
 ```
 
-The alternative to `Set` could be an array of users, and the code to check for duplicates on every insertion using [arr.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find). But the performance would be much worse, because this method walks through the whole array checking every element. `Set` is much better optimized internally for uniqueness checks.
+Alternativet til `Set` kunne være et array af brugere, og koden til at tjekke for dubletter ved hver indsættelse ved hjælp af [arr.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find). Men ydeevnen ville være meget dårligere, fordi denne metode gennemgår hele arrayet og tjekker hvert element. `Set` er meget bedre optimeret internt til unikhedstjek. 
 
 ## Iteration over Set
 
-We can loop over a set either with `for..of` or using `forEach`:
+Vi kan gennemløbe et sæt enten med `for..of` eller ved at bruge `forEach`:
 
 ```js run
-let set = new Set(["oranges", "apples", "bananas"]);
+let set = new Set(["appelsiner", "æbler", "bananer"]);
 
 for (let value of set) alert(value);
 
-// the same with forEach:
+// det samme med forEach:
 set.forEach((value, valueAgain, set) => {
   alert(value);
 });
 ```
 
-Note the funny thing. The callback function passed in `forEach` has 3 arguments: a `value`, then *the same value* `valueAgain`, and then the target object. Indeed, the same value appears in the arguments twice.
+Bemærk en sjov ting. Callback-funktionen, der gives til `forEach`, har 3 argumenter: en `value`, derefter *den samme værdi* `valueAgain`, og så målobjektet. Faktisk optræder den samme værdi to gange i argumenterne.
 
-That's for compatibility with `Map` where the callback passed `forEach` has three arguments. Looks a bit strange, for sure. But this may help to replace `Map` with `Set` in certain cases with ease, and vice versa.
+Det er for kompatibilitet med `Map`, hvor callback-funktionen, der gives til `forEach`, har tre argumenter. Det ser lidt mærkeligt ud, helt sikkert. Men det kan hjælpe med at erstatte `Map` med `Set` i visse tilfælde nemt, og omvendt.
 
-The same methods `Map` has for iterators are also supported:
+De samme metoder, som `Map` har til iteratorer, understøttes også:
 
-- [`set.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/keys) -- returns an iterable object for values,
-- [`set.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/values) -- same as `set.keys()`, for compatibility with `Map`,
-- [`set.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/entries) -- returns an iterable object for entries `[value, value]`, exists for compatibility with `Map`.
+- [`set.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/keys) -- returnerer et iterable objekt for værdier,
+- [`set.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/values) -- det samme som `set.keys()`, for kompatibilitet med `Map`,
+- [`set.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/entries) -- returnerer et iterable objekt for entries `[value, value]`, findes for kompatibilitet med `Map`.
 
-## Summary
+## Opsummering
 
-[`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) -- is a collection of keyed values.
+[`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) -- er en samling værdier baseret på nøgler.
 
-Methods and properties:
+Metoder og egenskaber:
 
-- [`new Map([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- creates the map, with optional `iterable` (e.g. array) of `[key,value]` pairs for initialization.
-- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- stores the value by the key, returns the map itself.
-- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- returns the value by the key, `undefined` if `key` doesn't exist in map.
-- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- returns `true` if the `key` exists, `false` otherwise.
-- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- removes the element by the key, returns `true` if `key` existed at the moment of the call, otherwise `false`.
-- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- removes everything from the map.
-- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- returns the current element count.
+- [`new Map([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- opretter et Map, med valgfrit `iterable` (f.eks. array) af `[key,value]` par til initialisering.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- gemmer værdien under nøglen, returnerer kortet selv.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- returnerer værdien for nøglen, `undefined` hvis `key` ikke findes i kortet.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- returnerer `true` hvis `key` findes, ellers `false`.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- fjerner elementet med nøglen, returnerer `true` hvis `key` fandtes på tidspunktet for kaldet, ellers `false`.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- fjerner alt fra kortet.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- returnerer det aktuelle antal elementer.
 
-The differences from a regular `Object`:
+Forskellene fra et almindeligt `Object`:
 
-- Any keys, objects can be keys.
-- Additional convenient methods, the `size` property.
+- Enhver nøgle, objekter kan være nøgler.
+- Yderligere praktiske metoder, `size`-egenskaben.
 
-[`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) -- is a collection of unique values.
+[`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) -- er en samling unikke værdier.
 
-Methods and properties:
+Metoder og egenskaber:
 
-- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- creates the set, with optional `iterable` (e.g. array) of values for initialization.
-- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- adds a value (does nothing if `value` exists), returns the set itself.
-- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
-- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- returns `true` if the value exists in the set, otherwise `false`.
-- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- removes everything from the set.
-- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- is the elements count.
+- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- opretter et Set, med valgfrit `iterable` (f.eks. array) af værdier til initialisering.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- tilføjer en værdi (gør ingenting hvis `value` allerede findes), returnerer sættet selv.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- fjerner værdien, returnerer `true` hvis `value` fandtes på tidspunktet for kaldet, ellers `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- returnerer `true` hvis værdien findes i sættet, ellers `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- fjerner alt fra sættet.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- er antallet af elementer.
 
-Iteration over `Map` and `Set` is always in the insertion order, so we can't say that these collections are unordered, but we can't reorder elements or directly get an element by its number.
+Iteration over `Map` og `Set` er altid i indsættelsesrækkefølge, så vi kan ikke sige, at disse samlinger er uordnede, men vi kan ikke omarrangere elementer eller direkte få et element efter dets nummer.

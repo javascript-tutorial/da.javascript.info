@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Iterable keys
+# Itererbare nøgler
 
-We'd like to get an array of `map.keys()` in a variable and then apply array-specific methods to it, e.g. `.push`.
+Vi vil gerne have et array af `map.keys()` i en variabel og derefter anvende array-specifikke metoder på det, f.eks. `.push`.
 
-But that doesn't work:
+Men det virker ikke:
 
 ```js run
 let map = new Map();
@@ -16,9 +16,9 @@ map.set("name", "John");
 let keys = map.keys();
 
 *!*
-// Error: keys.push is not a function
+// Fejl: keys.push er ikke en funktion
 keys.push("more");
 */!*
 ```
 
-Why? How can we fix the code to make `keys.push` work?
+Hvorfor? Hvordan kan vi rette koden, så `keys.push` virker?
