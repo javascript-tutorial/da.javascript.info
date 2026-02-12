@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Calling in an array context
+# Kald i et array-kontekst
 
-What is the result? Why?
+Hvad er resultatet? Hvorfor?
 
 ```js
 let arr = ["a", "b"];

@@ -1,320 +1,319 @@
-# Arrays
+# Arrays (rækker)
 
-Objects allow you to store keyed collections of values. That's fine.
+Objekter tillader dig at gemme samlinger af værdier med nøgler. Det er fint.
 
-But quite often we find that we need an *ordered collection*, where we have a 1st, a 2nd, a 3rd element and so on. For example, we need that to store a list of something: users, goods, HTML elements etc.
+Men meget ofte finder vi ud af, at vi har brug for en *ordnet samling*, hvor vi har et 1., et 2., et 3. element osv. For eksempel har vi brug for det til at gemme en liste over noget: brugere, varer, HTML-elementer osv.
 
-It is not convenient to use an object here, because it provides no methods to manage the order of elements. We can’t insert a new property “between” the existing ones. Objects are just not meant for such use.
+Det er ikke praktisk at bruge et objekt her, fordi det ikke giver metoder til at håndtere rækkefølgen af elementer. Vi kan ikke indsætte en ny egenskab "mellem" de eksisterende. Objekter er bare ikke beregnet til sådan brug.
 
-There exists a special data structure named `Array`, to store ordered collections.
+Der findes en speciel datastruktur kaldet `Array`, til at gemme ordnede samlinger.
 
-## Declaration
+## Deklaration
 
-There are two syntaxes for creating an empty array:
+Der er to syntakser til at oprette et tomt array:
 
 ```js
 let arr = new Array();
 let arr = [];
 ```
 
-Almost all the time, the second syntax is used. We can supply initial elements in the brackets:
+Næsten altid bruges den anden syntaks. Vi kan angive startværdier i parenteserne:
 
 ```js
 let fruits = ["Apple", "Orange", "Plum"];
 ```
 
-Array elements are numbered, starting with zero.
+Array elementer er nummererede, startende fra nul.
 
-We can get an element by its number in square brackets:
+Vi kan få et element ved dets nummer i firkantede parenteser:
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Æble", "Appelsin", "Blomme"];
 
-alert( fruits[0] ); // Apple
-alert( fruits[1] ); // Orange
-alert( fruits[2] ); // Plum
+alert( fruits[0] ); // Æble
+alert( fruits[1] ); // Appelsin
+alert( fruits[2] ); // Blomme
 ```
 
-We can replace an element:
+Vi kan erstatte et element:
 
 ```js
-fruits[2] = 'Pear'; // now ["Apple", "Orange", "Pear"]
+fruits[2] = 'Pære'; // now ["Æble", "Appelsin", "Pære"]
 ```
 
-...Or add a new one to the array:
+...Eller tilføj en ny til arrayet:
 
 ```js
-fruits[3] = 'Lemon'; // now ["Apple", "Orange", "Pear", "Lemon"]
+fruits[3] = 'Citron'; // now ["Æble", "Appelsin", "Pære", "Citron"]
 ```
 
-The total count of the elements in the array is its `length`:
+Det samlede antal elementer i arrayet er dets `length`:
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Æble", "Appelsin", "Blomme"];
 
 alert( fruits.length ); // 3
 ```
 
-We can also use `alert` to show the whole array.
+Vi kan også bruge `alert` til at vise hele arrayet.
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Æble", "Appelsin", "Blomme"];
 
-alert( fruits ); // Apple,Orange,Plum
+alert( fruits ); // Æble,Appelsin,Blomme
 ```
 
-An array can store elements of any type.
+Et array kan gemme elementer af enhver type.
 
-For instance:
+For eksempel, det kan være en blanding af værdier:
 
 ```js run no-beautify
-// mix of values
-let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
+// blanding af værdier
+let arr = [ 'Æble', { name: 'Karsten' }, true, function() { alert('hej'); } ];
 
-// get the object at index 1 and then show its name
-alert( arr[1].name ); // John
+// henter objektet ved indeks 1 og viser dets navn
+alert( arr[1].name ); // Karsten
 
-// get the function at index 3 and run it
-arr[3](); // hello
+// henter funktionen ved indeks 3 og kører den
+arr[3](); // hej
 ```
 
 
-````smart header="Trailing comma"
-An array, just like an object, may end with a comma:
+````smart header="Hængende komma"
+Et array, ligesom et objekt, kan ende med et komma:
 ```js
 let fruits = [
-  "Apple",
-  "Orange",
-  "Plum"*!*,*/!*
+  "Æble",
+  "Appelsin",
+  "Blomme"*!*,*/!*
 ];
 ```
 
-The "trailing comma" style makes it easier to insert/remove items, because all lines become alike.
+Det "hængende komma" gør det lettere at indsætte/fjerne elementer, fordi alle linjer bliver ens.
 ````
 
-## Get last elements with "at"
+## Hente sidste elementer med "at"
 
 [recent browser="new"]
 
-Let's say we want the last element of the array.
+Lad os sige, at vi vil have det sidste element i arrayet.
 
-Some programming languages allow the use of negative indexes for the same purpose, like `fruits[-1]`.
+Nogle programmeringssprog tillader brugen af negative indekser til det samme formål, som `fruits[-1]`.
 
-However, in JavaScript it won't work. The result will be `undefined`, because the index in square brackets is treated literally.
+Men i JavaScript virker det ikke. Resultatet vil være `undefined`, fordi indekset i firkantede parenteser behandles bogstaveligt. 
 
-We can explicitly calculate the last element index and then access it: `fruits[fruits.length - 1]`.
-
-```js run
-let fruits = ["Apple", "Orange", "Plum"];
-
-alert( fruits[fruits.length-1] ); // Plum
-```
-
-A bit cumbersome, isn't it? We need to write the variable name twice.
-
-Luckily, there's a shorter syntax: `fruits.at(-1)`:
+Vi kan eksplicit beregne indekset for det sidste element og derefter få adgang til det: `fruits[fruits.length - 1]`.
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Æble", "Appelsin", "Blomme"];
 
-// same as fruits[fruits.length-1]
-alert( fruits.at(-1) ); // Plum
+alert( fruits[fruits.length-1] ); // Blomme
 ```
 
-In other words, `arr.at(i)`:
-- is exactly the same as `arr[i]`, if `i >= 0`.
-- for negative values of `i`, it steps back from the end of the array.
+En smule besværligt, ikke? Vi skal skrive variabelnavnet to gange.
 
-## Methods pop/push, shift/unshift
+Heldigvis findes der en kortere syntaks: `fruits.at(-1)`:
 
-A [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) is one of the most common uses of an array. In computer science, this means an ordered collection of elements which supports two operations:
+```js run
+let fruits = ["Æble", "Appelsin", "Blomme"];
 
-- `push` appends an element to the end.
-- `shift` get an element from the beginning, advancing the queue, so that the 2nd element becomes the 1st.
+// Samme som fruits[fruits.length-1]
+alert( fruits.at(-1) ); // Blomme
+```
+
+Med andre ord, `arr.at(i)`:
+- er præcis det samme som `arr[i]`, hvis `i >= 0`.
+- for negative værdier af `i`, går det baglæns fra slutningen af arrayet.
+
+## Metoderne pop/push, shift/unshift
+
+En [kø](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) er en af de mest almindelige anvendelser af et array. I datalogi betyder det en ordnet samling af elementer, som understøtter to operationer:
+
+- `push` tilføjer et element til slutningen.
+- `shift` henter et element fra begyndelsen, hvilket flytter køen frem, så det 2. element bliver det 1.
 
 ![](queue.svg)
 
-Arrays support both operations.
+Arrays understøtter begge operationer.
 
-In practice we need it very often. For example, a queue of messages that need to be shown on-screen.
+I praksis har vi ofte brug for det. For eksempel en kø af beskeder, der skal vises på skærmen.
 
-There's another use case for arrays -- the data structure named [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)).
+Der er en anden anvendelse af arrays -- datastrukturen kaldet [stak](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)).
 
-It supports two operations:
+Den understøtter to operationer:
 
-- `push` adds an element to the end.
-- `pop` takes an element from the end.
+- `push` tilføjer et element til slutningen.
+- `pop` henter et element fra slutningen.
 
-So new elements are added or taken always from the "end".
+Så nye elementer tilføjes eller tages altid fra "enden".
 
-A stack is usually illustrated as a pack of cards: new cards are added to the top or taken from the top:
+En stak illustreres normalt som en bunke kort: nye kort tilføjes øverst eller tages fra øverst:
 
 ![](stack.svg)
 
-For stacks, the latest pushed item is received first, that's also called LIFO (Last-In-First-Out) principle. For queues, we have FIFO (First-In-First-Out).
+For stakke modtages det senest tilføjede element først, det kaldes også LIFO-princippet (Last-In-First-Out). For køer har vi FIFO (First-In-First-Out).
 
-Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements, both to/from the beginning or the end.
+Arrays i JavaScript kan fungere både som en kø og som en stak. De tillader dig at tilføje/fjerne elementer både i starten og i slutningen.
+I datalogi kaldes datastrukturen, der tillader dette, for en [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
 
-In computer science, the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
-
-**Methods that work with the end of the array:**
+**Metoder, der arbejder med slutningen af arrayet:**
 
 `pop`
-: Extracts the last element of the array and returns it:
+: Trækker det sidste element ud af arrayet og returnerer det:
 
     ```js run
-    let fruits = ["Apple", "Orange", "Pear"];
+    let fruits = ["Æble", "Appelsin", "Blomme"];
 
-    alert( fruits.pop() ); // remove "Pear" and alert it
+    alert( fruits.pop() ); // fjern "Blomme" og vis det
 
-    alert( fruits ); // Apple, Orange
+    alert( fruits ); // Æble, Appelsin
     ```
 
-    Both `fruits.pop()` and `fruits.at(-1)` return the last element of the array, but `fruits.pop()` also modifies the array by removing it.
+    Både `fruits.pop()` og `fruits.at(-1)` returnerer det sidste element i arrayet, men `fruits.pop()` ændrer også arrayet ved at fjerne det.
 
 `push`
-: Append the element to the end of the array:
+: Tilføjer elementet til slutningen af arrayet:
 
     ```js run
-    let fruits = ["Apple", "Orange"];
+    let fruits = ["Æble", "Appelsin"];
 
-    fruits.push("Pear");
+    fruits.push("Blomme");
 
-    alert( fruits ); // Apple, Orange, Pear
+    alert( fruits ); // Æble, Appelsin, Blomme
     ```
 
-    The call `fruits.push(...)` is equal to `fruits[fruits.length] = ...`.
+    Kaldet `fruits.push(...)` svarer til `fruits[fruits.length] = ...`.
 
-**Methods that work with the beginning of the array:**
+**Metoder, der arbejder med begyndelsen af arrayet:**
 
 `shift`
-: Extracts the first element of the array and returns it:
+: Trækker det første element ud af arrayet og returnerer det:
 
     ```js run
-    let fruits = ["Apple", "Orange", "Pear"];
+    let fruits = ["Æble", "Appelsin", "Blomme"];
 
-    alert( fruits.shift() ); // remove Apple and alert it
+    alert( fruits.shift() ); // fjern "Æble" og vis det
 
-    alert( fruits ); // Orange, Pear
+    alert( fruits ); // Appelsin, Blomme
     ```
 
 `unshift`
-: Add the element to the beginning of the array:
+: Tilføjer elementet til begyndelsen af arrayet:
 
     ```js run
-    let fruits = ["Orange", "Pear"];
+    let fruits = ["Appelsin", "Blomme"];
 
-    fruits.unshift('Apple');
+    fruits.unshift('Æble');
 
-    alert( fruits ); // Apple, Orange, Pear
+    alert( fruits ); // Æble, Appelsin, Blomme
     ```
 
-Methods `push` and `unshift` can add multiple elements at once:
+Metoderne `push` og `unshift` kan tilføje flere elementer på én gang:
 
 ```js run
-let fruits = ["Apple"];
+let fruits = ["Æble"];
 
-fruits.push("Orange", "Peach");
-fruits.unshift("Pineapple", "Lemon");
+fruits.push("Appelsin", "Blomme");
+fruits.unshift("Ananas", "Citron");
 
-// ["Pineapple", "Lemon", "Apple", "Orange", "Peach"]
+// ["Ananas", "Citron", "Æble", "Appelsin", "Blomme"]
 alert( fruits );
 ```
 
-## Internals
+## Intern opbygning
 
-An array is a special kind of object. The square brackets used to access a property `arr[0]` actually come from the object syntax. That's essentially the same as `obj[key]`, where `arr` is the object, while numbers are used as keys.
+Et array er en særlig slags objekt. De firkantede parenteser, der bruges til at få adgang til en egenskab `arr[0]`, stammer faktisk fra objektsyntaksen. Det er i bund og grund det samme som `obj[key]`, hvor `arr` er objektet, mens tal bruges som nøgler.
 
-They extend objects providing special methods to work with ordered collections of data and also the `length` property. But at the core it's still an object.
+De udvider objekter ved at tilbyde specielle metoder til at arbejde med ordnede samlinger af data og også `length`-egenskaben. Men i kernen er det stadig et objekt.
 
-Remember, there are only eight basic data types in JavaScript (see the [Data types](info:types) chapter for more info). Array is an object and thus behaves like an object.
+Husk, der kun er otte grundlæggende datatyper i JavaScript (se kapitlet [Datatyper](info:types) for mere info). Array er et objekt og opfører sig derfor som et objekt.
 
-For instance, it is copied by reference:
+For eksempel kopieres det ved reference:
 
 ```js run
-let fruits = ["Banana"]
+let fruits = ["Banan"]
 
-let arr = fruits; // copy by reference (two variables reference the same array)
+let arr = fruits; // kopier ved reference (to variabler refererer til samme array)
 
 alert( arr === fruits ); // true
 
-arr.push("Pear"); // modify the array by reference
+arr.push("Pære"); // ændrer arrayet ved reference
 
-alert( fruits ); // Banana, Pear - 2 items now
+alert( fruits ); // Banan, Pære - 2 elementer nu
 ```
 
-...But what makes arrays really special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+...Men det, der virkelig gør arrays specielle, er deres interne repræsentation. Motoren forsøger at gemme elementerne i et sammenhængende hukommelsesområde, ét efter ét, som vist på illustrationerne i dette kapitel, og der er også andre optimeringer for at få arrays til at køre virkelig hurtigt.
 
-But they all break if we quit working with an array as with an "ordered collection" and start working with it as if it were a regular object.
+Men de bryder alle sammen, hvis vi holder op med at arbejde med et array som en "ordnet samling" og begynder at arbejde med det, som om det var et almindeligt objekt.
 
-For instance, technically we can do this:
+For eksempel kan vi teknisk set gøre dette:
 
 ```js
-let fruits = []; // make an array
+let fruits = []; // lav et array
 
-fruits[99999] = 5; // assign a property with the index far greater than its length
+fruits[99999] = 5; // tildel en egenskab med et indeks langt større end længden
 
-fruits.age = 25; // create a property with an arbitrary name
+fruits.age = 25; // opret en egenskab med et vilkårligt navn
 ```
 
-That's possible, because arrays are objects at their base. We can add any properties to them.
+Det er muligt, fordi arrays i bund og grund er objekter. Vi kan tilføje vilkårlige egenskaber til dem.
 
-But the engine will see that we're working with the array as with a regular object. Array-specific optimizations are not suited for such cases and will be turned off, their benefits disappear.
+Men motoren vil se, at vi arbejder med arrayet som med et almindeligt objekt. Array-specifikke optimeringer er ikke egnede til sådanne tilfælde og vil blive slået fra, deres fordele forsvinder.
 
-The ways to misuse an array:
+Måder at misbruge et array på:
 
-- Add a non-numeric property like `arr.test = 5`.
-- Make holes, like: add `arr[0]` and then `arr[1000]` (and nothing between them).
-- Fill the array in the reverse order, like `arr[1000]`, `arr[999]` and so on.
+- Tilføj en ikke-numerisk egenskab som `arr.test = 5`.
+- Lav huller, som: tilføj `arr[0]` og derefter `arr[1000]` (og intet imellem).
+- Fyld arrayet i omvendt rækkefølge, som `arr[1000]`, `arr[999]` og så videre.
 
-Please think of arrays as special structures to work with the *ordered data*. They provide special methods for that. Arrays are carefully tuned inside JavaScript engines to work with contiguous ordered data, please use them this way. And if you need arbitrary keys, chances are high that you actually require a regular object `{}`.
+Tænk venligst på arrays som specielle strukturer til at arbejde med *ordnede data*. De tilbyder specielle metoder til det. Arrays er omhyggeligt optimeret i JavaScript-motorer til at arbejde med sammenhængende ordnede data, brug dem venligst på denne måde. Og hvis du har brug for vilkårlige nøgler, er chancerne store for, at du faktisk har brug for et almindeligt objekt `{}`.
 
 ## Performance
 
-Methods `push/pop` run fast, while `shift/unshift` are slow.
+Metoderne `push/pop` kører hurtigt, mens `shift/unshift` er langsomme.
 
 ![](array-speed.svg)
 
-Why is it faster to work with the end of an array than with its beginning? Let's see what happens during the execution:
+Hvorfor er det hurtigere at arbejde med enden af et array end med begyndelsen? Lad os se, hvad der sker under udførelsen:
 
 ```js
-fruits.shift(); // take 1 element from the start
+fruits.shift(); // fjern 1 element fra starten
 ```
 
-It's not enough to take and remove the element with the index `0`. Other elements need to be renumbered as well.
+Det er ikke nok at tage og fjerne elementet med indekset `0`. De andre elementer skal også omnummereres.
 
-The `shift` operation must do 3 things:
+`shift`-operationen skal gøre 3 ting:
 
-1. Remove the element with the index `0`.
-2. Move all elements to the left, renumber them from the index `1` to `0`, from `2` to `1` and so on.
-3. Update the `length` property.
+1. Fjern elementet med indekset `0`.
+2. Flyt alle elementer til venstre, omnummerer dem fra indekset `1` til `0`, fra `2` til `1` og så videre.
+3. Opdater `length`-egenskaben.
 
 ![](array-shift.svg)
 
-**The more elements in the array, the more time to move them, more in-memory operations.**
+**Jo flere elementer i arrayet, jo længere tid tager det at flytte dem, flere operationer i hukommelsen.**
 
-The similar thing happens with `unshift`: to add an element to the beginning of the array, we need first to move existing elements to the right, increasing their indexes.
+Det samme sker med `unshift`: for at tilføje et element i begyndelsen af arrayet, skal vi først flytte eksisterende elementer til højre, hvilket øger deres indekser.
 
-And what's with `push/pop`? They do not need to move anything. To extract an element from the end, the `pop` method cleans the index and shortens `length`.
+Og hvad med `push/pop`? De behøver ikke at flytte noget. For at fjerne et element fra enden, rydder `pop`-metoden indekset og forkorter `length`.
 
-The actions for the `pop` operation:
+Handlingerne for `pop`-operationen:
 
 ```js
-fruits.pop(); // take 1 element from the end
+fruits.pop(); // fjern 1 element fra enden
 ```
 
 ![](array-pop.svg)
 
-**The `pop` method does not need to move anything, because other elements keep their indexes. That's why it's blazingly fast.**
+**`pop`-metoden behøver ikke at flytte noget, fordi de andre elementer beholder deres indekser. Derfor er den lynhurtig.**
 
-The similar thing with the `push` method.
+Det samme gælder for `push`-metoden.
 
-## Loops
+## Løkker
 
-One of the oldest ways to cycle array items is the `for` loop over indexes:
+En af de traditionelle måder at gennemløbe array-elementer på er ved at bruge `for`-loopet over indekser:
 
 ```js run
-let arr = ["Apple", "Orange", "Pear"];
+let arr = ["Æble", "Appelsin", "Pære"];
 
 *!*
 for (let i = 0; i < arr.length; i++) {
@@ -323,101 +322,101 @@ for (let i = 0; i < arr.length; i++) {
 }
 ```
 
-But for arrays there is another form of loop, `for..of`:
+Men for arrays er der en anden form for løkke, `for..of`:
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Æble", "Appelsin", "Blomme"];
 
-// iterates over array elements
+// itererer over array-elementer
 for (let fruit of fruits) {
   alert( fruit );
 }
 ```
 
-The `for..of` doesn't give access to the number of the current element, just its value, but in most cases that's enough. And it's shorter.
+`for..of` giver ikke adgang til nummeret på det aktuelle element, kun dets værdi, men i de fleste tilfælde er det nok. Og det er kortere.
 
-Technically, because arrays are objects, it is also possible to use `for..in`:
+Teknisk set, fordi arrays er objekter, er det også muligt at bruge `for..in`:
 
 ```js run
-let arr = ["Apple", "Orange", "Pear"];
+let arr = ["Æble", "Appelsin", "Pære"];
 
 *!*
 for (let key in arr) {
 */!*
-  alert( arr[key] ); // Apple, Orange, Pear
+  alert( arr[key] ); // Æble, Appelsin, Pære
 }
 ```
 
-But that's actually a bad idea. There are potential problems with it:
+Men det er faktisk en dårlig idé. Der er potentielle problemer med det:
 
-1. The loop `for..in` iterates over *all properties*, not only the numeric ones.
+1. Løkken `for..in` itererer over *alle egenskaber*, ikke kun de numeriske.
 
-    There are so-called "array-like" objects in the browser and in other environments, that *look like arrays*. That is, they have `length` and indexes properties, but they may also have other non-numeric properties and methods, which we usually don't need. The `for..in` loop will list them though. So if we need to work with array-like objects, then these "extra" properties can become a problem.
+    Der findes såkaldte "array-lignende" objekter i browseren og i andre miljøer, som *ligner arrays*. Det vil sige, de har `length` og indeks-egenskaber, men de kan også have andre ikke-numeriske egenskaber og metoder, som vi normalt ikke har brug for. `for..in`-løkken vil dog liste dem. Så hvis vi skal arbejde med array-lignende objekter, kan disse "ekstra" egenskaber blive et problem.
 
-2. The `for..in` loop is optimized for generic objects, not arrays, and thus is 10-100 times slower. Of course, it's still very fast. The speedup may only matter in bottlenecks. But still we should be aware of the difference.
+2. `for..in`-løkken er optimeret til generiske objekter, ikke arrays, og derfor er den 10-100 gange langsommere. Selvfølgelig er den stadig meget hurtig. Hastighedsfordelen kan kun være relevant i flaskehalse. Men vi bør stadig være opmærksomme på forskellen.
 
-Generally, we shouldn't use `for..in` for arrays.
+Generelt bør vi ikke bruge `for..in` til arrays.
 
 
-## A word about "length"
+## Lidt detaljer om "length"
 
-The `length` property automatically updates when we modify the array. To be precise, it is actually not the count of values in the array, but the greatest numeric index plus one.
+`length`-egenskaben opdateres automatisk, når vi ændrer arrayet. For at være præcis, er det faktisk ikke antallet af værdier i arrayet, men den største numeriske indeks plus én.
 
-For instance, a single element with a large index gives a big length:
+For eksempel, et enkelt element med en stor indeks giver en stor længde:
 
 ```js run
 let fruits = [];
-fruits[123] = "Apple";
+fruits[123] = "Æble";
 
 alert( fruits.length ); // 124
 ```
 
-Note that we usually don't use arrays like that.
+Bemærk, at vi normalt ikke bruger arrays på den måde.
 
-Another interesting thing about the `length` property is that it's writable.
+En anden interessant ting ved `length`-egenskaben er, at den kan skrives til.
 
-If we increase it manually, nothing interesting happens. But if we decrease it, the array is truncated. The process is irreversible, here's the example:
+Hvis vi øger den manuelt, sker der ikke noget interessant. Men hvis vi mindsker den, bliver arrayet forkortet. Processen er irreversibel, her er et eksempel:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
 
-arr.length = 2; // truncate to 2 elements
+arr.length = 2; // forkort til 2 elementer
 alert( arr ); // [1, 2]
 
-arr.length = 5; // return length back
-alert( arr[3] ); // undefined: the values do not return
+arr.length = 5; // returner længden tilbage
+alert( arr[3] ); // undefined: værdierne kommer ikke tilbage
 ```
 
-So, the simplest way to clear the array is: `arr.length = 0;`.
+Så den enkleste måde at rydde arrayet på er: `arr.length = 0;`.
 
 
 ## new Array() [#new-array]
 
-There is one more syntax to create an array:
+Der er endnu en syntaks til at oprette et array:
 
 ```js
-let arr = *!*new Array*/!*("Apple", "Pear", "etc");
+let arr = *!*new Array*/!*("Æble", "Pære", "osv");
 ```
 
-It's rarely used, because square brackets `[]` are shorter. Also, there's a tricky feature with it.
+Det bruges sjældent, fordi firkantede parenteser `[]` er kortere. Derudover er der en tricky funktion med det.
 
-If `new Array` is called with a single argument which is a number, then it creates an array *without items, but with the given length*.
+Hvis `new Array` kaldes med et enkelt argument, som er et tal, så opretter det et array *uden elementer, men med den givne længde*.
 
-Let's see how one can shoot themselves in the foot:
+Lad os se hvordan man kan skyde sig selv i foden ved at bruge `new Array`:
 
 ```js run
-let arr = new Array(2); // will it create an array of [2] ?
+let arr = new Array(2); // vil det oprette et array med [2] ?
 
-alert( arr[0] ); // undefined! no elements.
+alert( arr[0] ); // undefined! intet element.
 
 alert( arr.length ); // length 2
 ```
 
-To avoid such surprises, we usually use square brackets, unless we really know what we're doing.
+For at undgå sådanne overraskelser bruger vi normalt firkantede parenteser, medmindre vi virkelig ved, hvad vi gør.
 
-## Multidimensional arrays
+## Flerdimensionale arrays
 
-Arrays can have items that are also arrays. We can use it for multidimensional arrays, for example to store matrices:
+Arrays kan have elementer, som også er arrays. Vi kan bruge det til flerdimensionale arrays, for eksempel til at gemme matricer eller tabeller.:
 
 ```js run
 let matrix = [
@@ -426,14 +425,14 @@ let matrix = [
   [7, 8, 9]
 ];
 
-alert( matrix[0][1] ); // 2, the second value of the first inner array
+alert( matrix[0][1] ); // 2, den anden værdi i det første indre array
 ```
 
 ## toString
 
-Arrays have their own implementation of `toString` method that returns a comma-separated list of elements.
+Arrays har deres egen implementering af `toString`-metoden, som returnerer en kommasepareret liste over elementer.
 
-For instance:
+For eksempel, her er et array med tre elementer:
 
 
 ```js run
@@ -443,7 +442,7 @@ alert( arr ); // 1,2,3
 alert( String(arr) === '1,2,3' ); // true
 ```
 
-Also, let's try this:
+Lad os også prøve dette:
 
 ```js run
 alert( [] + 1 ); // "1"
@@ -451,9 +450,9 @@ alert( [1] + 1 ); // "11"
 alert( [1,2] + 1 ); // "1,21"
 ```
 
-Arrays do not have `Symbol.toPrimitive`, neither a viable `valueOf`, they implement only `toString` conversion, so here `[]` becomes an empty string, `[1]` becomes `"1"` and `[1,2]` becomes `"1,2"`.
+Arrays har ikke `Symbol.toPrimitive`, heller ikke en brugbar `valueOf`, de implementerer kun `toString`-konvertering, så her bliver `[]` til en tom streng, `[1]` bliver `"1"` og `[1,2]` bliver `"1,2"`.
 
-When the binary plus `"+"` operator adds something to a string, it converts it to a string as well, so the next step looks like this:
+Når den binære plus `"+"` operator lægger noget til en streng, konverterer den det også til en streng, så næste trin ser sådan ud:
 
 ```js run
 alert( "" + 1 ); // "1"
@@ -461,31 +460,31 @@ alert( "1" + 1 ); // "11"
 alert( "1,2" + 1 ); // "1,21"
 ```
 
-## Don't compare arrays with ==
+## Sammenlign ikke arrays med ==
 
-Arrays in JavaScript, unlike some other programming languages, shouldn't be compared with operator `==`.
+Arrays i JavaScript, i modsætning til nogle andre programmeringssprog, bør ikke sammenlignes med operatoren `==`.
 
-This operator has no special treatment for arrays, it works with them as with any objects.
+Denne operator har ingen særlig behandling for arrays, den fungerer med dem som med enhver anden objekt.
 
-Let's recall the rules:
+Lad os genopfriske reglerne:
 
-- Two objects are equal `==` only if they're references to the same object.
-- If one of the arguments of `==` is an object, and the other one is a primitive, then the object gets converted to primitive, as explained in the chapter <info:object-toprimitive>.
-- ...With an exception of `null` and `undefined` that equal `==` each other and nothing else.
+- To objekter er lige `==` kun hvis de refererer til det samme objekt.
+- Hvis et af argumenterne til `==` er et objekt, og det andet er en primitiv, så bliver objektet konverteret til en primitiv, som forklaret i kapitlet <info:object-toprimitive>.
+- ...Med undtagelse af `null` og `undefined`, som er lige `==` hinanden og intet andet.
 
-The strict comparison `===` is even simpler, as it doesn't convert types.
+Streng sammenligning `===` er endnu enklere, da den ikke konverterer typer.
 
-So, if we compare arrays with `==`, they are never the same, unless we compare two variables that reference exactly the same array.
+Så hvis vi sammenligner arrays med `==`, er de aldrig ens, medmindre vi sammenligner to variabler, der refererer til præcis det samme array.
 
-For example:
+For eksempel:
 ```js run
 alert( [] == [] ); // false
 alert( [0] == [0] ); // false
 ```
 
-These arrays are technically different objects. So they aren't equal. The `==` operator doesn't do item-by-item comparison.
+Disse arrays er teknisk set forskellige objekter. Så de er ikke ens. Operatoren `==` laver ikke element-for-element sammenligning.
 
-Comparison with primitives may give seemingly strange results as well:
+Sammenligning med primitivtyper kan også give tilsyneladende mærkelige resultater:
 
 ```js run
 alert( 0 == [] ); // true
@@ -493,59 +492,60 @@ alert( 0 == [] ); // true
 alert('0' == [] ); // false
 ```
 
-Here, in both cases, we compare a primitive with an array object. So the array `[]` gets converted to primitive for the purpose of comparison and becomes an empty string `''`.
+I begge tilfælde sammenligner vi en primitiv med et array-objekt. Så arrayet `[]` bliver konverteret til en primitiv med henblik på sammenligning og bliver til en tom streng `''`.
 
-Then the comparison process goes on with the primitives, as described in the chapter <info:type-conversions>:
+Sammenligningsprocessen fortsætter derefter med primitivtyperne, som beskrevet i kapitlet <info:type-conversions>:
 
 ```js run
-// after [] was converted to ''
-alert( 0 == '' ); // true, as '' becomes converted to number 0
+// efter [] blev konverteret til ''
+alert( 0 == '' ); // true, da '' bliver konverteret til tallet 0
 
-alert('0' == '' ); // false, no type conversion, different strings
+alert('0' == '' ); // false, ingen typekonvertering, forskellige strenge
 ```
 
-So, how to compare arrays?
+Så, hvordan sammenligner man arrays?
 
-That's simple: don't use the `==` operator. Instead, compare them item-by-item in a loop or using iteration methods explained in the next chapter.
+Det er egentlig simpelt: brug ikke `==` operatoren. Sammenlign dem i stedet element-for-element i en løkke eller ved hjælp af iterationsmetoder, der forklares i det næste kapitel.
 
-## Summary
+## Opsummering
 
-Array is a special kind of object, suited to storing and managing ordered data items.
+Array er en speciel slags objekt, velegnet til at gemme og håndtere ordnede dataelementer.
 
-The declaration:
+Deklarationen:
 
 ```js
-// square brackets (usual)
+// firkantede parenteser (almindeligt)
+
 let arr = [item1, item2...];
 
-// new Array (exceptionally rare)
+// new Array (meget sjældent)
 let arr = new Array(item1, item2...);
 ```
 
-The call to `new Array(number)` creates an array with the given length, but without elements.
+Kaldet til `new Array(number)` opretter et array med den givne længde, men uden elementer.
 
-- The `length` property is the array length or, to be precise, its last numeric index plus one. It is auto-adjusted by array methods.
-- If we shorten `length` manually, the array is truncated.
+- `length`-egenskaben er arrayets længde eller, mere præcist, dets sidste numeriske indeks plus en. Den justeres automatisk af array-metoder.
+- Hvis vi forkorter `length` manuelt, bliver arrayet forkortet.
 
-Getting the elements:
+Hentning af elementer:
 
-- we can get element by its index, like `arr[0]`
-- also we can use `at(i)` method that allows negative indexes. For negative values of `i`, it steps back from the end of the array. If `i >= 0`, it works same as `arr[i]`.
+- vi kan få elementet ved dets indeks, som `arr[0]`
+- vi kan også bruge metoden `at(i)`, som tillader negative indekser. For negative værdier af `i` tæller den baglæns fra slutningen af arrayet. Hvis `i >= 0`, fungerer den som `arr[i]`.
 
-We can use an array as a deque with the following operations:
+Vi kan bruge et array som en deque med følgende operationer:
 
-- `push(...items)` adds `items` to the end.
-- `pop()` removes the element from the end and returns it.
-- `shift()` removes the element from the beginning and returns it.
-- `unshift(...items)` adds `items` to the beginning.
+- `push(...items)` tilføjer `items` til slutningen.
+- `pop()` fjerner elementet fra slutningen og returnerer det.
+- `shift()` fjerner elementet fra begyndelsen og returnerer det.
+- `unshift(...items)` tilføjer `items` til begyndelsen.
 
-To loop over the elements of the array:
-  - `for (let i=0; i<arr.length; i++)` -- works fastest, old-browser-compatible.
-  - `for (let item of arr)` -- the modern syntax for items only,
-  - `for (let i in arr)` -- never use.
+For at gennemløbe elementerne i arrayet, kan vi bruge en af følgende løkker:
+  - `for (let i=0; i<arr.length; i++)` -- virker hurtigst, kompatibel med gamle browsere.
+  - `for (let item of arr)` -- den moderne syntaks for kun elementer,
+  - `for (let i in arr)` -- brug aldrig.
 
-To compare arrays, don't use the `==` operator (as well as `>`, `<` and others), as they have no special treatment for arrays. They handle them as any objects, and it's not what we usually want.
+For at sammenligne arrays, brug ikke `==` operatoren (eller `>`, `<` og andre), da de ikke har nogen særlig behandling for arrays. De håndterer dem som almindelige objekter, og det er ikke, hvad vi normalt ønsker.
 
-Instead you can use `for..of` loop to compare arrays item-by-item.
+I stedet kan du bruge en `for..of` løkke til at sammenligne arrays element-for-element.
 
-We will continue with arrays and study more methods to add, remove, extract elements and sort arrays in the next chapter <info:array-methods>.
+Vi fortsætter med arrays og studerer flere metoder til at tilføje, fjerne, udtrække elementer og sortere arrays i det næste kapitel <info:array-methods>.

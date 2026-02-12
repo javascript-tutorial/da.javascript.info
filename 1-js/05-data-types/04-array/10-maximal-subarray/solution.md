@@ -1,43 +1,42 @@
-# Slow solution
+# Langsom løsning
 
-We can calculate all possible subsums.
+Vi kan beregne alle mulige delsummer.
 
-The simplest way is to take every element and calculate sums of all subarrays starting from it.
-
-For instance, for `[-1, 2, 3, -9, 11]`:
+Den simpleste måde er at tage hvert element og beregne summen af alle delarrays, der starter fra det.
+For eksempel, for `[-1, 2, 3, -9, 11]`:
 
 ```js no-beautify
-// Starting from -1:
+// Startende fra -1:
 -1
 -1 + 2
 -1 + 2 + 3
 -1 + 2 + 3 + (-9)
 -1 + 2 + 3 + (-9) + 11
 
-// Starting from 2:
+// Startende fra 2:
 2
 2 + 3
 2 + 3 + (-9)
 2 + 3 + (-9) + 11
 
-// Starting from 3:
+// Startende fra 3:
 3
 3 + (-9)
 3 + (-9) + 11
 
-// Starting from -9
+// Startende fra -9
 -9
 -9 + 11
 
-// Starting from 11
+// Startende fra 11
 11
 ```
 
-The code is actually a nested loop: the external loop over array elements, and the internal counts subsums starting with the current element.
+Koden er faktisk en indlejret løkke: den ydre løkke går over array-elementerne, og den indre tæller delsummer, der starter med det aktuelle element.
 
 ```js run
 function getMaxSubSum(arr) {
-  let maxSum = 0; // if we take no elements, zero will be returned
+  let maxSum = 0; // hvis vi ikke tager nogle elementer, vil nul blive returneret
 
   for (let i = 0; i < arr.length; i++) {
     let sumFixedStart = 0;
@@ -57,25 +56,25 @@ alert( getMaxSubSum([1, 2, 3]) ); // 6
 alert( getMaxSubSum([100, -9, 2, -3, 5]) ); // 100
 ```
 
-The solution has a time complexity of [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation). In other words, if we increase the array size 2 times, the algorithm will work 4 times longer.
+Løsningen har en tidskompleksitet på [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation). Med andre ord, hvis vi fordobler størrelsen på arrayet, vil algoritmen tage fire gange så lang tid.
 
-For big arrays (1000, 10000 or more items) such algorithms can lead to serious sluggishness.
+For store arrays (1000, 10000 eller flere elementer) kan sådanne algoritmer føre til alvorlig langsommelighed.
 
-# Fast solution
+# Hurtig løsning
 
-Let's walk the array and keep the current partial sum of elements in the variable `s`. If `s` becomes negative at some point, then assign `s=0`. The maximum of all such `s` will be the answer.
+Lad os gå igennem arrayet og holde den nuværende delsum af elementer i variablen `s`. Hvis `s` bliver negativ på et tidspunkt, så sæt `s=0`. Maksimum af alle sådanne `s` vil være svaret.
 
-If the description is too vague, please see the code, it's short enough:
+Hvis beskrivelsen er for vag, så se venligst koden, den er kort nok:
 
 ```js run demo
 function getMaxSubSum(arr) {
   let maxSum = 0;
   let partialSum = 0;
 
-  for (let item of arr) { // for each item of arr
-    partialSum += item; // add it to partialSum
-    maxSum = Math.max(maxSum, partialSum); // remember the maximum
-    if (partialSum < 0) partialSum = 0; // zero if negative
+  for (let item of arr) { // for hvert item af arr
+    partialSum += item; // læg item til partialSum
+    maxSum = Math.max(maxSum, partialSum); // husk maksimum
+    if (partialSum < 0) partialSum = 0; // nul hvis negativ
   }
 
   return maxSum;
@@ -89,6 +88,6 @@ alert( getMaxSubSum([1, 2, 3]) ); // 6
 alert( getMaxSubSum([-1, -2, -3]) ); // 0
 ```
 
-The algorithm requires exactly 1 array pass, so the time complexity is O(n).
+Algoritmen kræver præcis 1 gennemgang af arrayet, så tidskompleksiteten er O(n).
 
-You can find more detailed information about the algorithm here: [Maximum subarray problem](http://en.wikipedia.org/wiki/Maximum_subarray_problem). If it's still not obvious why that works, then please trace the algorithm on the examples above, see how it works, that's better than any words.
+Du kan finde mere detaljeret information om algoritmen her: [Maximum subarray problem](http://en.wikipedia.org/wiki/Maximum_subarray_problem). Hvis det stadig ikke er indlysende, hvorfor det virker, så prøv at følge algoritmen på eksemplerne ovenfor, se hvordan den fungerer, det er ofte bedre end ord.
