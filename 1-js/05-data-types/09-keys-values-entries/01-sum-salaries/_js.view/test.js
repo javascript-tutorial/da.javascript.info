@@ -1,15 +1,15 @@
-describe("sumSalaries", function() {
-  it("returns sum of salaries", function() {
+describe("sumSalaries", function () {
+  it("returner summen af lønninger", function () {
     let salaries = {
       "John": 100,
       "Pete": 300,
       "Mary": 250
     };
 
-    assert.equal( sumSalaries(salaries), 650 );
+    assert.equal(sumSalaries(salaries), 650);
   });
 
-  it("returns 0 for the empty object", function() {
-    assert.strictEqual( sumSalaries({}), 0);
+  it("returnerer 0 for et tomt objekt", function () {
+    assert.strictEqual(sumSalaries({}), 0);
   });
 });
