@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Sum the properties
+# Summen af egenskaberne
 
-There is a `salaries` object with arbitrary number of salaries. 
+Der er et `salaries` objekt med et vilkårligt antal lønninger. 
 
-Write the function `sumSalaries(salaries)` that returns the sum of all salaries using `Object.values` and the `for..of` loop.
+Skriv funktionen `sumSalaries(salaries)`, der returnerer summen af alle lønninger ved hjælp af `Object.values` og `for..of` løkken.
 
-If `salaries` is empty, then the result must be `0`.
+Hvis `salaries` er tom, skal resultatet være `0`.
 
-For instance:
+For eksempel:
 
 ```js
 let salaries = {
