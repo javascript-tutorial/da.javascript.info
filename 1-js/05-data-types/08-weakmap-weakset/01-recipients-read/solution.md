@@ -9,35 +9,35 @@ let messages = [
 
 let readMessages = new WeakSet();
 
-// two messages have been read
+// to beskeder er læst
 readMessages.add(messages[0]);
 readMessages.add(messages[1]);
-// readMessages has 2 elements
+// readMessages har 2 elementer
 
-// ...let's read the first message again!
+// ...lad os læse den første besked igen!
 readMessages.add(messages[0]);
-// readMessages still has 2 unique elements
+// readMessages stadig har 2 unikke elementer
 
-// answer: was the message[0] read?
-alert("Read message 0: " + readMessages.has(messages[0])); // true
+// svar: var message[0] læst?
+alert("Er besked 0 læst: " + readMessages.has(messages[0])); // true
 
 messages.shift();
-// now readMessages has 1 element (technically memory may be cleaned later)
+// nu har readMessages 1 element (teknisk set kan hukommelsen ryddes senere)
 ```
 
-The `WeakSet` allows to store a set of messages and easily check for the existence of a message in it.
+Et `WeakSet` tillader at gemme et sæt af beskeder og nemt kontrollere, om en besked findes i det.
 
-It cleans up itself automatically. The tradeoff is that we can't iterate over it,  can't get "all read messages" from it directly. But we can do it by iterating over all messages and filtering those that are in the set.
+Det rydder automatisk op i sig selv. Ulempen er, at vi ikke kan iterere over det, og vi kan ikke få "alle læste beskeder" direkte fra det. Men vi kan gøre det ved at iterere over alle beskeder og filtrere dem, der er i sættet.
 
-Another, different solution could be to add a property like `message.isRead=true` to a message after it's read. As messages objects are managed by another code, that's generally discouraged, but we can use a symbolic property to avoid conflicts.
+En anden, forskellig løsning kunne være at tilføje en egenskab som `message.isRead=true` til en besked, efter den er læst. Da beskedobjekter styres af en anden kode, er det generelt ikke anbefalet, men vi kan bruge en symbolsk egenskab for at undgå konflikter.
 
-Like this:
+Som dette:
 ```js
-// the symbolic property is only known to our code
+// den symbolske egenskab er kun kendt af vores kode
 let isRead = Symbol("isRead");
 messages[0][isRead] = true;
 ```
 
-Now third-party code probably won't see our extra property.
+Nu vil 3de-parts kode sandsynligvis ikke se vores ekstra egenskab.
 
-Although symbols allow to lower the probability of problems, using `WeakSet` is better from the architectural point of view.
+Selvom symboler reducerer sandsynligheden for problemer, er brugen af `WeakSet` bedre fra et arkitektonisk synspunkt.
