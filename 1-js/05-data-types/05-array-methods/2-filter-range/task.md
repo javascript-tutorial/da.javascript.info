@@ -2,21 +2,21 @@ importance: 4
 
 ---
 
-# Filter range
+# Filtrer interval
 
-Write a function `filterRange(arr, a, b)` that gets an array `arr`, looks for elements with values higher or equal to `a` and lower or equal to `b` and return a result as an array.
+Skriv en funktion `filterRange(arr, a, b)` der modtager et array `arr`, leder efter elementer med værdier højere eller lig med `a` og lavere eller lig med `b` og returnerer resultatet som et array.
 
-The function should not modify the array. It should return the new array.
+Funktionen må ikke ændre arrayet. Den skal returnere det nye array.
 
-For instance:
+For eksempel:
 
 ```js
 let arr = [5, 3, 8, 1];
 
 let filtered = filterRange(arr, 1, 4); 
 
-alert( filtered ); // 3,1 (matching values)
+alert( filtered ); // 3,1 (matchende værdier)
 
-alert( arr ); // 5,3,8,1 (not modified)
+alert( arr ); // 5,3,8,1 (ikke ændret)
 ```
 

@@ -25,9 +25,9 @@ alert( usersMapped[0].id ); // 1
 alert( usersMapped[0].fullName ); // John Smith
 ```
 
-Please note that in the arrow functions we need to use additional brackets. 
+Vær opmærksom på at med arrow funktionen vi brug for yderligere parenteser. 
 
-We can't write like this:
+:
 ```js
 let usersMapped = users.map(user => *!*{*/!*
   fullName: `${user.name} ${user.surname}`,
@@ -35,9 +35,9 @@ let usersMapped = users.map(user => *!*{*/!*
 });
 ```
 
-As we remember, there are two arrow functions: without body `value => expr` and with body `value => {...}`.
+Som vi husker, er der to typer arrow funktioner: uden krop `value => expr` og med krop `value => {...}`.
 
-Here JavaScript would treat `{` as the start of function body, not the start of the object. The workaround is to wrap them in the "normal" brackets:
+I dette tilfælde vil JavaScript behandle `{` som starten på funktionskroppen, ikke starten på objektet. Løsningen er at omslutte dem i "almindelige" parenteser:
 
 ```js
 let usersMapped = users.map(user => *!*({*/!*
@@ -46,6 +46,6 @@ let usersMapped = users.map(user => *!*({*/!*
 }));
 ```
 
-Now fine.
+Nu virker det fint.
 
 

@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Create keyed object from array
+# Opret objekt med nøgler fra array
 
-Let's say we received an array of users in the form `{id:..., name:..., age:... }`.
+Lad os antage, at vi har modtaget et array af brugere i formen `{id:..., name:..., age:... }`.
 
-Create a function `groupById(arr)` that creates an object from it, with `id` as the key, and array items as values.
+Opret en funktion `groupById(arr)`, der opretter et objekt ud fra det, med `id` som nøgle, og array-elementerne som værdier.
 
-For example:
+For eksempel:
 
 ```js
 let users = [
@@ -20,7 +20,7 @@ let users = [
 let usersById = groupById(users);
 
 /*
-// after the call we should have:
+efter kaldet skal vi have:
 
 usersById = {
   john: {id: 'john', name: "John Smith", age: 20},
@@ -30,8 +30,8 @@ usersById = {
 */
 ```
 
-Such function is really handy when working with server data.
+Sådan en funktion er virkelig praktisk, når man arbejder med serverdata.
 
-In this task we assume that `id` is unique. There may be no two array items with the same `id`.
+I denne opgave antager vi at `id` er unik. Der må ikke være to array-elementer med samme `id`.
 
-Please use array `.reduce` method in the solution.
+Brug array-metoden `.reduce` i løsningen.

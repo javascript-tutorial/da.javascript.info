@@ -1,6 +1,6 @@
-Let's walk the array items:
-- For each item we'll check if the resulting array already has that item.
-- If it is so, then ignore, otherwise add to results.
+Lad os gennemgå array-elementerne:
+- For hvert element tjekker vi, om det resulterende array allerede indeholder det element.
+- Hvis det er tilfældet, ignorerer vi det, ellers tilføjer vi det til resultatet.
 
 ```js run demo
 function unique(arr) {
@@ -22,18 +22,21 @@ let strings = ["Hare", "Krishna", "Hare", "Krishna",
 alert( unique(strings) ); // Hare, Krishna, :-O
 ```
 
-The code works, but there's a potential performance problem in it.
+Koden virker, men der er et potentielt ydelsesproblem i den.
 
-The method `result.includes(str)` internally walks the array `result` and compares each element against `str` to find the match.
+Metoden `result.includes(str)` gennemgår internt arrayet `result` og sammenligner hvert element med `str` for at finde et match.
 
-So if there are `100` elements in `result` and no one matches `str`, then it will walk the whole `result` and do exactly `100` comparisons. And if `result` is large, like `10000`, then there would be `10000` comparisons.
+Så hvis der er `100` elementer i `result` og ingen matcher `str`, vil den gennemgå hele `result` og lave præcis `100` sammenligninger. Og hvis `result` er stort, som `10000`, vil der være `10000` sammenligninger.
 
-That's not a problem by itself, because JavaScript engines are very fast, so walk `10000` array is a matter of microseconds.
+Det er ikke et problem i sig selv, fordi JavaScript-motorer er meget hurtige, så det at gennemgå et array med `10000` elementer kun tager mikrosekunder.
 
-But we do such test for each element of `arr`, in the `for` loop.
+Men vi laver sådan en test for hvert element i `arr` i `for`-løkken.
 
-So if `arr.length` is `10000` we'll have something like `10000*10000` = 100 millions of comparisons. That's a lot.
+Så hvis `arr.length` er `10000`, vil vi have noget i retning af `10000*10000` = 100 millioner sammenligninger. Det er meget.
 
-So the solution is only good for small arrays.
+Så løsningen er kun god til små arrays.
 
-Further in the chapter <info:map-set> we'll see how to optimize it.
+Senere i kapitlet <info:map-set> vil vi se, hvordan man optimerer det.
+
+NB: I moderne JavaScript kan vi bruge en [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) til at gøre det samme på en mere effektiv måde.
+

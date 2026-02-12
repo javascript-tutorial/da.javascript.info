@@ -1,3 +1,3 @@
 
-- Please note how methods are stored. They are simply added to `this.methods` property.
-- All tests and numeric conversions are done in the `calculate` method. In future it may be extended to support more complex expressions.
+- Vær opmærksom på, hvordan metoderne gemmes. De tilføjes simpelthen til `this.methods`-egenskaben.
+- Alle tests og numeriske konverteringer udføres i `calculate`-metoden. I fremtiden kan den udvides til at understøtte mere komplekse udtryk.

@@ -2,24 +2,24 @@ importance: 5
 
 ---
 
-# Create an extendable calculator
+# Opret en lommeregner, der kan udvides
 
-Create a constructor function `Calculator` that creates "extendable" calculator objects.
+Opret en konstruktørfunktion `Calculator`, der skaber "udvidelige" lommeregner-objekter.
 
-The task consists of two parts.
+Opgaven består af to dele.
 
-1. First, implement the method `calculate(str)` that takes a string like `"1 + 2"` in the format "NUMBER operator NUMBER" (space-delimited) and returns the result. Should understand plus `+` and minus `-`.
+1. Først skal du implementere metoden `calculate(str)`, der tager en streng som `"1 + 2"` i formatet "NUMMER operator NUMMER" (adskilt af mellemrum) og returnerer resultatet. Den skal forstå plus `+` og minus `-`.
 
-    Usage example:
+    Brugseksempel:
 
     ```js
     let calc = new Calculator;
 
     alert( calc.calculate("3 + 7") ); // 10
     ```
-2. Then add the method `addMethod(name, func)` that teaches the calculator a new operation. It takes the operator `name` and the two-argument function `func(a,b)` that implements it.
+2. Så skal du tilføje metoden `addMethod(name, func)`, der lærer lommeregneren en ny operation. Den tager operatorens `name` og den to-argument funktion `func(a,b)`, der implementerer den.
 
-    For instance, let's add the multiplication `*`, division `/` and power `**`:
+    For eksempel, lad os tilføje multiplikation `*`, division `/` og potens `**`:
 
     ```js
     let powerCalc = new Calculator;
@@ -31,6 +31,6 @@ The task consists of two parts.
     alert( result ); // 8
     ```
 
-- No parentheses or complex expressions in this task.
-- The numbers and the operator are delimited with exactly one space.
-- There may be error handling if you'd like to add it.
+- Ingen parenteser eller komplekse udtryk i denne opgave.
+- Tallene og operatoren er adskilt med præcis ét mellemrum.
+- Der kan tilføjes fejlhåndtering, hvis du ønsker det.

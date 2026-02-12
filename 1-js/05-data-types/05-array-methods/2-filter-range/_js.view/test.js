@@ -1,21 +1,21 @@
-describe("filterRange", function() {
+describe("filterRange", function () {
 
-  it("returns the filtered values", function() {
+  it("returner de filtrerede værdier", function () {
 
     let arr = [5, 3, 8, 1];
 
-    let filtered = filterRange(arr, 1, 4); 
+    let filtered = filterRange(arr, 1, 4);
 
     assert.deepEqual(filtered, [3, 1]);
   });
 
-  it("doesn't change the array", function() {
+  it("ændrer ikke arrayet", function () {
 
     let arr = [5, 3, 8, 1];
 
-    let filtered = filterRange(arr, 1, 4); 
+    let filtered = filterRange(arr, 1, 4);
 
-    assert.deepEqual(arr, [5,3,8,1]);
+    assert.deepEqual(arr, [5, 3, 8, 1]);
   });
 
 });
