@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Array operations.
+# Array operationer.
 
-Let's try 5 array operations.
+Lad os prøve 5 array operationer.
 
-1. Create an array `styles` with items "Jazz" and "Blues".
-2. Append "Rock-n-Roll" to the end.
-3. Replace the value in the middle with "Classics". Your code for finding the middle value should work for any arrays with odd length.
-4. Strip off the first value of the array and show it.
-5. Prepend `Rap` and `Reggae` to the array.
+1. Opret et array `styles` med elementerne "Jazz" og "Blues".
+2. Tilføj "Rock-n-Roll" til slutningen.
+3. Erstat værdien i midten med "Classics". Din kode til at finde midterværdien skal fungere for alle arrays med ulige længde.
+4. Fjern den første værdi i arrayet og vis den.
+5. Tilføj `Rap` og `Reggae` til begyndelsen af arrayet.
 
-The array in the process:
+Arrayet i processen skal se sådan ud:
 
 ```js no-beautify
 Jazz, Blues

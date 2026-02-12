@@ -2,14 +2,14 @@ importance: 4
 
 ---
 
-# Sum input numbers
+# Opsummer indtastede tal
 
-Write the function `sumInput()` that:
+Skriv en funktion `sumInput()` som:
 
-- Asks the user for values using `prompt` and stores the values in the array.
-- Finishes asking when the user enters a non-numeric value, an empty string, or presses "Cancel".
-- Calculates and returns the sum of array items.
+- Spørger brugeren om værdier med `prompt` og gemmer værdierne i et array.
+- Stopper med at spørge, når brugeren indtaster en ikke-numerisk værdi, en tom streng eller trykker "Annuller".
+- Beregner og returnerer summen af arrayets elementer.
 
-P.S. A zero `0` is a valid number, please don't stop the input on zero.
+P.S. Et nul `0` er et gyldigt tal, så stop ikke inputtet ved nul.
 
 [demo]

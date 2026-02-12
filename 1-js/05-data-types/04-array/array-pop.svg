@@ -1,1 +1,104 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="479" height="148" viewBox="0 0 479 148"><defs><style>@import url(https://fonts.googleapis.com/css?family=Open+Sans:bold,italic,bolditalic%7CPT+Mono);@font-face{font-family:&apos;PT Mono&apos;;font-weight:700;font-style:normal;src:local(&apos;PT MonoBold&apos;),url(/font/PTMonoBold.woff2) format(&apos;woff2&apos;),url(/font/PTMonoBold.woff) format(&apos;woff&apos;),url(/font/PTMonoBold.ttf) format(&apos;truetype&apos;)}</style></defs><g id="array" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g id="array-pop.svg"><path id="Rectangle-1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M103 82h35v52h-35z"/><path id="Rectangle-2" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M139 82h35v52h-35z"/><text id="0" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="117" y="112">0</tspan></text><text id="1" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="154" y="112">1</tspan></text><path id="Rectangle-3" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M175 82h35v52h-35z"/><text id="2" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="190" y="112">2</tspan></text><path id="Rectangle-4" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M211 82h35v52h-35z"/><text id="3" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="226" y="112">3</tspan></text><text id="&quot;Apple&quot;" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" transform="rotate(-89 114.044 48.948)"><tspan x="84.544" y="53.448">&quot;Apple&quot;</tspan></text><text id="&quot;Orange&quot;" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" transform="rotate(-89 151.053 44.448)"><tspan x="117.053" y="48.948">&quot;Orange&quot;</tspan></text><text id="&quot;Pear&quot;" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" transform="rotate(-89 187.535 52.448)"><tspan x="162.035" y="56.948">&quot;Pear&quot;</tspan></text><text id="&quot;Lemon&quot;" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" transform="rotate(-89 229.044 48.948)"><tspan x="199.544" y="53.448">&quot;Lemon&quot;</tspan></text><text id="length-=-4" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="8" y="59">length = 4</tspan></text><path id="Shape" fill="#C06334" d="M306 137l9-16.606h-6V78h-6v42.394h-6z" transform="rotate(-90 306 107.5)"/><text id="clear" fill="#C06334" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="287" y="96">clear</tspan></text><path id="Rectangle-7" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M363 82h35v52h-35z"/><path id="Rectangle-5" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M399 82h35v52h-35z"/><text id="-1" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="377" y="112">0</tspan></text><text id="-2" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="414" y="112">1</tspan></text><path id="Rectangle-6" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M435 82h35v52h-35z"/><text id="-3" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="450" y="112">2</tspan></text><text id="&quot;Apple&quot;" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" transform="rotate(-89 374.044 48.948)"><tspan x="344.544" y="53.448">&quot;Apple&quot;</tspan></text><text id="&quot;Orange&quot;" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" transform="rotate(-89 411.053 44.448)"><tspan x="377.053" y="48.948">&quot;Orange&quot;</tspan></text><text id="&quot;Pear&quot;" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" transform="rotate(-89 447.535 52.448)"><tspan x="422.035" y="56.948">&quot;Pear&quot;</tspan></text><text id="length-=-3" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="263" y="59">length = 3</tspan></text></g></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 479 162.11">
+  <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #fbf2ec;
+        stroke: #dbaf88;
+        stroke-width: 2px;
+      }
+
+      .st0, .st1 {
+        fill-rule: evenodd;
+      }
+
+      .st2, .st3, .st4, .st5 {
+        isolation: isolate;
+      }
+
+      .st3 {
+        fill: #af6e24;
+      }
+
+      .st3, .st4, .st5 {
+        font-size: 14px;
+      }
+
+      .st3, .st5 {
+        font-family: PTMono-Regular, 'PT Mono';
+      }
+
+      .st1, .st4, .st5 {
+        fill: #c06334;
+      }
+
+      .st4 {
+        font-family: OpenSans, 'Open Sans';
+      }
+    </style>
+  </defs>
+  <g id="array">
+    <g id="array-pop.svg">
+      <path id="Rectangle-1" class="st0" d="M103,96.11h35v52h-35v-52Z"/>
+      <path id="Rectangle-2" class="st0" d="M139,96.11h35v52h-35v-52Z"/>
+      <g id="_x30_" class="st2">
+        <text class="st3" transform="translate(117 126.11)"><tspan x="0" y="0">0</tspan></text>
+      </g>
+      <g id="_x31_" class="st2">
+        <text class="st3" transform="translate(154 126.11)"><tspan x="0" y="0">1</tspan></text>
+      </g>
+      <path id="Rectangle-3" class="st0" d="M175,96.11h35v52h-35v-52Z"/>
+      <g id="_x32_" class="st2">
+        <text class="st3" transform="translate(190 126.11)"><tspan x="0" y="0">2</tspan></text>
+      </g>
+      <path id="Rectangle-4" class="st0" d="M211,96.11h35v52h-35v-52Z"/>
+      <g id="_x33_" class="st2">
+        <text class="st5" transform="translate(226 126.11)"><tspan x="0" y="0">3</tspan></text>
+      </g>
+      <g id="_x22_Apple_x22_" class="st2">
+        <text class="st3" transform="translate(118.03 92.63) rotate(-89)"><tspan x="0" y="0">&quot;Æble&quot;</tspan></text>
+      </g>
+      <g id="_x22_Orange_x22_" class="st2">
+        <text class="st3" transform="translate(154.96 92.63) rotate(-89)"><tspan x="0" y="0">&quot;Appelsin&quot;</tspan></text>
+      </g>
+      <g id="_x22_Pear_x22_" class="st2">
+        <text class="st3" transform="translate(191.59 92.13) rotate(-89)"><tspan x="0" y="0">&quot;Pære&quot;</tspan></text>
+      </g>
+      <g id="_x22_Lemon_x22_" class="st2">
+        <text class="st5" transform="translate(233.03 92.63) rotate(-89)"><tspan x="0" y="0">&quot;Citron&quot;</tspan></text>
+      </g>
+      <g id="length-_x3D_-4" class="st2">
+        <text class="st3" transform="translate(8 73.11)"><tspan x="0" y="0">length = 4</tspan></text>
+      </g>
+      <path id="Shape" class="st1" d="M335.5,121.61l-16.61-9v6h-42.39v6h42.39v6l16.61-9Z"/>
+      <g id="clear" class="st2">
+        <text class="st4" transform="translate(287 110.11)"><tspan x="0" y="0">clear</tspan></text>
+      </g>
+      <path id="Rectangle-7" class="st0" d="M363,96.11h35v52h-35v-52Z"/>
+      <path id="Rectangle-5" class="st0" d="M399,96.11h35v52h-35v-52Z"/>
+      <g id="_x2D_1" class="st2">
+        <text class="st3" transform="translate(377 126.11)"><tspan x="0" y="0">0</tspan></text>
+      </g>
+      <g id="_x2D_2" class="st2">
+        <text class="st3" transform="translate(414 126.11)"><tspan x="0" y="0">1</tspan></text>
+      </g>
+      <path id="Rectangle-6" class="st0" d="M435,96.11h35v52h-35v-52Z"/>
+      <g id="_x2D_3" class="st2">
+        <text class="st3" transform="translate(450 126.11)"><tspan x="0" y="0">2</tspan></text>
+      </g>
+      <g id="_x22_Apple_x22_1" data-name="_x22_Apple_x22_" class="st2">
+        <text class="st3" transform="translate(378.03 92.63) rotate(-89)"><tspan x="0" y="0">&quot;Æble&quot;</tspan></text>
+      </g>
+      <g id="_x22_Orange_x22_1" data-name="_x22_Orange_x22_" class="st2">
+        <text class="st3" transform="translate(414.96 92.63) rotate(-89)"><tspan x="0" y="0">&quot;Appelsin&quot;</tspan></text>
+      </g>
+      <g id="_x22_Pear_x22_1" data-name="_x22_Pear_x22_" class="st2">
+        <text class="st3" transform="translate(451.59 92.13) rotate(-89)"><tspan x="0" y="0">&quot;Pære&quot;</tspan></text>
+      </g>
+      <g id="length-_x3D_-3" class="st2">
+        <text class="st3" transform="translate(263 73.11)"><tspan x="0" y="0">length = 3</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
