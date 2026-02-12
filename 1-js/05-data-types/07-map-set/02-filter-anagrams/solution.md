@@ -1,6 +1,6 @@
-To find all anagrams, let's split every word to letters and sort them. When letter-sorted, all anagrams are same.
+For at finde alle anagrammer kan vi opdele hvert ord i bogstaver og sortere dem. Når bogstaverne er sorteret, er alle anagrammer ens.
 
-For instance:
+For eksempel:
 
 ```
 nap, pan -> anp
@@ -9,14 +9,14 @@ cheaters, hectares, teachers -> aceehrst
 ...
 ```
 
-We'll use the letter-sorted variants as map keys to store only one value per each key:
+Vi bruger de bogstav-sorterede varianter som map-nøgler for kun at gemme én værdi per nøgle:
 
 ```js run
 function aclean(arr) {
   let map = new Map();
 
   for (let word of arr) {
-    // split the word by letters, sort them and join back
+    // opsplit ordet i bogstaver, sorter dem og sæt dem sammen igen
 *!*
     let sorted = word.toLowerCase().split('').sort().join(''); // (*)
 */!*
@@ -31,9 +31,9 @@ let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
 alert( aclean(arr) );
 ```
 
-Letter-sorting is done by the chain of calls in the line `(*)`.
+Bogstav-sortering udføres af kæden af kald i linjen `(*)`.
 
-For convenience let's split it into multiple lines:
+For nemheds skyld deler vi det op i flere linjer:
 
 ```js
 let sorted = word // PAN
@@ -43,21 +43,21 @@ let sorted = word // PAN
   .join(''); // anp
 ```
 
-Two different words `'PAN'` and `'nap'` receive the same letter-sorted form `'anp'`.
+To forskellige ord `'PAN'` og `'nap'` får den samme bogstav-sorterede form `'anp'`.
 
-The next line put the word into the map:
+Næste linje sætter ordet ind i map'et med den bogstav-sorterede form som nøgle:
 
 ```js
 map.set(sorted, word);
 ```
 
-If we ever meet a word the same letter-sorted form again, then it would overwrite the previous value with the same key in the map. So we'll always have at maximum one word per letter-form.
+Hvis vi nogensinde møder et ord med den samme bogstav-sorterede form igen, vil det overskrive den tidligere værdi med den samme nøgle i map'et. Så vi vil altid have højst ét ord per bogstav-form.
 
-At the end `Array.from(map.values())` takes an iterable over map values (we don't need keys in the result) and returns an array of them.
+Til sidst tager `Array.from(map.values())` en iterable over map-værdier (vi behøver ikke nøgler i resultatet) og returnerer et array af dem.
 
-Here we could also use a plain object instead of the `Map`, because keys are strings.
+Her kunne vi også bruge et almindeligt objekt i stedet for `Map`, fordi nøglerne er strenge.
 
-That's how the solution can look:
+En løsning kan se sådan ud:
 
 ```js run demo
 function aclean(arr) {
