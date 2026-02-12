@@ -2,17 +2,17 @@ importance: 4
 
 ---
 
-# Filter unique array members
+# Filtrer unikke array-medlemmer
 
-Let `arr` be an array.
+Lad `arr` være et array.
 
-Create a function `unique(arr)` that should return an array with unique items of `arr`.
+Opret en funktion `unique(arr)`, der skal returnere et array med unikke elementer fra `arr`.
 
-For instance:
+For eksempel:
 
 ```js
 function unique(arr) {
-  /* your code */
+  /* din kode */
 }
 
 let strings = ["Hare", "Krishna", "Hare", "Krishna",

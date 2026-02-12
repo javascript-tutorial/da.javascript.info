@@ -1,111 +1,111 @@
-# Array methods
+# Array-metoder
 
-Arrays provide a lot of methods. To make things easier, in this chapter, they are split into groups.
+Array giver os mange metoder. For at gøre det nemmere, er de i dette kapitel opdelt i grupper.
 
-## Add/remove items
+## Tilføj/fjern elementer
 
-We already know methods that add and remove items from the beginning or the end:
+Vi kender allerede metoder, der tilføjer og fjerner elementer fra begyndelsen eller slutningen:
 
-- `arr.push(...items)` -- adds items to the end,
-- `arr.pop()` -- extracts an item from the end,
-- `arr.shift()` -- extracts an item from the beginning,
-- `arr.unshift(...items)` -- adds items to the beginning.
+- `arr.push(...items)` -- tilføjer elementer til slutningen,
+- `arr.pop()` -- fjerner et element fra slutningen,
+- `arr.shift()` -- fjerner et element fra begyndelsen,
+- `arr.unshift(...items)` -- tilføjer elementer til begyndelsen.
 
-Here are a few others.
+Her er et par andre.
 
 ### splice
 
-How to delete an element from the array?
+Hvordan sletter man et element fra arrayet?
 
-The arrays are objects, so we can try to use `delete`:
+Array er objekter, så vi kan prøve at bruge `delete`:
 
 ```js run
-let arr = ["I", "go", "home"];
+let arr = ["Jeg", "går", "hjem"];
 
-delete arr[1]; // remove "go"
+delete arr[1]; // fjern "går"
 
 alert( arr[1] ); // undefined
 
-// now arr = ["I",  , "home"];
+// nu er  arr = ["Jeg",  , "hjem"];
 alert( arr.length ); // 3
 ```
 
-The element was removed, but the array still has 3 elements, we can see that `arr.length == 3`.
+Elementet blev slettet, men har stadig 3 elementer. Vi kan se, at `arr.length == 3`.
 
-That's natural, because `delete obj.key` removes a value by the `key`. It's all it does. Fine for objects. But for arrays we usually want the rest of the elements to shift and occupy the freed place. We expect to have a shorter array now.
+Det er naturligt, fordi `delete obj.key` fjerner en værdi ved `key`. Det er alt, hvad det gør. Fint for objekter. Men for arrays ønsker vi normalt, at resten af elementerne skal skifte og optage det frigjorte sted. Vi forventer at have et kortere array nu.
 
-So, special methods should be used.
+Derfor skal der bruges specielle metoder.
 
-The [arr.splice](mdn:js/Array/splice) method is a Swiss army knife for arrays. It can do everything: insert, remove and replace elements.
+Metoden [arr.splice](mdn:js/Array/splice) er en schweizerkniv for arrays. Den kan det hele: indsætte, fjerne og erstatte elementer.
 
-The syntax is:
+Syntaksen er:
 
 ```js
 arr.splice(start[, deleteCount, elem1, ..., elemN])
 ```
 
-It modifies `arr` starting from the index `start`: removes `deleteCount` elements and then inserts `elem1, ..., elemN` at their place. Returns the array of removed elements.
+Den ændrer `arr` startende fra indekset `start`: fjerner `deleteCount` elementer og indsætter derefter `elem1, ..., elemN` på deres plads. Returnerer arrayet af fjernede elementer.
 
-This method is easy to grasp by examples.
+Metoden er nok nemmere at forstå ved hjælp af eksempler.
 
-Let's start with the deletion:
+Lad os starte med sletning:
 
 ```js run
-let arr = ["I", "study", "JavaScript"];
+let arr = ["Jeg", "studerer", "JavaScript"];
 
 *!*
-arr.splice(1, 1); // from index 1 remove 1 element
+arr.splice(1, 1); // fra indeks 1 fjern 1 element
 */!*
 
-alert( arr ); // ["I", "JavaScript"]
+alert( arr ); // ["Jeg", "JavaScript"]
 ```
 
-Easy, right? Starting from the index `1` it removed `1` element.
+Nem, ikke? Fra indeks `1` fjernede den `1` element.
 
-In the next example, we remove 3 elements and replace them with the other two:
+I det næste eksempel fjerner vi 3 elementer og erstatter dem med de to andre:
 
 ```js run
-let arr = [*!*"I", "study", "JavaScript",*/!* "right", "now"];
+let arr = [*!*"Jeg", "studerer", "JavaScript",*/!* "lige", "nu"];
 
-// remove 3 first elements and replace them with another
-arr.splice(0, 3, "Let's", "dance");
+// fjerner de 3 første elementer og erstatter dem med andre
+arr.splice(0, 3, "Lad", "os", "danse");
 
-alert( arr ) // now [*!*"Let's", "dance"*/!*, "right", "now"]
+alert( arr ) // nu ["Lad", "os", "danse", "lige", "nu"]
 ```
 
-Here we can see that `splice` returns the array of removed elements:
+Her kan vi se, at `splice` returnerer arrayet af fjernede elementer:
 
 ```js run
-let arr = [*!*"I", "study",*/!* "JavaScript", "right", "now"];
+let arr = [*!*"Jeg", "studerer",*/!* "JavaScript", "lige", "nu"];
 
-// remove 2 first elements
+// fjern de 2 første elementer
 let removed = arr.splice(0, 2);
 
-alert( removed ); // "I", "study" <-- array of removed elements
+alert( removed ); // "Jeg", "studerer" <-- array af fjernede elementer
 ```
 
-The `splice` method is also able to insert the elements without any removals. For that, we need to set `deleteCount` to `0`:
+Metoden `splice` kan også indsætte elementer uden at fjerne nogen. For det skal vi sætte `deleteCount` til `0`:
 
 ```js run
-let arr = ["I", "study", "JavaScript"];
+let arr = ["Jeg", "studerer", "JavaScript"];
 
-// from index 2
-// delete 0
-// then insert "complex" and "language"
-arr.splice(2, 0, "complex", "language");
+// fra indeks 2
+// slet 0
+// indsæt "et", "kompleks" og "sprog"
+arr.splice(2, 0, "et", "kompleks", "sprog");
 
-alert( arr ); // "I", "study", "complex", "language", "JavaScript"
+alert( arr ); // "Jeg", "studerer", "kompleks", "sprog", "JavaScript"
 ```
 
-````smart header="Negative indexes allowed"
-Here and in other array methods, negative indexes are allowed. They specify the position from the end of the array, like here:
+````smart header="Negative indeks er tilladt"
+Her og i andre array-metoder er negative indekser tilladt. De angiver positionen fra slutningen af arrayet, som her:
 
 ```js run
 let arr = [1, 2, 5];
 
-// from index -1 (one step from the end)
-// delete 0 elements,
-// then insert 3 and 4
+// fra indeks -1 (et skridt fra slutningen)
+// slet 0 elementer,
+// indsæt derefter 3 og 4
 arr.splice(-1, 0, 3, 4);
 
 alert( arr ); // 1,2,3,4,5
@@ -114,134 +114,134 @@ alert( arr ); // 1,2,3,4,5
 
 ### slice
 
-The method [arr.slice](mdn:js/Array/slice) is much simpler than the similar-looking `arr.splice`.
+Metoden [arr.slice](mdn:js/Array/slice) er meget enklere end den lignende `arr.splice`.
 
-The syntax is:
+Syntaksen er:
 
 ```js
 arr.slice([start], [end])
 ```
 
-It returns a new array copying to it all items from index `start` to `end` (not including `end`). Both `start` and `end` can be negative, in that case position from array end is assumed.
+Den returnerer et nyt array, der kopierer alle elementer fra indeks `start` til `end` (eksklusiv `end`). Både `start` og `end` kan være negative, i så fald antages positionen fra slutningen af arrayet.
 
-It's similar to a string method `str.slice`, but instead of substrings, it makes subarrays.
+Det ligner string-metoden `str.slice`, men i stedet for substrings laver den subarrays.
 
-For instance:
+For eksempel:
 
 ```js run
 let arr = ["t", "e", "s", "t"];
 
-alert( arr.slice(1, 3) ); // e,s (copy from 1 to 3)
+alert( arr.slice(1, 3) ); // e,s (kopier fra 1 til 3)
 
-alert( arr.slice(-2) ); // s,t (copy from -2 till the end)
+alert( arr.slice(-2) ); // s,t (kopier fra -2 til slutningen)
 ```
 
-We can also call it without arguments: `arr.slice()` creates a copy of `arr`. That's often used to obtain a copy for further transformations that should not affect the original array.
+Vi kan også kalde den uden argumenter: `arr.slice()` laver en kopi af `arr`. Det bruges ofte til at få en kopi til videre transformationer, der ikke skal påvirke det oprindelige array.
 
 ### concat
 
-The method [arr.concat](mdn:js/Array/concat) creates a new array that includes values from other arrays and additional items.
+Metoden [arr.concat](mdn:js/Array/concat) opretter et nyt array der inkluderer værdierne fra andre arrays og eventuelle yderligere elementer.
 
-The syntax is:
+Syntaksen er:
 
 ```js
 arr.concat(arg1, arg2...)
 ```
 
-It accepts any number of arguments -- either arrays or values.
+Den accepterer et vilkårligt antal argumenter -- enten arrays eller værdier.
 
-The result is a new array containing items from `arr`, then `arg1`, `arg2` etc.
+Resultatet er et nyt array, der indeholder elementer fra `arr`, derefter `arg1`, `arg2` osv.
 
-If an argument `argN` is an array, then all its elements are copied. Otherwise, the argument itself is copied.
+Hvis et argument `argN` er et array, kopieres alle dets elementer. Ellers kopieres argumentet selv.
 
-For instance:
+For eksempel:
 
 ```js run
 let arr = [1, 2];
 
-// create an array from: arr and [3,4]
+// Opret et array fra: arr og [3,4]
 alert( arr.concat([3, 4]) ); // 1,2,3,4
 
-// create an array from: arr and [3,4] and [5,6]
+// Opret et array fra: arr og [3,4] og [5,6]
 alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
 
-// create an array from: arr and [3,4], then add values 5 and 6
+// Opret et array fra: arr og [3,4], og tilføj derefter værdierne 5 og 6
 alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
 ```
 
-Normally, it only copies elements from arrays. Other objects, even if they look like arrays, are added as a whole:
+Normalt kopierer den kun elementer fra arrays. Andre objekter, selvom de ligner arrays, tilføjes som helhed:
 
 ```js run
 let arr = [1, 2];
 
 let arrayLike = {
-  0: "something",
+  0: "noget",
   length: 1
 };
 
 alert( arr.concat(arrayLike) ); // 1,2,[object Object]
 ```
 
-...But if an array-like object has a special `Symbol.isConcatSpreadable` property, then it's treated as an array by `concat`: its elements are added instead:
+...Men hvis et array-lignende objekt har en speciel `Symbol.isConcatSpreadable` egenskab, behandles det som et array af `concat`: dets elementer tilføjes i stedet:
 
 ```js run
 let arr = [1, 2];
 
 let arrayLike = {
-  0: "something",
-  1: "else",
+  0: "noget",
+  1: "andet",
 *!*
   [Symbol.isConcatSpreadable]: true,
 */!*
   length: 2
 };
 
-alert( arr.concat(arrayLike) ); // 1,2,something,else
+alert( arr.concat(arrayLike) ); // 1,2,noget,andet
 ```
 
-## Iterate: forEach
+## Iteration: forEach
 
-The [arr.forEach](mdn:js/Array/forEach) method allows to run a function for every element of the array.
+Metoden [arr.forEach](mdn:js/Array/forEach) tillader at køre en funktion for hvert element i arrayet.
 
-The syntax:
+Syntaksen er:
 ```js
 arr.forEach(function(item, index, array) {
-  // ... do something with an item
+  // ... gør noget med elementet
 });
 ```
 
-For instance, this shows each element of the array:
+For eksempel, dette viser hvert element i arrayet:
 
 ```js run
-// for each element call alert
+// for hvert element kald alert
 ["Bilbo", "Gandalf", "Nazgul"].forEach(alert);
 ```
 
-And this code is more elaborate about their positions in the target array:
+Og denne kode er mere detaljeret om deres positioner i mål-arrayet:
 
 ```js run
 ["Bilbo", "Gandalf", "Nazgul"].forEach((item, index, array) => {
-  alert(`${item} is at index ${index} in ${array}`);
+  alert(`${item} er ved indeks ${index} i ${array}`);
 });
 ```
 
-The result of the function (if it returns any) is thrown away and ignored.
+Resultatet af funktionen (hvis den returnerer noget) kasseres og ignoreres.
 
 
-## Searching in array
+## Søgning i array
 
-Now let's cover methods that search in an array.
+Lad os nu dække metoder, der søger i et array.
 
-### indexOf/lastIndexOf and includes
+### indexOf/lastIndexOf og includes
 
-The methods [arr.indexOf](mdn:js/Array/indexOf) and [arr.includes](mdn:js/Array/includes) have the similar syntax and do essentially the same as their string counterparts, but operate on items instead of characters:
+Metoderne [arr.indexOf](mdn:js/Array/indexOf) og [arr.includes](mdn:js/Array/includes) har en lignende syntaks og gør stort set det samme som deres string-modstykker, men opererer på elementer i stedet for tegn:
 
-- `arr.indexOf(item, from)` -- looks for `item` starting from index `from`, and returns the index where it was found, otherwise `-1`.
-- `arr.includes(item, from)` -- looks for `item` starting from index `from`, returns `true` if found.
+- `arr.indexOf(item, from)` -- leder efter `item` startende fra indeks `from`, og returnerer indekset hvor det blev fundet, ellers `-1`.
+- `arr.includes(item, from)` -- leder efter `item` startende fra indeks `from`, returnerer `true` hvis fundet.
 
-Usually, these methods are used with only one argument: the `item` to search. By default, the search is from the beginning.
+Normalt bruges disse metoder med kun ét argument: det `item` der skal søges efter. Som standard er søgningen fra starten.
 
-For instance:
+For eksempel:
 
 ```js run
 let arr = [1, 0, false];
@@ -253,53 +253,53 @@ alert( arr.indexOf(null) ); // -1
 alert( arr.includes(1) ); // true
 ```
 
-Please note that `indexOf` uses the strict equality `===` for comparison. So, if we look for `false`, it finds exactly `false` and not the zero.
+Bemærk, at `indexOf` bruger streng lighed `===` til sammenligning. Så hvis vi leder efter `false`, finder den præcis `false` og ikke nul.
 
-If we want to check if `item` exists in the array and don't need the index, then `arr.includes` is preferred.
+Hvis vi vil tjekke, om `item` findes i arrayet og ikke har brug for indekset, er `arr.includes` at foretrække.
 
-The method [arr.lastIndexOf](mdn:js/Array/lastIndexOf) is the same as `indexOf`, but looks for from right to left.
+Metoden [arr.lastIndexOf](mdn:js/Array/lastIndexOf) er den samme som `indexOf`, men søger fra højre mod venstre.
 
 ```js run
-let fruits = ['Apple', 'Orange', 'Apple']
+let fruits = ['Æble', 'Appelsin', 'Æble']
 
-alert( fruits.indexOf('Apple') ); // 0 (first Apple)
-alert( fruits.lastIndexOf('Apple') ); // 2 (last Apple)
+alert( fruits.indexOf('Æble') ); // 0 (første Æble)
+alert( fruits.lastIndexOf('Æble') ); // 2 (sidste Æble)
 ```
 
-````smart header="The `includes` method handles `NaN` correctly"
-A minor, but noteworthy feature of `includes` is that it correctly handles `NaN`, unlike `indexOf`:
+````smart header="Metoden `includes` håndterer `NaN` korrekt"
+En lille, men bemærkelsesværdig funktion ved `includes` er, at den korrekt håndterer `NaN`, i modsætning til `indexOf`:
 
 ```js run
 const arr = [NaN];
-alert( arr.indexOf(NaN) ); // -1 (wrong, should be 0)
-alert( arr.includes(NaN) );// true (correct)
+alert( arr.indexOf(NaN) ); // -1 (forkert, burde være 0)
+alert( arr.includes(NaN) );// true (korrekt)
 ```
-That's because `includes` was added to JavaScript much later and uses the more up-to-date comparison algorithm internally.
+Dette er fordi `includes` blev tilføjet til JavaScript meget senere og bruger den mere opdaterede sammenligningsalgoritme internt.
 ````
 
-### find and findIndex/findLastIndex
+### find og findIndex/findLastIndex
 
-Imagine we have an array of objects. How do we find an object with a specific condition?
+Forestil dig, at vi har et array af objekter. Hvordan finder vi et objekt med en bestemt betingelse?
 
-Here the [arr.find(fn)](mdn:js/Array/find) method comes in handy.
+Her kommer metoden [arr.find(fn)](mdn:js/Array/find) til hjælp.
 
-The syntax is:
+Syntaksen er:
 ```js
 let result = arr.find(function(item, index, array) {
-  // if true is returned, item is returned and iteration is stopped
-  // for falsy scenario returns undefined
+  // hvis true returneres, returneres item og iterationen stoppes
+  // for falsy scenarier returneres undefined
 });
 ```
 
-The function is called for elements of the array, one after another:
+Funktionen kaldes for elementer i arrayet, et efter et:
 
-- `item` is the element.
-- `index` is its index.
-- `array` is the array itself.
+- `item` er elementet.
+- `index` er dets indeks.
+- `array` er selve arrayet.
 
-If it returns `true`, the search is stopped, the `item` is returned. If nothing is found, `undefined` is returned.
+Hvis det returnerer `true`, stoppes søgningen, og `item` returneres. Hvis intet findes, returneres `undefined`.
 
-For example, we have an array of users, each with the fields `id` and `name`. Let's find the one with `id == 1`:
+For eksempel, vi har et array af brugere, hver med felterne `id` og `name`. Lad os finde den med `id == 1`:
 
 ```js run
 let users = [
@@ -313,15 +313,15 @@ let user = users.find(item => item.id == 1);
 alert(user.name); // John
 ```
 
-In real life, arrays of objects are a common thing, so the `find` method is very useful.
+I virkelige projekter er arrays af objekter en almindelig ting, så `find`-metoden er meget nyttig.
 
-Note that in the example we provide to `find` the function `item => item.id == 1` with one argument. That's typical, other arguments of this function are rarely used.
+Bemærk, at i eksemplet giver vi kun ét argument til `find` funktionen `item => item.id == 1`. Det er typisk, andre argumenter til denne funktion bruges sjældent.
 
-The [arr.findIndex](mdn:js/Array/findIndex) method has the same syntax but returns the index where the element was found instead of the element itself. The value of `-1` is returned if nothing is found.
+Metoden [arr.findIndex](mdn:js/Array/findIndex) har samme syntaks, men returnerer indekset hvor elementet blev fundet i stedet for elementet selv. Værdien `-1` returneres hvis intet findes.
 
-The [arr.findLastIndex](mdn:js/Array/findLastIndex) method is like `findIndex`, but searches from right to left, similar to `lastIndexOf`.
+Metoden [arr.findLastIndex](mdn:js/Array/findLastIndex) er som `findIndex`, men søger fra højre mod venstre, ligesom `lastIndexOf`.
 
-Here's an example:
+Her er et eksempel:
 
 ```js run
 let users = [
@@ -331,29 +331,29 @@ let users = [
   {id: 4, name: "John"}
 ];
 
-// Find the index of the first John
+// Find indeks med den første John
 alert(users.findIndex(user => user.name == 'John')); // 0
 
-// Find the index of the last John
+// Find indeks med den sidste John
 alert(users.findLastIndex(user => user.name == 'John')); // 3
 ```
 
 ### filter
 
-The `find` method looks for a single (first) element that makes the function return `true`.
+Metoden `find` søger efter et enkelt (første) element der får funktionen til at returnere `true`.
 
-If there may be many, we can use [arr.filter(fn)](mdn:js/Array/filter).
+Hvis der kan være mange, kan vi bruge [arr.filter(fn)](mdn:js/Array/filter).
 
-The syntax is similar to `find`, but `filter` returns an array of all matching elements:
+Syntaksen er lignende `find`, men `filter` returnerer et array af alle matchende elementer:
 
 ```js
 let results = arr.filter(function(item, index, array) {
-  // if true item is pushed to results and the iteration continues
-  // returns empty array if nothing found
+  // hvis true bliver item tilføjet til results, og iterationen fortsætter
+  // returnerer et tomt array hvis intet findes
 });
 ```
 
-For instance:
+For eksempel:
 
 ```js run
 let users = [
@@ -362,31 +362,31 @@ let users = [
   {id: 3, name: "Mary"}
 ];
 
-// returns array of the first two users
+// returnerer et array med de første to brugere
 let someUsers = users.filter(item => item.id < 3);
 
 alert(someUsers.length); // 2
 ```
 
-## Transform an array
+## Transformér et array
 
-Let's move on to methods that transform and reorder an array.
+Lad os gå videre til metoder, der transformerer og omarrangerer et array.
 
 ### map
 
-The [arr.map](mdn:js/Array/map) method is one of the most useful and often used.
+Metoden [arr.map](mdn:js/Array/map) er en af de mest nyttige og ofte brugte.
 
-It calls the function for each element of the array and returns the array of results.
+Den kalder funktionen for hvert element i arrayet og returnerer arrayet af resultater.
 
-The syntax is:
+Syntaksen er:
 
 ```js
 let result = arr.map(function(item, index, array) {
-  // returns the new value instead of item
+  // returner den nye værdi i stedet for item
 });
 ```
 
-For instance, here we transform each element into its length:
+For eksempel, her transformerer vi hvert element til dets længde:
 
 ```js run
 let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
@@ -395,42 +395,42 @@ alert(lengths); // 5,7,6
 
 ### sort(fn)
 
-The call to [arr.sort()](mdn:js/Array/sort) sorts the array *in place*, changing its element order.
+Kaldet til [arr.sort()](mdn:js/Array/sort) sorterer arrayet *i sig selv*, og ændrer dermed rækkefølgen af dets egne elementer.
 
-It also returns the sorted array, but the returned value is usually ignored, as `arr` itself is modified.
+Det returnerer også det sorterede array, men den returnerede værdi ignoreres normalt, da `arr` selv bliver ændret.
 
-For instance:
+For eksempel:
 
 ```js run
 let arr = [ 1, 2, 15 ];
 
-// the method reorders the content of arr
+// metoden omarrangerer indholdet af arr
 arr.sort();
 
 alert( arr );  // *!*1, 15, 2*/!*
 ```
 
-Did you notice anything strange in the outcome?
+Bemærkede du noget mærkeligt i resultatet?
 
-The order became `1, 15, 2`. Incorrect. But why?
+Rækkefølgen blev `1, 15, 2`. Forkert. Men hvorfor?
 
-**The items are sorted as strings by default.**
+**Elementerne sorteres som standard som tekststrenge (string).**
 
-Literally, all elements are converted to strings for comparisons. For strings, lexicographic ordering is applied and indeed `"2" > "15"`.
+Det betyder at alle elementer konverteres til strenge for sammenligninger. For strenge anvendes leksikografisk orden, og faktisk er `"2" > "15"`.
 
-To use our own sorting order, we need to supply a function as the argument of `arr.sort()`.
+For at bruge vores egen sorteringsorden skal vi levere en funktion som argument til `arr.sort()`.
 
-The function should compare two arbitrary values and return:
+Funktionen skal sammenligne to vilkårlige værdier og returnere:
 
 ```js
 function compare(a, b) {
-  if (a > b) return 1; // if the first value is greater than the second
-  if (a == b) return 0; // if values are equal
-  if (a < b) return -1; // if the first value is less than the second
+  if (a > b) return 1; // hvis den første værdi er større end den anden
+  if (a == b) return 0; // hvis værdierne er lige
+  if (a < b) return -1; // hvis den første værdi er mindre end den anden
 }
 ```
 
-For instance, to sort as numbers:
+For eksempel kan vi sortere som tal således:
 
 ```js run
 function compareNumeric(a, b) {
@@ -448,13 +448,13 @@ arr.sort(compareNumeric);
 alert(arr);  // *!*1, 2, 15*/!*
 ```
 
-Now it works as intended.
+Nu virker det som forventet.
 
-Let's step aside and think about what's happening. The `arr` can be an array of anything, right? It may contain numbers or strings or objects or whatever. We have a set of *some items*. To sort it, we need an *ordering function* that knows how to compare its elements. The default is a string order.
+Lad os træde et skridt tilbage og tænke over, hvad der sker. `arr` kan være et array af hvad som helst, ikke? Det kan indeholde tal eller strenge eller objekter eller hvad som helst. Vi har et sæt af *nogle elementer*. For at sortere det, har vi brug for en *ordensfunktion*, der ved, hvordan man sammenligner dets elementer. Standard er en strengorden.
 
-The `arr.sort(fn)` method implements a generic sorting algorithm. We don't need to care how it internally works (an optimized [quicksort](https://en.wikipedia.org/wiki/Quicksort) or [Timsort](https://en.wikipedia.org/wiki/Timsort) most of the time). It will walk the array, compare its elements using the provided function and reorder them, all we need is to provide the `fn` which does the comparison.
+Metoden `arr.sort(fn)` implementerer en generisk sorteringsalgoritme. Vi behøver ikke bekymre os om, hvordan den internt fungerer (en optimeret [quicksort](https://en.wikipedia.org/wiki/Quicksort) eller [Timsort](https://en.wikipedia.org/wiki/Timsort) det meste af tiden). Den vil gå igennem arrayet, sammenligne dets elementer ved hjælp af den angivne funktion og omarrangere dem, alt hvad vi behøver er at levere `fn`, som gør sammenligningen.
 
-By the way, if we ever want to know which elements are compared -- nothing prevents us from alerting them:
+Forresten, hvis vi nogensinde vil vide, hvilke elementer der sammenlignes -- intet forhindrer os i at vise dem med alert:
 
 ```js run
 [1, -2, 15, 2, 0, 8].sort(function(a, b) {
@@ -463,12 +463,12 @@ By the way, if we ever want to know which elements are compared -- nothing preve
 });
 ```
 
-The algorithm may compare an element with multiple others in the process, but it tries to make as few comparisons as possible.
+Algoritmen kan sammenligne et element med flere andre i processen, men den prøver at lave så få sammenligninger som muligt.
 
-````smart header="A comparison function may return any number"
-Actually, a comparison function is only required to return a positive number to say "greater" and a negative number to say "less".
+````smart header="En sammenligningsfunktion kan returnere et hvilket som helst tal"
+Faktisk kræves det kun, at en sammenligningsfunktion returnerer et positivt tal for at angive "større" og et negativt tal for at angive "mindre".
 
-That allows to write shorter functions:
+Det tillader os at skrive kortere funktioner:
 
 ```js run
 let arr = [ 1, 2, 15 ];
@@ -479,37 +479,37 @@ alert(arr);  // *!*1, 2, 15*/!*
 ```
 ````
 
-````smart header="Arrow functions for the best"
-Remember [arrow functions](info:arrow-functions-basics)? We can use them here for neater sorting:
+````smart header="Arrow funktioner for de øvede"
+Husk [arrow functions](info:arrow-functions-basics)? Vi kan bruge dem her for en pænere sortering:
 
 ```js
 arr.sort( (a, b) => a - b );
 ```
 
-This works exactly the same as the longer version above.
+Det virker præcis på samme måde som den længere version ovenfor.
 ````
 
-````smart header="Use `localeCompare` for strings"
-Remember [strings](info:string#correct-comparisons) comparison algorithm? It compares letters by their codes by default.
+````smart header="Brug `localeCompare` til strenge"
+Husk du [strings](info:string#correct-comparisons) sammenligningsalgoritmen? Den sammenligner bogstaver efter deres koder som standard.
 
-For many alphabets, it's better to use `str.localeCompare` method to correctly sort letters, such as `Ö`.
+For mange alfabeter er det bedre at bruge metoden `str.localeCompare` for korrekt at sortere bogstaver, såsom `Ö` og "Æ", "Ø" og "Å".
 
-For example, let's sort a few countries in German:
+For eksempel, lad os sortere nogle lande på tysk:
 
 ```js run
 let countries = ['Österreich', 'Andorra', 'Vietnam'];
 
-alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Vietnam, Österreich (wrong)
+alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Vietnam, Österreich (forkert)
 
-alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Vietnam (correct!)
+alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Vietnam (korrekt!)
 ```
 ````
 
 ### reverse
 
-The method [arr.reverse](mdn:js/Array/reverse) reverses the order of elements in `arr`.
+Metoden [arr.reverse](mdn:js/Array/reverse) vender rækkefølgen af elementerne i `arr`.
 
-For instance:
+For eksempel:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -518,15 +518,15 @@ arr.reverse();
 alert( arr ); // 5,4,3,2,1
 ```
 
-It also returns the array `arr` after the reversal.
+Den returnerer også arrayet `arr` efter omvendelsen.
 
-### split and join
+### split og join
 
-Here's the situation from real life. We are writing a messaging app, and the person enters the comma-delimited list of receivers: `John, Pete, Mary`. But for us an array of names would be much more comfortable than a single string. How to get it?
+Her er situationen fra det virkelige liv. Vi skriver en beskedapp, og personen indtaster en kommasepareret liste over modtagere: `John, Pete, Mary`. Men for os ville et array af navne være meget mere bekvemt end en enkelt streng. Hvordan får vi det?
 
-The [str.split(delim)](mdn:js/String/split) method does exactly that. It splits the string into an array by the given delimiter `delim`.
+Metoden [str.split(delim)](mdn:js/String/split) gør præcis det. Den splitter strengen op i et array efter den givne delimiter `delim`.
 
-In the example below, we split by a comma followed by a space:
+I eksempel nedenfor splitter vi efter et komma efterfulgt af et mellemrum:
 
 ```js run
 let names = 'Bilbo, Gandalf, Nazgul';
@@ -534,11 +534,11 @@ let names = 'Bilbo, Gandalf, Nazgul';
 let arr = names.split(', ');
 
 for (let name of arr) {
-  alert( `A message to ${name}.` ); // A message to Bilbo  (and other names)
+  alert( `En besked til ${name}.` ); // En besked til Bilbo  (efterfulgt af de andre navne)
 }
 ```
 
-The `split` method has an optional second numeric argument -- a limit on the array length. If it is provided, then the extra elements are ignored. In practice it is rarely used though:
+Metoden `split` har et valgfrit andet numerisk argument -- en grænse for arrayets længde. Hvis det er angivet, ignoreres de ekstra elementer. I praksis bruges det dog sjældent:
 
 ```js run
 let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
@@ -546,8 +546,8 @@ let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
 alert(arr); // Bilbo, Gandalf
 ```
 
-````smart header="Split into letters"
-The call to `split(s)` with an empty `s` would split the string into an array of letters:
+````smart header="Opsplitning i bogstaver"
+Kaldet til `split(s)` med en tom `s` vil opdele strengen i et array af bogstaver:
 
 ```js run
 let str = "test";
@@ -556,27 +556,27 @@ alert( str.split('') ); // t,e,s,t
 ```
 ````
 
-The call [arr.join(glue)](mdn:js/Array/join) does the reverse to `split`. It creates a string of `arr` items joined by `glue` between them.
+Et kald til [arr.join(glue)](mdn:js/Array/join) gør det modsatte af `split`. Det skaber en streng af `arr` elementer forbundet med `glue` imellem dem.
 
-For instance:
+For eksempel:
 
 ```js run
 let arr = ['Bilbo', 'Gandalf', 'Nazgul'];
 
-let str = arr.join(';'); // glue the array into a string using ;
+let str = arr.join(';'); // limer arrayet sammen til en streng ved hjælp af ;
 
 alert( str ); // Bilbo;Gandalf;Nazgul
 ```
 
 ### reduce/reduceRight
 
-When we need to iterate over an array -- we can use `forEach`, `for` or `for..of`.
+Når vi har brug for at iterere over et array -- kan vi bruge `forEach`, `for` eller `for..of`.
 
-When we need to iterate and return the data for each element -- we can use `map`.
+Når vi har brug for at iterere og returnere data for hvert element -- kan vi bruge `map`.
 
-The methods [arr.reduce](mdn:js/Array/reduce) and [arr.reduceRight](mdn:js/Array/reduceRight) also belong to that breed, but are a little bit more intricate. They are used to calculate a single value based on the array.
+Metoderne [arr.reduce](mdn:js/Array/reduce) og [arr.reduceRight](mdn:js/Array/reduceRight) hører også til den kategori, men er lidt mere indviklede. De bruges til at beregne en enkelt værdi baseret på arrayet.
 
-The syntax is:
+Syntaksen er:
 
 ```js
 let value = arr.reduce(function(accumulator, item, index, array) {
@@ -584,24 +584,24 @@ let value = arr.reduce(function(accumulator, item, index, array) {
 }, [initial]);
 ```
 
-The function is applied to all array elements one after another and "carries on" its result to the next call.
+Funktionen anvendes på alle array-elementer én efter én og "bærer" sit resultat videre til det næste kald.
 
-Arguments:
+Argumenterne for funktionen er:
 
-- `accumulator` -- is the result of the previous function call, equals `initial` the first time (if `initial` is provided).
-- `item` -- is the current array item.
-- `index` -- is its position.
-- `array` -- is the array.
+- `accumulator` -- er resultatet af det forrige funktionskald, svarer til `initial` første gang (hvis `initial` er angivet).
+- `item` -- er det aktuelle array-element.
+- `index` -- er dets position.
+- `array` -- er arrayet.
 
-As the function is applied, the result of the previous function call is passed to the next one as the first argument.
+Efterhånden som funktionen anvendes, bliver resultatet af det forrige funktionskald videregivet til det næste som det første argument.
 
-So, the first argument is essentially the accumulator that stores the combined result of all previous executions. And at the end, it becomes the result of `reduce`.
+Så det første argument er i bund og grund akkumulatoren, der gemmer det kombinerede resultat af alle tidligere udførelser. Og til sidst bliver det resultatet af `reduce`.
 
-Sounds complicated?
+Lyder det kompliceret?
 
-The easiest way to grasp that is by example.
+Den nemmeste måde at forstå det på er ved eksempel.
 
-Here we get a sum of an array in one line:
+Her får vi summen af et array på én linje:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -611,73 +611,73 @@ let result = arr.reduce((sum, current) => sum + current, 0);
 alert(result); // 15
 ```
 
-The function passed to `reduce` uses only 2 arguments, that's typically enough.
+Funktionen, der gives til `reduce`, bruger kun 2 argumenter, det er typisk nok.
 
-Let's see the details of what's going on.
+Lad os se detaljerne i, hvad der sker.
 
-1. On the first run, `sum` is the `initial` value (the last argument of `reduce`), equals `0`, and `current` is the first array element, equals `1`. So the function result is `1`.
-2. On the second run, `sum = 1`, we add the second array element (`2`) to it and return.
-3. On the 3rd run, `sum = 3` and we add one more element to it, and so on...
+1. Ved første kørsel er `sum` den `initial` værdi (det sidste argument til `reduce`), som er `0`, og `current` er det første array-element, som er `1`. Så funktionens resultat er `1`.
+2. Ved anden kørsel er `sum = 1`, vi lægger det andet array-element (`2`) til det og returnerer.
+3. Ved tredje kørsel er `sum = 3` og vi lægger endnu et element til det, og så videre...
 
-The calculation flow:
+Beregningen forløber således:
 
 ![](reduce.svg)
 
-Or in the form of a table, where each row represents a function call on the next array element:
+Eller opsat i form af en tabel, hvor hver række repræsenterer et funktionskald på det næste array-element:
 
 |   |`sum`|`current`|result|
 |---|-----|---------|---------|
-|the first call|`0`|`1`|`1`|
-|the second call|`1`|`2`|`3`|
-|the third call|`3`|`3`|`6`|
-|the fourth call|`6`|`4`|`10`|
-|the fifth call|`10`|`5`|`15`|
+|det før første kald|`0`|`1`|`1`|
+|det andet kald|`1`|`2`|`3`|
+|det tredje kald|`3`|`3`|`6`|
+|det fjerde kald|`6`|`4`|`10`|
+|det femte kald|`10`|`5`|`15`|
 
-Here we can clearly see how the result of the previous call becomes the first argument of the next one.
+Her kan vi tydeligt se, hvordan resultatet af det forrige kald bliver det første argument i det næste.
 
-We also can omit the initial value:
+Vi kan også udelade den initiale værdi, så `reduce` starter med det første element i arrayet som det første argument og starter iterationen fra det andet element:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
 
-// removed initial value from reduce (no 0)
+// fjernet initial værdi fra reduce (ingen 0 til sidst)
 let result = arr.reduce((sum, current) => sum + current);
 
 alert( result ); // 15
 ```
 
-The result is the same. That's because if there's no initial, then `reduce` takes the first element of the array as the initial value and starts the iteration from the 2nd element.
+Resultatet er det samme. Det sker fordi `reduce` tager det første element i arrayet som den initiale værdi og starter iterationen fra det andet element hvis der ikke er angivet en initial værdi.
 
-The calculation table is the same as above, minus the first row.
+Beregningstabellen er den samme som ovenfor, minus den første række.
 
-But such use requires an extreme care. If the array is empty, then `reduce` call without initial value gives an error.
+Men sådan brug kræver at du er lidt opmærksom. Hvis arrayet er tomt, så giver et kald til `reduce` uden initial værdi en fejl.
 
-Here's an example:
+Her er et eksempel:
 
 ```js run
 let arr = [];
 
-// Error: Reduce of empty array with no initial value
-// if the initial value existed, reduce would return it for the empty arr.
+// TypeError: Reduce of empty array with no initial value
+// hvis den initiale værdi eksisterede, ville reduce returnere den for det tomme array.
 arr.reduce((sum, current) => sum + current);
 ```
 
-So it's advised to always specify the initial value.
+Så det anbefales altid at angive den initiale værdi.
 
-The method [arr.reduceRight](mdn:js/Array/reduceRight) does the same but goes from right to left.
+Metoden [arr.reduceRight](mdn:js/Array/reduceRight) gør det samme, men går fra højre mod venstre.
 
 ## Array.isArray
 
-Arrays do not form a separate language type. They are based on objects.
+Et array er ikke en separat datatype. De er baseret på objekter.
 
-So `typeof` does not help to distinguish a plain object from an array:
+Så `typeof` hjælper ikke med at skelne den fra et regulært objekt:
 
 ```js run
 alert(typeof {}); // object
-alert(typeof []); // object (same)
+alert(typeof []); // object (samme)
 ```
 
-...But arrays are used so often that there's a special method for that: [Array.isArray(value)](mdn:js/Array/isArray). It returns `true` if the `value` is an array, and `false` otherwise.
+...Men arrays bruges så ofte, at der findes en speciel metode til det: [Array.isArray(value)](mdn:js/Array/isArray). Den returnerer `true`, hvis `value` er et array, og `false` ellers.
 
 ```js run
 alert(Array.isArray({})); // false
@@ -685,25 +685,25 @@ alert(Array.isArray({})); // false
 alert(Array.isArray([])); // true
 ```
 
-## Most methods support "thisArg"
+## De fleste metoder understøtter "thisArg"
 
-Almost all array methods that call functions -- like `find`, `filter`, `map`, with a notable exception of `sort`, accept an optional additional parameter `thisArg`.
+Næsten alle array-metoder der kalder funktioner -- som `find`, `filter`, `map`, med en bemærkelsesværdig undtagelse af `sort`, accepterer en valgfri ekstra parameter `thisArg`.
 
-That parameter is not explained in the sections above, because it's rarely used. But for completeness, we have to cover it.
+Den parameter er ikke forklaret i afsnittene ovenfor, fordi den sjældent bruges. Men for fuldstændighedens skyld skal vi dække den.
 
-Here's the full syntax of these methods:
+Her er den fulde syntaks for disse metoder:
 
 ```js
 arr.find(func, thisArg);
 arr.filter(func, thisArg);
 arr.map(func, thisArg);
 // ...
-// thisArg is the optional last argument
+// thisArg er det valgfrie sidste argument
 ```
 
-The value of `thisArg` parameter becomes `this` for `func`.
+Værdien af `thisArg`-parameteren bliver `this` for `func`.
 
-For example, here we use a method of `army` object as a filter, and `thisArg` passes the context:
+For eksempel, her bruger vi en metode af `army`-objektet som et filter, og `thisArg` sender konteksten til det:
 
 ```js run
 let army = {
@@ -722,7 +722,7 @@ let users = [
 ];
 
 *!*
-// find users, for who army.canJoin returns true
+// find users, for hvem army.canJoin returnerer true
 let soldiers = users.filter(army.canJoin, army);
 */!*
 
@@ -731,53 +731,53 @@ alert(soldiers[0].age); // 20
 alert(soldiers[1].age); // 23
 ```
 
-If in the example above we used `users.filter(army.canJoin)`, then `army.canJoin` would be called as a standalone function, with `this=undefined`, thus leading to an instant error.
+Hvis vi, i eksemplet ovenfor, brugte `users.filter(army.canJoin)`, ville `army.canJoin` blive kaldt som en selvstændig funktion, med `this=undefined`, hvilket ville føre til en øjeblikkelig fejl.
 
-A call to `users.filter(army.canJoin, army)` can be replaced with `users.filter(user => army.canJoin(user))`, that does the same. The latter is used more often, as it's a bit easier to understand for most people.
+Et kald til `users.filter(army.canJoin, army)` kan erstattes med `users.filter(user => army.canJoin(user))`, som gør det samme. Den sidstnævnte bruges oftere, da den er lidt nemmere at forstå for de fleste.
 
-## Summary
+## Opsummering
 
-A cheat sheet of array methods:
+Et cheat sheet over array-metoder:
 
-- To add/remove elements:
-  - `push(...items)` -- adds items to the end,
-  - `pop()` -- extracts an item from the end,
-  - `shift()` -- extracts an item from the beginning,
-  - `unshift(...items)` -- adds items to the beginning.
-  - `splice(pos, deleteCount, ...items)` -- at index `pos` deletes `deleteCount` elements and inserts `items`.
-  - `slice(start, end)` -- creates a new array, copies elements from index `start` till `end` (not inclusive) into it.
-  - `concat(...items)` -- returns a new array: copies all members of the current one and adds `items` to it. If any of `items` is an array, then its elements are taken.
+- For at tilføje/fjerne elementer:
+  - `push(...items)` -- tilføjer elementer til slutningen,
+  - `pop()` -- fjerner et element fra slutningen,
+  - `shift()` -- fjerner et element fra begyndelsen,
+  - `unshift(...items)` -- tilføjer elementer til begyndelsen.
+  - `splice(pos, deleteCount, ...items)` -- ved indeks `pos` sletter `deleteCount` elementer og indsætter `items`.
+  - `slice(start, end)` -- opretter et nyt array, kopierer elementer fra indekset `start` til `end` (ikke inklusiv) ind i det.
+  - `concat(...items)` -- opretter et nyt array: kopierer alle elementer fra det nuværende og tilføjer `items` til det. Hvis nogen af `items` er et array, tages dets elementer.
 
-- To search among elements:
-  - `indexOf/lastIndexOf(item, pos)` -- look for `item` starting from position `pos`, and return the index or `-1` if not found.
-  - `includes(value)` -- returns `true` if the array has `value`, otherwise `false`.
-  - `find/filter(func)` -- filter elements through the function, return first/all values that make it return `true`.
-  - `findIndex` is like `find`, but returns the index instead of a value.
+- For at søge blandt elementer:
+  - `indexOf/lastIndexOf(item, pos)` -- leder efter `item` startende fra position `pos`, og returnerer indekset eller `-1` hvis ikke fundet.
+  - `includes(value)` -- returnerer `true` hvis arrayet har `value`, ellers `false`.
+  - `find/filter(func)` -- filtrerer elementer gennem funktionen, returnerer første/alle værdier der får den til at returnere `true`.
+  - `findIndex` er som `find`, men returnerer indekset i stedet for en værdi.
 
-- To iterate over elements:
-  - `forEach(func)` -- calls `func` for every element, does not return anything.
+- For at iterere over elementer:
+  - `forEach(func)` -- kalder `func` for hvert element, returnerer ikke noget.
 
-- To transform the array:
-  - `map(func)` -- creates a new array from results of calling `func` for every element.
-  - `sort(func)` -- sorts the array in-place, then returns it.
-  - `reverse()` -- reverses the array in-place, then returns it.
-  - `split/join` -- convert a string to array and back.
-  - `reduce/reduceRight(func, initial)` -- calculate a single value over the array by calling `func` for each element and passing an intermediate result between the calls.
+- For at transformere arrayet:
+  - `map(func)` -- opretter et nyt array fra resultaterne af at kalde `func` for hvert element.
+  - `sort(func)` -- sorterer arrayet på stedet, og returnerer det.
+  - `reverse()` -- vender arrayet om på stedet, og returnerer det.
+  - `split/join` -- konverterer en streng til et array og tilbage.
+  - `reduce/reduceRight(func, initial)` -- beregner en enkelt værdi over arrayet ved at kalde `func` for hvert element og videregive et mellemliggende resultat mellem kald.
 
-- Additionally:
-  - `Array.isArray(value)` checks `value` for being an array, if so returns `true`, otherwise `false`.
+- Derudover:
+  - `Array.isArray(value)` tjekker om `value` er et array, hvis ja returnerer `true`, ellers `false`.
 
-Please note that methods `sort`, `reverse` and `splice` modify the array itself.
+Bemærk venligst, at metoderne `sort`, `reverse` og `splice` ændrer arrayet selv.
 
-These methods are the most used ones, they cover 99% of use cases. But there are few others:
+Disse metoder er de mest brugte, de dækker 99% af brugstilfælde. Men der er få andre:
 
-- [arr.some(fn)](mdn:js/Array/some)/[arr.every(fn)](mdn:js/Array/every) check the array.
+- [arr.some(fn)](mdn:js/Array/some)/[arr.every(fn)](mdn:js/Array/every) tjekker arrayet.
 
-  The function `fn` is called on each element of the array similar to `map`. If any/all results are `true`, returns `true`, otherwise `false`.
+  Funktionen `fn` kaldes på hvert element i arrayet på samme måde som med `map`. Hvis nogen/alle resultater er `true`, returneres `true`, ellers `false`.
 
-  These methods behave sort of like `||` and `&&` operators: if `fn` returns a truthy value, `arr.some()` immediately returns `true` and stops iterating over the rest of items; if `fn` returns a falsy value, `arr.every()` immediately returns `false` and stops iterating over the rest of items as well.
+  Disse metoder opfører sig lidt som `||` og `&&` operatorerne: hvis `fn` returnerer en sand værdi, returnerer `arr.some()` straks `true` og stopper iterationen over de resterende elementer; hvis `fn` returnerer en falsk værdi, returnerer `arr.every()` straks `false` og stopper iterationen over de resterende elementer.
 
-  We can use `every` to compare arrays:
+  Vi kan bruge `every` til at sammenligne arrays:
 
   ```js run
   function arraysEqual(arr1, arr2) {
@@ -787,16 +787,16 @@ These methods are the most used ones, they cover 99% of use cases. But there are
   alert( arraysEqual([1, 2], [1, 2])); // true
   ```
 
-- [arr.fill(value, start, end)](mdn:js/Array/fill) -- fills the array with repeating `value` from index `start` to `end`.
+- [arr.fill(value, start, end)](mdn:js/Array/fill) -- fylder arrayet med `value` fra indeks `start` til `end`.
 
-- [arr.copyWithin(target, start, end)](mdn:js/Array/copyWithin) -- copies its elements from position `start` till position `end` into *itself*, at position `target` (overwrites existing).
+- [arr.copyWithin(target, start, end)](mdn:js/Array/copyWithin) -- kopierer sine elementer fra position `start` til position `end` ind i *sig selv*, ved position `target` (overskriver eksisterende).
 
-- [arr.flat(depth)](mdn:js/Array/flat)/[arr.flatMap(fn)](mdn:js/Array/flatMap) create a new flat array from a multidimensional array.
+- [arr.flat(depth)](mdn:js/Array/flat)/[arr.flatMap(fn)](mdn:js/Array/flatMap) opretter et nyt fladt array fra et multidimensionelt array.
 
-For the full list, see the [manual](mdn:js/Array).
+For the komplette fulde liste, se [manualen](mdn:js/Array).
 
-At first sight, it may seem that there are so many methods, quite difficult to remember. But actually, that's much easier.
+Ved første øjekast kan det virke som om der er så mange metoder, at det er ret svært at huske dem alle. Men ved at huske de vigtigste er du langt.
 
-Look through the cheat sheet just to be aware of them. Then solve the tasks of this chapter to practice, so that you have experience with array methods.
+Kig på cheat sheet ovenfor og øv dig på dem. Løs derefter opgaverne i dette kapitel for at øve dig, så du får erfaring med array-metoder.
 
-Afterwards whenever you need to do something with an array, and you don't know how -- come here, look at the cheat sheet and find the right method. Examples will help you to write it correctly. Soon you'll automatically remember the methods, without specific efforts from your side.
+Herefter, når du har brug for at gøre noget med et array, og du ikke ved hvordan -- kom herhen, kig på cheat sheet og find den rigtige metode. Eksempler vil hjælpe dig med at skrive det korrekt. Snart vil du automatisk huske metoderne, uden specifikke anstrengelser fra din side.

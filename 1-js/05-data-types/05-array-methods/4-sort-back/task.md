@@ -2,12 +2,12 @@ importance: 4
 
 ---
 
-# Sort in decreasing order
+# Sorter i faldende rækkefølge
 
 ```js
 let arr = [5, 2, 1, -10, 8];
 
-// ... your code to sort it in decreasing order
+// ... din kode for at sortere i faldende rækkefølge
 
 alert( arr ); // 8, 5, 2, 1, -10
 ```

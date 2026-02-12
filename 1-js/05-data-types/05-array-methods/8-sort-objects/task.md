@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Sort users by age
+# Sorter brugere efter alder
 
-Write the function `sortByAge(users)` that gets an array of objects with the `age` property and sorts them by `age`.
+Skriv en funktion `sortByAge(users)`, der modtager et array af objekter med egenskaben `age` og sorterer dem efter `age`.
 
-For instance:
+For eksempel:
 
 ```js no-beautify
 let john = { name: "John", age: 25 };
@@ -17,7 +17,7 @@ let arr = [ pete, john, mary ];
 
 sortByAge(arr);
 
-// now: [john, mary, pete]
+// nu: [john, mary, pete]
 alert(arr[0].name); // John
 alert(arr[1].name); // Mary
 alert(arr[2].name); // Pete

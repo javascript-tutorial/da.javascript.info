@@ -2,11 +2,11 @@ importance: 3
 
 ---
 
-# Shuffle an array
+# Bland et array
 
-Write the function `shuffle(array)` that shuffles (randomly reorders) elements of the array.
+Skriv en funktion `shuffle(array)` der blander (tilfældigt omarrangerer) elementerne i arrayet.
 
-Multiple runs of `shuffle` may lead to different orders of elements. For instance:
+Flere køringer af `shuffle` kan føre til forskellige rækkefølger af elementer. For eksempel:
 
 ```js
 let arr = [1, 2, 3];
@@ -22,4 +22,4 @@ shuffle(arr);
 // ...
 ```
 
-All element orders should have an equal probability. For instance, `[1,2,3]` can be reordered as `[1,2,3]` or `[1,3,2]` or `[3,1,2]` etc, with equal probability of each case.
+Alle elementrækkefølger skal have lige stor sandsynlighed. For eksempel kan `[1,2,3]` omarrangeres som `[1,2,3]` eller `[1,3,2]` eller `[3,1,2]` osv., med lige stor sandsynlighed for hver tilfældighed.

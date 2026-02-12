@@ -5,7 +5,7 @@ function Calculator() {
     "+": (a, b) => a + b
   };
 
-  this.calculate = function(str) {
+  this.calculate = function (str) {
 
     let split = str.split(' '),
       a = +split[0],
@@ -19,7 +19,7 @@ function Calculator() {
     return this.methods[op](a, b);
   };
 
-  this.addMethod = function(name, func) {
+  this.addMethod = function (name, func) {
     this.methods[name] = func;
   };
 }
