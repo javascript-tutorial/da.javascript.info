@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Destructuring assignment
+# Destrukturering
 
-We have an object:
+Vi har et objekt:
 
 ```js
 let user = {
@@ -13,18 +13,18 @@ let user = {
 };
 ```
 
-Write the destructuring assignment that reads:
+Skriv en destruktureringsopgave, der læser:
 
-- `name` property into the variable `name`.
-- `years` property into the variable `age`.
-- `isAdmin` property into the variable `isAdmin` (false, if no such property)
+- `name` egenskaben ind i variablen `name`.
+- `years` egenskaben ind i variablen `age`.
+- `isAdmin` egenskaben ind i variablen `isAdmin` (false, hvis der ikke findes en sådan egenskab)
 
-Here's an example of the values after your assignment:
+Her er et eksempel på værdierne efter din opgave:
 
 ```js
 let user = { name: "John", years: 30 };
 
-// your code to the left side:
+// din kode til venstre for lighedstegnet
 // ... = user
 
 alert( name ); // John

@@ -1,28 +1,28 @@
-# Destructuring assignment
+# Deestrukturering
 
-The two most used data structures in JavaScript are `Object` and `Array`.
+De to mest brugte datastrukturer i JavaScript er `Object` og `Array`.
 
-- Objects allow us to create a single entity that stores data items by key.
-- Arrays allow us to gather data items into an ordered list.
+- Objekter tillader os at skabe en enkelt enhed, der gemmer dataelementer efter nøgle.
+- Arrays tillader os at samle dataelementer i en ordnet liste.
 
-However, when we pass these to a function, we may not need all of it. The function might only require certain elements or properties.
+Men når vi sender disse til en funktion, har vi måske ikke brug for det hele. Funktionen kan kun have brug for visse elementer eller egenskaber.
 
-*Destructuring assignment* is a special syntax that allows us to "unpack" arrays or objects into a bunch of variables, as sometimes that's more convenient.
+*Destrukturering tildeling* er en speciel syntaks, der tillader os at "pakke" arrays eller objekter ud i en bunke variabler, da det nogle gange er mere bekvemt.
 
-Destructuring also works well with complex functions that have a lot of parameters, default values, and so on. Soon we'll see that.
+Destrukturering fungerer også godt med komplekse funktioner, der har mange parametre, standardværdier osv. Det vil vi snart se.
 
-## Array destructuring
+## Array destrukturering
 
-Here's an example of how an array is destructured into variables:
+Her er et eksempel på, hvordan et array destruktureres til variabler:
 
 ```js
-// we have an array with a name and surname
+// vi har et array med et navn og efternavn
 let arr = ["John", "Smith"]
 
 *!*
-// destructuring assignment
-// sets firstName = arr[0]
-// and surname = arr[1]
+// destrukturering tildeling
+// sætter firstName = arr[0]
+// og surname = arr[1]
 let [firstName, surname] = arr;
 */!*
 
@@ -30,9 +30,9 @@ alert(firstName); // John
 alert(surname);  // Smith
 ```
 
-Now we can work with variables instead of array members.
+Nu kan vi arbejde med variabler i stedet for medlemmer af et array.
 
-It looks great when combined with `split` or other array-returning methods:
+Det ser godt ud, når det kombineres med `split` eller andre metoder, der returnerer arrays:
 
 ```js run
 let [firstName, surname] = "John Smith".split(' ');
@@ -40,12 +40,12 @@ alert(firstName); // John
 alert(surname);  // Smith
 ```
 
-As you can see, the syntax is simple. There are several peculiar details though. Let's see more examples to understand it better.
+Som du kan se, er syntaksen enkel. Der er dog flere særlige detaljer. Lad os se flere eksempler for at forstå det bedre.
 
-````smart header="\"Destructuring\" does not mean \"destructive\"."
-It's called "destructuring assignment," because it "destructurizes" by copying items into variables. However, the array itself is not modified.
+````smart header="\"Destrukturering\" betyder ikke \"destruktiv\"."
+Det kaldes "destruktureringstildeling", fordi det "destrukturerer" ved at kopiere elementer til variabler. Dog ændres arrayet selv ikke.
 
-It's just a shorter way to write:
+Det er en kortere måde at skrive dette på:
 ```js
 // let [firstName, surname] = arr;
 let firstName = arr[0];
@@ -53,37 +53,37 @@ let surname = arr[1];
 ```
 ````
 
-````smart header="Ignore elements using commas"
-Unwanted elements of the array can also be thrown away via an extra comma:
+````smart header="Ignorer elementer ved hjælp af kommaer"
+Elementer du ikke skal bruge kan også kasseres ved hjælp af et ekstra komma:
 
 ```js run
 *!*
-// second element is not needed
-let [firstName, , title] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
+// andet element er ikke nødvendigt, så det er bare et ekstra komma
+let [firstName, , title] = ["Julius", "Cæsar", "Konsul", "af den Romerske Republik"];
 */!*
 
-alert( title ); // Consul
+alert( title ); // Konsul
 ```
 
-In the code above, the second element of the array is skipped, the third one is assigned to `title`, and the rest of the array items are also skipped (as there are no variables for them).
+I koden ovenfor bliver det andet element i arrayet sprunget over, det tredje tildeles til `title`, og resten af arrayets elementer bliver også sprunget over (da der ikke er nogen variabler til dem).
 ````
 
-````smart header="Works with any iterable on the right-side"
+````smart header="Virker med ethvert itererbart objekt på højre side"
 
-...Actually, we can use it with any iterable, not only arrays:
+...Faktisk kan vi bruge det med ethvert itererbart objekt, ikke kun arrays:
 
 ```js
 let [a, b, c] = "abc"; // ["a", "b", "c"]
 let [one, two, three] = new Set([1, 2, 3]);
 ```
-That works, because internally a destructuring assignment works by iterating over the right value. It's a kind of syntax sugar for calling `for..of` over the value to the right of `=` and assigning the values.
+Det virker fordi tildeling gennem destrukturering itererer over værdien til højre. Det er en slags syntaktisk sukker for at kalde `for..of` over værdien til højre for `=` og tildele værdierne.
 ````
 
 
-````smart header="Assign to anything at the left-side"
-We can use any "assignables" on the left side.
+````smart header="Tildel til hvad som helst på venstre side"
+Vi kan bruge ethvert "tildelbar" element på venstre side.
 
-For instance, an object property:
+For eksempel en objekt-egenskab:
 ```js run
 let user = {};
 [user.name, user.surname] = "John Smith".split(' ');
@@ -94,10 +94,10 @@ alert(user.surname); // Smith
 
 ````
 
-````smart header="Looping with .entries()"
-In the previous chapter, we saw the [Object.entries(obj)](mdn:js/Object/entries) method.
+````smart header="Gennemløb med .entries()"
+I det forrige kapitel så vi [Object.entries(obj)](mdn:js/Object/entries) metoden.
 
-We can use it with destructuring to loop over the keys-and-values of an object:
+Vi kan bruge det med destrukturering til at gennemløbe nøgler og værdier i et objekt:
 
 ```js run
 let user = {
@@ -105,15 +105,15 @@ let user = {
   age: 30
 };
 
-// loop over the keys-and-values
+// Gennemløb over nøgler og værdier
 *!*
 for (let [key, value] of Object.entries(user)) {
 */!*
-  alert(`${key}:${value}`); // name:John, then age:30
+  alert(`${key}:${value}`); // name:John, derefter age:30
 }
 ```
 
-The similar code for a `Map` is simpler, as it's iterable:
+Den lignende kode for en `Map` er enklere, da den er itererbar:
 
 ```js run
 let user = new Map();
@@ -121,73 +121,73 @@ user.set("name", "John");
 user.set("age", "30");
 
 *!*
-// Map iterates as [key, value] pairs, very convenient for destructuring
+// Map itererer som [key, value] par, meget praktisk for destrukturering
 for (let [key, value] of user) {
 */!*
-  alert(`${key}:${value}`); // name:John, then age:30
+  alert(`${key}:${value}`); // name:John, derefter age:30
 }
 ```
 ````
 
-````smart header="Swap variables trick"
-There's a well-known trick for swapping values of two variables using a destructuring assignment:
+````smart header="Ombyt variabler trick'et"
+Der er et velkendt trick til at bytte værdierne af to variabler ved hjælp af en destruktureringsopgave:
 
 ```js run
 let guest = "Jane";
 let admin = "Pete";
 
-// Let's swap the values: make guest=Pete, admin=Jane
+// Lad os bytte værdierne: gør guest=Pete, admin=Jane
 *!*
 [guest, admin] = [admin, guest];
 */!*
 
-alert(`${guest} ${admin}`); // Pete Jane (successfully swapped!)
+alert(`${guest} ${admin}`); // Pete Jane (byttet om uden besvær!)
 ```
 
-Here we create a temporary array of two variables and immediately destructure it in swapped order.
+Her opretter vi et midlertidigt array af to variabler og destrukturerer så der er byttet om på dem.
 
-We can swap more than two variables this way.
+Vi kan bytte mere end to variabler på denne måde.
 ````
 
-### The rest '...'
+### rest parameteren '...'
 
-Usually, if the array is longer than the list at the left, the "extra" items are omitted.
+Normalt, hvis et array er længere end listen på venstre side, bliver de "ekstra" elementer udeladt.
 
-For example, here only two items are taken, and the rest is just ignored:
+For eksempel, her tages kun to elementer, og resten ignoreres:
 
 ```js run
-let [name1, name2] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
+let [name1, name2] = ["Julius", "Cæsar", "Konsul", "af den Romerske Republik"];
 
 alert(name1); // Julius
-alert(name2); // Caesar
-// Further items aren't assigned anywhere
+alert(name2); // Cæsar
+// Resten af elementerne bliver ikke tildelt noget sted
 ```
 
-If we'd like also to gather all that follows -- we can add one more parameter that gets "the rest" using three dots `"..."`:
+Hvis vi vil indsamle alt det følgende -- vi kan tilføje en parameter, der får "resten" ved hjælp af tre prikker `"..."`:
 
 ```js run
-let [name1, name2, *!*...rest*/!*] = ["Julius", "Caesar", *!*"Consul", "of the Roman Republic"*/!*];
+let [name1, name2, *!*...rest*/!*] = ["Julius", "Cæsar", "Konsul", "af den Romerske Republik"];
 
 *!*
-// rest is an array of items, starting from the 3rd one
-alert(rest[0]); // Consul
-alert(rest[1]); // of the Roman Republic
+// `rest` er et array af elementer, startende fra det tredje element
+alert(rest[0]); // Konsul
+alert(rest[1]); // af den Romerske Republik
 alert(rest.length); // 2
 */!*
 ```
 
-The value of `rest` is the array of the remaining array elements.
+Værdien af `rest` er et array af de resterende array-elementer.
 
-We can use any other variable name in place of `rest`, just make sure it has three dots before it and goes last in the destructuring assignment.
+Vi kan bruge hvilken som helst anden variabelnavn i stedet for `rest`, bare sørg for at det har tre prikker før det og står sidst i destruktureringsopgaven.
 
 ```js run
-let [name1, name2, *!*...titles*/!*] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
-// now titles = ["Consul", "of the Roman Republic"]
+let [name1, name2, *!*...titles*/!*] = ["Julius", "Cæsar", "Konsul", "af den Romerske Republik"];
+// nu indeholder titles = ["Konsul", "af den Romerske Republik"]
 ```
 
-### Default values
+### Standardværdier
 
-If the array is shorter than the list of variables on the left, there will be no errors. Absent values are considered undefined:
+Hvis det givne array er kortere end listen af variabler på venstre side, vil der ikke være nogen fejl. Manglende værdier betragtes som `undefined`:
 
 ```js run
 *!*
@@ -198,45 +198,45 @@ alert(firstName); // undefined
 alert(surname); // undefined
 ```
 
-If we want a "default" value to replace the missing one, we can provide it using `=`:
+Hvis vi vil have standardværdier i stedet for `undefined`, kan vi bruge `=`:
 
 ```js run
 *!*
 // default values
-let [name = "Guest", surname = "Anonymous"] = ["Julius"];
+let [name = "Gæst", surname = "Anonym"] = ["Julius"];
 */!*
 
-alert(name);    // Julius (from array)
-alert(surname); // Anonymous (default used)
+alert(name);    // Julius (fra array)
+alert(surname); // Anonym (standardværdi brugt)
 ```
 
-Default values can be more complex expressions or even function calls. They are evaluated only if the value is not provided.
+Standardværdier kan være mere komplekse udtryk eller endda funktion kald. De evalueres kun hvis værdien ikke er tilgængelig.
 
-For instance, here we use the `prompt` function for two defaults:
+For eksempel, her bruger vi `prompt` funktionen for to standardværdier:
 
 ```js run
 // runs only prompt for surname
-let [name = prompt('name?'), surname = prompt('surname?')] = ["Julius"];
+let [name = prompt('navn?'), surname = prompt('efternavn?')] = ["Julius"];
 
-alert(name);    // Julius (from array)
-alert(surname); // whatever prompt gets
+alert(name);    // Julius (fra array)
+alert(surname); // Hvad end du modtager fra propmt, fordi det ikke er i arrayet
 ```
 
-Please note: the `prompt` will run only for the missing value (`surname`).
+Bemærk at `prompt` vil kun køre for den manglende værdi (`surname`).
 
-## Object destructuring
+## Destrukturering af objekt
 
-The destructuring assignment also works with objects.
+Tildeling gennem destrukturering virker også med objekter.
 
-The basic syntax is:
+Den grundlæggende syntaks er:
 
 ```js
 let {var1, var2} = {var1:…, var2:…}
 ```
 
-We should have an existing object on the right side, that we want to split into variables. The left side contains an object-like "pattern" for corresponding properties. In the simplest case, that's a list of variable names in `{...}`.
+Vi skal have et eksisterende objekt på højre side, som vi vil opdele i variabler. Venstre side indeholder et objekt-lignende "mønster" for de tilsvarende egenskaber. I det enkleste tilfælde er det en liste af variabelnavne i `{...}`.
 
-For instance:
+For eksempel:
 
 ```js run
 let options = {
@@ -254,18 +254,18 @@ alert(width);  // 100
 alert(height); // 200
 ```
 
-Properties `options.title`, `options.width` and `options.height` are assigned to the corresponding variables.
+Egenskaberne `options.title`, `options.width` og `options.height` bliver tildelt til de tilsvarende variable.
 
-The order does not matter. This works too:
+Rækkefølgen er ligegyldig. Dette virker også:
 
 ```js
-// changed the order in let {...}
+// ændret rækkefølge i let {...}
 let {height, width, title} = { title: "Menu", height: 200, width: 100 }
 ```
 
-The pattern on the left side may be more complex and specify the mapping between properties and variables.
+Venstre side kan være mere komplekse og specificere mapping mellem egenskaber og variabler.
 
-If we want to assign a property to a variable with another name, for instance, make `options.width` go into the variable named `w`, then we can set the variable name using a colon:
+Hvis vi vil tildele en egenskab til en variabel med et andet navn, for eksempel, gør `options.width` til variablen `w`, så kan vi sætte variabelnavnet ved hjælp af kolon:
 
 ```js run
 let options = {
@@ -275,7 +275,7 @@ let options = {
 };
 
 *!*
-// { sourceProperty: targetVariable }
+// { kildesEgenskab: målVariabel }
 let {width: w, height: h, title} = options;
 */!*
 
@@ -288,9 +288,9 @@ alert(w);      // 100
 alert(h);      // 200
 ```
 
-The colon shows "what : goes where". In the example above the property `width` goes to `w`, property `height` goes to `h`, and `title` is assigned to the same name.
+Kolonet viser "det her : skal her". I eksemplet ovenfor sendes egenskaben `width` il variablen `w`, egenskaben `height` sendes til `h` og `title` forbliver det samme navn.
 
-For potentially missing properties we can set default values using `"="`, like this:
+For potentielt manglende egenskaber kan vi sætte standardværdier ved hjælp af `"="`, som dette:
 
 ```js run
 let options = {
@@ -306,9 +306,9 @@ alert(width);  // 100
 alert(height); // 200
 ```
 
-Just like with arrays or function parameters, default values can be any expressions or even function calls. They will be evaluated if the value is not provided.
+På samme måde som med parametre til array og funktioner, kan standardværdier være hvilket som helst udtryk eller endda funktion kald. De evalueres kun hvis værdien ikke er tilgængelig.
 
-In the code below `prompt` asks for `width`, but not for `title`:
+I koden under vil `prompt` spørge efter en værdi til `width`, men ikke til `title`:
 
 ```js run
 let options = {
@@ -320,10 +320,10 @@ let {width = prompt("width?"), title = prompt("title?")} = options;
 */!*
 
 alert(title);  // Menu
-alert(width);  // (whatever the result of prompt is)
+alert(width);  // (hvad end resultatet af prompt er)
 ```
 
-We also can combine both the colon and equality:
+Vi kan  også kombinere både kolon og lighedstegn for at tildele en egenskab til en variabel med et andet navn og samtidig sætte en standardværdi:
 
 ```js run
 let options = {
@@ -339,7 +339,7 @@ alert(w);      // 100
 alert(h);      // 200
 ```
 
-If we have a complex object with many properties, we can extract only what we need:
+Hvis vi har et komplekst objekt med mange egenskaber, kan vi kun trække de egenskaber, vi har brug for:
 
 ```js run
 let options = {
@@ -348,19 +348,19 @@ let options = {
   height: 200
 };
 
-// only extract title as a variable
+// Udtræk kun title som variabel
 let { title } = options;
 
 alert(title); // Menu
 ```
 
-### The rest pattern "..."
+### rest parameteren "..."
 
-What if the object has more properties than we have variables? Can we take some and then assign the "rest" somewhere?
+Hvad hvis objektet har flere egenskaber end vi har variable? Kan vi tage nogle og så tildele "resten" et sted?
 
-We can use the rest pattern, just like we did with arrays. It's not supported by some older browsers (IE, use Babel to polyfill it), but works in modern ones.
+Vi kan bruge parameteren rest, lige som vi gjorde med arrays. Muligheden er ikke undestøttet af gamle browsere, men virker fint i nyere.
 
-It looks like this:
+Det ser således ud:
 
 ```js run
 let options = {
@@ -370,57 +370,57 @@ let options = {
 };
 
 *!*
-// title = property named title
-// rest = object with the rest of properties
+// title = Egenskab kaldet title
+// rest = objekt kaldet rest med resten af egenskaberne
 let {title, ...rest} = options;
 */!*
 
-// now title="Menu", rest={height: 200, width: 100}
+// nu er title="Menu", rest={height: 200, width: 100}
 alert(rest.height);  // 200
 alert(rest.width);   // 100
 ```
 
-````smart header="Gotcha if there's no `let`"
-In the examples above variables were declared right in the assignment: `let {…} = {…}`. Of course, we could use existing variables too, without `let`. But there's a catch.
+````smart header="Detalje, hvis der ikke er noget`let`"
+I eksemplet ovenfor bliver variablene deklareret samtidig med at de tildeles værdi: `let {…} = {…}`. Vi kan selfølgelig bruge eksisterende variable også, uden `let`. Men der er en lille detalje du skal være opmærksom på.
 
-This won't work:
+Dette vil ikke virke:
 ```js run
 let title, width, height;
 
-// error in this line
+// Fejl i denne linje
 {title, width, height} = {title: "Menu", width: 200, height: 100};
 ```
 
-The problem is that JavaScript treats `{...}` in the main code flow (not inside another expression) as a code block. Such code blocks can be used to group statements, like this:
+Problemet er at JavaScript behandler `{...}` i kodens hovedflow (ikke inde i andre udtryk) som en kodeblok. Sådan en kodeblok kan bruges til at gruppere udsagn, som dette:
 
 ```js run
 {
-  // a code block
-  let message = "Hello";
+  // en kodeblok
+  let message = "Hej!";
   // ...
   alert( message );
 }
 ```
 
-So here JavaScript assumes that we have a code block, that's why there's an error. We want destructuring instead.
+Så her vil JavaScript antage at vi har en kodeblok - derfor er der er en fejl. Vi vil have destructuring i stedet.
 
-To show JavaScript that it's not a code block, we can wrap the expression in parentheses `(...)`:
+For at vise JavaScript at det ikke er en kodeblok, kan vi indkapsle udtrykket med parenteser `(...)`:
 
 ```js run
 let title, width, height;
 
-// okay now
+// okay nu
 *!*(*/!*{title, width, height} = {title: "Menu", width: 200, height: 100}*!*)*/!*;
 
 alert( title ); // Menu
 ```
 ````
 
-## Nested destructuring
+## Indlejret destrukturering
 
-If an object or an array contains other nested objects and arrays, we can use more complex left-side patterns to extract deeper portions.
+Hvis et objekt eller et array indeholder andre indlejrede objekter og arrays, kan vi bruge mere komplekse venstre side mønstre til at trække dybere dele ud.
 
-In the code below `options` has another object in the property `size` and an array in the property `items`. The pattern on the left side of the assignment has the same structure to extract values from them:
+I koden nedenfor har `options` et andet objekt i egenskaben `size` og et array i egenskaben `items`. Mønsteret på venstre side af tildelingsudtrykket har samme struktur som bruges til at trække værdier ud af dem:
 
 ```js run
 let options = {
@@ -432,14 +432,14 @@ let options = {
   extra: true
 };
 
-// destructuring assignment split in multiple lines for clarity
+// destrukturering splittet i flere linjer for tydelighed
 let {
-  size: { // put size here
+  size: { // put size her, så vi kan få
     width,
     height
   },
-  items: [item1, item2], // assign items here
-  title = "Menu" // not present in the object (default value is used)
+  items: [item1, item2], // tildel items her
+  title = "Menu" // hvis det ikke findes, så brug standardværdi
 } = options;
 
 alert(title);  // Menu
@@ -449,19 +449,19 @@ alert(item1);  // Cake
 alert(item2);  // Donut
 ```
 
-All properties of `options` object except `extra` which is absent in the left part, are assigned to corresponding variables:
+Alle egenegenskaberne i `options` objektet undtagen `extra` som ikke findes i venstre side, er tildelt til tilsvarende variabler:
 
 ![](destructuring-complex.svg)
 
-Finally, we have `width`, `height`, `item1`, `item2` and `title` from the default value.
+Endelig har vi `width`, `height`, `item1`, `item2` og `title` fra standardværdierne.
 
-Note that there are no variables for `size` and `items`, as we take their content instead.
+Bemærk at der ikke er variable for `size` og `items`, da vi tager deres indhold i stedet.
 
-## Smart function parameters
+## Smarte parametre til funktioner
 
-There are times when a function has many parameters, most of which are optional. That's especially true for user interfaces. Imagine a function that creates a menu. It may have a width, a height, a title, an item list and so on.
+Der er situationer hvor en funktione er nødt til at have mulighed for mange parametre men hvor de fleste er frivillige. Det kan f.eks. være i forbindelse med brugerinterfaces. Forestil dig en funktion der opretter en menu. Den kan have en bredde, en højde, en titel, en liste af elementer og så videre.
 
-Here's a bad way to write such a function:
+Her er en mindre god måde at skrive sådan en funktion:
 
 ```js
 function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
@@ -469,56 +469,56 @@ function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
 }
 ```
 
-In real-life, the problem is how to remember the order of arguments. Usually, IDEs try to help us, especially if the code is well-documented, but still... Another problem is how to call a function when most parameters are ok by default.
+I virkeligheden er problemet hvordan man husker rækkefølgen af argumenter. Ofte hjælper IDE'er os, især hvis koden er godt dokumenteret, men stadig... Et andet problem er hvordan man kalder en funktion når de fleste parametre er ok med standardværdier.
 
-Like this?
+Som dette?
 
 ```js
-// undefined where default values are fine
+// undefined hvor standardværdierne er fine
 showMenu("My Menu", undefined, undefined, ["Item1", "Item2"])
 ```
 
-That's ugly. And becomes unreadable when we deal with more parameters.
+Det er uholdbart. Og bliver ulæselig når vi har mange parametre.
 
-Destructuring comes to the rescue!
+Destrukturering kommer til hjælp!
 
-We can pass parameters as an object, and the function immediately destructurizes them into variables:
+Vi kan overføre parametre som et objekt, og funktionen destrukturerer dem med det samme til variable:
 
 ```js run
-// we pass object to function
+// vi overfører objektet til funktionen
 let options = {
-  title: "My menu",
+  title: "Min menu",
   items: ["Item1", "Item2"]
 };
 
-// ...and it immediately expands it to variables
+// ...og det bliver med det samme trukket ud til variable
 function showMenu(*!*{title = "Untitled", width = 200, height = 100, items = []}*/!*) {
-  // title, items – taken from options,
-  // width, height – defaults used
-  alert( `${title} ${width} ${height}` ); // My Menu 200 100
+  // title, items – tages fra options,
+  // width, height – standard brugt
+  alert( `${title} ${width} ${height}` ); // Min Menu 200 100
   alert( items ); // Item1, Item2
 }
 
 showMenu(options);
 ```
 
-We can also use more complex destructuring with nested objects and colon mappings:
+Vi kan også bruge mere komplekse destruktureringsmønstre med indlejrede objekter og kolon-mapping:
 
 ```js run
 let options = {
-  title: "My menu",
+  title: "Min menu",
   items: ["Item1", "Item2"]
 };
 
 *!*
 function showMenu({
   title = "Untitled",
-  width: w = 100,  // width goes to w
-  height: h = 200, // height goes to h
-  items: [item1, item2] // items first element goes to item1, second to item2
+  width: w = 100,  // width sendes til w
+  height: h = 200, // height sendes til h
+  items: [item1, item2] // items første element sendes til item1, anden sendes til item2
 }) {
 */!*
-  alert( `${title} ${w} ${h}` ); // My Menu 100 200
+  alert( `${title} ${w} ${h}` ); // Min Menu 100 200
   alert( item1 ); // Item1
   alert( item2 ); // Item2
 }
@@ -526,7 +526,7 @@ function showMenu({
 showMenu(options);
 ```
 
-The full syntax is the same as for a destructuring assignment:
+Den fulde syntaks er den samme som for en destrukturerings-tilordning:
 ```js
 function({
   incomingProperty: varName = defaultValue
@@ -534,17 +534,17 @@ function({
 })
 ```
 
-Then, for an object of parameters, there will be a variable `varName` for the property `incomingProperty`, with `defaultValue` by default.
+For et objekt med parametre vil der være en variabel `varName` for egenskaben `incomingProperty`, med `defaultValue` som standardværdi.
 
-Please note that such destructuring assumes that `showMenu()` does have an argument. If we want all values by default, then we should specify an empty object:
+Bemærk at destruktureringsmønstre som dette antager at `showMenu()` har et argument. Hvis vi ønsker alle værdier som standard, så skal vi specificere et tomt objekt:
 
 ```js
-showMenu({}); // ok, all values are default
+showMenu({}); // ok, alle værdier er standard
 
-showMenu(); // this would give an error
+showMenu(); // dette vil resultere i en fejl
 ```
 
-We can fix this by making `{}` the default value for the whole object of parameters:
+Vi kan fixe dette ved at gøre `{}` til standardværdien for hele objektet med parametre:
 
 ```js run
 function showMenu({ title = "Menu", width = 100, height = 200 }*!* = {}*/!*) {
@@ -554,26 +554,26 @@ function showMenu({ title = "Menu", width = 100, height = 200 }*!* = {}*/!*) {
 showMenu(); // Menu 100 200
 ```
 
-In the code above, the whole arguments object is `{}` by default, so there's always something to destructurize.
+I koden ovenfor er hele objektet med argumenter `{}` som standardværdi, så der er altid noget at destrukturerer.
 
-## Summary
+## Opsummering
 
-- Destructuring assignment allows for instantly mapping an object or array onto many variables.
-- The full object syntax:
+- Destrukturering tillader øjeblikkelig mapping af et objekt eller array til mange variable.
+- Den fulde objektsyntaks:
     ```js
     let {prop : varName = defaultValue, ...rest} = object
     ```
 
-    This means that property `prop` should go into the variable `varName` and, if no such property exists, then the `default` value should be used.
+    Dette betyder at egenskaben `prop` skal sendes til variablen `varName`, og hvis der ikke findes en sådan egenskab, så skal standardværdien bruges.
 
-    Object properties that have no mapping are copied to the `rest` object.
+    Objektegenskaber som ikke har nogen mapping kopieres til objektet `rest`.
 
-- The full array syntax:
+- Den fulde fulde syntaks for arrya er:
 
     ```js
     let [item1 = defaultValue, item2, ...rest] = array
     ```
 
-    The first item goes to `item1`; the second goes into `item2`, and all the rest makes the array `rest`.
+    Det første element sendes til `item1`; det andet element sendes til `item2`, og alt det resterende laves til arrayet `rest`.
 
-- It's possible to extract data from nested arrays/objects, for that the left side must have the same structure as the right one.
+- Det er muligt at hente data fra indlejrede arrays/objekter. Her skal venstre side have samme struktur som det højre side.

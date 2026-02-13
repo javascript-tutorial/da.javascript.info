@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The maximal salary 
+# Den maksimale løn
 
-There is a `salaries` object:
+Der er et `salaries` objekt:
 
 ```js
 let salaries = {
@@ -14,9 +14,9 @@ let salaries = {
 };
 ```
 
-Create the function `topSalary(salaries)` that returns the name of the top-paid person.
+Skriv funktionen `topSalary(salaries)`, der returnerer navnet på den bedst betalte person.
 
-- If `salaries` is empty, it should return `null`.
-- If there are multiple top-paid persons, return any of them.
+- Hvis `salaries` er tomt, skal den returnere `null`.
+- Hvis der er flere bedst betalte personer, kan du returnere en af dem.
 
-P.S. Use `Object.entries` and destructuring to iterate over key/value pairs.
+P.S. Brug `Object.entries` og destrukturering til at iterere over nøgle-/værdipar. 
