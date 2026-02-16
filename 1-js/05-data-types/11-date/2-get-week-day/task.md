@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Show a weekday
+# Vis dagen i ugen
 
-Write a function `getWeekDay(date)` to show the weekday in short format: 'MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'.
+Skriv en funktion `getWeekDay(date)` der viser dagen i ugen i forkortet format: 'Man', 'Tir', 'Ons', 'Tors', 'Fre', 'Lør', 'Søn'.
 
-For instance:
+For eksempel:
 
 ```js no-beautify
-let date = new Date(2012, 0, 3);  // 3 Jan 2012
-alert( getWeekDay(date) );        // should output "TU"
+let date = new Date(2014, 0, 3);  // 3. januar 2014
+alert( getWeekDay(date) );        // Skal skrive "Fre
 ```

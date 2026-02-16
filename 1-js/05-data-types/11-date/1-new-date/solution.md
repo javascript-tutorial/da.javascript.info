@@ -1,15 +1,15 @@
-The `new Date` constructor uses the local time zone. So the only important thing to remember is that months start from zero.
+`new Date` konstruktøren bruger lokal tidszone. Så det vigtigste at huske er, at måneder starter fra 0.
 
-So February has number 1.
+Så februar har nummer 1.
 
-Here's an example with numbers as date components:
+Her er et eksempel med tal som dato-komponenter:
 
 ```js run
-//new Date(year, month, date, hour, minute, second, millisecond)
+//new Date(år, måned, månedsdag, timer, minutter, sekunder, mellisekunder)
 let d1 = new Date(2012, 1, 20, 3, 12);
 alert( d1 );
 ```
-We could also create a date from a string, like this:
+Vi kunne også oprette en dato fra en streng, som dette:
 
 ```js run
 //new Date(datastring)

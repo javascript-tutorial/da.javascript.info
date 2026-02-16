@@ -1,39 +1,39 @@
-# Date and time
+# Dato og tid
 
-Let's meet a new built-in object: [Date](mdn:js/Date). It stores the date, time and provides methods for date/time management.
+Lad os se på et andet indbygget objekt: [Date](mdn:js/Date). Det gemmer datoen, tiden og giver metoder til håndtering af dato/tid.
 
-For instance, we can use it to store creation/modification times, to measure time, or just to print out the current date.
+For eksempel kan vi bruge det til at gemme oprettelses-/ændringstider, måle tid eller blot udskrive den nuværende dato.
 
-## Creation
+## Oprettelse
 
-To create a new `Date` object call `new Date()` with one of the following arguments:
+For at oprette et nyt `Date` objekt kalder vi `new Date()` med en af følgende argumenter:
 
 `new Date()`
-: Without arguments -- create a `Date` object for the current date and time:
+: uden argumenter -- opretter et `Date` objekt med nuværende dato og tid:
 
     ```js run
     let now = new Date();
-    alert( now ); // shows current date/time
+    alert( now ); // viser nuværende dato/tid
     ```
 
-`new Date(milliseconds)`
-: Create a `Date` object with the time equal to number of milliseconds (1/1000 of a second) passed after the Jan 1st of 1970 UTC+0.
+`new Date(millisekunder)`
+: Opretter et `Date` objekt med tiden lig med antallet af millisekunder (1/1000 af en sekund) der er gået efter 1. januar 1970 UTC+0.
 
     ```js run
-    // 0 means 01.01.1970 UTC+0
+    // 0 betyder 01.01.1970 UTC+0
     let Jan01_1970 = new Date(0);
     alert( Jan01_1970 );
 
-    // now add 24 hours, get 02.01.1970 UTC+0
+    // tilføjer 24 timer, giver 02.01.1970 UTC+0
     let Jan02_1970 = new Date(24 * 3600 * 1000);
     alert( Jan02_1970 );
     ```
 
-    An integer number representing the number of milliseconds that has passed since the beginning of 1970 is called a *timestamp*.
+    Et heltal der repræsenterer antallet af millisekunder der er gået siden 1. januar 1970 UTC+0 kaldes en *timestamp* (tidsstempel).
 
-    It's a lightweight numeric representation of a date. We can always create a date from a timestamp using `new Date(timestamp)` and convert the existing `Date` object to a timestamp using the `date.getTime()` method (see below).
+    Det er en simpel numerisk repræsentation af en dato som heltal. Vi kan altid oprette en dato fra et timestamp ved hjælp af `new Date(timestamp)` og konvertere et eksisterende `Date` objekt til et timestamp ved hjælp af metoden `date.getTime()` (se nedenfor).
 
-    Dates before 01.01.1970 have negative timestamps, e.g.:
+    Datoer før 01.01.1970 har negative timestamps, e.g.:
     ```js run
     // 31 Dec 1969
     let Dec31_1969 = new Date(-24 * 3600 * 1000);
@@ -41,101 +41,103 @@ To create a new `Date` object call `new Date()` with one of the following argume
     ```
 
 `new Date(datestring)`
-: If there is a single argument, and it's a string, then it is parsed automatically. The algorithm is the same as `Date.parse` uses, we'll cover it later.
+: Hvis der sendes et enkelt argument og det er en streng, så bliver den automatisk fortolket. Algoritmen er den samme som `Date.parse` bruger - den ser vi på senere.
 
     ```js run
     let date = new Date("2017-01-26");
     alert(date);
-    // The time is not set, so it's assumed to be midnight GMT and
-    // is adjusted according to the timezone the code is run in
-    // So the result could be
+    // Tiden er ikke defineret, så det antages at være midnat GMT og
+    // justeres i forhold til tidszonen hvor koden køres
+    // Så resultatet kan være
     // Thu Jan 26 2017 11:00:00 GMT+1100 (Australian Eastern Daylight Time)
-    // or
+    // eller
     // Wed Jan 25 2017 16:00:00 GMT-0800 (Pacific Standard Time)
     ```
 
-`new Date(year, month, date, hours, minutes, seconds, ms)`
-: Create the date with the given components in the local time zone. Only the first two arguments are obligatory.
+`new Date(år, måned, dag, timer, minutter, sekunder, millisekunder)`
+: Opretter et date objekt med de givne komponenter i den lokale tidszone. Kun de første to argumenter er obligatoriske.
 
-    - The `year` should have 4 digits. For compatibility, 2 digits are also accepted and considered `19xx`, e.g. `98` is the same as `1998` here, but always using 4 digits is strongly encouraged.
-    - The `month` count starts with `0` (Jan), up to `11` (Dec).
-    - The `date` parameter is actually the day of month, if absent then `1` is assumed.
-    - If `hours/minutes/seconds/ms` is absent, they are assumed to be equal `0`.
+    - `år` skal have 4 tal. For kompatibilitet er to tal også tilladt og betragtes som `19xx`. F.eks. `98` er det samme som `1998`. Men, brug af 4 tal er stærkt anbefalet.
+    - `måned` tallet for måned starter fra `0` (Jan), op til `11` (Dec).
+    - `dag` parameteren er den aktuelle dag i måneden. Hvis den ikke gives sættes den til `1`.
+    - Hvis `timer/minutter/sekunder/millisekunder` ikke gives, sættes de til `0`.
 
-    For instance:
+    For eksempel, for at oprette et `Date` objekt for 1. januar 2011 kl. 00:00:00, kan vi bruge:
 
     ```js
     new Date(2011, 0, 1, 0, 0, 0, 0); // 1 Jan 2011, 00:00:00
-    new Date(2011, 0, 1); // the same, hours etc are 0 by default
+    new Date(2011, 0, 1); // samme resultat, timer osv. er sat til 0 som standard
     ```
 
-    The maximal precision is 1 ms (1/1000 sec):
+    Maksimal præcision er 1 ms (1/1000 sekund):
 
     ```js run
     let date = new Date(2011, 0, 1, 2, 3, 4, 567);
     alert( date ); // 1.01.2011, 02:03:04.567
     ```
 
-## Access date components
+## Tilgå de enkelte komponenter i et dato objekt
 
-There are methods to access the year, month and so on from the `Date` object:
+Der er metoder til at tilgå år, måned og så videre fra et `Date` objekt:
 
 [getFullYear()](mdn:js/Date/getFullYear)
-: Get the year (4 digits)
+: Henter årstallet (4 cifre)
 
 [getMonth()](mdn:js/Date/getMonth)
-: Get the month, **from 0 to 11**.
+: Henter måneden, **fra 0 til 11**.
 
 [getDate()](mdn:js/Date/getDate)
-: Get the day of month, from 1 to 31, the name of the method does look a little bit strange.
+: Henter dagen i måneden, fra 1 til 31 (Metodens navn er lidt mærkeligt).
 
 [getHours()](mdn:js/Date/getHours), [getMinutes()](mdn:js/Date/getMinutes), [getSeconds()](mdn:js/Date/getSeconds), [getMilliseconds()](mdn:js/Date/getMilliseconds)
-: Get the corresponding time components.
+: Henter de tilsvarende tidskomponenter.
 
-```warn header="Not `getYear()`, but `getFullYear()`"
-Many JavaScript engines implement a non-standard method `getYear()`. This method is deprecated. It returns 2-digit year sometimes. Please never use it. There is `getFullYear()` for the year.
+```warn header="Ikke `getYear()`, men `getFullYear()`"
+Mange JavaScript motorer har implememnteret en ikke-standard metode ved navn `getYear()`. Denne metode er udfaset. Den returnerer ofte 2-cifret år. Brug `getFullYear()` til at hente årstallet.
 ```
 
-Additionally, we can get a day of week:
+Derudover kan vi også få ugedagen:
 
 [getDay()](mdn:js/Date/getDay)
-: Get the day of week, from `0` (Sunday) to `6` (Saturday). The first day is always Sunday, in some countries that's not so, but can't be changed.
+: Henter ugedagen, fra `0` (søndag) til `6` (lørdag). Den første dag er som standard altid søndag. I Danmark er det mandag der betragtes som første ugedag, men det kan ikke ændres.
 
-**All the methods above return the components relative to the local time zone.**
+**Alle metoderne ovenfor returnerer komponenterne i forhold til den lokale tidszone.**
 
-There are also their UTC-counterparts, that return day, month, year and so on for the time zone UTC+0: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js/Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay). Just insert the `"UTC"` right after `"get"`.
+Der er også deres UTC-modsvar, som returnerer dag, måned, år og så videre for tidszonen UTC+0: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js/Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay). Bare indsæt `"UTC"` lige efter `"get"`.
 
-If your local time zone is shifted relative to UTC, then the code below shows different hours:
+Hvis din lokale tidszone er forskellig fra UTC, så viser koden nedenfor forskellige timer:
+
+Hvis din lokale tidszone er forskellig fra UTC, så viser koden nedenfor forskellige timer:
 
 ```js run
-// current date
+// nuværende dato
 let date = new Date();
 
-// the hour in your current time zone
+// Timer i den lokale tidszone
 alert( date.getHours() );
 
-// the hour in UTC+0 time zone (London time without daylight savings)
+// Timer i UTC+0 tidszone (London tid uden sommertid)
 alert( date.getUTCHours() );
 ```
 
-Besides the given methods, there are two special ones that do not have a UTC-variant:
+Udover de givne metoder er der to specielle der ikke har en UTC-variant:
 
 [getTime()](mdn:js/Date/getTime)
-: Returns the timestamp for the date -- a number of milliseconds passed from the January 1st of 1970 UTC+0.
+: Returnerer en timestamp for datoen -- det antal millisekunder der er gået fra 1. januar 1970 UTC+0.
 
 [getTimezoneOffset()](mdn:js/Date/getTimezoneOffset)
-: Returns the difference between UTC and the local time zone, in minutes:
+: Returnerer forskellen mellem UTC og den lokale tidszone, i minutter. For eksempel, hvis du er i tidszonen UTC-1, så returnerer den `60` (fordi UTC er 60 minutter foran). Hvis du er i tidszonen UTC+3, så returnerer den `-180` (fordi UTC er 180 minutter bagud).:
 
     ```js run
-    // if you are in timezone UTC-1, outputs 60
-    // if you are in timezone UTC+3, outputs -180
+    // hvis du er i tidszonen UTC-1, gives 60
+    // hvis du er i tidszonen UTC+3, gives -180
     alert( new Date().getTimezoneOffset() );
 
     ```
 
-## Setting date components
+## Sæt de enkelte komponenter i et dato objekt
 
-The following methods allow to set date/time components:
+De følgende metoder tillader at sætte dato/tidskomponenter:
 
 - [`setFullYear(year, [month], [date])`](mdn:js/Date/setFullYear)
 - [`setMonth(month, [date])`](mdn:js/Date/setMonth)
@@ -144,38 +146,38 @@ The following methods allow to set date/time components:
 - [`setMinutes(min, [sec], [ms])`](mdn:js/Date/setMinutes)
 - [`setSeconds(sec, [ms])`](mdn:js/Date/setSeconds)
 - [`setMilliseconds(ms)`](mdn:js/Date/setMilliseconds)
-- [`setTime(milliseconds)`](mdn:js/Date/setTime) (sets the whole date by milliseconds since 01.01.1970 UTC)
+- [`setTime(milliseconds)`](mdn:js/Date/setTime) (sætter hele datoen baseret på antal millisekunder siden 01.01.1970 UTC)
 
-Every one of them except `setTime()` has a UTC-variant, for instance: `setUTCHours()`.
+Hver af disse undtaget `setTime()` har en UTC-variant, for eksempel: `setUTCHours()`.
 
-As we can see, some methods can set multiple components at once, for example `setHours`. The components that are not mentioned are not modified.
+Som vi kan se, kan nogle metoder sætte flere komponenter på én gang, for eksempel `setHours`. De komponenter der ikke er nævnt ændres ikke.
 
-For instance:
+For eksempel:
 
 ```js run
 let today = new Date();
 
 today.setHours(0);
-alert(today); // still today, but the hour is changed to 0
+alert(today); // stadig dagen idag, men timer er ændret til 0
 
 today.setHours(0, 0, 0, 0);
-alert(today); // still today, now 00:00:00 sharp.
+alert(today); // stadig dagen idag, men tiden er sat til 00:00:00.
 ```
 
-## Autocorrection
+## Automatisk korrektion
 
-The *autocorrection* is a very handy feature of `Date` objects. We can set out-of-range values, and it will auto-adjust itself.
+*autokorrektion* er en praktisk feature af `Date` objekter. Vi kan sætte værdier uden for det normale interval, og det vil automatisk justere sig.
 
-For instance:
+For eksempel:
 
 ```js run
 let date = new Date(2013, 0, *!*32*/!*); // 32 Jan 2013 ?!?
-alert(date); // ...is 1st Feb 2013!
+alert(date); // ...bliver til 1st februar 2013!
 ```
 
-Out-of-range date components are distributed automatically.
+Datokomponenter uden for det normale interval distribueres automatisk.
 
-Let's say we need to increase the date "28 Feb 2016" by 2 days. It may be "2 Mar" or "1 Mar" in case of a leap-year. We don't need to think about it. Just add 2 days. The `Date` object will do the rest:
+Lad os sige at vi vil forøge datoen "28 Feb 2016" med 2 dage. Det kan være "2 Mar" eller "1 Mar" i tilfældet af et skudår. Vi behøver ikke at tænke over det. Bare tilføj 2 dage. `Date` objektet vil gøre resten:
 
 ```js run
 let date = new Date(2016, 1, 28);
@@ -183,112 +185,112 @@ let date = new Date(2016, 1, 28);
 date.setDate(date.getDate() + 2);
 */!*
 
-alert( date ); // 1 Mar 2016
+alert( date ); // 1. marts 2016
 ```
 
-That feature is often used to get the date after the given period of time. For instance, let's get the date for "70 seconds after now":
+Denne feature er ofte brugt til at få datoen efter en given tidsperiode. For eksempel, lad os få datoen for "70 sekunder efter nu":
 
 ```js run
 let date = new Date();
 date.setSeconds(date.getSeconds() + 70);
 
-alert( date ); // shows the correct date
+alert( date ); // viser den korrekte dato, 70 sekunder efter nu
 ```
 
-We can also set zero or even negative values. For example:
+Vi kan også indstille nul eller endda negative værdier. For eksempel, hvis vi sætter dag til nul, så bliver det den sidste dag i den forrige måned:
 
 ```js run
-let date = new Date(2016, 0, 2); // 2 Jan 2016
+let date = new Date(2016, 0, 2); // 2. januar 2016
 
-date.setDate(1); // set day 1 of month
+date.setDate(1); // sæt dagen til den 1. i måneden
 alert( date );
 
-date.setDate(0); // min day is 1, so the last day of the previous month is assumed
-alert( date ); // 31 Dec 2015
+date.setDate(0); // mindste dag er 1, så 0 vil sætte den til sidste dag i måneden før
+alert( date ); // 31. december 2015
 ```
 
-## Date to number, date diff
+## Date til tal kan bruges til at trække datoer fra hinanden
 
-When a `Date` object is converted to number, it becomes the timestamp same as `date.getTime()`:
+Når et `Date` objekt konverteres til et tal, bliver det til en timestamp på samme måde som `date.getTime()`:
 
 ```js run
 let date = new Date();
-alert(+date); // the number of milliseconds, same as date.getTime()
+alert(+date); // antal millisekunder, samme som date.getTime()
 ```
 
-The important side effect: dates can be subtracted, the result is their difference in ms.
+En vigtig sideeffekt: datoer kan trækkes fra, og resultatet er deres forskel i millisekunder.
 
-That can be used for time measurements:
+Det kan bruges til tidsmålinger:
 
 ```js run
-let start = new Date(); // start measuring time
+let start = new Date(); // start måling af tid
 
 // do the job
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
-let end = new Date(); // end measuring time
+let end = new Date(); // slut tidsmåling
 
-alert( `The loop took ${end - start} ms` );
+alert( `Loopet tog ${end - start} ms at gennemføre` );
 ```
 
 ## Date.now()
 
-If we only want to measure time, we don't need the `Date` object.
+Hvis vi kun vil måle tid, behøver vi ikke hele `Date` objektet.
 
-There's a special method `Date.now()` that returns the current timestamp.
+Der er en speciel metode `Date.now()` som returnerer den aktuelle timestamp.
 
-It is semantically equivalent to `new Date().getTime()`, but it doesn't create an intermediate `Date` object. So it's faster and doesn't put pressure on garbage collection.
+Det er det samme som hvis du skriver `new Date().getTime()`, men det opretter ikke selve `Date` objektet. På den måde er det en hurtigere metode uden at påvirke garbage collection.
 
-It is used mostly for convenience or when performance matters, like in games in JavaScript or other specialized applications.
+Det bruges mest fordi det er bekvemmeligt og hvis hastighed er kritisk, som ved udvikling af spil eller andre specialiserede programmer.
 
-So this is probably better:
+Så viil dette nok være bedre:
 
 ```js run
 *!*
-let start = Date.now(); // milliseconds count from 1 Jan 1970
+let start = Date.now(); // millisekunder tæller fra 1. januar 1970
 */!*
 
-// do the job
+// Udfør en hansling
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
 *!*
-let end = Date.now(); // done
+let end = Date.now(); // færdig
 */!*
 
-alert( `The loop took ${end - start} ms` ); // subtract numbers, not dates
+alert( `Loopet tog ${end - start} ms at gennemføre` ); // træk de to tal fra hinanden
 ```
 
-## Benchmarking
+## Hastighedsmåling (benchmarking)
 
-If we want a reliable benchmark of CPU-hungry function, we should be careful.
+Hvis vi ønsker en pålidelig benchmark af en CPU-intensiv funktion, bør vi være forsigtige.
 
-For instance, let's measure two functions that calculate the difference between two dates: which one is faster?
+For eksempel, lad os måle to funktioner der beregner forskellen mellem to datoer: hvilken er hurtigere?
 
-Such performance measurements are often called "benchmarks".
+Sådanne ydeevne-målinger kaldes ofte "benchmarks".
 
 ```js
-// we have date1 and date2, which function faster returns their difference in ms?
+// Vi har date1 og date2. Hvilken funktion er hurtigere til at returnere forskellen i ms?
 function diffSubtract(date1, date2) {
   return date2 - date1;
 }
 
-// or
+// eller måske denne?
 function diffGetTime(date1, date2) {
   return date2.getTime() - date1.getTime();
 }
 ```
 
-These two do exactly the same thing, but one of them uses an explicit `date.getTime()` to get the date in ms, and the other one relies on a date-to-number transform. Their result is always the same.
+Disse to funktioner gør præcis det samme, men en af dem bruger et eksplicit `date.getTime()` for at få datoen i millisekunder, og den anden bruger en dato-til-tal konvertering. Deres resultat er altid det samme.
 
-So, which one is faster?
+Så, hvilken er hurtigere?
 
-The first idea may be to run them many times in a row and measure the time difference. For our case, functions are very simple, so we have to do it at least 100000 times.
+Den første idé kan være at køre dem mange gange i træk og måle tidsforskellen. For vores tilfælde er funktionerne meget simple, så vi skal gøre det mindst 100000 gange.
 
-Let's measure:
+Lad os måle det:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -308,23 +310,23 @@ function bench(f) {
   return Date.now() - start;
 }
 
-alert( 'Time of diffSubtract: ' + bench(diffSubtract) + 'ms' );
-alert( 'Time of diffGetTime: ' + bench(diffGetTime) + 'ms' );
+alert( 'Tiden for diffSubtract: ' + bench(diffSubtract) + 'ms' );
+alert( 'Tiden for diffGetTime: ' + bench(diffGetTime) + 'ms' );
 ```
 
-Wow! Using `getTime()` is so much faster! That's because there's no type conversion, it is much easier for engines to optimize.
+Wow! Brugen af `getTime()` er ret meget hurtigere! Hovedårsagen er at der ikke er nogen konvertering af datatype, det er meget lettere for motorer at optimere.
 
-Okay, we have something. But that's not a good benchmark yet.
+Okay, vi er på vej med noget. Men det er ikke en god benchmark endnu.
 
-Imagine that at the time of running `bench(diffSubtract)` CPU was doing something in parallel, and it was taking resources. And by the time of running `bench(diffGetTime)` that work has finished.
+Forestil dig at der, mens `bench(diffSubtract)` kører, at CPU'en havde brug for at køre noget parallelt der optog ressourcer. Hvad hvis den opgave så var slut i den periode hvor `bench(diffGetTime)` kører?
 
-A pretty real scenario for a modern multi-process OS.
+Det er et meget realistisk scenarie i et moderne OS med flere porcesser der kører samtidig.
 
-As a result, the first benchmark will have less CPU resources than the second. That may lead to wrong results.
+Resultatet vil være at den første benchmark vil have mindre CPU-ressourcer end den anden. Det kan føre til forkerte resultater.
 
-**For more reliable benchmarking, the whole pack of benchmarks should be rerun multiple times.**
+**For en mere troværdig benchmarking, bør hele bunken af benchmarks blive kørt flere gange.**
 
-For example, like this:
+For eksempel, som dette:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -359,42 +361,42 @@ alert( 'Total time for diffSubtract: ' + time1 );
 alert( 'Total time for diffGetTime: ' + time2 );
 ```
 
-Modern JavaScript engines start applying advanced optimizations only to "hot code" that executes many times (no need to optimize rarely executed things). So, in the example above, first executions are not well-optimized. We may want to add a heat-up run:
+Moderne JavaScript motorer er begyndt at udføre avanceret optimering med fokus på "hot code" der kører mange gange - der er sjældent behov for at optimere kode der bruges sjældent. Så i eksemplet ovenfor er de første par afviklinger ikke godt optimerede. Vi ønsker måske at tilføje en "heat-up" kørsel før den egentlige benchmark for at få mere pålidelige resultater.:
 
 ```js
-// added for "heating up" prior to the main loop
+// Tilføj en "opvarming" før loopet
 bench(diffSubtract);
 bench(diffGetTime);
 
-// now benchmark
+// nu til benchmark
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
 }
 ```
 
-```warn header="Be careful doing microbenchmarking"
-Modern JavaScript engines perform many optimizations. They may tweak results of "artificial tests" compared to "normal usage", especially when we benchmark something very small, such as how an operator works, or a built-in function. So if you seriously want to understand performance, then please study how the JavaScript engine works. And then you probably won't need microbenchmarks at all.
+```warn header="Vær opmærksom på at lave microbenchmarking"
+Moderne JavaScript motorer udfører mange optimeringer. De kan godt tweake "artificielle tests" i forhold til "normal brug", især når vi benchmarker noget meget lille, som hvordan en operator virker eller en indbygget funktion. Så hvis du ønsker at forstå ydeevne, så studér venligst hvordan JavaScript-motoren virker. Og så vil du sandsynligvis ikke have brug for microbenchmarks overhovedet.
 
-The great pack of articles about V8 can be found at <https://mrale.ph>.
+Der findes en god samling af artikler om V8 på <https://mrale.ph>.
 ```
 
-## Date.parse from a string
+## Date.parse fra en streng
 
-The method [Date.parse(str)](mdn:js/Date/parse) can read a date from a string.
+Metoden [Date.parse(str)](mdn:js/Date/parse) kan læse en dato fra en streng.
 
-The string format should be: `YYYY-MM-DDTHH:mm:ss.sssZ`, where:
+Strengformatet skal være: `YYYY-MM-DDTHH:mm:ss.sssZ`, hvor:
 
-- `YYYY-MM-DD` -- is the date: year-month-day.
-- The character `"T"` is used as the delimiter.
-- `HH:mm:ss.sss` -- is the time: hours, minutes, seconds and milliseconds.
-- The optional `'Z'` part denotes the time zone in the format `+-hh:mm`. A single letter `Z` would mean UTC+0.
+- `YYYY-MM-DD` -- er datoen: år-måned-dag.
+- Tegnet `"T"` bruges som separator.
+- `HH:mm:ss.sss` -- er tiden: timer, minutter, sekunder og millisekunder.
+- Den frivillige `'Z'` del markerer tidszonen i formatet `+-hh:mm`. En enkeltkarakter `Z` vil betyde UTC+0.
 
-Shorter variants are also possible, like `YYYY-MM-DD` or `YYYY-MM` or even `YYYY`.
+Kortere varianter er også mulige, f.eks. `YYYY-MM-DD` eller `YYYY-MM` eller endda `YYYY`.
 
-The call to `Date.parse(str)` parses the string in the given format and returns the timestamp (number of milliseconds from 1 Jan 1970 UTC+0). If the format is invalid, returns `NaN`.
+Kaldet til `Date.parse(str)` tolker strengen i det givne format og returnerer tidsstempel (antal millisekunder fra 1. januar 1970 UTC+0). Hvis formatet er ugyldigt, returneres `NaN`.
 
-For instance:
+For eksempel:
 
 ```js run
 let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
@@ -402,7 +404,7 @@ let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
 alert(ms); // 1327611110417  (timestamp)
 ```
 
-We can instantly create a `new Date` object from the timestamp:
+Vi kan med det samme oprette et `new Date` objekt fra tidsstempel:
 
 ```js run
 let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
@@ -410,24 +412,24 @@ let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
 alert(date);
 ```
 
-## Summary
+## Opsummering
 
-- Date and time in JavaScript are represented with the [Date](mdn:js/Date) object. We can't create "only date" or "only time": `Date` objects always carry both.
-- Months are counted from zero (yes, January is a zero month).
-- Days of week in `getDay()` are also counted from zero (that's Sunday).
-- `Date` auto-corrects itself when out-of-range components are set. Good for adding/subtracting days/months/hours.
-- Dates can be subtracted, giving their difference in milliseconds. That's because a `Date` becomes the timestamp when converted to a number.
-- Use `Date.now()` to get the current timestamp fast.
+- Dato og tid i JavaScript er repræsenteret med [Date](mdn:js/Date) objektet. Vi kan ikke oprette "kun dato" eller "kun tid": `Date` objekter bærer altid begge dele.
+- Måneder tælles fra nul (ja, januar er måneden 0).
+- Dagen på ugen hentes med `getDay()`. Den er også talt fra nul (det er søndag).
+- `Date` autokorrigerer sig selv når delkomponenter sættes. Det er praktisk for at tilføje eller trække dage/måneder/timer fra hinanden.
+- Datoer kan trækkes fra hinanden, hvilket giver deres forskel i millisekunder. Det skyldes at et `Date` objekt bliver et tidsstempel når det konverteres til et tal.
+- Brug `Date.now()` for hurtigt at få det aktuelle tidsstempel.
 
-Note that unlike many other systems, timestamps in JavaScript are in milliseconds, not in seconds.
+Bemærk at, ulig mange andre systemer, er tidsstempel i JavaScript i millisekunder, ikke sekunder.
 
-Sometimes we need more precise time measurements. JavaScript itself does not have a way to measure time in microseconds (1 millionth of a second), but most environments provide it. For instance, browser has [performance.now()](mdn:api/Performance/now) that gives the number of milliseconds from the start of page loading with microsecond precision (3 digits after the point):
+Nogle gange har vi brug for en mere præcis måling af tid. JavaScript har ikke en måde at måle tid i mikrosekunder (1 milliontedel af en sekund), men de fleste miljøer har det. For eksempel har browseren [performance.now()](mdn:api/Performance/now) som giver antallet af millisekunder fra starten af sideindlæsningen med mikrosekund præcision (3 cifre efter kommaet):
 
 ```js run
-alert(`Loading started ${performance.now()}ms ago`);
-// Something like: "Loading started 34731.26000000001ms ago"
-// .26 is microseconds (260 microseconds)
-// more than 3 digits after the decimal point are precision errors, only the first 3 are correct
+alert(`Siden blev indlæst for ${performance.now()}ms siden`);
+// Noget i stil med: "Siden blev indlæst for 34731.26000000001ms siden"
+// .26 er mikrosekunder (260 mikrosekunder)
+// mere end 3 cifre efter kommaet er præcisionsfejl, kun de første 3 er korrekte
 ```
 
-Node.js has `microtime` module and other ways. Technically, almost any device and environment allows to get more precision, it's just not in `Date`.
+Node.js har `microtime` modulet og andre måder. Næsten alle enheder har miljøer tilgængeligt, der tillader stor præcision. Teknisk set tillader næsten enhver enhed og miljø at få mere præcise målinger, det er bare ikke i `Date`.

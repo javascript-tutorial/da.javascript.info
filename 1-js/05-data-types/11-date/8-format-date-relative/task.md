@@ -2,24 +2,24 @@ importance: 4
 
 ---
 
-# Format the relative date
+# Formater den relative dato
 
-Write a function `formatDate(date)` that should format `date` as follows:
+Skriv en funktion `formatDate(date)` der formaterer `date` som følger:
 
-- If since `date` passed less than 1 second, then `"right now"`.
-- Otherwise, if since `date` passed less than 1 minute, then `"n sec. ago"`.
-- Otherwise, if less than an hour, then `"m min. ago"`.
-- Otherwise, the full date in the format `"DD.MM.YY HH:mm"`. That is: `"day.month.year hours:minutes"`, all in 2-digit format, e.g. `31.12.16 10:00`.
+- Hvis `date` er givet for under en sekund siden, så skal den returnere `"lige nu"`.
+- Hvis `date` er givet for under en minut siden, så skal den returnere `"n sekunder siden"`.
+- Hvis `date` er givet for under en time siden, så skal den returnere `"m minutter siden"`.
+- Hvis `date` er givet for under en dag siden, så skal den returnere `"DD.MM.YY HH:mm"`.
 
-For instance:
+For eksempel:
 
 ```js
-alert( formatDate(new Date(new Date - 1)) ); // "right now"
+alert( formatDate(new Date(new Date - 1)) ); // "lige nu"
 
-alert( formatDate(new Date(new Date - 30 * 1000)) ); // "30 sec. ago"
+alert( formatDate(new Date(new Date - 30 * 1000)) ); // "30 sekunder siden"
 
-alert( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 min. ago"
+alert( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 minutter siden"
 
-// yesterday's date like 31.12.16 20:00
+// En dag siden
 alert( formatDate(new Date(new Date - 86400 * 1000)) );
 ```
