@@ -1,20 +1,20 @@
-To get the number of milliseconds till tomorrow, we can from "tomorrow 00:00:00" substract the current date.
+For at få antallet af millisekunder til morgen, kan vi fra "morgens 00:00:00" subtrahere den nuværende dags tidsstempel.
 
-First, we generate that "tomorrow", and then do it:
+Først genererer vi den "morgens", og så gør vi det:
 
 ```js run
 function getSecondsToTomorrow() {
   let now = new Date();
 
-  // tomorrow date
+  // imorgens tidsstempel
   let tomorrow = new Date(now.getFullYear(), now.getMonth(), *!*now.getDate()+1*/!*);
 
-  let diff = tomorrow - now; // difference in ms
-  return Math.round(diff / 1000); // convert to seconds
+  let diff = tomorrow - now; // forskel i millisekunder
+  return Math.round(diff / 1000); // konverter til sekunder
 }
 ```
 
-Alternative solution:
+Alternative løsning:
 
 ```js run
 function getSecondsToTomorrow() {
@@ -29,4 +29,4 @@ function getSecondsToTomorrow() {
 }
 ```
 
-Please note that many countries have Daylight Savings Time (DST), so there may be days with 23 or 25 hours. We may want to treat such days separately.
+Bemærk, at mange lande har sommer tid (DST), så der kan være dage med 23 eller 25 timer. Vi kan ønske at behandle sådanne dage separat.

@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Create a date
+# Opret et dato objekt
 
-Create a `Date` object for the date: Feb 20, 2012, 3:12am. The time zone is local.
+Opret et `Date` objekt for datoen: 20. februar 2012 kl. 03:12. Tidszonen er lokal.
 
-Show it using `alert`.
+Vis det med `alert`.
