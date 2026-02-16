@@ -5,7 +5,7 @@ let room = {
 };
 
 let meetup = {
-  title: "Conference",
+  title: "Konference",
   occupiedBy: [{name: "John"}, {name: "Alice"}],
   place: room
 };
@@ -19,12 +19,12 @@ alert( JSON.stringify(meetup, function replacer(key, value) {
 
 /* 
 {
-  "title":"Conference",
+  "title":"Konference",
   "occupiedBy":[{"name":"John"},{"name":"Alice"}],
   "place":{"number":23}
 }
 */
 ```
 
-Here we also need to test `key==""` to exclude the first call where it is normal that `value` is `meetup`.
+Vi bør også teste `key==""` for at ekskludere det første kald, hvor det er normalt at `value` er `meetup`.
 

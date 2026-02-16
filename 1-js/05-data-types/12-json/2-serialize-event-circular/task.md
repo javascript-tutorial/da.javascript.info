@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Exclude backreferences
+# Ekskluder cirkulære referencer
 
-In simple cases of circular references, we can exclude an offending property from serialization by its name.
+I simple tilfælde med cirkulære referencer kan vi ekskludere en egenskab fra serialisering ved dens navn.
 
-But sometimes we can't just use the name, as it may be used both in circular references and normal properties. So we can check the property by its value.
+Men nogle gange kan vi ikke bare bruge navnet, da det kan bruges både i cirkulære referencer og normale egenskaber. Så vi kan tjekke egenskaben ved dens værdi.
 
-Write `replacer` function to stringify everything, but remove properties that reference `meetup`:
+Skriv en `replacer` funktion der `stringify'er` alt, men fjerner egenskaber med reference til `meetup`:
 
 ```js run
 let room = {
@@ -16,24 +16,24 @@ let room = {
 };
 
 let meetup = {
-  title: "Conference",
+  title: "Konference",
   occupiedBy: [{name: "John"}, {name: "Alice"}],
   place: room
 };
 
 *!*
-// circular references
+// circulær reference
 room.occupiedBy = meetup;
 meetup.self = meetup;
 */!*
 
 alert( JSON.stringify(meetup, function replacer(key, value) {
-  /* your code */
+  /* din kode */
 }));
 
-/* result should be:
+/* resultatet bør være:
 {
-  "title":"Conference",
+  "title":"Konference",
   "occupiedBy":[{"name":"John"},{"name":"Alice"}],
   "place":{"number":23}
 }
