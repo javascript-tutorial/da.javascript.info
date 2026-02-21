@@ -1,4 +1,4 @@
-The solution using a loop:
+Løsningen ved brug af et `for`-loop:
 
 ```js run
 function sumTo(n) {
@@ -12,7 +12,7 @@ function sumTo(n) {
 alert( sumTo(100) );
 ```
 
-The solution using recursion:
+Løsningen der bruger rekursion:
 
 ```js run
 function sumTo(n) {
@@ -23,7 +23,7 @@ function sumTo(n) {
 alert( sumTo(100) );
 ```
 
-The solution using the formula: `sumTo(n) = n*(n+1)/2`:
+Løsningnen der bruger formlen: `sumTo(n) = n*(n+1)/2`:
 
 ```js run
 function sumTo(n) {
@@ -33,8 +33,8 @@ function sumTo(n) {
 alert( sumTo(100) );
 ```
 
-P.S. Naturally, the formula is the fastest solution. It uses only 3 operations for any number `n`. The math helps!
+P.S. Naturligvis er formlen den hurtigste løsning. Den bruger kun 3 operationer for ethvert tal `n`. Matematikken hjælper!
 
-The loop variant is the second in terms of speed. In both the recursive and the loop variant we sum the same numbers. But the recursion involves nested calls and execution stack management. That also takes resources, so it's slower.
+Loop-varianten er den anden i hastighed. I både den rekursive og loop-variant summerer vi de samme tal. Men rekursionen involverer indlejrede kald og stak-håndtering. Det tager også ressourcer, så det er langsommere.
 
-P.P.S. Some engines support the "tail call" optimization: if a recursive call is the very last one in the function, with no other calculations performed, then the outer function will not need to resume the execution, so the engine doesn't need to remember its execution context. That removes the burden on memory. But if the JavaScript engine does not support tail call optimization (most of them don't), there will be an error: maximum stack size exceeded, because there's usually a limitation on the total stack size.
+P.P.S. Nogle motorer understøtter "tail call" optimering: hvis et rekursivt kald er det sidste i funktionen uden andre beregninger udført, så vil den ydre funktion ikke behøve at genoptage eksekveringen, så motoren behøver ikke at huske dens eksekveringskontekst. Det fjerner byrden på hukommelsen. Men hvis JavaScript-motoren ikke understøtter tail call optimering (de fleste gør ikke), vil der være en fejl: maksimal stakstørrelse overskredet, fordi der normalt er en begrænsning på den totale stakstørrelse.

@@ -2,17 +2,17 @@ importance: 4
 
 ---
 
-# Calculate factorial
+# Udregn faktorial
 
-The [factorial](https://en.wikipedia.org/wiki/Factorial) of a natural number is a number multiplied by `"number minus one"`, then by `"number minus two"`, and so on till `1`. The factorial of `n` is denoted as `n!`
+[Fakultet](https://da.wikipedia.org/wiki/Fakultet_(matematik))(engelsk [factorial](https://en.wikipedia.org/wiki/Factorial)) af et naturligt tal er tallet ganget med "tallet minus én", så med "tallet minus to", og så videre til `1`. Fakultetet af `n` betegnes som `n!`
 
-We can write a definition of factorial like this:
+Vi kan skrive en definition af fakultet som denne:
 
 ```js
 n! = n * (n - 1) * (n - 2) * ...*1
 ```
 
-Values of factorials for different `n`:
+Værdier af fakultet for forskellige `n`:
 
 ```js
 1! = 1
@@ -22,10 +22,10 @@ Values of factorials for different `n`:
 5! = 5 * 4 * 3 * 2 * 1 = 120
 ```
 
-The task is to write a function `factorial(n)` that calculates `n!` using recursive calls.
+Opgaven er at skrive en funktion `factorial(n)` som beregner `n!` ved hjælp af rekursive kald.
 
 ```js
 alert( factorial(5) ); // 120
 ```
 
-P.S. Hint: `n!` can be written as `n * (n-1)!` For instance: `3! = 3*2! = 3*2*1! = 6`
+Hint: `n!` kan skrives som `n * (n-1)!` For eksempel: `3! = 3*2! = 3*2*1! = 6`

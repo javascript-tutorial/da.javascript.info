@@ -1,1 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="652" height="77" viewBox="0 0 652 77"><defs><style>@import url(https://fonts.googleapis.com/css?family=Open+Sans:bold,italic,bolditalic%7CPT+Mono);@font-face{font-family:&apos;PT Mono&apos;;font-weight:700;font-style:normal;src:local(&apos;PT MonoBold&apos;),url(/font/PTMonoBold.woff2) format(&apos;woff2&apos;),url(/font/PTMonoBold.woff) format(&apos;woff&apos;),url(/font/PTMonoBold.ttf) format(&apos;truetype&apos;)}</style></defs><g id="combined" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g id="linked-list.svg"><path id="Rectangle-15" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M48 30h78v32H48z"/><text id="value" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="50" y="20">value</tspan></text><text id="-8" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="82" y="50">1</tspan></text><path id="Line-21" fill="#C06334" fill-rule="nonzero" d="M170.27 38l14 7-14 7-.001-6H111.73v-2h58.539l.001-6z"/><text id="next" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="136" y="34">next</tspan></text><path id="Rectangle-11" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M188 30h78v32h-78z"/><text id="value-2" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="190" y="20">value</tspan></text><text id="-9" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="222" y="50">2</tspan></text><path id="Line-22" fill="#C06334" fill-rule="nonzero" d="M310.27 38l14 7-14 7v-6h-58.54v-2h58.54v-6z"/><text id="next-2" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="276" y="34">next</tspan></text><path id="Rectangle-13" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M327 30h78v32h-78z"/><text id="value-3" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="329" y="20">value</tspan></text><text id="-10" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="361" y="50">3</tspan></text><path id="Line-23" fill="#C06334" fill-rule="nonzero" d="M449.27 38l14 7-14 7v-6h-58.54v-2h58.54v-6z"/><text id="next-3" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="415" y="34">next</tspan></text><path id="Rectangle-14" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M467 30h78v32h-78z"/><text id="value-4" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="469" y="20">value</tspan></text><text id="4" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="501" y="50">4</tspan></text><path id="Line-24" fill="#C06334" fill-rule="nonzero" d="M589.27 38l14 7-14 7v-6h-58.54v-2h58.54v-6z"/><text id="next-4" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="555" y="34">next</tspan></text><text id="null" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="610" y="49">null</tspan></text><text id="list" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="10" y="49">list</tspan></text></g></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 652 77">
+  <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #fbf2ec;
+        fill-rule: evenodd;
+        stroke: #dbaf88;
+        stroke-width: 2px;
+      }
+
+      .st1, .st2, .st3 {
+        isolation: isolate;
+      }
+
+      .st2 {
+        fill: #af6e24;
+      }
+
+      .st2, .st3 {
+        font-family: PTMono-Regular, 'PT Mono';
+        font-size: 14px;
+      }
+
+      .st4, .st3 {
+        fill: #c06334;
+      }
+    </style>
+  </defs>
+  <g id="combined">
+    <g id="linked-list.svg">
+      <path id="Rectangle-15" class="st0" d="M48,30h78v32H48V30Z"/>
+      <g id="value" class="st1">
+        <text class="st2" transform="translate(70 20)"><tspan x="0" y="0">værdi</tspan></text>
+      </g>
+      <g id="_x2D_8" class="st1">
+        <text class="st2" transform="translate(82 50)"><tspan x="0" y="0">1</tspan></text>
+      </g>
+      <path id="Line-21" class="st4" d="M170.27,38l14,7-14,7v-6h-58.54v-2h58.54v-6s0,0,0,0Z"/>
+      <g id="next" class="st1">
+        <text class="st3" transform="translate(136 34)"><tspan x="0" y="0">næste</tspan></text>
+      </g>
+      <path id="Rectangle-11" class="st0" d="M188,30h78v32h-78V30Z"/>
+      <g id="value-2" class="st1">
+        <text class="st2" transform="translate(210 20)"><tspan x="0" y="0">værdi</tspan></text>
+      </g>
+      <g id="_x2D_9" class="st1">
+        <text class="st2" transform="translate(222 50)"><tspan x="0" y="0">2</tspan></text>
+      </g>
+      <path id="Line-22" class="st4" d="M310.27,38l14,7-14,7v-6h-58.54v-2h58.54v-6Z"/>
+      <g id="next-2" class="st1">
+        <text class="st3" transform="translate(276 34)"><tspan x="0" y="0">næste</tspan></text>
+      </g>
+      <path id="Rectangle-13" class="st0" d="M327,30h78v32h-78V30Z"/>
+      <g id="value-3" class="st1">
+        <text class="st2" transform="translate(349 20)"><tspan x="0" y="0">værdi</tspan></text>
+      </g>
+      <g id="_x2D_10" class="st1">
+        <text class="st2" transform="translate(361 50)"><tspan x="0" y="0">3</tspan></text>
+      </g>
+      <path id="Line-23" class="st4" d="M449.27,38l14,7-14,7v-6h-58.54v-2h58.54v-6Z"/>
+      <g id="next-3" class="st1">
+        <text class="st3" transform="translate(415 34)"><tspan x="0" y="0">næste</tspan></text>
+      </g>
+      <path id="Rectangle-14" class="st0" d="M467,30h78v32h-78V30Z"/>
+      <g id="value-4" class="st1">
+        <text class="st2" transform="translate(489 20)"><tspan x="0" y="0">værdi</tspan></text>
+      </g>
+      <g id="_x34_" class="st1">
+        <text class="st2" transform="translate(501 50)"><tspan x="0" y="0">4</tspan></text>
+      </g>
+      <path id="Line-24" class="st4" d="M589.27,38l14,7-14,7v-6h-58.54v-2h58.54v-6Z"/>
+      <g id="next-4" class="st1">
+        <text class="st3" transform="translate(555 34)"><tspan x="0" y="0">næste</tspan></text>
+      </g>
+      <g id="null" class="st1">
+        <text class="st2" transform="translate(610 49)"><tspan x="0" y="0">null</tspan></text>
+      </g>
+      <g id="list" class="st1">
+        <text class="st2" transform="translate(10 49)"><tspan x="0" y="0">list</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

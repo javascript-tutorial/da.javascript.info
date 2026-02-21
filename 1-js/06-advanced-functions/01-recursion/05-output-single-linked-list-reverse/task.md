@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Output a single-linked list in the reverse order
+# Udskriv en enkeltstrenget linked list i omvendt rækkefølge
 
-Output a single-linked list from the previous task <info:task/output-single-linked-list> in the reverse order.
+Udskriv en enkeltstrenget linked list fra det forrige opgave <info:task/output-single-linked-list> i omvendt rækkefølge.
 
-Make two solutions: using a loop and using a recursion.
+Lav to løsninger: ved brug af en løkke og ved brug af rekursion.

@@ -1,8 +1,8 @@
-# Using a recursion
+# Ved brug af rekursion
 
-The recursive logic is a little bit tricky here.
+Den recursive logik er en lille smule svær her.
 
-We need to first output the rest of the list and *then* output the current one:
+Vi skal først udskrive resten af listen og *derefter* udskrive det nuværende element:
 
 ```js run
 let list = {
@@ -31,13 +31,13 @@ function printReverseList(list) {
 printReverseList(list);
 ```
 
-# Using a loop
+# Ved brug af en løkke
 
-The loop variant is also a little bit more complicated than the direct output.
+Den løkkebaserede variant er også en lille smule mere kompliceret end direkte output.
 
-There is no way to get the last value in our `list`. We also can't "go back".
+Der er ingen måde at få den sidste værdi i vores `list`. Vi kan også ikke "gå tilbage".
 
-So what we can do is to first go through the items in the direct order and remember them in an array, and then output what we remembered in the reverse order:
+Få det vi kan gøre er at gennemgå elementerne i den direkte rækkefølge og huske dem i et array, og derefter udskrive det vi huskede i omvendt rækkefølge:
 
 ```js run
 let list = {
@@ -71,4 +71,4 @@ function printReverseList(list) {
 printReverseList(list);
 ```
 
-Please note that the recursive solution actually does exactly the same: it follows the list, remembers the items in the chain of nested calls (in the execution context stack), and then outputs them. 
+Bemærk at den rekursive løsning gør præcis det samme: den følger listen, husker elementerne i kæden af indlejrede kald (i eksekveringsstakken), og udskriver dem derefter. 
