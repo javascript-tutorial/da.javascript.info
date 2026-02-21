@@ -2,22 +2,22 @@ importance: 5
 
 ---
 
-# Does a function pickup latest changes?
+# Vil funktionen tage de seneste ændringer?
 
-The function sayHi uses an external variable name. When the function runs, which value is it going to use?
+Funktionen sayHi bruger en ekstern variabel name. Når funktionen kører, hvilken værdi vil den bruge?
 
 ```js
 let name = "John";
 
 function sayHi() {
-  alert("Hi, " + name);
+  alert("Hej, " + name);
 }
 
 name = "Pete";
 
-sayHi(); // what will it show: "John" or "Pete"?
+sayHi(); // Hvad vil den vise: "John" eller "Pete"?
 ```
 
-Such situations are common both in browser and server-side development. A function may be scheduled to execute later than it is created, for instance after a user action or a network request.
+Sådanne situationer er udbredte både i browser- og server-side udvikling. En funktion kan blive planlagt til at køre senere end den blev oprettet, for eksempel efter en brugerhandling eller en netværksforespørgsel.
 
-So, the question is: does it pick up the latest changes?
+Så spørgsmålet er: vil den tage de seneste ændringer?

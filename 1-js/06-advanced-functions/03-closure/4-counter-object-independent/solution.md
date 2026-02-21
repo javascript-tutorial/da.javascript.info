@@ -1,7 +1,7 @@
 
-Surely it will work just fine.
+Det vil fungere helt fint.
 
-Both nested functions are created within the same outer Lexical Environment, so they share access to the same `count` variable:
+Begge indlejrede funktioner er oprettet i det samme ydre leksikale miljø, så de deler adgang til den samme `count` variabel:
 
 ```js run
 function Counter() {

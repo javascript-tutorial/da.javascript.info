@@ -1,115 +1,115 @@
 
 # Variable scope, closure
 
-JavaScript is a very function-oriented language. It gives us a lot of freedom. A function can be created at any moment, passed as an argument to another function, and then called from a totally different place of code later.
+JavaScript er et meget funktionsorienteret sprog. Det giver os en masse frihed. En funktion kan skabes når som helst, overføres som argument til en anden funktion, og derefter kaldes fra et helt andet sted i koden.
 
-We already know that a function can access variables outside of it ("outer" variables).
+Vi ved allerede, at en funktion kan tilgå variabler uden for den ("outer" variables).
 
-But what happens if outer variables change since a function is created? Will the function get newer values or the old ones?
+Men hvad sker der hvis de ydre variabler ændres efter en funktion er skabt? Vil funktionen få de nyere værdier eller de gamle?
 
-And what if a function is passed along as an argument and called from another place of code, will it get access to outer variables at the new place?
+Og hvad hvis en funktion gives som et argument til en anden funktion og derefter kaldes fra et andet sted i koden, vil den da have adgang til de ydre variabler på det nye sted?
 
-Let's expand our knowledge to understand these scenarios and more complex ones.
+Lad os udvide forståelsen af funktioner for at håndtere mere komplekse situationer der gør brug af dem.
 
-```smart header="We'll talk about `let/const` variables here"
-In JavaScript, there are 3 ways to declare a variable: `let`, `const` (the modern ones), and `var` (the remnant of the past).
+```smart header="Vi taler om `let/const` variable her"
+I JavaScript er der tre måder at deklarere en variabel: `let`, `const` (de moderne måder), og `var` (et l"evn fra fortiden").
 
-- In this article we'll use `let` variables in examples.
-- Variables, declared with `const`, behave the same, so this article is about `const` too.
-- The old `var` has some notable differences, they will be covered in the article <info:var>.
+- I denne artikel bruger vi `let` til at deklarere variable i eksemplerne.
+- Variable der er deklareret med `const`, opfører sig på samme måde, så denne artikel gælder også for dem.
+- Den traditionelle `var` har en lidt anderledes opførsel, som beskrives i artiklen <info:var>.
 ```
 
-## Code blocks
+## Kodeblokke
 
-If a variable is declared inside a code block `{...}`, it's only visible inside that block.
+Hvis en variabel er deklareret inden for et kodeblok `{...}`, er den kun synlig inde i den blok.
 
-For example:
+For eksempel:
 
 ```js run
 {
-  // do some job with local variables that should not be seen outside
+  // udfør kode med lokale variable der ikke skal være synlige uden for blokken
 
-  let message = "Hello"; // only visible in this block
+  let message = "Hej"; // kun synlig inde i denne blok
 
-  alert(message); // Hello
+  alert(message); // Hej
 }
 
-alert(message); // Error: message is not defined
+alert(message); // Fejl: message er ikke defineret
 ```
 
-We can use this to isolate a piece of code that does its own task, with variables that only belong to it:
+Vi kan bruge dette til at isolere en del af koden, som har sin egen opgave og variable der kun tilhører den:
 
 ```js run
 {
-  // show message
-  let message = "Hello";
+  // vis besked
+  let message = "Hej";
   alert(message);
 }
 
 {
-  // show another message
-  let message = "Goodbye";
+  // vis en anden besked
+  let message = "Farvel";
   alert(message);
 }
 ```
 
-````smart header="There'd be an error without blocks"
-Please note, without separate blocks there would be an error, if we use `let` with the existing variable name:
+````smart header="Der ville være fejl uden blokke"
+Bemærk at uden separate blokke ville der være en fejl, hvis vi bruger `let` med en eksisterende variabelnavn:
 
 ```js run
-// show message
-let message = "Hello";
+// vis besked
+let message = "Hej";
 alert(message);
 
-// show another message
+// vis en anden besked
 *!*
-let message = "Goodbye"; // Error: variable already declared
+let message = "Farvel"; // Fejl: variabel allerede deklareret
 */!*
 alert(message);
 ```
 ````
 
-For `if`, `for`, `while` and so on, variables declared in `{...}` are also only visible inside:
+For `if`, `for`, `while` og så videre gælder det også at variable deklareret inden for `{...}` er kun synlige inde i blokken:
 
 ```js run
 if (true) {
-  let phrase = "Hello!";
+  let phrase = "Hej!";
 
-  alert(phrase); // Hello!
+  alert(phrase); // Hej!
 }
 
-alert(phrase); // Error, no such variable!
+alert(phrase); // Fejl, variablen findes ikke!
 ```
 
-Here, after `if` finishes, the `alert` below won't see the `phrase`, hence the error.
+Fordi `if`-blokken er færdig kan `alert` nedenfor ikke se `phrase` - derfor fejlen.
 
-That's great, as it allows us to create block-local variables, specific to an `if` branch.
+Det er perfekt da det tillader os at deklarere lokale variable, specifikke for hver `if`-gren.
 
-The similar thing holds true for `for` and `while` loops:
+Det samme gælder for `for` og `while` løkker:
 
 ```js run
 for (let i = 0; i < 3; i++) {
-  // the variable i is only visible inside this for
-  alert(i); // 0, then 1, then 2
+  // variablen i er kun synlig inde i denne for-løkke
+  alert(i); // 0, så 1, så 2
 }
 
-alert(i); // Error, no such variable
+alert(i); // Fejl, ingen sådan variabel
 ```
 
-Visually, `let i` is outside of `{...}`. But the `for` construct is special here: the variable, declared inside it, is considered a part of the block.
+Visuelt er `let i` uden for de krøllede parenteser `{...}` men `for` konstruktionen er speciel her: Variablen der deklareres i den ses som en del af kodeblokken.
 
-## Nested functions
+## Indlejrede funktioner
 
-A function is called "nested" when it is created inside another function.
+En funktion kaldes "indlejret" (nested) når den er oprettet inde i en anden funktion.
 
-It is easily possible to do this with JavaScript.
+Det er nemt at gøre dette med JavaScript.
 
-We can use it to organize our code, like this:
+Vi kan bruge det til at organisere vores kode, som dette:
 
 ```js
 function sayHiBye(firstName, lastName) {
 
-  // helper nested function to use below
+  // Indlejret hjælpefunktion der bruges til at generere fulde navn
   function getFullName() {
     return firstName + " " + lastName;
   }
@@ -120,12 +120,11 @@ function sayHiBye(firstName, lastName) {
 }
 ```
 
-Here the *nested* function `getFullName()` is made for convenience. It can access the outer variables and so can return the full name. Nested functions are quite common in JavaScript.
+Her er den *indlejrede* funktion `getFullName()` oprettet for overskuelighed. Den kan tilgå de ydre variable og returnere det fulde navn. Indlejrede funktioner er meget almindelige i JavaScript.
 
-What's much more interesting, a nested function can be returned: either as a property of a new object or as a result by itself. It can then be used somewhere else. No matter where, it still has access to the same outer variables.
+Hvad er endnu mere interessant, en indlejret funktion kan returneres: enten som en egenskab af et nyt objekt eller som resultat af sig selv. Den kan derefter bruges et andet sted. Uanset hvor, den har stadig adgang til de samme ydre variable.
 
-Below, `makeCounter` creates the "counter" function that returns the next number on each invocation:
-
+Nedenfor opretter `makeCounter` funktionen "counter" der returnerer næste tal ved hvert kald:
 ```js run
 function makeCounter() {
   let count = 0;
@@ -142,87 +141,89 @@ alert( counter() ); // 1
 alert( counter() ); // 2
 ```
 
-Despite being simple, slightly modified variants of that code have practical uses, for instance, as a [random number generator](https://en.wikipedia.org/wiki/Pseudorandom_number_generator) to generate random values for automated tests.
+Udover at være simpel, har små ændrede varianter af denne kode praktiske anvendelser, for eksempel som en [random number generator](https://en.wikipedia.org/wiki/Pseudorandom_number_generator) til at generere tilfældige værdier til automatiserede tests.
 
-How does this work? If we create multiple counters, will they be independent? What's going on with the variables here?
+Hvordan virker dette? Hvis vi opretter flere counters, vil de være uafhængige? Hvad sker der med variablene her?
 
-Understanding such things is great for the overall knowledge of JavaScript and beneficial for more complex scenarios. So let's go a bit in-depth.
+At forstå denne slags er godt for den generelle forståelse af JavaScripts måde at arbejde med variable og funktioner. Det er også god viden for at kunne arbejde med mere komplekse scenarier. Så lad os gå lidt mere i dybden.
 
-## Lexical Environment
+## Leksikalt miljø (Lexical Environment)
 
 ```warn header="Here be dragons!"
-The in-depth technical explanation lies ahead.
+Den dybere tekniske forklaring ligger foran os.
 
-As far as I'd like to avoid low-level language details, any understanding without them would be lacking and incomplete, so get ready.
+Selv om jeg gerne vil undgå detaljer om lavniveau sprog, vil enhver forståelse uden dem være mangelfuld og ufuldstændig, så gør jer klar.
 ```
 
-For clarity, the explanation is split into multiple steps.
+For overskuelighedens skyld, er forklaringen opdelt i flere trin.
 
-### Step 1. Variables
+### Trin 1. Variable
 
-In JavaScript, every running function, code block `{...}`, and the script as a whole have an internal (hidden) associated object known as the *Lexical Environment*.
+I JavaScript har enhver kørende funktion, kodeblok `{...}`, og hele scriptet et internt (skjult) tilknyttet objekt kendt som *Leksikalt miljø* (Lexical Environment).
 
-The Lexical Environment object consists of two parts:
+Det leksikale miljø består af to dele:
 
-1. *Environment Record* -- an object that stores all local variables as its properties (and some other information like the value of `this`).
-2. A reference to the *outer lexical environment*, the one associated with the outer code.
+1. *Environment Record* -- et objekt som gemmer alle lokale variable som dens egenskaber (og nogle andre informationer som værdien af `this`).
+2. En reference til det *ydre leksikale miljø*, det som er forbundet med ydre kode.
 
-**A "variable" is just a property of the special internal object, `Environment Record`. "To get or change a variable" means "to get or change a property of that object".**
+**En "variabel" er bare en egenskab af det specielle interne objekt, `Environment Record`. "At hente eller ændre en variabel" betyder "at hente eller ændre en egenskab af det objekt".**
 
-In this simple code without functions, there is only one Lexical Environment:
+I denne simple kode uden funktioner, findes der kun ét leksikalt miljø:
 
 ![lexical environment](lexical-environment-global.svg)
 
-This is the so-called *global* Lexical Environment, associated with the whole script.
+Dette er det såkaldte *globale* leksikale miljø, forbundet med hele scriptet.
 
-On the picture above, the rectangle means Environment Record (variable store) and the arrow means the outer reference. The global Lexical Environment has no outer reference, that's why the arrow points to `null`.
+På billedet ovenfor, betyder rektanglen Environment Record (variable store) og pilen ydre reference. Det globale leksikale miljø har ingen ydre reference, derfor peger pilen til `null`.
 
-As the code starts executing and goes on, the Lexical Environment changes.
+Mens koden afvikles, ændres det leksikale miljø.
 
-Here's a little bit longer code:
+Her er en lidt længere kode:
 
 ![lexical environment](closure-variable-phrase.svg)
 
-Rectangles on the right-hand side demonstrate how the global Lexical Environment changes during the execution:
+Rektanglerne på højre side demonstrerer hvordan det globale leksikale miljø ændrer sig under afvikling:
 
-1. When the script starts, the Lexical Environment is pre-populated with all declared variables.
-    - Initially, they are in the "Uninitialized" state. That's a special internal state, it means that the engine knows about the variable, but it cannot be referenced until it has been declared with `let`. It's almost the same as if the variable didn't exist.
-2. Then `let phrase` definition appears. There's no assignment yet, so its value is `undefined`. We can use the variable from this point forward.
-3. `phrase` is assigned a value.
-4. `phrase` changes the value.
+1. Når scriptet starter, er det leksikale miljø forudfyldt med alle deklarerede variable.
+    - Oprindeligt er de i "Uninitialized" tilstanden. Det er en speciel intern tilstand, det betyder at motoren kender til variablen, men den ikke kan refereres før den er deklareret med `let`. Det er næsten det samme som om variablen ikke eksisterede.
+2. Derefter optræder `let phrase` definitionen. Der er ingen tildeling endnu, så dens værdi er `undefined`. Vi kan bruge variablen fra dette tidspunkt og frem.
+3. `phrase` tildeler en værdi.
+4. `phrase` ændrer værdien.
 
-Everything looks simple for now, right?
+Alting virker simpelt for nu, ikke?
 
-- A variable is a property of a special internal object, associated with the currently executing block/function/script.
-- Working with variables is actually working with the properties of that object.
+- En variabel er en egenskab af et specielt internt objekt, forbundet med det aktuelt kørende blok/funktion/script.
+- Arbejde med variable er faktisk arbejde med egenskaberne af det objekt.
 
-```smart header="Lexical Environment is a specification object"
-"Lexical Environment" is a specification object: it only exists "theoretically" in the [language specification](https://tc39.es/ecma262/#sec-lexical-environments) to describe how things work. We can't get this object in our code and manipulate it directly.
+```smart header="Det leksikale miljø er et specifikationsobjekt"
+Det "leksikale miljø" er et specifikationsobjekt: det eksisterer kun "teoretisk" i [sprogspecifikationen](https://tc39.es/ecma262/#sec-lexical-environments) for at beskrive hvordan ting fungerer. Vi kan ikke få adgang til dette objekt i vores kode og manipulere det direkte.
 
-JavaScript engines also may optimize it, discard variables that are unused to save memory and perform other internal tricks, as long as the visible behavior remains as described.
+JavaScript-motorer kan også optimere det, fjerne variable som ikke bruges for at spare hukommelse og udføre andre interne tricks, så længe det synlige adfærd forbliver som beskrevet.
 ```
 
-### Step 2. Function Declarations
+### Trin 2. Deklarering af funktioner
 
-A function is also a value, like a variable.
+En funktion er også en værdi, ligesom en variabel.
 
-**The difference is that a Function Declaration is instantly fully initialized.**
+**Forskellen er at en Function Declaration er øjeblikkeligt fuldt initialiseret.**
 
-When a Lexical Environment is created, a Function Declaration immediately becomes a ready-to-use function (unlike `let`, that is unusable till the declaration).
+Når et leksikalt miljø oprettes, bliver en Function Declaration øjeblikkeligt til en klar til brug funktion (forskellig fra `let`, som ikke kan bruges før deklarationen).
 
-That's why we can use a function, declared as Function Declaration, even before the declaration itself.
+Når et leksikalt miljø oprettes, bliver en Function Declaration øjeblikkeligt til en klar til brug funktion (forskellig fra `let`, som ikke kan bruges før deklarationen).
 
-For example, here's the initial state of the global Lexical Environment when we add a function:
+Det er derfor vi kan bruge en funktion, deklareret som Function Declaration, selv før deklarationen selv.
+
+For eksempel, her er det oprindelige tilstand af det globale leksikale miljø, når vi tilføjer en funktion:
 
 ![](closure-function-declaration.svg)
 
-Naturally, this behavior only applies to Function Declarations, not Function Expressions where we assign a function to a variable, such as `let say = function(name)...`.
+Denne adfærd gælder kun for Function Declarations, ikke for Function Expressions hvor vi tildeler en funktion til en variabel, såsom `let say = function(name)...`.
 
-### Step 3. Inner and outer Lexical Environment
+### Trin 3. Indre og ydre leksikale miljøer
 
-When a function runs, at the beginning of the call, a new Lexical Environment is created automatically to store local variables and parameters of the call.
+Når en funktion kører, oprettes et nyt leksikalt miljø automatisk for at gemme lokale variable og parametre for kaldet.
 
-For instance, for `say("John")`, it looks like this (the execution is at the line, labelled with an arrow):
+For eksempel, for `say("John")`, ser det ud som følger (køretidspunktet er markeret med en pil):
 
 <!--
     ```js
@@ -237,28 +238,28 @@ For instance, for `say("John")`, it looks like this (the execution is at the lin
 
 ![](lexical-environment-simple.svg)
 
-During the function call we have two Lexical Environments: the inner one (for the function call) and the outer one (global):
+Ved kald af funktionen har vi to leksikale miljøer: det indre (for funktionens kald) og det ydre (globalt):
 
-- The inner Lexical Environment corresponds to the current execution of `say`. It has a single property: `name`, the function argument. We called `say("John")`, so the value of the `name` is `"John"`.
-- The outer Lexical Environment is the global Lexical Environment. It has the `phrase` variable and the function itself.
+- Det indre leksikale miljø svarer til den nuværende udførelse af `say`. Det har en enkelt egenskab: `name`, funktionens argument. Vi kalder `say("John")`, så værdien af `name` er `"John"`.
+- Det ydre leksikale miljø er det globale leksikale miljø. Det har variablen `phrase` og selve funktionen.
 
-The inner Lexical Environment has a reference to the `outer` one.
+Det indre leksikale miljø har en reference til det ydre.
 
-**When the code wants to access a variable -- the inner Lexical Environment is searched first, then the outer one, then the more outer one and so on until the global one.**
+**Når koden ønsker at tilgå en variabel -- søges det indre leksikale miljø først, derefter det ydre, og så videre indtil det globale miljø.**
 
-If a variable is not found anywhere, that's an error in strict mode (without `use strict`, an assignment to a non-existing variable creates a new global variable, for compatibility with old code).
+Hvis en variabel ikke findes nogen steder, er det en fejl i strict mode (uden `use strict`, vil en tildeling til en ikke-eksisterende variabel skabe en ny global variabel, for kompatibilitet med gammel kode).
 
-In this example the search proceeds as follows:
+I dette eksempel går søgningen som følger:
 
-- For the `name` variable, the `alert` inside `say` finds it immediately in the inner Lexical Environment.
-- When it wants to access `phrase`, then there is no `phrase` locally, so it follows the reference to the outer Lexical Environment and finds it there.
+- For variablen `name`, finder `alert` inden i `say` den øjeblikkeligt i det indre leksikale miljø.
+- Når den forsøger at tilgå `phrase`, så findes den ikke lokalt, så den følger referencen til det ydre leksikale miljø og finder den der.
 
 ![lexical environment lookup](lexical-environment-simple-lookup.svg)
 
 
-### Step 4. Returning a function
+### Trin 4. Returnering af en funktion
 
-Let's return to the `makeCounter` example.
+Lad os vende tilbage til eksemplet med `makeCounter`.
 
 ```js
 function makeCounter() {
@@ -272,51 +273,51 @@ function makeCounter() {
 let counter = makeCounter();
 ```
 
-At the beginning of each `makeCounter()` call, a new Lexical Environment object is created, to store variables for this `makeCounter` run.
+I begyndelsen af hvert `makeCounter()` kald oprettes et nyt leksikalt miljøobjekt, for at gemme variabler for dette `makeCounter` kald.
 
-So we have two nested Lexical Environments, just like in the example above:
+Så vi har to indlejrede leksikale miljøer, lige som i eksemplet ovenfor:
 
 ![](closure-makecounter.svg)
 
-What's different is that, during the execution of `makeCounter()`, a tiny nested function is created of only one line: `return count++`. We don't run it yet, only create.
+Hvad der er forskelligt her er at der ved eksekvering  af `makeCounter()` oprettes en lille indlejret funktion der kun indeholder en linje: `return count++`. Vi kører den ikke, den oprettes kun.
 
-All functions remember the Lexical Environment in which they were made. Technically, there's no magic here: all functions have the hidden property named `[[Environment]]`, that keeps the reference to the Lexical Environment where the function was created:
+Alle funktioner husker det leksikale miljø hvor de blev oprettet. Teknisk set er der ingen magi her: alle funktioner har den skjulte egenskab kaldet `[[Environment]]`, som holder referencen til det leksikale miljø hvor funktionen blev oprettet:
 
 ![](closure-makecounter-environment.svg)
 
-So, `counter.[[Environment]]` has the reference to `{count: 0}` Lexical Environment. That's how the function remembers where it was created, no matter where it's called. The `[[Environment]]` reference is set once and forever at function creation time.
+Så `counter.[[Environment]]` har referencen til `{count: 0}` leksikale miljø. Det er sådan funktionen husker hvor den blev oprettet, uanset hvor den kaldes. Referencen `[[Environment]]` sættes én gang og for altid ved oprettelsen af funktionen.
 
-Later, when `counter()` is called, a new Lexical Environment is created for the call, and its outer Lexical Environment reference is taken from `counter.[[Environment]]`:
+Senere, når `counter()` kaldes, oprettes et nyt leksikalt miljø for kaldet, og dens ydre leksikale miljøreference tages fra `counter.[[Environment]]`:
 
 ![](closure-makecounter-nested-call.svg)
 
-Now when the code inside `counter()` looks for `count` variable, it first searches its own Lexical Environment (empty, as there are no local variables there), then the Lexical Environment of the outer `makeCounter()` call, where it finds and changes it.
+Når koden indeni `counter()` søger efter `count` variablen, søger den først i sit eget leksikale miljø (tomt, da der ikke er lokale variabler der), derefter i det ydre leksikale miljø af det ydre `makeCounter()` kald, hvor den finder og ændrer den.
 
-**A variable is updated in the Lexical Environment where it lives.**
+**En variabel er opdateret i det leksikale miljø hvor den lever.**
 
-Here's the state after the execution:
+Her er tilstanden efter eksekveringen af `counter()`:
 
 ![](closure-makecounter-nested-call-2.svg)
 
-If we call `counter()` multiple times, the `count` variable will be increased to `2`, `3` and so on, at the same place.
+Hvis vi kalder `counter()` flere gange, vil `count` variablen blive øget til `2`, `3` og så videre, på samme sted.
 
 ```smart header="Closure"
-There is a general programming term "closure", that developers generally should know.
+Der er et generelt term i programmering kaldet "closure", som udviklere generelt bør kende.
 
-A [closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)) is a function that remembers its outer variables and can access them. In some languages, that's not possible, or a function should be written in a special way to make it happen. But as explained above, in JavaScript, all functions are naturally closures (there is only one exception, to be covered in <info:new-function>).
+En [closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)) er en funktion der husker sine ydre variable og kan tilgå dem. I nogle sprog er det ikke muligt, eller en funktion skal skrives på en speciel måde for at det skal virke. Men som forklaret ovenfor, i JavaScript, er alle funktioner naturligt closures (der er kun ét undtagelse, som beskrives i <info:new-function>).
 
-That is: they automatically remember where they were created using a hidden `[[Environment]]` property, and then their code can access outer variables.
+Det vil sige: de husker automatisk hvor de blev oprettet ved hjælp af en skjult `[[Environment]]` egenskab, og derefter kan deres kode tilgå ydre variabler.
 
-When on an interview, a frontend developer gets a question about "what's a closure?", a valid answer would be a definition of the closure and an explanation that all functions in JavaScript are closures, and maybe a few more words about technical details: the `[[Environment]]` property and how Lexical Environments work.
+Når en frontend udvikler stilles et spørgsmål om "Hvad er en closure?", så er et gyldigt svar en definition af closure og en forklaring på at alle funktioner i JavaScript er closures, og måske et par flere ord om tekniske detaljer: egenskaben `[[Environment]]` og hvordan Lexical Environments virker.
 ```
 
 ## Garbage collection
 
-Usually, a Lexical Environment is removed from memory with all the variables after the function call finishes. That's because there are no references to it. As any JavaScript object, it's only kept in memory while it's reachable.
+Normalt vil et leksikalt miljø blive fjernet fra hukommelsen sammen med alle variablerne efter at funktionen er afsluttet. Det skyldes at der ikke er nogen referencer til det. Som ethvert JavaScript objekt, bliver det kun beholdt i hukommelsen så længe det er tilgængeligt.
 
-However, if there's a nested function that is still reachable after the end of a function, then it has `[[Environment]]` property that references the lexical environment.
+Men, hvis der er en indlejret funktion som stadig er tilgængelig efter afslutningen af en funktion, så har den en `[[Environment]]` egenskab som refererer til det leksikale miljø.
 
-In that case the Lexical Environment is still reachable even after the completion of the function, so it stays alive.
+I dette tilfælde er det leksikale miljø stadig tilgængeligt selv efter afslutningen af funktionen, så det bliver beholdt i hukommelsen.
 
 For example:
 
@@ -329,11 +330,11 @@ function f() {
   }
 }
 
-let g = f(); // g.[[Environment]] stores a reference to the Lexical Environment
-// of the corresponding f() call
+let g = f(); // g.[[Environment]] gemmer en reference til det leksikale miljø
+// af det tilsvarende f() kald
 ```
 
-Please note that if `f()` is called many times, and resulting functions are saved, then all corresponding Lexical Environment objects will also be retained in memory. In the code below, all 3 of them:
+Bemærk at hvis `f()` kaldes mange gange, og de resulterende funktioner gemmes, så vil alle tilsvarende leksikale miljøobjekter også blive beholdt i hukommelsen. I koden nedenfor, vil alle 3 af dem gemmes:
 
 ```js
 function f() {
@@ -342,14 +343,14 @@ function f() {
   return function() { alert(value); };
 }
 
-// 3 functions in array, every one of them links to Lexical Environment
-// from the corresponding f() run
+// 3 funktioner i et array. Hvert af dem linjer til et leksikalt miljø
+// af det tilsvarende f() kald
 let arr = [f(), f(), f()];
 ```
 
-A Lexical Environment object dies when it becomes unreachable (just like any other object). In other words, it exists only while there's at least one nested function referencing it.
+Et leksikalt miljøobjekt dør når det bliver utilgængeligt (ligesom ethvert andet objekt). Med andre ord eksisterer det kun mens der er mindst én indlejret funktion der refererer til det.
 
-In the code below, after the nested function is removed, its enclosing Lexical Environment (and hence the `value`) is cleaned from memory:
+I koden nedenfor, efter at den indlejrede funktion er fjernet, bliver dets omkringliggende leksikale miljø (og dermed `value`) ryddet fra hukommelsen:
 
 ```js
 function f() {
@@ -360,29 +361,29 @@ function f() {
   }
 }
 
-let g = f(); // while g function exists, the value stays in memory
+let g = f(); // mens funktionen g eksisterer, bliver value beholdt i hukommelsen
 
-g = null; // ...and now the memory is cleaned up
+g = null; // ...og nu bliver hukommelsen ryddet
 ```
 
-### Real-life optimizations
+### Optimeringer (lidt for meget i virkeligheden)
 
-As we've seen, in theory while a function is alive, all outer variables are also retained.
+Som vi har set, i teorien eksisterer alle ydre variabler så længe en funktion lever.
 
-But in practice, JavaScript engines try to optimize that. They analyze variable usage and if it's obvious from the code that an outer variable is not used -- it is removed.
+Men i praksis forsøger JavaScript-motorer at optimere det. De analyserer brugen af variabler og hvis det er klart fra koden at en ydre variabel ikke bruges -- bliver den fjernet.
 
-**An important side effect in V8 (Chrome, Edge, Opera) is that such variable will become unavailable in debugging.**
+**En vigtig sideeffekt i V8 (Chrome, Edge, Opera) er at en sådan variabel ikke længere er tilgængelig i debugging.**
 
-Try running the example below in Chrome with the Developer Tools open.
+Prøv at køre følgende eksempel i Chrome med Developer Tools åbnet.
 
-When it pauses, in the console type `alert(value)`.
+Når det stopper, skriv `alert(value)` i konsollen.
 
 ```js run
 function f() {
   let value = Math.random();
 
   function g() {
-    debugger; // in console: type alert(value); No such variable!
+    debugger; // i konsollen: skriv alert(value); No such variable!
   }
 
   return g;
@@ -392,18 +393,18 @@ let g = f();
 g();
 ```
 
-As you could see -- there is no such variable! In theory, it should be accessible, but the engine optimized it out.
+Som du kan se -- der er ingen sådan variabel! I teorien burde den være tilgængelig, men motoren har optimiseret den ud.
 
-That may lead to funny (if not such time-consuming) debugging issues. One of them -- we can see a same-named outer variable instead of the expected one:
+Det kan føre til morsomme (eller ikke så sjove) fejl i debugging. En af dem er at vi vil kunne se en ydre variabel der er navngivet med samme navn i stedet for den forventede:
 
 ```js run global
-let value = "Surprise!";
+let value = "Overrasket!";
 
 function f() {
-  let value = "the closest value";
+  let value = "den tætteste værdi";
 
   function g() {
-    debugger; // in console: type alert(value); Surprise!
+    debugger; // i konsollen: skriv alert(value); Overrasket!
   }
 
   return g;
@@ -413,6 +414,6 @@ let g = f();
 g();
 ```
 
-This feature of V8 is good to know. If you are debugging with Chrome/Edge/Opera, sooner or later you will meet it.
+Denne feature i V8 er god at kende til. Hvis du debugger med Chrome/Edge/Opera, vil du til sidst møde den.
 
-That is not a bug in the debugger, but rather a special feature of V8. Perhaps it will be changed sometime. You can always check for it by running the examples on this page.
+Det er ikke en fejl i debuggere, men snarere en speciel feature i V8. Måske vil det blive ændret på et tidspunkt. Du kan altid tjekke for det ved at køre eksemplerne på denne side.

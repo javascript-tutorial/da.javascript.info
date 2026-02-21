@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Sort by field
+# Sorter efter felt
 
-We've got an array of objects to sort:
+Vi har et array af objekter, som skal sorteres:
 
 ```js
 let users = [
@@ -14,23 +14,23 @@ let users = [
 ];
 ```
 
-The usual way to do that would be:
+Den normale måde at gøre det på er:
 
 ```js
-// by name (Ann, John, Pete)
+// ved navn (Ann, John, Pete)
 users.sort((a, b) => a.name > b.name ? 1 : -1);
 
-// by age (Pete, Ann, John)
+// ved alder (Pete, Ann, John)
 users.sort((a, b) => a.age > b.age ? 1 : -1);
 ```
 
-Can we make it even less verbose, like this?
+Kan vi gøre det endnu mindre "udtalt" (verbose). Noget i stil med dette?
 
 ```js
 users.sort(byField('name'));
 users.sort(byField('age'));
 ```
 
-So, instead of writing a function, just put `byField(fieldName)`.
+Så i stedet for at skrive en funktion, bare brug `byField(fieldName)`.
 
-Write the function `byField` that can be used for that.
+Skriv funktionen `byField` som kan bruges til det.
