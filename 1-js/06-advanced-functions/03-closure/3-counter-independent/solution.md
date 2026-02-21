@@ -1,5 +1,5 @@
-The answer: **0,1.**
+Svaret er: **0,1.**
 
-Functions `counter` and `counter2` are created by different invocations of `makeCounter`.
+Funktionen `counter` og `counter2` er skabt af forskellige kald af `makeCounter`.
 
-So they have independent outer Lexical Environments, each one has its own `count`.
+Så de har uafhængige ydre leksikale miljøer, hver har sin egen `count`.

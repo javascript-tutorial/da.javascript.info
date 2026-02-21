@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Are counters independent?
+# Er tællere uafhængige?
 
-Here we make two counters: `counter` and `counter2` using the same `makeCounter` function.
+Her opretter vi to tællere: `counter` og `counter2` ved brug af samme `makeCounter` funktion.
 
-Are they independent? What is the second counter going to show? `0,1` or `2,3` or something else?
+Er de uafhængige? Hvad vil den anden tæller vise? `0,1` eller `2,3` eller noget andet?
 
 ```js
 function makeCounter() {

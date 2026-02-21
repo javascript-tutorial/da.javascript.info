@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Which variables are available?
+# Hvilke variable er tilgængelige?
 
-The function `makeWorker` below makes another function and returns it. That new function can be called from somewhere else.
+Funktionen `makeWorker` nedenfor opretter en anden funktion og returnerer den. Den nye funktion kan kaldes fra et andet sted.
 
-Will it have access to the outer variables from its creation place, or the invocation place, or both?
+Vil den have adgang til de ydre variable fra sit oprettelsessted, eller fra sit kaldested, eller begge?
 
 ```js
 function makeWorker() {
@@ -19,11 +19,11 @@ function makeWorker() {
 
 let name = "John";
 
-// create a function
+// Opret en funktion
 let work = makeWorker();
 
-// call it
-work(); // what will it show?
+// Kald den
+work(); // Hvad vil den vise?
 ```
 
-Which value it will show? "Pete" or "John"?
+Hvilken værdi vil den vise: "Pete" eller "John"?

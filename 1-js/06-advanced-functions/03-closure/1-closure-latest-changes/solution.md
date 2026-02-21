@@ -1,5 +1,6 @@
 The answer is: **Pete**.
 
-A function gets outer variables as they are now, it uses the most recent values.
+En funktion får ydre variabler som de er nu, den bruger de mest nyeste værdier.
 
-Old variable values are not saved anywhere. When a function wants a variable, it takes the current value from its own Lexical Environment or the outer one.
+Gamle variabelværdier gemmes ikke nogen steder. Når en funktion ønsker en variabel, tager den den nuværende værdi fra sit eget leksikale miljø eller det ydre.
+

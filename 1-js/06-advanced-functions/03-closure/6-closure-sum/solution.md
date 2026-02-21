@@ -1,12 +1,12 @@
-For the second parentheses to work, the first ones must return a function.
+For at den anden sætning med parenteser skal fungere, skal den første returnere en funktion.
 
-Like this:
+Sådan her:
 
 ```js run
 function sum(a) {
 
   return function(b) {
-    return a + b; // takes "a" from the outer lexical environment
+    return a + b; // tager "a" fra det ydre leksikale miljø
   };
 
 }

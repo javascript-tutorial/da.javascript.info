@@ -1,14 +1,14 @@
 
-Let's examine what exactly happens inside `makeArmy`, and the solution will become obvious.
+Lad os undersøge hvad der faktisk sker inde i `makeArmy`. Måske står løsningen så klarere.
 
-1. It creates an empty array `shooters`:
+1. Den opretter et tomt array `shooters`:
 
     ```js
     let shooters = [];
     ```
-2. Fills it with functions via `shooters.push(function)` in the loop.
+2. Fylder den med funktioner via `shooters.push(function)` i løkken.
 
-    Every element is a function, so the resulting array looks like this:
+    Hvert element er en funktion, så det resulterer i et array der ser således ud:
 
     ```js no-beautify
     shooters = [
@@ -25,40 +25,38 @@ Let's examine what exactly happens inside `makeArmy`, and the solution will beco
     ];
     ```
 
-3. The array is returned from the function.
+3. Arrayet returneres fra funktionen.
     
-    Then, later, the call to any member, e.g. `army[5]()` will get the element `army[5]` from the array (which is a function) and calls it.
+    Senere vil et kald til et element i arrayet, f.eks. `army[5]()` vil hente elementet `army[5]` fra arrayet (som er en funktion) og kalde den.
     
-    Now why do all such functions show the same value, `10`?
+    Men, hvorfor viser alle sådanne funktioner så samme værdi, `10`?
     
-    That's because there's no local variable `i` inside `shooter` functions. When such a function is called, it takes `i` from its outer lexical environment.
+    Det skyldes, at der ikke er en lokal variabel `i` inde i `shooter`-funktionerne. Når en sådan funktion kaldes, tager den `i` fra dens ydre leksikale miljø. Så hvad er værdien af `i` når funktionen kaldes?
     
-    Then, what will be the value of `i`?
-    
-    If we look at the source:
+    Kig på koden:
     
     ```js
     function makeArmy() {
       ...
       let i = 0;
       while (i < 10) {
-        let shooter = function() { // shooter function
-          alert( i ); // should show its number
+        let shooter = function() { // shooter funktion
+          alert( i ); // skal vise sit nummer
         };
-        shooters.push(shooter); // add function to the array
+        shooters.push(shooter); // tilføj funktionen til arrayet
         i++;
       }
       ...
     }
     ```
     
-    We can see that all `shooter` functions are created in the lexical environment of `makeArmy()` function. But when `army[5]()` is called, `makeArmy` has already finished its job, and the final value of `i` is `10` (`while` stops at `i=10`).
+    Vi kan se at alle `shooter` funktioner er oprettet i det leksikale miljø af `makeArmy()` funktionen. Men når `army[5]()` kaldes, har `makeArmy` allerede afsluttet sin job, og den endelige værdi af `i` er `10` (`while` stopper ved `i=10`).
     
-    As the result, all `shooter` functions get the same value from the outer lexical environment and that is, the last value, `i=10`.
+    Som resultat får alle `shooter` funktioner samme værdi fra det ydre leksikale miljø og det er den sidste værdi, `i=10`.
     
     ![](lexenv-makearmy-empty.svg)
     
-    As you can see above, on each iteration of a `while {...}` block, a new lexical environment is created. So, to fix this, we can copy the value of `i` into a variable within the `while {...}` block, like this:
+    Som du kan se ovenfor så oprettes der et nyt leksikalt miljø ved hver iteration af `while {...}` blokken. Så for at fikse dette, kan vi kopiere værdien af `i` til en variabel inden i `while {...}` blokken, som dette:
     
     ```js run
     function makeArmy() {
@@ -69,8 +67,8 @@ Let's examine what exactly happens inside `makeArmy`, and the solution will beco
         *!*
           let j = i;
         */!*
-          let shooter = function() { // shooter function
-            alert( *!*j*/!* ); // should show its number
+          let shooter = function() { // shooter funktion
+            alert( *!*j*/!* ); // skal vise sit nummer
           };
         shooters.push(shooter);
         i++;
@@ -81,18 +79,18 @@ Let's examine what exactly happens inside `makeArmy`, and the solution will beco
     
     let army = makeArmy();
     
-    // Now the code works correctly
+    // Nu virker koden som den skal
     army[0](); // 0
     army[5](); // 5
     ```
     
-    Here `let j = i` declares an "iteration-local" variable `j` and copies `i` into it. Primitives are copied "by value", so we actually get an independent copy of `i`, belonging to the current loop iteration.
+    Her vil `let j = i` deklarere en lokal variabel `j` og kopiere `i` over i den. Primitiver kopieres "ved deres værdi", så vi får en reelt uafhængig kopi af `i`, der tilhører den aktuelle løkkes iteration.
     
-    The shooters work correctly, because the value of `i` now lives a little bit closer. Not in `makeArmy()` Lexical Environment, but in the Lexical Environment that corresponds to the current loop iteration:
+    Shooters virker korrekt nu fordi værdien af `i` nu lever et lidt tættere på. Ikke i `makeArmy()` Lexical Environment, men i det Lexical Environment der svarer til den aktuelle løkkes iteration:
     
     ![](lexenv-makearmy-while-fixed.svg)
     
-    Such a problem could also be avoided if we used `for` in the beginning, like this:
+    Dette problem kunne undgås hvis vi brugte `for` i stedet for `while`, som dette:
     
     ```js run demo
     function makeArmy() {
@@ -102,8 +100,8 @@ Let's examine what exactly happens inside `makeArmy`, and the solution will beco
     *!*
       for(let i = 0; i < 10; i++) {
     */!*
-        let shooter = function() { // shooter function
-          alert( i ); // should show its number
+        let shooter = function() { // shooter funktion
+          alert( i ); // bør vise sit nummer
         };
         shooters.push(shooter);
       }
@@ -117,13 +115,12 @@ Let's examine what exactly happens inside `makeArmy`, and the solution will beco
     army[5](); // 5
     ```
     
-    That's essentially the same, because `for` on each iteration generates a new lexical environment, with its own variable `i`. So `shooter` generated in every iteration references its own `i`, from that very iteration.
+    Det er grundlæggende det samme fordi `for` gennem hver iteration genererer en ny leksikale miljø med sin egen variabel `i`. Så `shooter` genereret i hver iteration refererer til dens egen `i`, fra den pågældende iteration.
     
     ![](lexenv-makearmy-for-fixed.svg)
 
-Now, as you've put so much effort into reading this, and the final recipe is so simple - just use `for`, you may wonder -- was it worth that?
+Nu, efter du har lagt så meget energi i at læse dette, og den endelige opskrift er så enkel - bare brug `for`, kan du måske tænke -- var det værd det?
 
-Well, if you could easily answer the question, you wouldn't read the solution. So, hopefully this task must have helped you to understand things a bit better. 
+Vel, hvis du kunne svare spørgsmålet nemt, ville du ikke have læst løsningen. Så håber jeg, at denne opgave har hjulpet dig med at forstå tingene lidt bedre. 
 
-Besides, there are indeed cases when one prefers `while` to `for`, and other scenarios, where such problems are real.
-
+Desuden er der faktisk tilfælde hvor man hellere foretrækker `while` frem for `for`, og andre scenarier hvor sådanne problemer opstår.

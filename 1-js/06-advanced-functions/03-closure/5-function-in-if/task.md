@@ -1,9 +1,9 @@
 importance: 5
 
 ---
-# Function in if
+# Funktion i if
 
-Look at the code. What will be the result of the call at the last line?
+Se på følgende kode. Hvad vil resultatet være af kaldet på den sidste linje?
 
 ```js run
 let phrase = "Hello";
