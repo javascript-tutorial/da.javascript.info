@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Sum all numbers till the given one
+# Sammentæl alle tal op til et bestemt tal
 
-Write a function `sumTo(n)` that calculates the sum of numbers `1 + 2 + ... + n`.
+Skriv en funktion `sumTo(n)` som beregner summen af tallene `1 + 2 + ... + n`.
 
-For instance:
+For eksempel:
 
 ```js no-beautify
 sumTo(1) = 1
@@ -17,20 +17,20 @@ sumTo(4) = 4 + 3 + 2 + 1 = 10
 sumTo(100) = 100 + 99 + ... + 2 + 1 = 5050
 ```
 
-Make 3 solution variants:
+Opret tre variationer af løsningen:
 
-1. Using a for loop.
-2. Using a recursion, cause `sumTo(n) = n + sumTo(n-1)` for `n > 1`.
-3. Using the [arithmetic progression](https://en.wikipedia.org/wiki/Arithmetic_progression) formula.
+1. Ved brug af et `for`-loop.
+2. Ved brug af rekursion, da `sumTo(n) = n + sumTo(n-1)` for `n > 1`.
+3. Ved brug af formlen [Differensrække](https://da.wikipedia.org/wiki/Differensr%C3%A6kke). Det engelske opslag [aritmetisk progression](https://en.wikipedia.org/wiki/Arithmetic_progression) giver en dybere forklaring, hvis du har brug for det.
 
-An example of the result:
+Her er et eksempel på resultatet:
 
 ```js
-function sumTo(n) { /*... your code ... */ }
+function sumTo(n) { /*... din kode ... */ }
 
 alert( sumTo(100) ); // 5050
 ```
 
-P.S. Which solution variant is the fastest? The slowest? Why?
+P.S. Hvilken løsning er hurtigst? Og hvilken er langsomst? Hvorfor?
 
-P.P.S. Can we use recursion to count `sumTo(100000)`? 
+P.P.S. Kan vi bruge rekursion til at regne `sumTo(100000)`? 

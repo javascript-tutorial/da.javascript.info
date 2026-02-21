@@ -1,18 +1,18 @@
-# Recursion and stack
+# Rekursion og stak
 
-Let's return to functions and study them more in-depth.
+Lad os vende tilbage til funktioner og studere dem mere grundigt.
 
-Our first topic will be *recursion*.
+Vores første emne vil være *rekursion*.
 
-If you are not new to programming, then it is probably familiar and you could skip this chapter.
+Hvis du ikke er ny i programmering, så er det sandsynligvis kendt og du kan springe dette kapitel over.
 
-Recursion is a programming pattern that is useful in situations when a task can be naturally split into several tasks of the same kind, but simpler. Or when a task can be simplified into an easy action plus a simpler variant of the same task. Or, as we'll see soon, to deal with certain data structures.
+Rekursion er et programmeringsmønster, som er nyttigt i situationer hvor en opgave kan opdeles i flere opgaver af samme type, men mere simple. Eller når en opgave kan formindskes til en enkel handling plus en mere simpel variant af samme opgave. Eller, som vi vil se snart, for at håndtere bestemte datastrukturer.
 
-When a function solves a task, in the process it can call many other functions. A partial case of this is when a function calls *itself*. That's called *recursion*.
+Når en funktion løser en opgave, kan den i processen kalde mange andre funktioner. En delmængde heraf er når en funktion kalder *sig selv*. Det kaldes *rekursion*.
 
-## Two ways of thinking
+## To måder at tænke på
 
-For something simple to start with -- let's write a function `pow(x, n)` that raises `x` to a natural power of `n`. In other words, multiplies `x` by itself `n` times.
+For noget simpelt at starte med -- lad os skrive en funktion `pow(x, n)` som hæver `x` til en naturlig potens af `n`. Med andre ord, multiplicerer `x` med sig selv `n` gange.
 
 ```js
 pow(2, 2) = 4
@@ -20,15 +20,15 @@ pow(2, 3) = 8
 pow(2, 4) = 16
 ```
 
-There are two ways to implement it.
+Der er to måder at implementere det.
 
-1. Iterative thinking: the `for` loop:
+1. Iterativ tankegang: `for`-loopet:
 
     ```js run
     function pow(x, n) {
       let result = 1;
 
-      // multiply result by x n times in the loop
+      // Gang resultatet med x n gange i loopet
       for (let i = 0; i < n; i++) {
         result *= x;
       }
@@ -39,7 +39,7 @@ There are two ways to implement it.
     alert( pow(2, 3) ); // 8
     ```
 
-2. Recursive thinking: simplify the task and call self:
+2. Rekursiv tænkning: Simplificer opgaven og kald dig selv:
 
     ```js run
     function pow(x, n) {
@@ -53,9 +53,9 @@ There are two ways to implement it.
     alert( pow(2, 3) ); // 8
     ```
 
-Please note how the recursive variant is fundamentally different.
+Bemærk hvordan den rekursive variant er grundiglæggende anderledes.
 
-When `pow(x, n)` is called, the execution splits into two branches:
+Når `pow(x, n)` kaldes splittes udførelsen til to forgreninger:
 
 ```js
               if n==1  = x
@@ -65,27 +65,27 @@ pow(x, n) =
               else     = x * pow(x, n - 1)
 ```
 
-1. If `n == 1`, then everything is trivial. It is called *the base* of recursion, because it immediately produces the obvious result: `pow(x, 1)` equals `x`.
-2. Otherwise, we can represent `pow(x, n)` as `x * pow(x, n - 1)`. In maths, one would write <code>x<sup>n</sup> = x * x<sup>n-1</sup></code>. This is called *a recursive step*: we transform the task into a simpler action (multiplication by `x`) and a simpler call of the same task (`pow` with lower `n`). Next steps simplify it further and further until `n` reaches `1`.
+1. Hvis `n == 1`, så er alt trivielt. Dette kaldes *basen* for rekursion, fordi den fordi den umiddelbart producerer det obviouse resultat: `pow(x, 1)` er lig med `x`.
+2. Ellers kan vi repræsentere `pow(x, n)` som `x * pow(x, n - 1)`. I matematik ville man skrive <code>x<sup>n</sup> = x * x<sup>n-1</sup></code>. Dette kaldes *et rekursivt trin*: vi transformerer opgaven til en enkel handling (multiplication med `x`) og et mere simpelt kald af samme opgave (`pow` med lavere `n`). Næste trin forenkler det yderligere og yderligere indtil `n` når `1`.
 
-We can also say that `pow` *recursively calls itself* till `n == 1`.
+Vi kan også sige at `pow` *kalder sig selv rekursivt* indtil `n == 1`.
 
-![recursive diagram of pow](recursion-pow.svg)
+![rekursivt diagram af pow](recursion-pow.svg)
 
 
-For example, to calculate `pow(2, 4)` the recursive variant does these steps:
+For eksempel, for at udregne `pow(2, 4)` vil den rekursive variant gøre disse trin:
 
 1. `pow(2, 4) = 2 * pow(2, 3)`
 2. `pow(2, 3) = 2 * pow(2, 2)`
 3. `pow(2, 2) = 2 * pow(2, 1)`
 4. `pow(2, 1) = 2`
 
-So, the recursion reduces a function call to a simpler one, and then -- to even more simpler, and so on, until the result becomes obvious.
+så rekursionen reducerer et funktionskald til et mere simpelt, og så videre, indtil resultatet bliver åbenlyst.
 
-````smart header="Recursion is usually shorter"
-A recursive solution is usually shorter than an iterative one.
+````smart header="Rekursion er normalt kortere"
+En rekursiv løsning er normalt kortere end en iterativ.
 
-Here we can rewrite the same using the conditional operator `?` instead of `if` to make `pow(x, n)` more terse and still very readable:
+Her kan vi omskrive det samme med betingelsesoperatoren `?` i stedet for `if` for at gøre `pow(x, n)` mere kompakt og stadig meget læselig:
 
 ```js run
 function pow(x, n) {
@@ -94,36 +94,36 @@ function pow(x, n) {
 ```
 ````
 
-The maximal number of nested calls (including the first one) is called *recursion depth*. In our case, it will be exactly `n`.
+Det maksimalt antal indlejrede kald (inklusive det første) kaldes *rekursionsdybde*. I vores tilfælde vil det være præcis `n`.
 
-The maximal recursion depth is limited by JavaScript engine. We can rely on it being 10000, some engines allow more, but 100000 is probably out of limit for the majority of them. There are automatic optimizations that help alleviate this ("tail calls optimizations"), but they are not yet supported everywhere and work only in simple cases.
+Den maksimale rekursionsdybde er begrænset af JavaScript-motoren. Vi kan stole på, at den er 10.000, nogle motorer tillader mere, men 100.000 er sandsynligvis uden for grænsen for de fleste af dem. Der er automatiske optimeringer, der hjælper med at optimere antallet af kald ("tail calls optimizations"), men de er ikke endnu understøttet overalt og virker kun i simple tilfælde.
 
-That limits the application of recursion, but it still remains very wide. There are many tasks where recursive way of thinking gives simpler code, easier to maintain.
+Det begrænser anvendelsen af rekursion, men den forbliver stadig meget bred. Der er mange opgaver hvor den rekursive måde at tænke giver enklere kode der er nemmere at vedligeholde.
 
-## The execution context and stack
+## Eksekveringens kontekst og stak
 
-Now let's examine how recursive calls work. For that we'll look under the hood of functions.
+Lad os undersøge hvordan rekursive kald fungerer. For det vil vi kigge under huden på funktioner.
 
-The information about the process of execution of a running function is stored in its *execution context*.
+Informationen om processen for eksekvering af en kørende funktion er gemt i dens *eksekveringskontekst*.
 
-The [execution context](https://tc39.github.io/ecma262/#sec-execution-contexts) is an internal data structure that contains details about the execution of a function: where the control flow is now, the current variables, the value of `this` (we don't use it here) and few other internal details.
+[Eksekveringskonteksten](https://tc39.github.io/ecma262/#sec-execution-contexts) er en intern datastruktur, der indeholder detaljer om eksekveringen af en funktion: hvor kontrolløbet er nu, de aktuelle variabler, værdien af `this` (vi bruger det ikke her) og andre interne detaljer.
 
-One function call has exactly one execution context associated with it.
+Et funktionskald har præcis én eksekveringskontekst forbundet med det.
 
-When a function makes a nested call, the following happens:
+Når en funktion udfører et indlejret kald, sker følgende:
 
-- The current function is paused.
-- The execution context associated with it is remembered in a special data structure called *execution context stack*.
-- The nested call executes.
-- After it ends, the old execution context is retrieved from the stack, and the outer function is resumed from where it stopped.
+- Den nuværende funktion pauses.
+- Den eksekveringskontekst, der er forbundet med den, huskes i en speciel datastruktur kaldet *execution context stack*.
+- Det indlejrede kald udføres.
+- Når det er færdigt, hentes den gamle eksekveringskontekst fra stakken og den ydre funktion genoptages fra hvor den stoppede.
 
-Let's see what happens during the `pow(2, 3)` call.
+Lad os se hvad der sker under kaldet `pow(2, 3)`.
 
 ### pow(2, 3)
 
-In the beginning of the call `pow(2, 3)` the execution context will store variables: `x = 2, n = 3`, the execution flow is at line `1` of the function.
+I begyndelsen af kaldet `pow(2, 3)` vil eksekveringskonteksten gemme variablerne: `x = 2, n = 3`, og kontrolløbet er på linje `1` i funktionen.
 
-We can sketch it as:
+Vi kan skitsere det som:
 
 <ul class="function-execution-context-list">
   <li>
@@ -132,7 +132,7 @@ We can sketch it as:
   </li>
 </ul>
 
-That's when the function starts to execute. The condition `n == 1` is falsy, so the flow continues into the second branch of `if`:
+Det er her funktionen begynder at eksekvere. Betingelsen `n == 1` er falsk, så flowet fortsætter til den anden gren af `if`:
 
 ```js run
 function pow(x, n) {
@@ -149,7 +149,7 @@ alert( pow(2, 3) );
 ```
 
 
-The variables are same, but the line changes, so the context is now:
+Variablene er de samme, men linjen ændres, så konteksten er nu:
 
 <ul class="function-execution-context-list">
   <li>
@@ -158,67 +158,67 @@ The variables are same, but the line changes, so the context is now:
   </li>
 </ul>
 
-To calculate `x * pow(x, n - 1)`, we need to make a subcall of `pow` with new arguments `pow(2, 2)`.
+For at udregne `x * pow(x, n - 1)`, vi skal lave et indlejret kald af `pow` med nye argumenter `pow(2, 2)`.
 
 ### pow(2, 2)
 
-To do a nested call, JavaScript remembers the current execution context in the *execution context stack*.
+For at udføre et indlejret kald, husker JavaScript den nuværende eksekveringskontekst i *execution context stack*.
 
-Here we call the same function `pow`, but it absolutely doesn't matter. The process is the same for all functions:
+Her kalder vi den samme funktion `pow`, men det spiller ingen rolle. Processen er den samme for alle funktioner:
 
-1. The current context is "remembered" on top of the stack.
-2. The new context is created for the subcall.
-3. When the subcall is finished -- the previous context is popped from the stack, and its execution continues.
+1. Den nuværende kontekst huskes øverst på stakken.
+2. En ny kontekst oprettes for underkaldet.
+3. Når underkaldet er færdigt -- bliver den gamle kontekst fjernet fra stakken, og dens eksekvering genoptages.
 
-Here's the context stack when we entered the subcall `pow(2, 2)`:
+Her er kontekststakken efter vi er gået ind i underkaldet `pow(2, 2)`:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 2, at line 1 }</span>
+    <span class="function-execution-context">Kontekst: { x: 2, n: 2, at line 1 }</span>
     <span class="function-execution-context-call">pow(2, 2)</span>
   </li>
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Kontekst: { x: 2, n: 3, at line 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-The new current execution context is on top (and bold), and previous remembered contexts are below.
+Den nye nuværende eksekveringskontekst er øverst (og fed), og de tidligere huskede kontekster er nedenfor.
 
-When we finish the subcall -- it is easy to resume the previous context, because it keeps both variables and the exact place of the code where it stopped.
+Når underkaldet er færdigt -- er det nemt at genoptage den gamle kontekst, fordi den beholder både variablerne og den præcise sted i koden hvor den stoppede.
 
 ```smart
-Here in the picture we use the word "line", as in our example there's only one subcall in line, but generally a single line of code may contain multiple subcalls, like `pow(…) + pow(…) + somethingElse(…)`.
+Her i billedet bruger vi ordet "line", som i vores eksempel er der kun ét underkald i en linje, men generelt kan en enkelt linje af kode indeholde flere underkald, f.eks. `pow(…) + pow(…) + somethingElse(…)`.
 
-So it would be more precise to say that the execution resumes "immediately after the subcall".
+Så det ville være mere præcist at sige, at eksekveringen genoptages "øjeblikkeligt efter underkaldet".
 ```
 
 ### pow(2, 1)
 
-The process repeats: a new subcall is made at line `5`, now with arguments `x=2`, `n=1`.
+Processen gentages: et nyt underkald oprettes på linje `5`, nu med argumenterne `x=2`, `n=1`.
 
-A new execution context is created, the previous one is pushed on top of the stack:
+En ny eksekveringskontekst oprettes, den gamle kontekst bliver pushed øverst på stakken:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 1, at line 1 }</span>
+    <span class="function-execution-context">Kontekst: { x: 2, n: 1, at line 1 }</span>
     <span class="function-execution-context-call">pow(2, 1)</span>
   </li>
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 2, at line 5 }</span>
+    <span class="function-execution-context">Kontekst: { x: 2, n: 2, at line 5 }</span>
     <span class="function-execution-context-call">pow(2, 2)</span>
   </li>
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Kontekst: { x: 2, n: 3, at line 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-There are 2 old contexts now and 1 currently running for `pow(2, 1)`.
+Der er 2 gamle kontekster og 1 nuværende kontekst for `pow(2, 1)`.
 
-### The exit
+### Udgangen
 
-During the execution of `pow(2, 1)`, unlike before, the condition `n == 1` is truthy, so the first branch of `if` works:
+Med udførelsen af `pow(2, 1)` vil betingelsen `n == 1`, i modsætning til før, være sand. Derfor udføres den første gren af `if`:
 
 ```js
 function pow(x, n) {
@@ -232,9 +232,9 @@ function pow(x, n) {
 }
 ```
 
-There are no more nested calls, so the function finishes, returning `2`.
+Der er ikke flere indlejrede kald, så funktionen afslutter og returnerer `2`.
 
-As the function finishes, its execution context is not needed anymore, so it's removed from the memory. The previous one is restored off the top of the stack:
+Når funktionen afslutter, er dens eksekveringskontekst ikke længere nødvendig, så den fjernes fra hukommelsen. Den tidligere kontekst genoprettes fra toppen af stakken:
 
 
 <ul class="function-execution-context-list">
@@ -248,26 +248,26 @@ As the function finishes, its execution context is not needed anymore, so it's r
   </li>
 </ul>
 
-The execution of `pow(2, 2)` is resumed. It has the result of the subcall `pow(2, 1)`, so it also can finish the evaluation of `x * pow(x, n - 1)`, returning `4`.
+Udførelsen af `pow(2, 2)` genoptages. Den har resultatet af underkaldet `pow(2, 1)`, så den også kan færdiggøre evalueringen af `x * pow(x, n - 1)`, og returnere `4`.
 
-Then the previous context is restored:
+Så den tidligere kontekst genoprettes:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Kontekst: { x: 2, n: 3, at line 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-When it finishes, we have a result of `pow(2, 3) = 8`.
+Når den afslutter, har vi et resultat på `pow(2, 3) = 8`.
 
-The recursion depth in this case was: **3**.
+Dybden af rekursionen i dette tilfælde var: **3**.
 
-As we can see from the illustrations above, recursion depth equals the maximal number of context in the stack.
+Som vi kan se fra illustrationerne ovenfor, er rekursionsdybden lig med det maksimale antal kontekster i stakken.
 
-Note the memory requirements. Contexts take memory. In our case, raising to the power of `n` actually requires the memory for `n` contexts, for all lower values of `n`.
+Bemærk hukommelseskravene. Kontekster tager plads. I vores tilfælde kræver en udregning til potens af `n` faktisk hukommelse for `n` kontekster, for alle lavere værdier af `n`.
 
-A loop-based algorithm is more memory-saving:
+En algoritme baseret på løkker er mere hukommelsesvenlig:
 
 ```js
 function pow(x, n) {
@@ -281,19 +281,19 @@ function pow(x, n) {
 }
 ```
 
-The iterative `pow` uses a single context changing `i` and `result` in the process. Its memory requirements are small, fixed and do not depend on `n`.
+Denne udgave af `pow` bruger kun en enkelt kontekst der ændrer `i` og `result` i processen. Dens hukommelseskrav er små, faste og afhænger ikke af `n`.
 
-**Any recursion can be rewritten as a loop. The loop variant usually can be made more effective.**
+**Enhver rekursion kan omskrives som en løkke. Versionen baseret på løkker er ofte mere effektiv.**
 
-...But sometimes the rewrite is non-trivial, especially when a function uses different recursive subcalls depending on conditions and merges their results or when the branching is more intricate. And the optimization may be unneeded and totally not worth the efforts.
+...men nogle gange er omskrivningen ikke-triviel, især når en funktion bruger forskellige rekursive underkald afhængigt af betingelser og fletter deres resultater eller når forgreningen er mere kompleks. Endelig kan optimeringen være unødvendig til en grad hvor det ikke er værd værd at investere i.
 
-Recursion can give a shorter code, easier to understand and support. Optimizations are not required in every place, mostly we need a good code, that's why it's used.
+Rekursion kan give en kortere kode der nemmere at forstå og understøtte. Optimeringer er ikke nødvendige overalt. Det vigtigste vi har brug for er god kode, og her kan rekursion være at foretrække (når man har "knækket koden" il at forstå den).
 
-## Recursive traversals
+## Rekursive 'traversals'
 
-Another great application of the recursion is a recursive traversal.
+Et anden god brug af rekursion er rekursive 'traversal'. Jeg tror ikke der er et godt direkte dansk ord, men det betyder noget i stil med *gennemløb af alle elementer i en struktur*.
 
-Imagine, we have a company. The staff structure can be presented as an object:
+Forestil dig et firma. I det kan medarbejdernes struktureres i et objekt i stil med dette:
 
 ```js
 let company = {
@@ -322,34 +322,34 @@ let company = {
 };
 ```
 
-In other words, a company has departments.
+Med andre ord - et firma har afdelinger.
 
-- A department may have an array of staff. For instance, `sales` department has 2 employees: John and Alice.
-- Or a department may split into subdepartments, like `development` has two branches: `sites` and `internals`. Each of them has their own staff.
-- It is also possible that when a subdepartment grows, it divides into subsubdepartments (or teams).
+- En afdeling kan have et array af medarbejdere. For eksempel har salgsafdelingen (`sales`) 2 medarbejdere: John og Alice.
+- Eller en afdeling kan opdeles i underafdelinger, som `development` har to grene: `sites` og `internals`. Hver af dem har deres egen medarbejderliste.
+- Det er også muligt at en underafdeling vokser og opdeles i underunderafdelinger (eller hold).
 
-    For instance, the `sites` department in the future may be split into teams for `siteA` and `siteB`. And they, potentially, can split even more. That's not on the picture, just something to have in mind.
+    For eksempel kan `sites`-afdelingen i fremtiden opdeles i hold for `siteA` og `siteB`. Og de, potentielt, kan opdeles end mere. Det er ikke på billedet, bare noget at have i tankerne.
 
-Now let's say we want a function to get the sum of all salaries. How can we do that?
+Lad os nu forestille os at vi vil have en funktion der lægger alle lønninger (salaries) sammen. Hvordan gør vi det?
 
-An iterative approach is not easy, because the structure is not simple. The first idea may be to make a `for` loop over `company` with nested subloop over 1st level departments. But then we need more nested subloops to iterate over the staff in 2nd level departments like `sites`... And then another subloop inside those for 3rd level departments that might appear in the future? If we put 3-4 nested subloops in the code to traverse a single object, it becomes rather ugly.
+En iterativ tilgang er ikke nem da strukturen ikke er simpel. En første idé kunne være at gennemløbe `company` med en nested subloop over 1. niveau afdelinger. Men så skal vi have flere nested subloops for at gennemløbe medarbejderne i 2. niveau afdelinger som `sites`... Og så en subloop inden i dem for 3. niveau afdelinger som måske vil opstå i fremtiden? Hvis vi sætter 3-4 nested subloops i koden for at gennemløbe et enkelt objekt, bliver det ret hurtigt svært at håndtere.
 
-Let's try recursion.
+Lad os prøve rekursion.
 
-As we can see, when our function gets a department to sum, there are two possible cases:
+Som vi kan se, når vores funktion får en afdeling den skal sammentælle, er der to mulige tilfælde:
 
-1. Either it's a "simple" department with an *array* of people -- then we can sum the salaries in a simple loop.
-2. Or it's *an object* with `N` subdepartments -- then we can make `N` recursive calls to get the sum for each of the subdeps and combine the results.
+1. Enten er den en "simpel" afdeling med et *array* af medarbejdere -- da kan vi summe lønningerne i en simpel loop.
+2. Eller den er *et objekt* med `N` underafdelinger -- da kan vi lave `N` rekursive kald for at få summen for hver af de underafdelinger og kombinere resultaterne.
 
-The 1st case is the base of recursion, the trivial case, when we get an array.
+Det første tilfælde er basen for rekursionen, det trivielle tilfælde, når vi får et array.
 
-The 2nd case when we get an object is the recursive step. A complex task is split into subtasks for smaller departments. They may in turn split again, but sooner or later the split will finish at (1).
+Det andet tilfælde når vi får et objekt er det rekursive trin. En kompleks opgave opdeles i underopgaver for mindre afdelinger. De kan i sin tur opdeles igen, men snarest eller senest vil opdeltningen slutte ved (1).
 
-The algorithm is probably even easier to read from the code:
+Algoritmen er sandsynligvis endnu lettere at læse fra koden:
 
 
 ```js run
-let company = { // the same object, compressed for brevity
+let company = { // det samme objekt, komprimeret 
   sales: [{name: 'John', salary: 1000}, {name: 'Alice', salary: 1600 }],
   development: {
     sites: [{name: 'Peter', salary: 2000}, {name: 'Alex', salary: 1800 }],
@@ -357,15 +357,15 @@ let company = { // the same object, compressed for brevity
   }
 };
 
-// The function to do the job
+// Funktionen der udfører jobbet
 *!*
 function sumSalaries(department) {
-  if (Array.isArray(department)) { // case (1)
+  if (Array.isArray(department)) { // Tilfælde (1)
     return department.reduce((prev, current) => prev + current.salary, 0); // sum the array
-  } else { // case (2)
+  } else { // Tilfælde (2)
     let sum = 0;
     for (let subdep of Object.values(department)) {
-      sum += sumSalaries(subdep); // recursively call for subdepartments, sum the results
+      sum += sumSalaries(subdep); // rekursivt kald til underafdelinger. Sammentæl alle deres returnerede resultater
     }
     return sum;
   }
@@ -375,62 +375,62 @@ function sumSalaries(department) {
 alert(sumSalaries(company)); // 7700
 ```
 
-The code is short and easy to understand (hopefully?). That's the power of recursion. It also works for any level of subdepartment nesting.
+Koden er kort og (forhåbentlig) nem at forstå. Det er kraften i rekursionen. Den virker også for ethvert niveau af underafdelingsindlejring.
 
-Here's the diagram of calls:
+Her er et diagram over kaldene:
 
-![recursive salaries](recursive-salaries.svg)
+![rekursive løsnninger](recursive-salaries.svg)
 
-We can easily see the principle: for an object `{...}` subcalls are made, while arrays `[...]` are the "leaves" of the recursion tree, they give immediate result.
+Her kan vi måske nemmere se principperne: for et objekt `{...}` udføres subkald, mens arrays `[...]` er "blade" i rekursions-træet og giver umiddelbare resultater.
 
-Note that the code uses smart features that we've covered before:
+Bemærk at koden bruger et par af de smarte muligheder som vi har gennemgået tidligere:
 
-- Method `arr.reduce` explained in the chapter <info:array-methods> to get the sum of the array.
-- Loop `for(val of Object.values(obj))` to iterate over object values: `Object.values` returns an array of them.
+- Metoden `arr.reduce` forklaret i kapitlet <info:array-methods> returnerer summen af et array.
+- Løkken `for(val of Object.values(obj))` itererer over et objekt og `Object.values` returnerer et array af dens værdier.
 
 
-## Recursive structures
+## Rekursive strukturer
 
-A recursive (recursively-defined) data structure is a structure that replicates itself in parts.
+En rekursiv (recursivt defineret) datastruktur er en struktur der replikerer sig selv i dele.
 
-We've just seen it in the example of a company structure above.
+Vi har lige set det i eksemplet med en virksomhedsstruktur ovenfor.
 
-A company *department* is:
-- Either an array of people.
-- Or an object with *departments*.
+En virksomheds *afdeling* er:
+- Enten et array af medarbejdere.
+- Eller et objekt med *underafdelinger*.
 
-For web-developers there are much better-known examples: HTML and XML documents.
+For webudviklere er der et meget mere velkendt eksempel: HTML og XML dokumenter.
 
-In the HTML document, an *HTML-tag* may contain a list of:
-- Text pieces.
-- HTML-comments.
-- Other *HTML-tags* (that in turn may contain text pieces/comments or other tags etc).
+I et HTML dokument kan et *HTML-tag* indeholde en liste af:
+- Tekststykker.
+- HTML-kommentarer.
+- Andre *HTML-tags* (der i sig selv kan indeholde tekststykker/kommentarer eller andre tags etc).
 
-That's once again a recursive definition.
+Det er igen en rekursiv definition.
 
-For better understanding, we'll cover one more recursive structure named "Linked list" that might be a better alternative for arrays in some cases.
+For bedre at forstå dette vil vi gennemgå en mere kompleks rekursiv struktur kaldet "Linked list" som kan være en bedre alternativ til arrays i nogle tilfælde.
 
 ### Linked list
 
-Imagine, we want to store an ordered list of objects.
+Forestil dig, vi vil gemme en ordnet liste af objekter.
 
-The natural choice would be an array:
+Den naturlige valg er et array:
 
 ```js
 let arr = [obj1, obj2, obj3];
 ```
 
-...But there's a problem with arrays. The "delete element" and "insert element" operations are expensive. For instance, `arr.unshift(obj)` operation has to renumber all elements to make room for a new `obj`, and if the array is big, it takes time. Same with `arr.shift()`.
+...Men der er et problem med arrays. Operationerne "slet element" og "indsæt element" er dyre. For eksempel vil `arr.unshift(obj)` være nødt til at renummerere alle elementer for at skabe plads for det nye element `obj`. Hvis det er et stort array, så tager det tid; det samme vil ske med `arr.shift()`.
 
-The only structural modifications that do not require mass-renumbering are those that operate with the end of array: `arr.push/pop`. So an array can be quite slow for big queues, when we have to work with the beginning.
+Den eneste modifikation der ikke kræver masser af renummerering er de operationer der arbejder med slutningen af arrayet: `arr.push/pop`. Så et array kan være ret langsomt for store køer, når vi skal arbejde med starten.
 
-Alternatively, if we really need fast insertion/deletion, we can choose another data structure called a [linked list](https://en.wikipedia.org/wiki/Linked_list).
+Alternativt, hvis vi virkelig har brug for hurtig indsættelse/sletning, kan vi vælge en anden datastruktur kaldet en [linked list](https://en.wikipedia.org/wiki/Linked_list).
 
-The *linked list element* is recursively defined as an object with:
-- `value`.
-- `next` property referencing the next *linked list element* or `null` if that's the end.
+Et *linked list element* er rekursivt defineret som et objekt med:
+- `value` - værdien af elementet.
+- `next` - en reference til det næste *linked list element* eller `null` hvis det er slutningen.
 
-For instance:
+For eksempel er her en linked list med 4 elementer:
 
 ```js
 let list = {
@@ -448,11 +448,11 @@ let list = {
 };
 ```
 
-Graphical representation of the list:
+Her er en grafisk repræsentation af listen:
 
 ![linked list](linked-list.svg)
 
-An alternative code for creation:
+En alternativ kode for oprettelse af den samme linked list kunne være:
 
 ```js no-beautify
 let list = { value: 1 };
@@ -462,9 +462,9 @@ list.next.next.next = { value: 4 };
 list.next.next.next.next = null;
 ```
 
-Here we can even more clearly see that there are multiple objects, each one has the `value` and `next` pointing to the neighbour. The `list` variable is the first object in the chain, so following `next` pointers from it we can reach any element.
+Her kan vi tydeligere se at der er flere objekter, hvor hvert objekt har `value` og `next` som peger på naboen. Variablen `list` er det første objekt i kæden, så ved at følge `next`-pegerne fra det kan vi nå ethvert element.
 
-The list can be easily split into multiple parts and later joined back:
+Listen kan nemt opdeles i flere dele og senere genoprettes:
 
 ```js
 let secondList = list.next.next;
@@ -473,15 +473,15 @@ list.next.next = null;
 
 ![linked list split](linked-list-split.svg)
 
-To join:
+For at genoprette den oprindelige liste, skal vi bare forbinde den første del med den anden:
 
 ```js
 list.next.next = secondList;
 ```
 
-And surely we can insert or remove items in any place.
+Og vi kan indsætte eller fjerne elementer hvor som helst.
 
-For instance, to prepend a new value, we need to update the head of the list:
+For eksempel, for at indsætte et nyt element i starten af listen, skal vi opdatere hovedet af listen:
 
 ```js
 let list = { value: 1 };
@@ -490,14 +490,14 @@ list.next.next = { value: 3 };
 list.next.next.next = { value: 4 };
 
 *!*
-// prepend the new value to the list
+// indsæt et nyt element i starten af listen
 list = { value: "new item", next: list };
 */!*
 ```
 
 ![linked list](linked-list-0.svg)
 
-To remove a value from the middle, change `next` of the previous one:
+For at fjerne et element fra midten, ændre `next` af det forrige element:
 
 ```js
 list.next = list.next.next;
@@ -505,38 +505,38 @@ list.next = list.next.next;
 
 ![linked list](linked-list-remove-1.svg)
 
-We made `list.next` jump over `1` to value `2`. The value `1` is now excluded from the chain. If it's not stored anywhere else, it will be automatically removed from the memory.
+Her får vi `list.next` til at hoppe over `1` til værdien `2`. Værdien `1` er nu fjernet fra kæden. Hvis den ikke er gemt et andet sted, vil den automatisk blive fjernet fra hukommelsen.
 
-Unlike arrays, there's no mass-renumbering, we can easily rearrange elements.
+I modsætning til arrays sker der ingen massiv omnummerering, vi kan nemt rearrangere elementer.
 
-Naturally, lists are not always better than arrays. Otherwise everyone would use only lists.
+Naturligvis er denne slags lister ikke altid bedre end arrays. Ellers ville alle bruge kun lister.
 
-The main drawback is that we can't easily access an element by its number. In an array that's easy: `arr[n]` is a direct reference. But in the list we need to start from the first item and go `next` `N` times to get the Nth element.
+Den store ulempe er at vi ikke nemt kan tilgå et element ved dets nummer. I et array er det nemt: `arr[n]` er en direkte reference. Men i listen skal vi starte fra det første element og gå `next` `N` gange for at nå det N'te element.
 
-...But we don't always need such operations. For instance, when we need a queue or even a [deque](https://en.wikipedia.org/wiki/Double-ended_queue) -- the ordered structure that must allow very fast adding/removing elements from both ends, but access to its middle is not needed.
+...Men vi har ikke altid brug for sådanne operationer. For eksempel, når vi har brug for en kø eller endda en [deque](https://en.wikipedia.org/wiki/Double-ended_queue) -- den ordnede struktur der skal tillade meget hurtigt tilføjelse/fjernelse af elementer fra begge ender, men adgang til midten ikke er nødvendig.
 
-Lists can be enhanced:
-- We can add property `prev` in addition to `next` to reference the previous element, to move back easily.
-- We can also add a variable named `tail` referencing the last element of the list (and update it when adding/removing elements from the end).
-- ...The data structure may vary according to our needs.
+Lister kan forbedres:
+- Vi kan tilføje en egenskab `prev` i tilføjelse til `next` for at referere til det forrige element, så man nemt kan gå baglæns.
+- Vi kan også tilføje en variabel kaldet `tail` som refererer til det sidste element i listen (og opdatere den når man tilføjer/fjerner elementer fra slutningen).
+- ...Datastrukturen kan justeres i forhold til specifikke behov.
 
-## Summary
+## Opsummering
 
 Terms:
-- *Recursion*  is a programming term that means calling a function from itself. Recursive functions can be used to solve tasks in elegant ways.
+- *Rekursion*  er et begreb i programmering der henviser til at en funktion kalder sig selv. Rekursive funktioner kan bruges til at løse opgaver på en elegant måde.
 
-    When a function calls itself, that's called a *recursion step*. The *basis* of recursion is function arguments that make the task so simple that the function does not make further calls.
+    Når en funktion kalder sig selv, kaldes det et *rekursions-trin*. *Basis* for rekursion er funktionsargumenter, der gør opgaven så simpel, at funktionen ikke laver yderligere kald til sig selv.
 
-- A [recursively-defined](https://en.wikipedia.org/wiki/Recursive_data_type) data structure is a data structure that can be defined using itself.
+- En [recursivt defineret](https://en.wikipedia.org/wiki/Recursive_data_type) datastruktur er en datastruktur der kan defineres ved hjælp af sig selv.
 
-    For instance, the linked list can be defined as a data structure consisting of an object referencing a list (or null).
+    For eksempel kan en linked list defineres som en datastruktur bestående af et objekt der refererer til en liste (eller null).
 
     ```js
     list = { value, next -> list }
     ```
 
-    Trees like HTML elements tree or the department tree from this chapter are also naturally recursive: they have branches and every branch can have other branches.
+    Træer (hierarkier) som HTML element-træer eller træer der viser afdelinger i en virksomhed er også rekursivt definerede. De har grene og hver gren kan have andre grene.
 
-    Recursive functions can be used to walk them as we've seen in the `sumSalary` example.
+    Rekursive funktioner kan bruges til at gennemløbe dem, som vi har set i eksemplet med `sumSalary`.
 
-Any recursive function can be rewritten into an iterative one. And that's sometimes required to optimize stuff. But for many tasks a recursive solution is fast enough and easier to write and support.
+Enhver rekursiv funktion kan omskrives til en iterativ funktion. Og det er nogle gange nødvendigt for at optimere ydeevnen. Men for mange opgaver er en rekursiv løsning hurtig nok og nemmere at skrive og vedligeholde.

@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Output a single-linked list
+# Udskriv en enkeltstrenget linked list
 
-Let's say we have a single-linked list (as described in the chapter <info:recursion>):
+Lad os sige, vi har en enkeltstrenget linked list (som beskrevet i kapitlet <info:recursion>):
 
 ```js
 let list = {
@@ -22,8 +22,9 @@ let list = {
 };
 ```
 
-Write a function `printList(list)` that outputs list items one-by-one.
+Skriv en funktion `printList(list)` som udskriver listens elementer ét ad gangen.
 
-Make two variants of the solution: using a loop and using recursion.
+Opret to varianter af løsningen: ved brug af en løkke og ved brug af rekursion.
 
-What's better: with recursion or without it?
+Hvad er bedst: med rekursion eller uden?
+

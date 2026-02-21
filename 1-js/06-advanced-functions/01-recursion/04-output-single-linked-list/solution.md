@@ -1,6 +1,6 @@
-# Loop-based solution
+# Løkkebaseret løsning
 
-The loop-based variant of the solution:
+Den løkkebaserede variant af løsningen:
 
 ```js run
 let list = {
@@ -30,7 +30,7 @@ function printList(list) {
 printList(list);
 ```
 
-Please note that we use a temporary variable `tmp` to walk over the list. Technically, we could use a function parameter `list` instead:
+Bemærk venligst, at vi bruger en midlertidig variabel `tmp` til at gennemgå listen. Teknisk set kunne vi have brugt en funktionsparameter `list` i stedet:
 
 ```js
 function printList(list) {
@@ -43,15 +43,15 @@ function printList(list) {
 }
 ```
 
-...But that would be unwise. In the future we may need to extend a function, do something else with the list. If we change `list`, then we lose such ability.
+...Men det vil ikke være klog. I fremtiden kan vi have brug for at udvide en funktion, gøre noget andet med listen. Hvis vi ændrer `list`, så mister vi den evne.
 
-Talking about good variable names, `list` here is the list itself. The first element of it. And it should remain like that. That's clear and reliable.
+Når vi nu taler om gode variabelnavne, er `list` her listen selv. Det første element i den. Og det bør forblive som det er. Det er klart og pålideligt.
 
-From the other side, the role of `tmp` is exclusively a list traversal, like `i` in the `for` loop.
+Modsat er rollen for `tmp` udelukkende en midlertidig variabel til listetraversering, ligesom `i` i `for`-løkken.
 
-# Recursive solution
+# Rekursiv løsning
 
-The recursive variant of `printList(list)` follows a simple logic: to output a list we should output the current element `list`, then do the same for `list.next`:
+Den rekursive variant af `printList(list)` følger en simpel logik: for at udskrive en liste skal vi udskrive det nuværende element `list`, og derefter gøre det samme for `list.next`:
 
 ```js run
 let list = {
@@ -70,10 +70,10 @@ let list = {
 
 function printList(list) {
 
-  alert(list.value); // output the current item
+  alert(list.value); // udskriver den aktuelle værdi
 
   if (list.next) {
-    printList(list.next); // do the same for the rest of the list
+    printList(list.next); // gør det samme for resten af listen
   }
 
 }
@@ -81,8 +81,8 @@ function printList(list) {
 printList(list);
 ```
 
-Now what's better?
+Hvad er bedst?
 
-Technically, the loop is more effective. These two variants do the same, but the loop does not spend resources for nested function calls.
+Teknisk set er løkken mere effektiv. Disse to varianter gør det samme, men løkken bruger ikke ressourcer på indlejrede funktionskald.
 
-From the other side, the recursive variant is shorter and sometimes easier to understand.
+Modsat er den rekursive variant kortere og nogle gange lettere at forstå.
