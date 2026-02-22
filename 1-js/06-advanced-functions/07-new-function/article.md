@@ -1,19 +1,19 @@
 
-# The "new Function" syntax
+# Syntaksen "new Function"
 
-There's one more way to create a function. It's rarely used, but sometimes there's no alternative.
+Der findes endnu en måde at oprette en funktion. Den bruges sjældent, men nogle gange er der ingen alternativ.
 
-## Syntax
+## Syntaks
 
-The syntax for creating a function:
+Syntaksen for at oprette en funktion med `new Function` er:
 
 ```js
 let func = new Function ([arg1, arg2, ...argN], functionBody);
 ```
 
-The function is created with the arguments `arg1...argN` and the given `functionBody`.
+Funktionen oprettes med argumenterne `arg1...argN` og den givne `functionBody`.
 
-It's easier to understand by looking at an example. Here's a function with two arguments:
+Det er lettere at forstå ved at se på et eksempel. Her er en funktion med to argumenter:
 
 ```js run
 let sum = new Function('a', 'b', 'return a + b');
@@ -21,37 +21,36 @@ let sum = new Function('a', 'b', 'return a + b');
 alert( sum(1, 2) ); // 3
 ```
 
-And here there's a function without arguments, with only the function body:
+Og her er en funktion uden argumenter, med kun funktionens krop:
 
 ```js run
-let sayHi = new Function('alert("Hello")');
+let sayHi = new Function('alert("Hej")');
 
-sayHi(); // Hello
+sayHi(); // Hej
 ```
 
-The major difference from other ways we've seen is that the function is created literally from a string, that is passed at run time.
+Den store forskel fra de andre måder vi har set er, at funktionen oprettes bogstaveligt fra en streng, som sendes ved køretid.
 
-All previous declarations required us, programmers, to write the function code in the script.
+Alle tidligere deklarationer krævede, at vi programmerere skrev funktionens kode i scriptet.
 
-But `new Function` allows to turn any string into a function. For example, we can receive a new function from a server and then execute it:
+Men `new Function` tillader os at omdanne enhver streng til en funktion. For eksempel kan vi modtage en ny funktion fra en server og derefter køre den:
 
 ```js
-let str = ... receive the code from a server dynamically ...
+let str = ... modtag koden dynamisk fra en server ...
 
 let func = new Function(str);
 func();
 ```
 
-It is used in very specific cases, like when we receive code from a server, or to dynamically compile a function from a template, in complex web-applications.
+Det bruges i meget specifikke situationer hvor vi modtager kode fra en server eller dynamisk kompilerer en funktion fra et skabelon, i komplekse web-applikationer.
 
 ## Closure
 
-Usually, a function remembers where it was born in the special property `[[Environment]]`. It references the Lexical Environment from where it's created  (we covered that in the chapter <info:closure>).
+Normalt husker en funktion hvor den blev oprettet i den specielle egenskab `[[Environment]]`. Den refererer til det leksikale miljø hvor den blev oprettet (vi dækkede det i kapitlet <info:closure>).
 
-But when a function is created using `new Function`, its `[[Environment]]` is set to reference not the current Lexical Environment, but the global one.
+Men når en funktion oprettes med `new Function`, sættes dens `[[Environment]]` til at referere ikke til det nuværende leksikale miljø, men til det globale.
 
-So, such function doesn't have access to outer variables, only to the global ones.
-
+Så har sådan en funktion ikke adgang til ydre variabler, kun til de globale.
 ```js run
 function getFunc() {
   let value = "test";
@@ -63,10 +62,10 @@ function getFunc() {
   return func;
 }
 
-getFunc()(); // error: value is not defined
+getFunc()(); // Fejl: value er ikke defineret
 ```
 
-Compare it with the regular behavior:
+Sammenlig det med den normale opførsel:
 
 ```js run
 function getFunc() {
@@ -79,45 +78,45 @@ function getFunc() {
   return func;
 }
 
-getFunc()(); // *!*"test"*/!*, from the Lexical Environment of getFunc
+getFunc()(); // *!*"test"*/!*, fra det leksikale miljø af getFunc
 ```
 
-This special feature of `new Function` looks strange, but appears very useful in practice.
+Denne specielle egenskab af `new Function` ser mærkelig ud, men er virkelig nyttig i praksis.
 
-Imagine that we must create a function from a string. The code of that function is not known at the time of writing the script (that's why we don't use regular functions), but will be known in the process of execution. We may receive it from the server or from another source.
+Forestil dig, at vi skal oprette en funktion fra en streng. Koden for den funktion er ikke kendt på tidspunktet for skrivning af scriptet (derfor bruger vi ikke normale funktioner), men vil være kendt i processen af kørsel. Vi kan modtage den fra serveren eller fra en anden kilde.
 
-Our new function needs to interact with the main script.
+Vores nye funktion skal interagere med hovedscriptet.
 
-What if it could access the outer variables?
+Hvad hvis den kunne tilgå ydre variabler?
 
-The problem is that before JavaScript is published to production, it's compressed using a *minifier* -- a special program that shrinks code by removing extra comments, spaces and -- what's important, renames local variables into shorter ones.
+Problem er at JavaScript, inden det publiseres til produktion, ofte bliver komprimeret ved brug af en *minifier* -- et specielt program der skrumper koden ved at fjerne kommentarer, mellemrum og hvad der er mere vigtigt - omdøber lokale variabler til kortere navne.
 
-For instance, if a function has `let userName`, minifier replaces it with `let a` (or another letter if this one is occupied), and does it everywhere. That's usually a safe thing to do, because the variable is local, nothing outside the function can access it. And inside the function, minifier replaces every mention of it. Minifiers are smart, they analyze the code structure, so they don't break anything. They're not just a dumb find-and-replace.
+For eksempel, hvis en funktion deklareres med `let userName`, vil minifier erstatte det med `let a` (eller et andet bogstav, hvis `a` er optaget), og gøre det alle steder der henvises til den. Det er normalt en sikker manøvre fordi variablen er lokal. Intet uden for funktionen kan tilgå den. Minifiers er smarte. De analyserer kodestrukturen så intet går i stykker. Det er ikke bare en simpel søg-og-erstat.
 
-So if `new Function` had access to outer variables, it would be unable to find renamed  `userName`.
+Så hvis `new Function` havde adgang til ydre variable, ville det ikke kunne finde den omdøbte `userName`.
 
-**If `new Function` had access to outer variables, it would have problems with minifiers.**
+**Hvis `new Function` havde adgang til ydre variable, ville det have problemer med minifiers.**
 
-Besides, such code would be architecturally bad and prone to errors.
+Derudover vil sådan en funktion være arkitektonisk dårlig og udsat for fejl. Det ville være let at glemme at definere en variabel, og det ville føre til fejl. At have `new Function` uden adgang til ydre variabler tvinger os til at passere alt hvad den har brug for som argumenter, og det er en god ting.
 
-To pass something to a function, created as `new Function`, we should use its arguments.
+Så for at tilføje noget til funktionen skabt med `new Function`, skal vi bruge dens argumenter.
 
-## Summary
+## Opsummering
 
-The syntax:
+Syntaksen:
 
 ```js
 let func = new Function ([arg1, arg2, ...argN], functionBody);
 ```
 
-For historical reasons, arguments can also be given as a comma-separated list.
+A historiske grunde kan argumenter også gives som en kommasepareret liste.
 
-These three declarations mean the same:
+Disse tre deklarationer betyder det samme:
 
 ```js
-new Function('a', 'b', 'return a + b'); // basic syntax
-new Function('a,b', 'return a + b'); // comma-separated
-new Function('a , b', 'return a + b'); // comma-separated with spaces
+new Function('a', 'b', 'return a + b'); // normale syntaks
+new Function('a,b', 'return a + b'); // kommasepareret
+new Function('a , b', 'return a + b'); // kommasepareret med mellemrum
 ```
 
-Functions created with `new Function`, have `[[Environment]]` referencing the global Lexical Environment, not the outer one. Hence, they cannot use outer variables. But that's actually good, because it insures us from errors. Passing parameters explicitly is a much better method architecturally and causes no problems with minifiers.
+Funktioner skabt med `new Function` har `[[Environment]]` som refererer til det globale leksikale miljø, ikke det ydre. Derfor kan de ikke bruge ydre variabler. Men det er faktisk godt, fordi det beskytter os mod fejl. At overføre parametre ekspllicit er en meget bedre metode arkitektonisk og forårsager ingen problemer med minifiers.
