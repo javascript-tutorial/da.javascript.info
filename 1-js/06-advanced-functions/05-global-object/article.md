@@ -1,89 +1,89 @@
 
-# Global object
+# Objektet Global
 
-The global object provides variables and functions that are available anywhere. By default, those that are built into the language or the environment.
+Objektet global indeholder variable og funktioner der er tilgængelige overalt. Som standard er de, der er indbygget i sproget eller miljøet.
 
-In a browser it is named `window`, for Node.js it is `global`, for other environments it may have another name.
+I en browser kaldes det `window`, for Node.js er det `global`, og for andre miljøer kan det have et andet navn.
 
-Recently, `globalThis` was added to the language, as a standardized name for a global object, that should be supported across all environments. It's supported in all major browsers.
+I den senere tid er `globalThis` tilføjet til sproget som et standardiseret navn for det globale objekt, som bør være understøttet i alle miljøer. Det er understøttet i alle store browsere.
 
-We'll use `window` here, assuming that our environment is a browser. If your script may run in other environments, it's better to use `globalThis` instead.
+Vi vil dog bruge `window` her, da det antages at vores miljø er en browser. Hvis dit script skal køre i andre miljøer, er det bedre at bruge `globalThis` istedet.
 
-All properties of the global object can be accessed directly:
+Elle egenskaber af det globale objekt kan tilgås direkte, uden at nævne det globale objekt direkte:
 
 ```js run
-alert("Hello");
-// is the same as
-window.alert("Hello");
+alert("Hej");
+// er det samme som
+window.alert("Hej");
 ```
 
-In a browser, global functions and variables declared with `var` (not `let/const`!) become the property of the global object:
+I en browser vil globale funktioner og variable deklareret med `var` (ikke `let/const`!) blive en del af det globale objekt:
 
 ```js run untrusted refresh
 var gVar = 5;
 
-alert(window.gVar); // 5 (became a property of the global object)
+alert(window.gVar); // 5 (er blevet en egenskab af det globale objekt)
 ```
 
-Function declarations have the same effect (statements with `function` keyword in the main code flow, not function expressions).
+Deklaration af funktionerer har samme effekt som `var` (sætninger med `function`-nøgleord i hovedkoden, ikke funktionsudtryk).
 
-Please don't rely on that! This behavior exists for compatibility reasons. Modern scripts use [JavaScript modules](info:modules) where such a thing doesn't happen.
+Du bør ikke gøre din kode afhængig af det! Denne adfærd eksisterer for kompatibilitetsformål. Moderne scripts bruger [JavaScript modules](info:modules) hvor det ikke sker.
 
-If we used `let` instead, such thing wouldn't happen:
+Hvis vi bruger `let` i stedet for `var`, så bliver det ikke en egenskab af det globale objekt:
 
 ```js run untrusted refresh
 let gLet = 5;
 
-alert(window.gLet); // undefined (doesn't become a property of the global object)
+alert(window.gLet); // undefined (bliver ikke en egenskab af det globale objekt)
 ```
 
-If a value is so important that you'd like to make it available globally, write it directly as a property:
+Hvis en værdi er så vigtig, at du vil gøre den tilgængelig globalt, så skriv den direkte som en egenskab af det globale objekt:
 
 ```js run
 *!*
-// make current user information global, to let all scripts access it
+// gør information om den nuværende bruger global, så alle scripts kan tilgå den
 window.currentUser = {
   name: "John"
 };
 */!*
 
-// somewhere else in code
+// et andet sted i koden
 alert(currentUser.name);  // John
 
-// or, if we have a local variable with the name "currentUser"
-// get it from window explicitly (safe!)
+// eller, hvis vi har en lokal variabel med navnet "currentUser"
+// hent den direkte fra window (sikker tilgang!)
 alert(window.currentUser.name); // John
 ```
 
-That said, using global variables is generally discouraged. There should be as few global variables as possible. The code design where a function gets "input" variables and produces certain "outcome" is clearer, less prone to errors and easier to test than if it uses outer or global variables.
+Med det sagt så er frarådes brugen af globale variabler generelt. Der bør være så få globale variabler som muligt. Design af kode hvor en funktion får "input" variabler og producerer et bestemt "output" er tydeligere, mindre udsat for fejl og lettere at teste end hvis den bruger ydre eller globale variabler.
 
-## Using for polyfills
+## Brugbart til polyfills
 
-We use the global object to test for support of modern language features.
+Vi kan bruge det globale objekt til at teste for understøttelse af moderne sprogfunktioner.
 
-For instance, test if a built-in `Promise` object exists (it doesn't in really old browsers):
+For eksempel, test om et indbygget `Promise`-objekt eksisterer (det eksisterer ikke i virkelig gamle browsere):
 ```js run
 if (!window.Promise) {
-  alert("Your browser is really old!");
+  alert("Din browser er virkelig gammel!");
 }
 ```
 
-If there's none (say, we're in an old browser), we can create "polyfills": add functions that are not supported by the environment, but exist in the modern standard.
+Hvis der ikke eksisterer en `Promise`-funktion (f.eks. i en gammel browser), kan vi oprette "polyfills": tilføj funktioner som ikke er understøttet af miljøet, men eksisterer i det moderne standard.
 
 ```js run
 if (!window.Promise) {
-  window.Promise = ... // custom implementation of the modern language feature
+  window.Promise = ... // egen implementation af en moderne funktion
 }
 ```
 
-## Summary
+## Opsummering
 
-- The global object holds variables that should be available everywhere.
+- Det globale objekt indeholder variable som skal være tilgængelige overalt.
 
-    That includes JavaScript built-ins, such as `Array` and environment-specific values, such as `window.innerHeight` -- the window height in the browser.
-- The global object has a universal name `globalThis`.
+    Det inkluderer JavaScript indbyggede funktioner, såsom `Array` og miljøspecifikke værdier, såsom `window.innerHeight` -- vindueshøjden i browseren.
+- Det globale objekt har et universelt navn `globalThis`.
 
-    ...But more often is referred by "old-school" environment-specific names, such as `window` (browser) and `global` (Node.js).
-- We should store values in the global object only if they're truly global for our project. And keep their number at minimum.
-- In-browser, unless we're using [modules](info:modules), global functions and variables declared with `var` become a property of the global object.
-- To make our code future-proof and easier to understand, we should access properties of the global object directly, as `window.x`.
+    ...Men ofte refereres det til med "gamle skole" miljøspecifikke navne, såsom `window` (browser) og `global` (Node.js).
+- Vi bør kun gemme værdier i det globale objekt, hvis de er virkelig globale for vores projekt. Og holde antallet af globale variabler lavt.
+- I browseren, medmindre vi bruger [modules](info:modules), bliver globale funktioner og variable deklareret med `var` til egenskaber af det globale objekt.
+- For at gøre vores kode fremtidssikker og lettere at forstå, bør vi tilgå egenskaber af det globale objekt direkte, som `window.x`.
