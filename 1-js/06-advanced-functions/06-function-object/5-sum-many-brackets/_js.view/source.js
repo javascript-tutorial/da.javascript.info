@@ -1,5 +1,5 @@
 function sum(a){
-  // Your code goes here.
+  // Din kode skal stå her.
 
 }
 
