@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# Set and decrease for counter
+# Sæt og formindsk for counter
 
-Modify the code of `makeCounter()` so that the counter can also decrease and set the number:
+Juster på koden `makeCounter()` så tælleren også kan formindske tallet og sætte den til et bestemt tal:
 
-- `counter()` should return the next number (as before).
-- `counter.set(value)` should set the counter to `value`.
-- `counter.decrease()` should decrease the counter by 1.
+- `counter()` skal returnere det næste tal (as before).
+- `counter.set(value)` skal sætte tælleren til `value`.
+- `counter.decrease()` skal formindske tælleren med 1.
 
-See the sandbox code for the complete usage example.
+Se sandbox-koden for det fulde brugseksempel.
 
-P.S. You can use either a closure or the function property to keep the current count. Or write both variants.
+P.S. Du kan bruge enten en closure eller funktionsegenskab til at gemme den nuværende tæller. Eller skriv begge varianter.
