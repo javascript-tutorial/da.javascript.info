@@ -1,52 +1,52 @@
 
-# Function object, NFE
+# Funktion som objekt, NFE
 
-As we already know, a function in JavaScript is a value.
+Som vi allerede har set er en funktion i JavaScript en værdi.
 
-Every value in JavaScript has a type. What type is a function?
+Alle værdier i JavaScript har en type. Hvad type har en funktion?
 
-In JavaScript, functions are objects.
+I JavaScript er funktioner objekter.
 
-A good way to imagine functions is as callable "action objects". We can not only call them, but also treat them as objects: add/remove properties, pass by reference etc.
+En god måde at forestille sig funktioner er som kaldbare "handlingsobjekter". Vi kan ikke kun kalde dem, men også behandle dem som objekter: tilføje/fjerne egenskaber, videregive som reference osv.
 
 
-## The "name" property
+## Egenskaben "name"
 
-Function objects contain some useable properties.
+Funktionens objekt indeholder nogle brugbare egenskaber.
 
-For instance, a function's name is accessible as the "name" property:
+For eksempel er en funktions navn tilgængeligt som egenskaben "name":
 
 ```js run
 function sayHi() {
-  alert("Hi");
+  alert("Hej);
 }
 
 alert(sayHi.name); // sayHi
 ```
 
-What's kind of funny, the name-assigning logic is smart. It also assigns the correct name to a function even if it's created without one, and then immediately assigned:
+Det er lidt pudsigt, men tildeling af navne er smart. Det tildeler også det korrekte navn til en funktion, selv hvis den oprettes uden et navn og derefter øjeblikkeligt tildeles til en variabel:
 
 ```js run
 let sayHi = function() {
-  alert("Hi");
+  alert("Hej");
 };
 
-alert(sayHi.name); // sayHi (there's a name!)
+alert(sayHi.name); // sayHi (den har fået et navn!)
 ```
 
-It also works if the assignment is done via a default value:
+Det virker også hvis tildelingen er sket via en standardværdi:
 
 ```js run
 function f(sayHi = function() {}) {
-  alert(sayHi.name); // sayHi (works!)
+  alert(sayHi.name); // sayHi (virker!)
 }
 
 f();
 ```
 
-In the specification, this feature is called a "contextual name". If the function does not provide one, then in an assignment it is figured out from the context.
+I specifikationen kaldes denne funktion "contextual name". Hvis funktionen ikke har et navn, så bliver det tildelt et fra konteksten.
 
-Object methods have names too:
+Objektets metoder har også navne, som er deres nøgle i objektet:
 
 ```js run
 let user = {
@@ -65,21 +65,21 @@ alert(user.sayHi.name); // sayHi
 alert(user.sayBye.name); // sayBye
 ```
 
-There's no magic though. There are cases when there's no way to figure out the right name. In that case, the name property is empty, like here:
+Der skabes dog ikke navne ud af den blå luft. Der er situationer hvor det er umuligt at finde det korrekte navn. I sådanne tilfælde er `name`-egenskaben tom, som her:
 
 ```js run
-// function created inside array
+// funktion oprettet inde i et array
 let arr = [function() {}];
 
 alert( arr[0].name ); // <empty string>
-// the engine has no way to set up the right name, so there is none
+// motoren har ingen måde at finde det korrekte navn, så den får ikke noget
 ```
 
-In practice, however, most functions do have a name.
+I praksis vil langt de fleste funktioner dog have et navn.
 
-## The "length" property
+## Egenskaben "length"
 
-There is another built-in property "length" that returns the number of function parameters, for instance:
+Der er en anden indbygget egenskab "length" som returnerer antallet af funktionsparametre, for eksempel:
 
 ```js run
 function f1(a) {}
@@ -91,20 +91,20 @@ alert(f2.length); // 2
 alert(many.length); // 2
 ```
 
-Here we can see that rest parameters are not counted.
+Som vi kan se ovenfor så bliver rest parameteren ikke talt med.
 
-The `length` property is sometimes used for [introspection](https://en.wikipedia.org/wiki/Type_introspection) in functions that operate on other functions.
+Egenskaben `length` bruges nogle gange til [introspection](https://en.wikipedia.org/wiki/Type_introspection) i funktioner der opererer på andre funktioner.
 
-For instance, in the code below the `ask` function accepts a `question` to ask and an arbitrary number of `handler` functions to call.
+For eksempel vil koden nedenfor vil funktionen `ask` acceptere et `question` der skal spørges efter og et antal `handler` funktioner der kan kaldes.
 
-Once a user provides their answer, the function calls the handlers. We can pass two kinds of handlers:
+Så snart brugeren giver deres svar vil funktionen kalde de leverede handlers. Vi kan levere to slags handlers:
 
-- A zero-argument function, which is only called when the user gives a positive answer.
-- A function with arguments, which is called in either case and returns an answer.
+- En funktion uden argumenter, som kun kaldes når brugeren giver et positivt svar.
+- En funktion med argumenter, som kaldes i begge tilfælde og returnerer et svar.
 
-To call `handler` the right way, we examine the `handler.length` property.
+For at kalde `handler` på den rigtige måde undersøger vi egenskaben `handler.length`.
 
-The idea is that we have a simple, no-arguments handler syntax for positive cases (most frequent variant), but are able to support universal handlers as well:
+Idéen er at vi har en simpel syntaks uden argumenter for positive svar (mest almindeligt), men også er i stand til at understøtte universelle handlers der kan håndtere både positive og negative svar, hvis det er nødvendigt.:
 
 ```js run
 function ask(question, ...handlers) {
@@ -120,47 +120,47 @@ function ask(question, ...handlers) {
 
 }
 
-// for positive answer, both handlers are called
-// for negative answer, only the second one
-ask("Question?", () => alert('You said yes'), result => alert(result));
+// for positive svar, begge handlers kaldes
+// for negative svar, kun den anden
+ask("Spørgsmål?", () => alert('Du sagde ja'), result => alert(result));
 ```
 
-This is a particular case of so-called [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) -- treating arguments differently depending on their type or, in our case depending on the `length`. The idea does have a use in JavaScript libraries.
+Dette er et særligt mønster i programmering kaldet [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) -- der behandler argumenter forskelligt alt efter type - i vores tilfælde afhængigt af `length`. Metoden ses ofte brugt i JavaScript-biblioteker.
 
-## Custom properties
+## Brugerdefinerede egenskaber
 
-We can also add properties of our own.
+Vi kan også tilføje vores egne egenskaber.
 
-Here we add the `counter` property to track the total calls count:
+Her tilføjer vi egenskaben `counter` for at spore antallet af kald:
 
 ```js run
 function sayHi() {
-  alert("Hi");
+  alert("Hej");
 
   *!*
-  // let's count how many times we run
+  // lad os tælle hvor mange gange vi kaldes
   sayHi.counter++;
   */!*
 }
-sayHi.counter = 0; // initial value
+sayHi.counter = 0; // startværdi
 
-sayHi(); // Hi
-sayHi(); // Hi
+sayHi(); // Hej
+sayHi(); // Hej
 
-alert( `Called ${sayHi.counter} times` ); // Called 2 times
+alert( `Kaldt ${sayHi.counter} gang(e)` ); // Kaldt 2 gang(e)
 ```
 
-```warn header="A property is not a variable"
-A property assigned to a function like `sayHi.counter = 0` does *not* define a local variable `counter` inside it. In other words, a property `counter` and a variable `let counter` are two unrelated things.
+```warn header="En egenskab er ikke en variabel"
+En egenskab tildelt til en funktion som `sayHi.counter = 0` definerer *ikke* en lokal variabel `counter` inde i den. Med andre ord, egenskaben `counter` og en variabel `let counter` er to forskellige ting.
 
-We can treat a function as an object, store properties in it, but that has no effect on its execution. Variables are not function properties and vice versa. These are just parallel worlds.
+Vi kan behandle en funktion som et objekt, gemme egenskaber i den, men det har ingen effekt på dens udførelse. Lokale variable er ikke funktionsegenskaber og omvendt. Disse er to parallelle verdener.
 ```
 
-Function properties can replace closures sometimes. For instance, we can rewrite the counter function example from the chapter <info:closure> to use a function property:
+Egenskaber i funktioner kan nogle gange erstatte closures. For eksempel kan vi omskrive counter-funktionen fra kapitlet <info:closure> til at bruge en funktionsegenskab i stedet for en variabel i en closure:
 
 ```js run
 function makeCounter() {
-  // instead of:
+  // i stedet for:
   // let count = 0
 
   function counter() {
@@ -177,11 +177,11 @@ alert( counter() ); // 0
 alert( counter() ); // 1
 ```
 
-The `count` is now stored in the function directly, not in its outer Lexical Environment.
+`count` er nu gemt direkte i funktionen, ikke i dens ydre leksikale miljø.
 
-Is it better or worse than using a closure?
+Er det bedre eller værre end at bruge en closure?
 
-The main difference is that if the value of `count` lives in an outer variable, then external code is unable to access it. Only nested functions may modify it. And if it's bound to a function, then such a thing is possible:
+Den vigtigste forskel er at hvis værdien af `count` lever i en ydre variabel, så kan ekstern kode ikke tilgå den - kun indre funktioner kan ændre den. Og hvis den er bundet til en funktion, så er det muligt:
 
 ```js run
 function makeCounter() {
@@ -203,77 +203,77 @@ alert( counter() ); // 10
 */!*
 ```
 
-So the choice of implementation depends on our aims.
+Så valget af implementering afhænger af vores mål.
 
-## Named Function Expression
+## Navngivet funktionsudtryk (Named Function Expression)
 
-Named Function Expression, or NFE, is a term for Function Expressions that have a name.
+Navngivet funktionsudtryk eller NFE er et udtryk for funktionsudtryk der har et navn.
 
-For instance, let's take an ordinary Function Expression:
+Tag for eksempel et almindeligt funktionsudtryk:
 
 ```js
 let sayHi = function(who) {
-  alert(`Hello, ${who}`);
+  alert(`Hej, ${who}`);
 };
 ```
 
-And add a name to it:
+og tilføj et navn til det:
 
 ```js
 let sayHi = function *!*func*/!*(who) {
-  alert(`Hello, ${who}`);
+  alert(`Hej, ${who}`);
 };
 ```
 
-Did we achieve anything here? What's the purpose of that additional `"func"` name?
+Men hvad opnår vi ved det? Hvad er meningen med et ekstra "func" som navn?
 
-First let's note, that we still have a Function Expression. Adding the name `"func"` after `function` did not make it a Function Declaration, because it is still created as a part of an assignment expression.
+Det første vi skal huske er, at vi stadig har et funktionsudtryk. Tilføjelsen af navnet `"func"` efter `function` gjorde det ikke til en funktionsdeklaration, fordi det stadig er oprettet som en del af et tildelingsudtryk.
 
-Adding such a name also did not break anything.
+Tilføjelsen af et navn påvirker ikke noget andet.
 
-The function is still available as `sayHi()`:
+Funktionen er stadig tilgængelig som `sayHi()`:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
-  alert(`Hello, ${who}`);
+  alert(`Hej, ${who}`);
 };
 
-sayHi("John"); // Hello, John
+sayHi("John"); // Hej, John
 ```
 
-There are two special things about the name `func`, that are the reasons for it:
+Der er to særlige ting ved navnet `func` som kan udnyttes:
 
-1. It allows the function to reference itself internally.
-2. It is not visible outside of the function.
+1. Det tillader funktionen at referere til sig selv internt.
+2. Det er ikke synligt uden for funktionen.
 
-For instance, the function `sayHi` below calls itself again with `"Guest"` if no `who` is provided:
+For eksempel, funktionen `sayHi` nedenfor kalder sig selv igen med `"Guest"` hvis ingen `who` er angivet:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`Hej, ${who}`);
   } else {
 *!*
-    func("Guest"); // use func to re-call itself
+    func("Guest"); // brug func til at kalde dig selv igen
 */!*
   }
 };
 
-sayHi(); // Hello, Guest
+sayHi(); // Hej, Guest
 
-// But this won't work:
-func(); // Error, func is not defined (not visible outside of the function)
+// Men dette virker ikke:
+func(); // Fejl, func er ikke defineret (ikke synlig uden for funktionen)
 ```
 
-Why do we use `func`? Maybe just use `sayHi` for the nested call?
+Men hvorfor vil vi bruge `func`? Hvorfor ikke bare bruge `sayHi` for det indlejrede kald?
 
 
-Actually, in most cases we can:
+Vi kan faktisk i de fleste tilfælde bruge `sayHi` for det indlejrede kald, og det vil fungere fint:
 
 ```js
 let sayHi = function(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`Hej, ${who}`);
   } else {
 *!*
     sayHi("Guest");
@@ -282,15 +282,15 @@ let sayHi = function(who) {
 };
 ```
 
-The problem with that code is that `sayHi` may change in the outer code. If the function gets assigned to another variable instead, the code will start to give errors:
+Problemet med denne kode er at `sayHi` kan ændres i det ydre kode. Hvis funktionen bliver tildelt til en anden variabel i stedet, vil koden begynde at give fejl:
 
 ```js run
 let sayHi = function(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`Hej, ${who}`);
   } else {
 *!*
-    sayHi("Guest"); // Error: sayHi is not a function
+    sayHi("Guest"); // Fejl: sayHi er ikke en funktion
 */!*
   }
 };
@@ -298,22 +298,22 @@ let sayHi = function(who) {
 let welcome = sayHi;
 sayHi = null;
 
-welcome(); // Error, the nested sayHi call doesn't work any more!
+welcome(); // Fejl, det indlejrede sayHi kald virker ikke mere!
 ```
 
-That happens because the function takes `sayHi` from its outer lexical environment. There's no local `sayHi`, so the outer variable is used. And at the moment of the call that outer `sayHi` is `null`.
+Dette sker fordi funktionen tager `sayHi` fra dens ydre leksikale miljø. Der er ingen lokal `sayHi`, så den ydre variabel bruges. Og ved det øjeblik hvor funktionen kaldes, er den ydre `sayHi` `null`.
 
-The optional name which we can put into the Function Expression is meant to solve exactly these kinds of problems.
+Det valgfrie navn som vi kan tilføje til et funktionsudtryk er ment til at løse præcis disse typer af problemer.
 
-Let's use it to fix our code:
+Lad os bruge det til at fikse vores kode:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`Hej, ${who}`);
   } else {
 *!*
-    func("Guest"); // Now all fine
+    func("Guest"); // Nu virker det
 */!*
   }
 };
@@ -321,33 +321,33 @@ let sayHi = function *!*func*/!*(who) {
 let welcome = sayHi;
 sayHi = null;
 
-welcome(); // Hello, Guest (nested call works)
+welcome(); // Hej, Guest (indlejret kald virker)
 ```
 
-Now it works, because the name `"func"` is function-local. It is not taken from outside (and not visible there). The specification guarantees that it will always reference the current function.
+Nu virker det fordi navnet `"func"` er funktionslokal. Det er ikke taget fra uden for (og ikke synligt der). Speficikationen garanterer at det altid vil referere til den nuværende funktion.
 
-The outer code still has its variable `sayHi` or `welcome`. And `func` is an "internal function name", the way for the function to call itself reliably.
+Det ydre kode har stadig sin variabel `sayHi` eller `welcome`. Og `func` er et "internt funktionsnavn", måden for funktionen at kalde sig selv på på en pålidelig måde.
 
-```smart header="There's no such thing for Function Declaration"
-The "internal name" feature described here is only available for Function Expressions, not for Function Declarations. For Function Declarations, there is no syntax for adding an "internal" name.
+```smart header="Du har ikke den mulighed med en funktionserklæring"
+Det "interne navn" er kun tilgængeligt for funktionsudtryk, ikke for funktionserklæringer. For funktionserklæringer findes der ingen syntaks til at tilføje et "internt" navn.
 
-Sometimes, when we need a reliable internal name, it's the reason to rewrite a Function Declaration to Named Function Expression form.
+Hvis vi har brug for et pålideligt internt navn, er det den grund til at omskrive en funktionserklæring til et navngivet funktionsudtryk (Named Function Expression).
 ```
 
-## Summary
+## Opsummering
 
-Functions are objects.
+Funktioner er objekter.
 
-Here we covered their properties:
+Vi har deres egenskaber.:
 
-- `name` -- the function name. Usually taken from the function definition, but if there's none, JavaScript tries to guess it from the context (e.g. an assignment).
-- `length` -- the number of arguments in the function definition. Rest parameters are not counted.
+- `name` -- funktionens navn. Ofte taget fra funktionsdefinitionen, men hvis der ikke er nogen, forsøger JavaScript at gætte det ud fra konteksten (f.eks. en tildeling).
+- `length` -- antallet af argumenter i funktionsdefinitionen. Rest-parametre tælles ikke.
 
-If the function is declared as a Function Expression (not in the main code flow), and it carries the name, then it is called a Named Function Expression. The name can be used inside to reference itself, for recursive calls or such.
+Hvis funktionen er deklareret som et funktionsudtryk (ikke i hovedkodeflowet), og den bærer et navn, så kaldes det et navngivet funktionsudtryk (Named Function Expression). Navnet kan bruges inde i funktionen til at referere til sig selv, for rekursive kald eller lignende.
 
-Also, functions may carry additional properties. Many well-known JavaScript libraries make great use of this feature.
+Desuden kan funktioner også bære yderligere egenskaber. Mange kendte JavaScript-biblioteker gør brug af denne funktion.
 
-They create a "main" function and attach many other "helper" functions to it. For instance, the [jQuery](https://jquery.com) library creates a function named `$`. The [lodash](https://lodash.com) library creates a function `_`, and then adds `_.clone`, `_.keyBy` and other properties to it (see the [docs](https://lodash.com/docs) when you want to learn more about them). Actually, they do it to lessen their pollution of the global space, so that a single library gives only one global variable. That reduces the possibility of naming conflicts.
+De opretter en "hoved" funktion og tilkobler mange "hjælpe" funktioner til den. For eksempel opretter biblioteket [jQuery](https://jquery.com) en funktion kaldet `$`. Biblioteket [lodash](https://lodash.com) opretter en funktion kaldet `_` og tilføjer `_.clone`, `_.keyBy` og andre egenskaber til det (se eventuelt [dokumentationen](https://lodash.com/docs) hvis du vil lære mere om dem). Faktisk gør de det for at mindske deres forurening af det globale objekt, så en enkelt bibliotek kun giver én global variabel. Det reducerer muligheden for navnekonflikter.
 
 
-So, a function can do a useful job by itself and also carry a bunch of other functionality in properties.
+Så en funktion kan udføre en nyttig opgave alene men også udvide dens muligheder ved at udnytte dens egne egenskaber.
