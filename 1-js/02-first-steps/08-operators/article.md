@@ -265,7 +265,7 @@ alert( c ); // 4
 
 Sammenkædede tildelinger evalueres fra højre mod venstre. Først evalueres det højre udtryk `2 + 2` og tildeles derefter til variablerne til venstre: `c`, `b` og `a`. Til sidst deler alle variablerne en enkelt værdi.
 
-For læsbarhedens skyld er det ofte bedre at opdele sådan kode i flere linjer:
+For læsbarhedens skyld er det derfor ofte bedre at opdele sådan kode i flere linjer:
 
 ```js
 c = 2 + 2;

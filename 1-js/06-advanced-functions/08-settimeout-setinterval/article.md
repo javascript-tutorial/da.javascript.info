@@ -219,7 +219,7 @@ Og her er billedet for det indlejrede `setTimeout`:
 
 ![](settimeout-interval.svg)
 
-**Den indlejrede `setTimeout` garanterer den faste forsinkelse (her 100ms).**
+**Den indlejrede `setTimeout` garanterer den faste forsinkelse (her 100ms) mellem slutningen af et kald og begyndelsen af det næste.**
 
 Det er fordi et nyt kald planlægges i slutningen af det forrige kald.
 

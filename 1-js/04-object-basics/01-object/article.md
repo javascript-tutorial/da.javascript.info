@@ -5,7 +5,7 @@ Som vi ved fra kapitlet <info:types>, er der otte datatyper i JavaScript. Syv af
 
 Modsat dem er objekter brugt til at gemme samlinger af forskellige data og mere komplekse enheder. I JavaScript gennemsyrer objekter næsten alle aspekter af sproget. Så vi skal forstå dem først, før vi går i dybden med noget andet.
 
-Et objekt kan oprettes med krøllede parenteser `{…}` med en valgfri liste af *egenskaber*. En egenskab er et "nøgle: værdi" par (key/value), hvor `nøgle` er en streng (også kaldet et "egenskabsnavn"), og `værdi` kan være hvad som helst.
+Et objekt kan oprettes med krøllede parenteser `{…}` med en valgfri liste af *egenskaber*. En egenskab er et "nøgle: værdi" par (key/value pair), hvor `nøgle` er en streng (også kaldet et "egenskabsnavn"), og `værdi` kan være hvad som helst.
 
 Vi kan forestille os et objekt som et skab med underskrevne filer. Hver datadel gemmes i sin fil efter nøglen. Det er nemt at finde en fil efter dens navn eller tilføje/fjerne en fil.
 

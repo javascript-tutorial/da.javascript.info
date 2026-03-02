@@ -81,7 +81,7 @@ Det virker fordi tildeling gennem destrukturering itererer over værdien til hø
 
 
 ````smart header="Tildel til hvad som helst på venstre side"
-Vi kan bruge ethvert "tildelbar" element på venstre side.
+Vi kan bruge alle slags elementer på venstre side så længe de har mulighed for at blive tildelt en værdi.
 
 For eksempel en objekt-egenskab:
 ```js run
