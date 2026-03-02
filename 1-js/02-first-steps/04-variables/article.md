@@ -167,7 +167,11 @@ let userName;
 let test123;
 ```
 
+<<<<<<< HEAD
 Når navnet indeholder flere ord, vil du normalt skrive dem som [camelCase](https://en.wikipedia.org/wiki/CamelCase). Det betyder: Alle ord skrives uden mellemrum og alle ord, undtaget det første, skrives med stort begyndelsesbogstav: `myVeryLongName`.
+=======
+When the name contains multiple words, [camelCase](https://en.wikipedia.org/wiki/CamelCase) is commonly used. That is: words go one after another, with each word except the first starting with a capital letter: `myVeryLongName`.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 En interessant detalje -- the dollartegn `'$'` og understreg `'_'` kan også bruges i navne. De er symboler, men optræder på lige fod med bogstaver uden nogen særskilt betydning.
 

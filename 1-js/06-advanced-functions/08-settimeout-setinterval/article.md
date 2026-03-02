@@ -219,7 +219,11 @@ Og her er billedet for det indlejrede `setTimeout`:
 
 ![](settimeout-interval.svg)
 
+<<<<<<< HEAD
 **Den indlejrede `setTimeout` garanterer den faste forsinkelse (her 100ms).**
+=======
+**The nested `setTimeout` ensures a minimum delay (100ms here) between the end of one call and the beginning of the subsequent one.**
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Det er fordi et nyt kald planlægges i slutningen af det forrige kald.
 
