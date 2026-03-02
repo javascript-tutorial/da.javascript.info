@@ -5,11 +5,7 @@ Som vi ved fra kapitlet <info:types>, er der otte datatyper i JavaScript. Syv af
 
 Modsat dem er objekter brugt til at gemme samlinger af forskellige data og mere komplekse enheder. I JavaScript gennemsyrer objekter næsten alle aspekter af sproget. Så vi skal forstå dem først, før vi går i dybden med noget andet.
 
-<<<<<<< HEAD
-Et objekt kan oprettes med krøllede parenteser `{…}` med en valgfri liste af *egenskaber*. En egenskab er et "nøgle: værdi" par (key/value), hvor `nøgle` er en streng (også kaldet et "egenskabsnavn"), og `værdi` kan være hvad som helst.
-=======
-An object can be created with curly braces `{…}` with an optional list of *properties*. A property is a "key: value" pair, where `key` is a string (also called a "property name"), and `value` can be anything.
->>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
+Et objekt kan oprettes med krøllede parenteser `{…}` med en valgfri liste af *egenskaber*. En egenskab er et "nøgle: værdi" par (key/value pair), hvor `nøgle` er en streng (også kaldet et "egenskabsnavn"), og `værdi` kan være hvad som helst.
 
 Vi kan forestille os et objekt som et skab med underskrevne filer. Hver datadel gemmes i sin fil efter nøglen. Det er nemt at finde en fil efter dens navn eller tilføje/fjerne en fil.
 
@@ -24,11 +20,7 @@ let user = {};  // "objekt literal" syntaks
 
 ![](object-user-empty.svg)
 
-<<<<<<< HEAD
 Normalt bruges krøllede parenteser `{...}`. Den erklæring kaldes en *objekt literal* - på dansk "objekt bogstaveligt".
-=======
-Usually, the curly braces `{...}` are used. That declaration is called an *object literal*.
->>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ## Literals og egenskaber
 
