@@ -1,31 +1,31 @@
 
-The method can take all enumerable keys using `Object.keys` and output their list.
+Metoden kan tage alle enumerable (tælbare) nøgler ved hjælp af `Object.keys` og outputte deres liste.
 
-To make `toString` non-enumerable, let's define it using a property descriptor. The syntax of `Object.create` allows us to provide an object with property descriptors as the second argument.
+For at gøre `toString` non-enumerable, lad os definere den ved hjælp af en egenskabsbeskrivelse. Syntaksen for `Object.create` giver os mulighed for at give et objekt med egenskabsbeskrivelser som anden argument.
 
 ```js run
 *!*
 let dictionary = Object.create(null, {
-  toString: { // define toString property
-    value() { // the value is a function
+  toString: { // definer egenskaben toString
+    value() { // value er en funktion
       return Object.keys(this).join();
     }
   }
 });
 */!*
 
-dictionary.apple = "Apple";
+dictionary.apple = "Æble";
 dictionary.__proto__ = "test";
 
-// apple and __proto__ is in the loop
+// Kun apple og __proto__ er i loopet
 for(let key in dictionary) {
-  alert(key); // "apple", then "__proto__"
+  alert(key); // "apple" og "__proto__"
 }  
 
-// comma-separated list of properties by toString
+// kommasepareret liste af egenskaber fra toString
 alert(dictionary); // "apple,__proto__"
 ```
 
-When we create a property using a descriptor, its flags are `false` by default. So in the code above, `dictionary.toString` is non-enumerable.
+Når vi opretter en egenskab ved hjælp af en egenskabsbeskrivelser, er dens flag som standard sat til `false`. Så i koden ovenfor er `dictionary.toString` non-enumerable.
 
-See the chapter [](info:property-descriptors) for review.
+Se kapitlet [](info:property-descriptors) for en gennemgang.

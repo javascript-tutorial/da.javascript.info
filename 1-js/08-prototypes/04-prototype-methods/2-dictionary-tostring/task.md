@@ -2,30 +2,30 @@ importance: 5
 
 ---
 
-# Add toString to the dictionary
+# Tilføj toString til ordbogen
 
-There's an object `dictionary`, created as `Object.create(null)`, to store any `key/value` pairs.
+Der er et objekt `dictionary`, oprettet som `Object.create(null)`, til at gemme enhver `key/value` par.
 
-Add method `dictionary.toString()` into it, that should return a comma-delimited list of keys. Your `toString` should not show up in `for..in` over the object.
+Tilføj metoden `dictionary.toString()` til det, som skal returnere en komma-separeret liste af nøgler. Din `toString` bør ikke vises i `for..in` over objektet.
 
-Here's how it should work:
+Den bør virke sådan her:
 
 ```js
 let dictionary = Object.create(null);
 
 *!*
-// your code to add dictionary.toString method
+// din kode til at tilføje dictionary.toString metoden
 */!*
 
-// add some data
-dictionary.apple = "Apple";
+// tilføj nogle data
+dictionary.apple = "æble";
 dictionary.__proto__ = "test"; // __proto__ is a regular property key here
 
-// only apple and __proto__ are in the loop
+// Kun apple og __proto__ er i loopet
 for(let key in dictionary) {
-  alert(key); // "apple", then "__proto__"
+  alert(key); // "apple" og "__proto__"
 }  
 
-// your toString in action
+// din toString i aktion
 alert(dictionary); // "apple,__proto__"
 ```

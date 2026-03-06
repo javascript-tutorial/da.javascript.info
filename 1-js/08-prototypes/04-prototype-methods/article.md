@@ -1,31 +1,31 @@
 
-# Prototype methods, objects without __proto__
+# Prototype metoder, objekter uden __proto__
 
-In the first chapter of this section, we mentioned that there are modern methods to setup a prototype.
+I det første kapitel i denne sektion nævnte vi, at der er moderne metoder til at sætte en prototype.
 
-Setting or reading the prototype with `obj.__proto__` is considered outdated and somewhat deprecated (moved to the so-called "Annex B" of the JavaScript standard, meant for browsers only).
+At sætte eller læse en prototype med `obj.__proto__` er betragtet som forældet og noget deprecated (flyttet til såkaldte "Annex B" i JavaScript-standarden, kun tilgængelig i browser-motorer).
 
-The modern methods to get/set a prototype are:
+De moderne metoder til at få/sætte en prototype er:
 
-- [Object.getPrototypeOf(obj)](mdn:js/Object/getPrototypeOf) -- returns the `[[Prototype]]` of `obj`.
-- [Object.setPrototypeOf(obj, proto)](mdn:js/Object/setPrototypeOf) -- sets the `[[Prototype]]` of `obj` to `proto`.
+- [Object.getPrototypeOf(obj)](mdn:js/Object/getPrototypeOf) -- returnerer `[[Prototype]]` af `obj`.
+- [Object.setPrototypeOf(obj, proto)](mdn:js/Object/setPrototypeOf) -- sætter `[[Prototype]]` af `obj` til `proto`.
 
-The only usage of `__proto__`, that's not frowned upon, is as a property when creating a new object: `{ __proto__: ... }`.
+Den eneste brug af `__proto__`, der ikke rynkes på panden af er, som en en egenskab når der oprettes et nyt objekt: `{ __proto__: ... }`.
 
-Although, there's a special method for this too:
+Selvom der egentlig er en speciel metode for dette også:
 
-- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- creates an empty object with given `proto` as `[[Prototype]]` and optional property descriptors.
+- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- opretter et tomt objekt med given `proto` som `[[Prototype]]` og valgfrie beskrivelser af egenskaber.
 
-For instance:
+For eksempel for at oprette et objekt med `animal` som prototype, kan vi bruge:
 
 ```js run
 let animal = {
   eats: true
 };
 
-// create a new object with animal as a prototype
+// opret et nyt objekt med animal som prototype
 *!*
-let rabbit = Object.create(animal); // same as {__proto__: animal}
+let rabbit = Object.create(animal); // samme som {__proto__: animal}
 */!*
 
 alert(rabbit.eats); // true
@@ -35,13 +35,13 @@ alert(Object.getPrototypeOf(rabbit) === animal); // true
 */!*
 
 *!*
-Object.setPrototypeOf(rabbit, {}); // change the prototype of rabbit to {}
+Object.setPrototypeOf(rabbit, {}); // Ændring af rabbits prototype til {}
 */!*
 ```
 
-The `Object.create` method is a bit more powerful, as it has an optional second argument: property descriptors.
+Metoden `Object.create` er lidt mere kraftfuld, da den giver mulighed for at tilføje egenskaber til det nye objekt. Det er en valgfri anden parameter: egenskabsbeskrivelser.
 
-We can provide additional properties to the new object there, like this:
+Vi kan tilføje yderligere egenskaber til det nye objekt der, som dette:
 
 ```js run
 let animal = {
@@ -57,9 +57,9 @@ let rabbit = Object.create(animal, {
 alert(rabbit.jumps); // true
 ```
 
-The descriptors are in the same format as described in the chapter <info:property-descriptors>.
+Muligheden for beskrivelser er det samme format som beskrevet i kapitlet <info:property-descriptors>.
 
-We can use `Object.create` to perform an object cloning more powerful than copying properties in `for..in`:
+Vi kan bruge `Object.create` til at udføre en kloning af et objekt der er mere effektiv end at kopiere de enkelte egenskaber i et `for..in` loop:
 
 ```js
 let clone = Object.create(
@@ -67,125 +67,125 @@ let clone = Object.create(
 );
 ```
 
-This call makes a truly exact copy of `obj`, including all properties: enumerable and non-enumerable, data properties and setters/getters -- everything, and with the right `[[Prototype]]`.
+Dette kald laver en helt præcis kopi af `obj`, inklusiv alle egenskaber: både enumerable og ikke-enumerable, data egenskaber og setters/getters -- alt, og med den rigtige `[[Prototype]]`.
 
 
-## Brief history
+## Et lille blik på historien bag
 
-There're so many ways to manage `[[Prototype]]`. How did that happen? Why?
+Der er SÅ mange måder at håndtere `[[Prototype]]`. Hvordan kunne det dog komme dertil?
 
-That's for historical reasons.
+Det er ganske enkelt en række historiske årsdager.
 
-The prototypal inheritance was in the language since its dawn, but the ways to manage it evolved over time.
+Nedarvning ved prototype har været muligt siden sprogets start, men måderne at håndtere den har udviklet sig over tid.
 
-- The `prototype` property of a constructor function has worked since very ancient times. It's the oldest way to create objects with a given prototype.
-- Later, in the year 2012, `Object.create` appeared in the standard. It gave the ability to create objects with a given prototype, but did not provide the ability to get/set it. Some browsers implemented the non-standard `__proto__` accessor that allowed the user to get/set a prototype at any time, to give more flexibility to developers.
-- Later, in the year 2015, `Object.setPrototypeOf` and `Object.getPrototypeOf` were added to the standard, to perform the same functionality as `__proto__`. As `__proto__` was de-facto implemented everywhere, it was kind-of deprecated and made its way to the Annex B of the standard, that is: optional for non-browser environments.
-- Later, in the year 2022, it was officially allowed to use `__proto__` in object literals `{...}` (moved out of Annex B), but not as a getter/setter `obj.__proto__` (still in Annex B).
+- Egenskaben `prototype` som led i en konstruktørfunktion har virket helt fra begyndelsen. Det er den ældste måde at oprette objekter med en given prototype.
+- Senere, i 2012, blev `Object.create` vedtaget som standard. Den gav mulighed for at oprette objekter med en given prototype, men gav ikke mulighed for at bruge get/set på den. Nogle browsere implementerede den ikke-standard `__proto__` tilgang, som tillod brugeren at bruge get/set på en prototype uden for konstruktøren, for at give mere fleksibilitet til udviklere.
+- Senere, i 2015, blev `Object.setPrototypeOf` og `Object.getPrototypeOf` tilføjet til standarden, for at udføre samme funktionalitet som `__proto__`. Da `__proto__` var de-facto implementeret overalt, blev det delvis deprecated og bragt til Annex B af standarden, altså valgfrit for ikke-browser miljøer.
+- Senere, i 2022, blev det officielt tilladt at bruge `__proto__` i objekt-literaler `{...}` (flyttet ud af Annex B), men ikke som en getter/setter `obj.__proto__` (stadig i Annex B).
 
-Why was `__proto__` replaced by the functions `getPrototypeOf/setPrototypeOf`?
+Hvorfor var `__proto__` erstattet af funktionerne `getPrototypeOf/setPrototypeOf`?
 
-Why was `__proto__` partially rehabilitated and its usage allowed in `{...}`, but not as a getter/setter?
+Hvorfor var `__proto__` delvist genindført så det er tilladt i objekt-literaler `{...}`, men ikke som en getter/setter `obj.__proto__`?
 
-That's an interesting question, requiring us to understand why `__proto__` is bad.
+Det er et interessant spørgsmål, der kræver, at vi forstår hvorfor `__proto__` er dårlig.
 
-And soon we'll get the answer.
+Og snart vil vi få svaret.
 
-```warn header="Don't change `[[Prototype]]` on existing objects if speed matters"
-Technically, we can get/set `[[Prototype]]` at any time. But usually we only set it once at the object creation time and don't modify it anymore: `rabbit` inherits from `animal`, and that is not going to change.
+```warn header="Lad være med at ændre `[[Prototype]]` på eksisterende objekter hvis hastighed er vigtig"
+Teknisk set kan vi oprette can get/set på en `[[Prototype]]` når som helst. Men i praksis sker det næsten altid kun ved oprettelsen af objektet. Ofte sætter vi kun `[[Prototype]]` én gang ved oprettelsen af objektet og undlader efterfølgende at ændre den ikke igen: `rabbit` nedarver fra `animal`, og det ændres ikke.
 
-And JavaScript engines are highly optimized for this. Changing a prototype "on-the-fly" with `Object.setPrototypeOf` or `obj.__proto__=` is a very slow operation as it breaks internal optimizations for object property access operations. So avoid it unless you know what you're doing, or JavaScript speed totally doesn't matter for you.
+JavaScript-motorer er højst optimerede til dette. Ændring af en prototype "on-the-fly" med `Object.setPrototypeOf` eller `obj.__proto__=` er en meget langsom operation, da den bryder interne optimeringer for objektegenskabstilgange. Undgå derfor at ændre prototypen, medmindre du ved hvad du gør, eller JavaScript-hastighed ikke spiller en rolle for dig.
 ```
 
-## "Very plain" objects [#very-plain]
+## "Meget simple" objekter [#very-plain]
 
-As we know, objects can be used as associative arrays to store key/value pairs.
+Som vi ved kan objekter bruges som associative arrays til at gemme nøgle/værdi-par.
 
-...But if we try to store *user-provided* keys in it (for instance, a user-entered dictionary), we can see an interesting glitch: all keys work fine except `"__proto__"`.
+...Men hvis vi forsøger at gemme *brugerdefinerede* nøgler i det (for eksempel en brugerdefineret ordbog), kan vi se et interessant glitch: alle nøgler virker fint, bortset fra `"__proto__"`.
 
-Check out the example:
+Så for eksempel nedenfor:
 
 ```js run
 let obj = {};
 
-let key = prompt("What's the key?", "__proto__");
-obj[key] = "some value";
+let key = prompt("Hvad er nøglen?", "__proto__");
+obj[key] = "en værdi";
 
-alert(obj[key]); // [object Object], not "some value"!
+alert(obj[key]); // [object Object], ikke "en værdi"!
 ```
 
-Here, if the user types in `__proto__`, the assignment in line 4 is ignored!
+Her vil linje 4 ignoreres, hvis brugeren skriver `__proto__` i prompten!
 
-That could surely be surprising for a non-developer, but pretty understandable for us. The `__proto__` property is special: it must be either an object or `null`. A string can not become a prototype. That's why assigning a string to `__proto__` is ignored.
+Det er umiddelbart overraskende, men egentlig meget logisk, når vi husker på at egenskaben `__proto__` er lidt speciel: Den skal enten være et objekt eller `null`. En streng kan ikke blive en prototype. Derfor ignoreres tildeling af en streng til `__proto__`.
 
-But we didn't *intend* to implement such behavior, right? We want to store key/value pairs, and the key named `"__proto__"` was not properly saved. So that's a bug!
+Det var var jo ikke vores *plan* at den skulle opføre sig på den måde, vel? Vi vil gerne gemme nøgle/værdi-par, og nøglen kaldt `"__proto__"` blev ikke korrekt gemt. Så det er en fejl!
 
-Here the consequences are not terrible. But in other cases we may be storing objects instead of strings in `obj`, and then the prototype will indeed be changed. As a result, the execution will go wrong in totally unexpected ways.
+Her er konsekvenserne ikke så farlige. Men i andre tilfælde kan vi gemme objekter i stedet for strenge i `obj`, og så vil prototypen faktisk blive ændret. Som resultat vil eksekveringen gå galt på helt uventede måder.
 
-What's worse -- usually developers do not think about such possibility at all. That makes such bugs hard to notice and even turn them into vulnerabilities, especially when JavaScript is used on server-side.
+Det værre -- ofte tænker udviklere ikke over denne mulighed overhovedet. Det gør sådanne fejl svære at opdage og endda omvandles til sikkerhedsproblemer, især når JavaScript bruges på server-side.
 
-Unexpected things also may happen when assigning to `obj.toString`, as it's a built-in object method.
+Uventede ting kan også ske når vi tildeler til `obj.toString`, da det er en indbygget objektmetode.
 
-How can we avoid this problem?
+Hvordan kan vi undgå dette problem?
 
-First, we can just switch to using `Map` for storage instead of plain objects, then everything's fine:
+Først og fremmest kan vi skifte til at bruge `Map` for lagring i stedet for almindelige objekter, så alt er i orden:
 
 ```js run
 let map = new Map();
 
-let key = prompt("What's the key?", "__proto__");
-map.set(key, "some value");
+let key = prompt("Hvad er nøglen?", "__proto__");
+map.set(key, "en værdi");
 
-alert(map.get(key)); // "some value" (as intended)
+alert(map.get(key)); // "en værdi" (som det var meningen)
 ```
 
-...But `Object` syntax is often more appealing, as it's more concise.
+...Men `Object` syntaksen appelerer mere til de fleste - og den er kortere.
 
-Fortunately, we *can* use objects, because language creators gave thought to that problem long ago.
+Heldigvis *kan* vi bruge objekter fordi udviklerne af sproget har tænkt over dette problem for længe siden.
 
-As we know, `__proto__` is not a property of an object, but an accessor property of `Object.prototype`:
+Som vi ved er `__proto__` ikke i sig selv en egenskab af et objekt, men en accessor-egenskab af `Object.prototype`:
 
 ![](object-prototype-2.svg)
 
-So, if `obj.__proto__` is read or set, the corresponding getter/setter is called from its prototype, and it gets/sets `[[Prototype]]`.
+Så, hvis `obj.__proto__` læses eller sættes vil dens respektive getter/setter kaldes fra dens prototype, som så får eller sætter værdien af `[[Prototype]]`.
 
-As it was said in the beginning of this tutorial section: `__proto__` is a way to access `[[Prototype]]`, it is not `[[Prototype]]` itself.
+Som det blev sagt i begyndelsen: `__proto__` er en måde at tilgå `[[Prototype]]`, det er ikke selve objektet `[[Prototype]]`.
 
-Now, if we intend to use an object as an associative array and be free of such problems, we can do it with a little trick:
+Så, hvis vi planlægger at bruge et objekt som et associativt array og være fri for sådanne problemer, kan vi gøre det med et lille trick:
 
 ```js run
 *!*
 let obj = Object.create(null);
-// or: obj = { __proto__: null }
+// eller: obj = { __proto__: null }
 */!*
 
-let key = prompt("What's the key?", "__proto__");
-obj[key] = "some value";
+let key = prompt("Hvad er nøglen?", "__proto__");
+obj[key] = "en værdi";
 
-alert(obj[key]); // "some value"
+alert(obj[key]); // "en værdi"
 ```
 
-`Object.create(null)` creates an empty object without a prototype (`[[Prototype]]` is `null`):
+`Object.create(null)` opretter et tomt objekt uden en prototype (`[[Prototype]]` er `null`):
 
 ![](object-prototype-null.svg)
 
-So, there is no inherited getter/setter for `__proto__`. Now it is processed as a regular data property, so the example above works right.
+På denne måde er der ingen arvede getter/setter for `__proto__`. Nu bliver det behandlet som en almindelig dataegenskab, så eksemplet ovenfor fungerer korrekt.
 
-We can call such objects "very plain" or "pure dictionary" objects, because they are even simpler than the regular plain object `{...}`.
+Vi kan kalde sådanne objekter "helt rene", fordi de er endnu mere simple end regulære rene objekter `{...}`.
 
-A downside is that such objects lack any built-in object methods, e.g. `toString`:
+En ulempe er, at sådanne objekter mangler alle indbyggede objektmetoder, f.eks. `toString`:
 
 ```js run
 *!*
 let obj = Object.create(null);
 */!*
 
-alert(obj); // Error (no toString)
+alert(obj); // Fejl (ingen toString)
 ```
 
-...But that's usually fine for associative arrays.
+...men det er normalt ikke et problem for associative arrays.
 
-Note that most object-related methods are `Object.something(...)`, like `Object.keys(obj)` -- they are not in the prototype, so they will keep working on such objects:
+Bemærk, at de fleste objektrelaterede metoder er `Object.something(...)`, som `Object.keys(obj)` -- de er ikke i prototype, så de vil fortsat fungere på denne slags objekter:
 
 
 ```js run
@@ -196,28 +196,28 @@ chineseDictionary.bye = "再见";
 alert(Object.keys(chineseDictionary)); // hello,bye
 ```
 
-## Summary
+## Opsummering
 
-- To create an object with the given prototype, use:
+- For at oprette et objekt med den givne prototype, brug:
 
-    - literal syntax: `{ __proto__: ... }`, allows to specify multiple properties
-    - or [Object.create(proto[, descriptors])](mdn:js/Object/create), allows to specify property descriptors.
+    - literal syntax: `{ __proto__: ... }`, tillader at specificere flere egenskaber
+    - eller [Object.create(proto[, descriptors])](mdn:js/Object/create), tillader at specificere egenskabsbeskrivelser.
 
-    The `Object.create` provides an easy way to shallow-copy an object with all descriptors:
+    `Object.create` giver en let måde at lave en flad kopi af et objekt med alle beskrivelser:
 
     ```js
     let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
     ```
 
-- Modern methods to get/set the prototype are:
+- Moderne metoder til at få eller sætte en prototype er:
 
-    - [Object.getPrototypeOf(obj)](mdn:js/Object/getPrototypeOf) -- returns the `[[Prototype]]` of `obj` (same as `__proto__` getter).
-    - [Object.setPrototypeOf(obj, proto)](mdn:js/Object/setPrototypeOf) -- sets the `[[Prototype]]` of `obj` to `proto` (same as `__proto__` setter).
+    - [Object.getPrototypeOf(obj)](mdn:js/Object/getPrototypeOf) -- returnerer `[[Prototype]]` of `obj` (samme som `__proto__` getter).
+    - [Object.setPrototypeOf(obj, proto)](mdn:js/Object/setPrototypeOf) -- sætter `[[Prototype]]` of `obj` til `proto` (samme som `__proto__` setter).
 
-- Getting/setting the prototype using the built-in `__proto__` getter/setter isn't recommended, it's now in the Annex B of the specification.
+- At få eller sætte en prototype ved hjælp af de indbyggede `__proto__` getter/setter anbefales ikke, da det nu er i Annex B af specifikationen.
 
-- We also covered prototype-less objects, created with `Object.create(null)` or `{__proto__: null}`.
+- Vi dækkede også objekter uden prototype, oprettet med `Object.create(null)` eller `{__proto__: null}`.
 
-    These objects are used as dictionaries, to store any (possibly user-generated) keys.
+    Disse objekter bruges som "dictionary" (ordbøger) til at gemme enhver (muligvis bruger-genereret) nøgle.
 
-    Normally, objects inherit built-in methods and `__proto__` getter/setter from `Object.prototype`, making corresponding keys "occupied" and potentially causing side effects. With `null` prototype, objects are truly empty.
+    Normalt arver objekter indbyggede metoder og `__proto__` getter/setter fra `Object.prototype`, hvilket gør de tilsvarende nøgler "optaget" og potentielt forårsager sideeffekter. Med `null` prototype er objekterne virkelig tomme.
