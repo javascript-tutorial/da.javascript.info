@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Rewrite to class
+# Omskriv til en klasse
 
-The `Clock` class (see the sandbox) is written in functional style. Rewrite it in the "class" syntax.
+Klassen `Clock` (se i sandkassen) er skrevet med funktioner. Omskriv den til "class" syntaks.
 
-P.S. The clock ticks in the console, open it to see.
+P.S. Klokken tikker i konsollen, åbn den for at se.

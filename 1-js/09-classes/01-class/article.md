@@ -1,19 +1,19 @@
 
-# Class basic syntax
+# Klasser: Grundlæggende syntaks
 
 ```quote author="Wikipedia"
-In object-oriented programming, a *class* is an extensible program-code-template for creating objects, providing initial values for state (member variables) and implementations of behavior (member functions or methods).
+I objekt-orienteret programmering, er en *klasse* (class) en udvidelig program-kodetemplate til at skabe objekter, der giver initiale værdier for tilstand (medlemsvariable) og implementeringer af adfærd (medlemsfunktioner eller metoder).
 ```
 
-In practice, we often need to create many objects of the same kind, like users, or goods or whatever.
+I praksis har vi ofte brug for at skabe mange objekter af samme type, som f.eks. brugere eller varer eller hvad som helst.
 
-As we already know from the chapter <info:constructor-new>, `new function` can help with that.
+Som vi allerede ved fra kapitlet <info:constructor-new>, kan `new function` hjælpe med det.
 
-But in the modern JavaScript, there's a more advanced "class" construct, that introduces great new features which are useful for object-oriented programming.
+Men i moderne JavaScript, er der en mere avanceret "class" konstruktion, der introducerer store nye funktioner, som er nyttige for objekt-orienteret programmering.
 
-## The "class" syntax
+## Syntaks for "class"
 
-The basic syntax is:
+Den grundlæggende syntaks er:
 ```js
 class MyClass {
   // class methods
@@ -25,11 +25,11 @@ class MyClass {
 }
 ```
 
-Then use `new MyClass()` to create a new object with all the listed methods.
+Derefter bruges `new MyClass()` til at oprette et nyt objekt med alle de opførte metoder.
 
-The `constructor()` method is called automatically by `new`, so we can initialize the object there.
+Metoden `constructor()` kaldes automatisk af `new`, så vi kan initialisere objektet der.
 
-For example:
+For eksempel:
 
 ```js run
 class User {
@@ -45,32 +45,32 @@ class User {
 }
 
 // Usage:
-let user = new User("John");
+let user = new User("Karsten");
 user.sayHi();
 ```
 
-When `new User("John")` is called:
-1. A new object is created.
-2. The `constructor` runs with the given argument and assigns it to `this.name`.
+Når `new User("Karsten")` kaldes, sker der følgende:
+1. Et nyt objekt oprettes.
+2. Metoden `constructor` kører med det givne argument og tildeler det til `this.name`.
 
-...Then we can call object methods, such as `user.sayHi()`.
+...efter det kan vi kalde objektets metoder, såsom `user.sayHi()`.
 
 
-```warn header="No comma between class methods"
-A common pitfall for novice developers is to put a comma between class methods, which would result in a syntax error.
+```warn header="Ingen komma mellem class metoder"
+En kendt fejl i begyndelsen er at putte kommaer mellem class metoder - det vil føre tilen syntaksfejl.
 
-The notation here is not to be confused with object literals. Within the class, no commas are required.
+Den notation her er ikke at forveksle med object literals. Inden for class, er kommaer ikke nødvendige.
 ```
 
-## What is a class?
+## Hvad er en class?
 
-So, what exactly is a `class`? That's not an entirely new language-level entity, as one might think.
+Så, hvad er `class` egentlig for en størrelse? Det er faktisk ikke så nyt et koncept på sprogniveau, som man måske skulle forestille sig.
 
-Let's unveil any magic and see what a class really is. That'll help in understanding many complex aspects.
+Lad os prøve at pakke det ud lidt ad gangen. Det vil hjælpe med at forstå de mere komplekse aspekter.
 
-In JavaScript, a class is a kind of function.
+I JavaScript er en klasse en slags funktion.
 
-Here, take a look:
+Lad os se på følgende:
 
 ```js run
 class User {
@@ -78,24 +78,24 @@ class User {
   sayHi() { alert(this.name); }
 }
 
-// proof: User is a function
+// Bevis: User er en function
 *!*
 alert(typeof User); // function
 */!*
 ```
 
-What `class User {...}` construct really does is:
+Det konstruktionen `class User {...}` i virkeligheden gør er:
 
-1. Creates a function named `User`, that becomes the result of the class declaration. The function code is taken from the `constructor` method (assumed empty if we don't write such method).
-2. Stores class methods, such as `sayHi`, in `User.prototype`.
+1. Opretter en funktion kaldet `User`, som bliver resultatet af class-deklarationen. Funktionens kode bliver taget fra `constructor`-metoden (antaget tom, hvis vi ikke skriver en sådan).
+2. Gemmer class-metoder, såsom `sayHi`, i `User.prototype`.
 
-After `new User` object is created, when we call its method, it's taken from the prototype, just as described in the chapter <info:function-prototype>. So the object has access to class methods.
+Efter at et `new User`-objekt er oprettet, når vi kalder dens metode, bliver den taget fra prototype, ligesom beskrevet i kapitlet <info:function-prototype>. Så har objektet adgang til class-metoder.
 
-We can illustrate the result of `class User` declaration as:
+Vi kan illustrere resultatet af `class User`-deklarationen som:
 
 ![](class-user.svg)
 
-Here's the code to introspect it:
+Her er koden til at kigge nærmere på det:
 
 ```js run
 class User {
@@ -103,50 +103,50 @@ class User {
   sayHi() { alert(this.name); }
 }
 
-// class is a function
+// class er en function
 alert(typeof User); // function
 
-// ...or, more precisely, the constructor method
+// ...eller, mere præcist, konstruktøren
 alert(User === User.prototype.constructor); // true
 
-// The methods are in User.prototype, e.g:
-alert(User.prototype.sayHi); // the code of the sayHi method
+// Metoderne findes i User.prototype, f. eks. sayHi:
+alert(User.prototype.sayHi); // her er koden for metoden sayHi
 
-// there are exactly two methods in the prototype
+// der er præcis to metoder i prototypen
 alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 ```
 
-## Not just a syntactic sugar
+## Det er ikke kun en syntactic sugar
 
-Sometimes people say that `class` is a "syntactic sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same thing without using the `class` keyword at all:
+Du vil høre folk sige at `class` er en "syntactic sugar" (syntaks der er designet til at gøre ting lettere at læse, men ikke introducerer noget nyt), fordi vi faktisk kunne erklære det samme uden at bruge `class`-nøgleordet:
 
 ```js run
-// rewriting class User in pure functions
+// omskrivning af class User til kun at bruge funktioner
 
-// 1. Create constructor function
+// 1. Opret constructor
 function User(name) {
   this.name = name;
 }
-// a function prototype has "constructor" property by default,
-// so we don't need to create it
+// En function prototype har egenskaben "constructor" som standard,
+// så vi behøver ikke at oprette den
 
-// 2. Add the method to prototype
+// 2. Tilføj metoden til prototype
 User.prototype.sayHi = function() {
   alert(this.name);
 };
 
-// Usage:
-let user = new User("John");
+// Brug:
+let user = new User("Karsten");
 user.sayHi();
 ```
 
-The result of this definition is about the same. So, there are indeed reasons why `class` can be considered a syntactic sugar to define a constructor together with its prototype methods.
+Resultatet af denne definition er omkring det samme. Så, der er faktisk grunde til at `class` kan betragtes som en syntactic sugar til at definere en constructor sammen med dens prototype metoder.
 
-Still, there are important differences.
+Alligevel, der er vigtige forskelle.
 
-1. First, a function created by `class` is labelled by a special internal property `[[IsClassConstructor]]: true`. So it's not entirely the same as creating it manually.
+1. Først, en funktion oprettet af `class` er mærket med en speciel intern egenskab `[[IsClassConstructor]]: true`. Så det er ikke helt det samme som at oprette den manuelt.
 
-    The language checks for that property in a variety of places. For example, unlike a regular function, it must be called with `new`:
+    SProget tjekker for denne egenskab i en række sammenhænge. For eksempel, i modsætning til en almindelig funktion, skal den kaldes med `new`:
 
     ```js run
     class User {
@@ -157,7 +157,7 @@ Still, there are important differences.
     User(); // Error: Class constructor User cannot be invoked without 'new'
     ```
 
-    Also, a string representation of a class constructor in most JavaScript engines starts with the "class..."
+    Derudover vil en repræsentation af klassen som en streng i de fleste JavaScript-motorer starte med "class..."
 
     ```js run
     class User {
@@ -166,23 +166,23 @@ Still, there are important differences.
 
     alert(User); // class User { ... }
     ```
-    There are other differences, we'll see them soon.
+    Der er også andre forskelle som vi snart vil se.
 
-2. Class methods are non-enumerable.
-    A class definition sets `enumerable` flag to `false` for all methods in the `"prototype"`.
+2. Class metoder er ikke-enumerable.
+    En class definition sætter flaget `enumerable` til `false` for alle metoder i dens `"prototype"`.
 
-    That's good, because if we `for..in` over an object, we usually don't want its class methods.
+    Det er godt, fordi hvis vi bruger `for..in` på et objekt, vil vi normalt ikke vil have dets class metoder.
 
-3. Classes always `use strict`.
-    All code inside the class construct is automatically in strict mode.
+3. Class bruger altid `use strict`.
+    Al kode inde i en class konstruktion er automatisk sat til strict mode.
 
-Besides, `class` syntax brings many other features that we'll explore later.
+Der er også andre features ved `class` syntaksen som vi kigger på senere.
 
 ## Class Expression
 
-Just like functions, classes can be defined inside another expression, passed around, returned, assigned, etc.
+På samme måde som funktioner, kan classes defineres indeni en andet udtryk (expression), videregives, returneres, tildeles osv.
 
-Here's an example of a class expression:
+Her er et eksempel på en class expression:
 
 ```js
 let User = class {
@@ -192,29 +192,29 @@ let User = class {
 };
 ```
 
-Similar to Named Function Expressions, class expressions may have a name.
+På samme måde som "Named Function Expressions", kan class udtryk også have et navn.
 
-If a class expression has a name, it's visible inside the class only:
+Hvis et class udtryk har et navn, er det kun synligt inden for klassen selv:
 
 ```js run
 // "Named Class Expression"
-// (no such term in the spec, but that's similar to Named Function Expression)
+// (der er ikke sådan et navn i specifikationen, men det er det samme som med Named Function Expression)
 let User = class *!*MyClass*/!* {
   sayHi() {
-    alert(MyClass); // MyClass name is visible only inside the class
+    alert(MyClass); // Navnet MyClass er kun synligt inden for klassen selv
   }
 };
 
-new User().sayHi(); // works, shows MyClass definition
+new User().sayHi(); // virker, viser MyClass definition
 
-alert(MyClass); // error, MyClass name isn't visible outside of the class
+alert(MyClass); // fejl, navnet MyClass er ikke synligt uden for klassen
 ```
 
-We can even make classes dynamically "on-demand", like this:
+Vi kan endda oprette klasser dynamisk "on-demand", som dette:
 
 ```js run
 function makeClass(phrase) {
-  // declare a class and return it
+  // deklarerer en klasse og returner den
   return class {
     sayHi() {
       alert(phrase);
@@ -222,24 +222,24 @@ function makeClass(phrase) {
   };
 }
 
-// Create a new class
-let User = makeClass("Hello");
+// Opret en ny klasse
+let User = makeClass("Hej!");
 
-new User().sayHi(); // Hello
+new User().sayHi(); // Hej!
 ```
 
 
 ## Getters/setters
 
-Just like literal objects, classes may include getters/setters, computed properties etc.
+På samme måde som med objekter kan klasser have getters og setters, computed properties osv.
 
-Here's an example for `user.name` implemented using `get/set`:
+Her er et eksempel for `user.name` implementeret ved hjælp af `get/set`:
 
 ```js run
 class User {
 
   constructor(name) {
-    // invokes the setter
+    // aktiverer dens setter
     this.name = name;
   }
 
@@ -253,7 +253,7 @@ class User {
   set name(value) {
 */!*
     if (value.length < 4) {
-      alert("Name is too short.");
+      alert("Navnet er for kort.");
       return;
     }
     this._name = value;
@@ -261,17 +261,17 @@ class User {
 
 }
 
-let user = new User("John");
-alert(user.name); // John
+let user = new User("Karsten");
+alert(user.name); // Karsten
 
-user = new User(""); // Name is too short.
+user = new User("Bo"); // Navnet er for kort.
 ```
 
-Technically, such class declaration works by creating getters and setters in `User.prototype`.
+Teknisk set virker sådanne deklarationer ved at oprette getter og setter i `User.prototype`.
 
 ## Computed names [...]
 
-Here's an example with a computed method name using brackets `[...]`:
+Her er et eksempel hvor navnet på metoden er udregnet ved hjælp af brackets `[...]`:
 
 ```js run
 class User {
@@ -279,7 +279,7 @@ class User {
 *!*
   ['say' + 'Hi']() {
 */!*
-    alert("Hello");
+    alert("Hej");
   }
 
 }
@@ -287,71 +287,71 @@ class User {
 new User().sayHi();
 ```
 
-Such features are easy to remember, as they resemble that of literal objects.
+Nogle muligheder er nemme at huske, da de minder om dem fra normale objekter.
 
 ## Class fields
 
-```warn header="Old browsers may need a polyfill"
-Class fields are a recent addition to the language.
+```warn header="Ældre browsere kan have brug for et polyfill"
+Class fields er en relativ ny feature i JavaScript.
 ```
 
-Previously, our classes only had methods.
+Tidligere havde klasser kun metoder.
 
-"Class fields" is a syntax that allows to add any properties.
+"Class fields" er en syntaks der tillader os at tilføje vilkårlige egenskaber.
 
-For instance, let's add `name` property to `class User`:
+For eksempel, lad os tilføje egenskaben `name` til `class User`:
 
 ```js run
 class User {
 *!*
-  name = "John";
+  name = "Karsten";
 */!*
 
   sayHi() {
-    alert(`Hello, ${this.name}!`);
+    alert(`Hej ${this.name}!`);
   }
 }
 
-new User().sayHi(); // Hello, John!
+new User().sayHi(); // Hej Karsten!
 ```
 
-So, we just write "<property name> = <value>" in the declaration, and that's it.
+Så vi skriver simpelthen "<property name> = <value>" i deklarationen, og det er det.
 
-The important difference of class fields is that they are set on individual objects, not `User.prototype`:
+En vigtig forskel mellem class fields og almindelige metoder er, at de er sat på individuelle objekter, ikke `User.prototype`:
 
 ```js run
 class User {
 *!*
-  name = "John";
+  name = "Karsten";
 */!*
 }
 
 let user = new User();
-alert(user.name); // John
+alert(user.name); // Karsten
 alert(User.prototype.name); // undefined
 ```
 
-We can also assign values using more complex expressions and function calls:
+Vi kan også tildele værdier ved hjælp af mere komplekse udtryk og funktionskald:
 
 ```js run
 class User {
 *!*
-  name = prompt("Name, please?", "John");
+  name = prompt("Dit navn, tak?", "Karsten");
 */!*
 }
 
 let user = new User();
-alert(user.name); // John
+alert(user.name); // Karsten
 ```
 
 
-### Making bound methods with class fields
+### Gør bundne metoder til class fields
 
-As demonstrated in the chapter <info:bind> functions in JavaScript have a dynamic `this`. It depends on the context of the call.
+Som demonstreret i kapitlet <info:bind> har funktioner i JavaScript en dynamisk `this`. Det afhænger af konteksten for kaldet.
 
-So if an object method is passed around and called in another context, `this` won't be a reference to its object any more.
+Så hvis en objektmetode bliver videregivet og kaldt i en anden kontekst, vil `this` ikke længere være en reference til objektet.
 
-For instance, this code will show `undefined`:
+For eksempel vil denne kode vise `undefined`:
 
 ```js run
 class Button {
@@ -364,21 +364,21 @@ class Button {
   }
 }
 
-let button = new Button("hello");
+let button = new Button("hej");
 
 *!*
 setTimeout(button.click, 1000); // undefined
 */!*
 ```
 
-The problem is called "losing `this`".
+Problemet kaldes populært at den "mister `this`" ("losing `this`").
 
-There are two approaches to fixing it, as discussed in the chapter <info:bind>:
+Der er to tilgange til at fikse det, som vi diskuterede i kapitlet <info:bind>:
 
-1. Pass a wrapper-function, such as `setTimeout(() => button.click(), 1000)`.
-2. Bind the method to object, e.g. in the constructor.
+1. Videregiv en wrapper-funktion, i stil med `setTimeout(() => button.click(), 1000)`.
+2. Bind metoden til objektet, f.eks. i constructor.
 
-Class fields provide another, quite elegant syntax:
+Class fields leverer en anden, ganske elegant syntaks:
 
 ```js run
 class Button {
@@ -392,37 +392,37 @@ class Button {
 */!*
 }
 
-let button = new Button("hello");
+let button = new Button("hej");
 
-setTimeout(button.click, 1000); // hello
+setTimeout(button.click, 1000); // hej
 ```
 
-The class field `click = () => {...}` is created on a per-object basis, there's a separate function for each `Button` object, with `this` inside it referencing that object. We can pass `button.click` around anywhere, and the value of `this` will always be correct.
+class field `click = () => {...}` oprettes på individuelle objekter, så der er en seperat funktion for hver `Button`-objekt, med `this` inde i den, der refererer til det objekt. Vi kan overføre `button.click` hvor som helst, og værdien af `this` vil altid være korrekt.
 
-That's especially useful in browser environment, for event listeners.
+Det er især nyttigt i browser-miljøet, for event-listeners.
 
-## Summary
+## Opsummering
 
-The basic class syntax looks like this:
+Den grundlæggende syntaks for klasser ser sådan ud:
 
 ```js
 class MyClass {
-  prop = value; // property
+  prop = value; // egenskab (class field)
 
   constructor(...) { // constructor
     // ...
   }
 
-  method(...) {} // method
+  method(...) {} // metode
 
-  get something(...) {} // getter method
-  set something(...) {} // setter method
+  get something(...) {} // getter metode
+  set something(...) {} // setter metode
 
-  [Symbol.iterator]() {} // method with computed name (symbol here)
+  [Symbol.iterator]() {} // metode med beregnet navn (symbol her)
   // ...
 }
 ```
 
-`MyClass` is technically a function (the one that we provide as `constructor`), while methods, getters and setters are written to `MyClass.prototype`.
+`MyClass` er teknisk set en function (den vi leverer som `constructor`), mens metoder, getters og setters skrives i `MyClass.prototype`.
 
-In the next chapters we'll learn more about classes, including inheritance and other features.
+I de næste kapitler vil vi lære mere om klasser, nedarvning og andre funktioner.
