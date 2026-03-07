@@ -1,1 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="463" height="202" viewBox="0 0 463 202"><defs><style>@import url(https://fonts.googleapis.com/css?family=Open+Sans:bold,italic,bolditalic%7CPT+Mono);@font-face{font-family:&apos;PT Mono&apos;;font-weight:700;font-style:normal;src:local(&apos;PT MonoBold&apos;),url(/font/PTMonoBold.woff2) format(&apos;woff2&apos;),url(/font/PTMonoBold.woff) format(&apos;woff&apos;),url(/font/PTMonoBold.ttf) format(&apos;truetype&apos;)}</style></defs><g id="inheritance" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g id="rabbit-animal-independent-rabbit.svg"><path id="Rectangle-1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M421 23v48H243V23h178z"/><text id="constructor:-Rabbit" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"> <tspan x="253" y="44">constructor: Rabbit</tspan> <tspan x="253" y="59">hide: function</tspan></text><text id="Rabbit.prototype" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="242" y="15">Rabbit.prototype</tspan></text><path id="Rectangle-1-Copy-2" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M8 23h108v28H8z"/><text id="Rabbit" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="7" y="15">Rabbit</tspan></text><path id="Rectangle-1-Copy-3" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M420 151v28H242v-28h178z"/><text id="new-Rabbit" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="244" y="143">new Rabbit</tspan></text><path id="Line" fill="#C06334" fill-rule="nonzero" d="M331.5 81.5l7 14h-6v28h-2v-28h-6l7-14z"/><path id="Line-Copy" fill="#C06334" fill-rule="nonzero" d="M212 30l14 7-14 7v-6h-80v-2h80v-6z"/><text id="[[Prototype]]" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="341" y="105">[[Prototype]]</tspan></text><text id="prototype" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="139" y="25">prototype</tspan></text><text id="name:-&quot;My-rabbit&quot;" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="254" y="169">name: &quot;My rabbit&quot;</tspan></text></g></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 463 202">
+  <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #fbf2ec;
+        fill-rule: evenodd;
+        stroke: #dbaf88;
+        stroke-width: 2px;
+      }
+
+      .st1, .st2 {
+        isolation: isolate;
+      }
+
+      .st2, .st3 {
+        fill: #af6e24;
+        font-family: PTMono-Regular, 'PT Mono';
+        font-size: 14px;
+      }
+
+      .st4 {
+        fill: #c06334;
+      }
+    </style>
+  </defs>
+  <g id="inheritance">
+    <g id="rabbit-animal-independent-rabbit.svg">
+      <path id="Rectangle-1" class="st0" d="M421,23v48h-178V23h178Z"/>
+      <g id="constructor:-Rabbit" class="st1">
+        <text class="st2" transform="translate(253 44)"><tspan x="0" y="0">constructor: Rabbit</tspan></text>
+        <text class="st3" transform="translate(412.6 44)"><tspan x="0" y="0"> </tspan></text>
+        <text class="st2" transform="translate(253 59)"><tspan x="0" y="0">hide: function</tspan></text>
+      </g>
+      <g id="Rabbit.prototype" class="st1">
+        <text class="st2" transform="translate(242 15)"><tspan x="0" y="0">Rabbit.prototype</tspan></text>
+      </g>
+      <path id="Rectangle-1-Copy-2" class="st0" d="M8,23h108v28H8v-28Z"/>
+      <g id="Rabbit" class="st1">
+        <text class="st2" transform="translate(7 15)"><tspan x="0" y="0">Rabbit</tspan></text>
+      </g>
+      <path id="Rectangle-1-Copy-3" class="st0" d="M420,151v28h-178v-28h178Z"/>
+      <g id="new-Rabbit" class="st1">
+        <text class="st2" transform="translate(244 143)"><tspan x="0" y="0">new Rabbit</tspan></text>
+      </g>
+      <path id="Line" class="st4" d="M331.5,81.5l7,14h-6v28h-2v-28h-6l7-14Z"/>
+      <path id="Line-Copy" class="st4" d="M212,30l14,7-14,7v-6h-80v-2h80v-6Z"/>
+      <g id="_x5B__x5B_Prototype_x5D__x5D_" class="st1">
+        <text class="st2" transform="translate(341 105)"><tspan x="0" y="0">[[Prototype]]</tspan></text>
+      </g>
+      <g id="prototype" class="st1">
+        <text class="st2" transform="translate(139 25)"><tspan x="0" y="0">prototype</tspan></text>
+      </g>
+      <g id="name:-_x22_My-rabbit_x22_" class="st1">
+        <text class="st2" transform="translate(254 169)"><tspan x="0" y="0">name: &quot;Mit dyr&quot;</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
