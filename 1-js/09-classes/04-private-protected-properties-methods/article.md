@@ -186,8 +186,6 @@ Så beskyttede felter er naturligt nedarvede. Til forskel fra private felter, so
 
 ## Privat "#waterLimit"
 
-[recent browser=none]
-
 JavaScript har fra og med ES2022 (ES13) sprogniveau støtte for private egenskaber og metoder.
 
 Private egenskaber og metoder skal starte med `#`. De er kun tilgængelige inde i klassen.
