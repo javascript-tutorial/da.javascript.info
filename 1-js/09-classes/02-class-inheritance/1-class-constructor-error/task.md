@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Error creating an instance
+# Fejl ved oprettelse af instans
 
-Here's the code with `Rabbit` extending `Animal`.
+Her er koden hvor `Rabbit` udvider `Animal`.
 
-Unfortunately, `Rabbit` objects can't be created. What's wrong? Fix it.
+Uheldigvis kan `Rabbit`-objekter ikke oprettes. Hvad er galt? Ret det.
 ```js run
 class Animal {
 
@@ -24,7 +24,7 @@ class Rabbit extends Animal {
 }
 
 *!*
-let rabbit = new Rabbit("White Rabbit"); // Error: this is not defined
+let rabbit = new Rabbit("Hvid kanin"); // Fejl: this is not defined
 */!*
 alert(rabbit.name);
 ```

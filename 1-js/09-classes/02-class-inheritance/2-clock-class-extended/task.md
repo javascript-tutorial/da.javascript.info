@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# Extended clock
+# Udvidet ur
 
-We've got a `Clock` class. As of now, it prints the time every second.
+Vi har en `Clock` klasse. Som det er nu udskriver den tiden hver sekund.
 
 
 [js src="source.view/clock.js"]
 
-Create a new class `ExtendedClock` that inherits from `Clock` and adds the parameter `precision` -- the number of `ms` between "ticks". Should be `1000` (1 second) by default.
+Opret en ny klasse `ExtendedClock`, som nedarver fra `Clock` og tilføjer parameteren `precision` -- antallet af `ms` mellem "ticks". Bør være `1000` (1 sekund) som standard.
 
-- Your code should be in the file `extended-clock.js`
-- Don't modify the original `clock.js`. Extend it.
+- Din kode bør være i filen `extended-clock.js`
+- Modificer ikke den originale `clock.js`. Udvid den.

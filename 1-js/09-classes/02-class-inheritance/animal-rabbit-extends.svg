@@ -1,1 +1,106 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="560" height="316" viewBox="0 0 560 316"><defs><style>@import url(https://fonts.googleapis.com/css?family=Open+Sans:bold,italic,bolditalic%7CPT+Mono);@font-face{font-family:&apos;PT Mono&apos;;font-weight:700;font-style:normal;src:local(&apos;PT MonoBold&apos;),url(/font/PTMonoBold.woff2) format(&apos;woff2&apos;),url(/font/PTMonoBold.woff) format(&apos;woff&apos;),url(/font/PTMonoBold.ttf) format(&apos;truetype&apos;)}</style></defs><g id="inheritance" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g id="animal-rabbit-extends.svg"><path id="Rectangle-1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M242 23h185v64H242z"/><text id="constructor:-Animal" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="252" y="42">constructor: Animal</tspan> <tspan x="252" y="57">run: function</tspan> <tspan x="252" y="72">stop: function</tspan></text><path id="Rectangle-1-Copy" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M242 286h185v28H242z"/><text id="Animal.prototype" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="241" y="15">Animal.prototype</tspan></text><path id="Rectangle-1-Copy-4" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M242 166h185v48H242z"/><text id="constructor:-Rabbit" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="252" y="185">constructor: Rabbit</tspan> <tspan x="252" y="200">hide: function</tspan></text><text id="Rabbit.prototype" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="241" y="158">Rabbit.prototype</tspan></text><path id="Rectangle-1-Copy-2" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M11 23h105v48H11z"/><text id="Animal" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="10" y="15">Animal</tspan></text><path id="Rectangle-1-Copy-3" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M11 166h105v48H11z"/><text id="Rabbit" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="10" y="158">Rabbit</tspan></text><text id="new-Rabbit" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="247" y="278">new Rabbit</tspan></text><path id="Line" fill="#C06334" fill-rule="nonzero" d="M330.5 96.5l7 14h-6v28h-2v-28h-6l7-14z"/><path id="Line-Copy" fill="#C06334" fill-rule="nonzero" d="M211 40l14 7-14 7v-6h-79v-2h79v-6z"/><path id="Line-Copy-4" fill="#C06334" fill-rule="nonzero" d="M489.157 87.31l.533.847-.424.266-20.68 13.021-5.129 3.228 7.263-.36.499-.024.05.999-.5.024-9.167.455-.888.044.423-.782 4.372-8.07.239-.44.879.476-.238.44-3.464 6.392 5.128-3.228 20.68-13.021.424-.267z"/><text id="[[Prototype]]" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="340" y="120">[[Prototype]]</tspan></text><path id="Line-Copy-3" fill="#C06334" fill-rule="nonzero" d="M330.5 230.5l7 14h-6v28h-2v-28h-6l7-14z"/><text id="[[Prototype]]-Copy" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="340" y="254">[[Prototype]]</tspan></text><text id="prototype" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="139" y="35">prototype</tspan></text><path id="Line-Copy-2" fill="#C06334" fill-rule="nonzero" d="M211 182l14 7-14 7v-6h-79v-2h79v-6z"/><text id="prototype-copy" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="139" y="176">prototype</tspan></text><text id="name:-&quot;White-Rabbit&quot;" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="253" y="304">name: &quot;White Rabbit&quot;</tspan></text><text id="constructor" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="17" y="41">constructor</tspan></text><text id="constructor-copy" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="17" y="183">constructor</tspan></text><ellipse id="Oval" cx="391.5" cy="117.5" stroke="#C06334" rx="70.5" ry="20.5"/><text id="extends" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="16" font-weight="normal"><tspan x="489" y="83">extends</tspan></text></g></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 560 316">
+  <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+        stroke: #c06334;
+      }
+
+      .st1 {
+        fill: #fbf2ec;
+        fill-rule: evenodd;
+        stroke: #dbaf88;
+        stroke-width: 2px;
+      }
+
+      .st2, .st3, .st4 {
+        isolation: isolate;
+      }
+
+      .st3, .st5 {
+        fill: #af6e24;
+        font-size: 14px;
+      }
+
+      .st3, .st5, .st4 {
+        font-family: PTMono-Regular, 'PT Mono';
+      }
+
+      .st6, .st4 {
+        fill: #c06334;
+      }
+
+      .st4 {
+        font-size: 16px;
+      }
+    </style>
+  </defs>
+  <g id="inheritance">
+    <g id="animal-rabbit-extends.svg">
+      <path id="Rectangle-1" class="st1" d="M242,23h185v64h-185V23Z"/>
+      <g id="constructor:-Animal" class="st2">
+        <text class="st3" transform="translate(252 42)"><tspan x="0" y="0">constructor: Animal</tspan></text>
+        <text class="st5" transform="translate(411.6 42)"><tspan x="0" y="0"> </tspan></text>
+        <text class="st3" transform="translate(252 57)"><tspan x="0" y="0">run: function</tspan></text>
+        <text class="st5" transform="translate(361.2 57)"><tspan x="0" y="0"> </tspan></text>
+        <text class="st3" transform="translate(252 72)"><tspan x="0" y="0">stop: function</tspan></text>
+      </g>
+      <path id="Rectangle-1-Copy" class="st1" d="M242,286h185v28h-185v-28Z"/>
+      <g id="Animal.prototype" class="st2">
+        <text class="st3" transform="translate(241 15)"><tspan x="0" y="0">Animal.prototype</tspan></text>
+      </g>
+      <path id="Rectangle-1-Copy-4" class="st1" d="M242,166h185v48h-185v-48Z"/>
+      <g id="constructor:-Rabbit" class="st2">
+        <text class="st3" transform="translate(252 185)"><tspan x="0" y="0">constructor: Rabbit</tspan></text>
+        <text class="st5" transform="translate(411.6 185)"><tspan x="0" y="0"> </tspan></text>
+        <text class="st3" transform="translate(252 200)"><tspan x="0" y="0">hide: function</tspan></text>
+      </g>
+      <g id="Rabbit.prototype" class="st2">
+        <text class="st3" transform="translate(241 158)"><tspan x="0" y="0">Rabbit.prototype</tspan></text>
+      </g>
+      <path id="Rectangle-1-Copy-2" class="st1" d="M11,23h105v48H11V23Z"/>
+      <g id="Animal" class="st2">
+        <text class="st3" transform="translate(10 15)"><tspan x="0" y="0">Animal</tspan></text>
+      </g>
+      <path id="Rectangle-1-Copy-3" class="st1" d="M11,166h105v48H11v-48Z"/>
+      <g id="Rabbit" class="st2">
+        <text class="st3" transform="translate(10 158)"><tspan x="0" y="0">Rabbit</tspan></text>
+      </g>
+      <g id="new-Rabbit" class="st2">
+        <text class="st3" transform="translate(247 278)"><tspan x="0" y="0">new Rabbit</tspan></text>
+      </g>
+      <path id="Line" class="st6" d="M330.5,96.5l7,14h-6v28h-2v-28h-6l7-14Z"/>
+      <path id="Line-Copy" class="st6" d="M211,40l14,7-14,7v-6h-79v-2h79v-6Z"/>
+      <path id="Line-Copy-4" class="st6" d="M489.16,87.31l.53.85-.42.27-20.68,13.02-5.13,3.23,7.26-.36.5-.02.05,1-.5.02-9.17.46-.89.04.42-.78,4.37-8.07.24-.44.88.48-.24.44-3.46,6.39,5.13-3.23,20.68-13.02.42-.27Z"/>
+      <g id="_x5B__x5B_Prototype_x5D__x5D_" class="st2">
+        <text class="st3" transform="translate(340 120)"><tspan x="0" y="0">[[Prototype]]</tspan></text>
+      </g>
+      <path id="Line-Copy-3" class="st6" d="M330.5,230.5l7,14h-6v28h-2v-28h-6l7-14Z"/>
+      <g id="_x5B__x5B_Prototype_x5D__x5D_-Copy" class="st2">
+        <text class="st3" transform="translate(340 254)"><tspan x="0" y="0">[[Prototype]]</tspan></text>
+      </g>
+      <g id="prototype" class="st2">
+        <text class="st3" transform="translate(139 35)"><tspan x="0" y="0">prototype</tspan></text>
+      </g>
+      <path id="Line-Copy-2" class="st6" d="M211,182l14,7-14,7v-6h-79v-2h79v-6Z"/>
+      <g id="prototype-copy" class="st2">
+        <text class="st3" transform="translate(139 176)"><tspan x="0" y="0">prototype</tspan></text>
+      </g>
+      <g id="name:-_x22_White-Rabbit_x22_" class="st2">
+        <text class="st3" transform="translate(253 304)"><tspan x="0" y="0">name: &quot;Hvid kanin&quot;</tspan></text>
+      </g>
+      <g id="constructor" class="st2">
+        <text class="st3" transform="translate(17 41)"><tspan x="0" y="0">constructor</tspan></text>
+      </g>
+      <g id="constructor-copy" class="st2">
+        <text class="st3" transform="translate(17 183)"><tspan x="0" y="0">constructor</tspan></text>
+      </g>
+      <ellipse id="Oval" class="st0" cx="391.5" cy="117.5" rx="70.5" ry="20.5"/>
+      <g id="extends" class="st2">
+        <text class="st4" transform="translate(489 83)"><tspan x="0" y="0">extends</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
