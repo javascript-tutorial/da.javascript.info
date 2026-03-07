@@ -1,95 +1,95 @@
 
-# Private and protected properties and methods
+# Private og beskyttede egenskaber og metoder
 
-One of the most important principles of object oriented programming -- delimiting internal interface from the external one.
+En af de vigtigste principper i objektorienteret programmering -- adskil det interne interface fra det eksterne.
 
-That is "a must" practice in developing anything more complex than a "hello world" app.
+Det er en "skal opgave" når du udvikler noget mere komplekst end en "hello world" app.
 
-To understand this, let's break away from development and turn our eyes into the real world.
+For at forstå dette, lad os tage en pause fra programmering og rette vores blik mod det virkelige liv.
 
-Usually, devices that we're using are quite complex. But delimiting the internal interface from the external one allows to use them without problems.
+Ofte er de enheder, vi bruger, ganske komplekse. Men ved at adskille det interne interface fra det eksterne interface er det muligt at bruge dem uden problemer.
 
-## A real-life example
+## Et eksempel fra det virkelige liv
 
-For instance, a coffee machine. Simple from outside: a button, a display, a few holes...And, surely, the result -- great coffee! :)
+Tag for eksempel en kaffemaskine. Simpel udenpå: en knap, et display, lidt huller ... og selvfølgelig -- en god kop kaffe! :)
 
 ![](coffee.jpg)
 
-But inside... (a picture from the repair manual)
+Men inden i ... (tag et billede fra reparation manualen for en kaffemaskine, og du vil se, hvor meget der skal samarbejde for at fungere korrekt).
 
 ![](coffee-inside.jpg)
 
-A lot of details. But we can use it without knowing anything.
+En masse detaljer. Men vi kan bruge den uden at vide noget om det.
 
-Coffee machines are quite reliable, aren't they? We can use one for years, and only if something goes wrong -- bring it for repairs.
+Kaffemaskiner er ret pålidelige, ikke? Vi kan bruge en i årevis, og kun hvis noget går galt -- så bringer vi den til reparation.
 
-The secret of reliability and simplicity of a coffee machine -- all details are well-tuned and *hidden* inside.
+Hemmeligheden bag denne pålidelighed og enkelhed i en kaffemaskine er, at alle detaljer er veljusteret og *skjult* inde.
 
-If we remove the protective cover from the coffee machine, then using it will be much more complex (where to press?), and dangerous (it can electrocute).
+Hvis vi fjerner den beskyttende kappe fra kaffemaskinen, så vil det at bruge den være meget mere komplekst (hvor skal man trykke?), og farligt (den kan give stød).
 
-As we'll see, in programming objects are like coffee machines.
+Som vi vil se, er det at programmere objekter lidt ligesom kaffemaskiner.
 
-But in order to hide inner details, we'll use not a protective cover, but rather special syntax of the language and conventions.
+Men for at skjule interne detaljer, vil vi bruge ikke en beskyttende kappe, men snarere speciel syntaks i sproget og konventioner.
 
-## Internal and external interface
+## Internt og eksternt interface
 
-In object-oriented programming, properties and methods are split into two groups:
+I objektorienteret programmering er egenskaber og metoder opdelt i to grupper:
 
-- *Internal interface* -- methods and properties, accessible from other methods of the class, but not from the outside.
-- *External interface* -- methods and properties, accessible also from outside the class.
+- *Internt interface* -- metoder og egenskaber, tilgængelige fra andre metoder i klassen, men ikke fra uden for klassen.
+- *Eksternt interface* -- metoder og egenskaber, også tilgængelige fra uden for klassen.
 
-If we continue the analogy with the coffee machine -- what's hidden inside: a boiler tube, heating element, and so on -- is its internal interface.
+Hvis vi fortsætter analogien med kaffemaskinen -- det, der er skjult inde: en varmepumpe, varmelegeme, og så videre -- er dens interne interface.
 
-An internal interface is used for the object to work, its details use each other. For instance, a boiler tube is attached to the heating element.
+Det interne interface er nødvendigt for, at objektet kan fungere, og dets dele er forbundet til hinanden. For eksempel er en varmepumpe forbundet til varmelegemet.
 
-But from the outside a coffee machine is closed by the protective cover, so that no one can reach those. Details are hidden and inaccessible. We can use its features via the external interface.
+Men udefra er en kaffemaskine lukket af den beskyttende kappe, så brugeren ikke kan nå "indmaden". Detaljerne er skjulte og utilgængelige. Vi kan bruge dens funktioner via det eksterne interface.
 
-So, all we need to use an object is to know its external interface. We may be completely unaware how it works inside, and that's great.
+Så, alt hvad vi har brug for at bruge et objekt er at kende dets eksterne interface. Vi behøver ikke at vide, hvordan det fungerer inde, og det er godt.
 
-That was a general introduction.
+Det var det overordnede billede.
 
-In JavaScript, there are two types of object fields (properties and methods):
+I JavaScript er der to typer af egenskaber og metoder:
 
-- Public: accessible from anywhere. They comprise the external interface. Until now we were only using public properties and methods.
-- Private: accessible only from inside the class. These are for the internal interface.
+- Public: tilgængelige fra hvor som helst. De udgør det eksterne interface. Indtil nu har vi kun brugt offentlige egenskaber og metoder.
+- Private: tilgængelige kun inde i klassen. Disse er det interne interface.
 
-In many other languages there also exist "protected" fields: accessible only from inside the class and those extending it (like private, but plus access from inheriting classes). They are also useful for the internal interface. They are in a sense more widespread than private ones, because we usually want inheriting classes to gain access to them.
+I mange andre sprog findes der også "beskyttede" (protected) felter : tilgængelige kun fra inde i klassen og de klasser, der udvider den (ligesom private, men med tilgang fra arvende klasser). De er også nyttige for det interne interface. De er i en vis forstand mere udbredt end private felter, fordi vi ofte vil have arvende klasser til at få adgang til dem.
 
-Protected fields are not implemented in JavaScript on the language level, but in practice they are very convenient, so they are emulated.
+Beskyttede felter er ikke implementeret i JavaScript på sprog-niveau, men i praksis er de meget praktiske, så de emuleres.
 
-Now we'll make a coffee machine in JavaScript with all these types of properties. A coffee machine has a lot of details, we won't model them to stay simple (though we could).
+Nu vil vi lave en kaffemaskine i JavaScript med alle disse typer af egenskaber. En kaffemaskine har mange detaljer, vi vil ikke modellere dem for at blive simpel (selvom vi kunne).
 
-## Protecting "waterAmount"
+## Beskytter "waterAmount"
 
-Let's make a simple coffee machine class first:
+Lad os først lave en simpel kaffemaskineklasse med to egenskaber: `power` og `waterAmount`:
 
 ```js run
 class CoffeeMachine {
-  waterAmount = 0; // the amount of water inside
+  waterAmount = 0; // mængden af vand inde i kaffemaskinen
 
   constructor(power) {
     this.power = power;
-    alert( `Created a coffee-machine, power: ${power}` );
+    alert( `Oprettet en kaffemaskine, effekt: ${power}` );
   }
 
 }
 
-// create the coffee machine
+// opret kaffemaskinen
 let coffeeMachine = new CoffeeMachine(100);
 
-// add water
+// fyld vand på
 coffeeMachine.waterAmount = 200;
 ```
 
-Right now the properties `waterAmount` and `power` are public. We can easily get/set them from the outside to any value.
+Lige nu er egenskaberne `waterAmount` og `power` offentlige (public). Vi kan nemt hente og sætte dem udefra og med alle værdier.
 
-Let's change `waterAmount` property to protected to have more control over it. For instance, we don't want anyone to set it below zero.
+Lad os ændre `waterAmount` egenskaben til beskyttet for at have mere kontrol over den. For eksempel vil vi ikke vil have, at nogen kan sætte den under nul.
 
-**Protected properties are usually prefixed with an underscore `_`.**
+**Beskyttede egenskaber er normalt præfikseret med en understregning `_`.**
 
-That is not enforced on the language level, but there's a well-known convention between programmers that such properties and methods should not be accessed from the outside.
+Det er ikke tvunget på sprog-niveau, men der er en velkendt konvention mellem programmører, at sådanne egenskaber og metoder ikke bør tilgås fra uden for klassen.
 
-So our property will be called `_waterAmount`:
+Så vores egenskab vil blive kaldt `_waterAmount`:
 
 ```js run
 class CoffeeMachine {
@@ -112,22 +112,22 @@ class CoffeeMachine {
 
 }
 
-// create the coffee machine
+// opret kaffemaskinen
 let coffeeMachine = new CoffeeMachine(100);
 
-// add water
-coffeeMachine.waterAmount = -10; // _waterAmount will become 0, not -10
+// fyld vand på
+coffeeMachine.waterAmount = -10; // _waterAmount vil blive 0, ikke -10
 ```
 
-Now the access is under control, so setting the water amount below zero becomes impossible.
+Nu er tilgangen under kontrol, så det ikke er muligt at hælde mindre end 0 vand på.
 
-## Read-only "power"
+## Kun læsbar "power"
 
-For `power` property, let's make it read-only. It sometimes happens that a property must be set at creation time only, and then never modified.
+Vi kan sørge for at de kun er muligt at læse egenskaben `power`. Det sker nogle gange, at en egenskab kun skal sættes ved oprettelse og derefter aldrig modificeres.
 
-That's exactly the case for a coffee machine: power never changes.
+Det er præcis tilfældet for en kaffemaskine: effekten ændres aldrig.
 
-To do so, we only need to make getter, but not the setter:
+For at gøre det, behøver vi kun at lave en getter, men ikke en setter:
 
 ```js run
 class CoffeeMachine {
@@ -143,18 +143,18 @@ class CoffeeMachine {
 
 }
 
-// create the coffee machine
+// opret kaffemaskinen
 let coffeeMachine = new CoffeeMachine(100);
 
-alert(`Power is: ${coffeeMachine.power}W`); // Power is: 100W
+alert(`Effekten er: ${coffeeMachine.power}W`); // Effekten er: 100W
 
-coffeeMachine.power = 25; // Error (no setter)
+coffeeMachine.power = 25; // Fejl (ingen setter)
 ```
 
-````smart header="Getter/setter functions"
-Here we used getter/setter syntax.
+````smart header="Getter/setter funktioner eller get/set syntaks?"
+Her har vi brugt getter/setter syntaks.
 
-But most of the time `get.../set...` functions are preferred, like this:
+En del udviklere foretrækker `get.../set...` funktioner, som dette:
 
 ```js
 class CoffeeMachine {
@@ -173,26 +173,26 @@ class CoffeeMachine {
 new CoffeeMachine().setWaterAmount(100);
 ```
 
-That looks a bit longer, but functions are more flexible. They can accept multiple arguments (even if we don't need them right now).
+Det ser ud til at være lidt længere, men funktioner er mere fleksible. De kan acceptere flere argumenter (selvom vi ikke har brug for dem lige nu) - get/set syntaksen kan kun arbejde med en enkelt værdi.
 
-On the other hand, get/set syntax is shorter, so ultimately there's no strict rule, it's up to you to decide.
-````
-
-```smart header="Protected fields are inherited"
-If we inherit `class MegaMachine extends CoffeeMachine`, then nothing prevents us from accessing `this._waterAmount` or `this._power` from the methods of the new class.
-
-So protected fields are naturally inheritable. Unlike private ones that we'll see below.
+På den anden side er get/set syntaks kortere, så i sidste ende er der ingen streng regel, det er op til dig at bestemme.
 ```
 
-## Private "#waterLimit"
+```smart header="Beskyttede felter nedarves"
+Hvis vi opretter `class MegaMachine extends CoffeeMachine` er der ikke noget der forhindrer os i at tilgå `this._waterAmount` eller `this._power` fra metoderne i den nye klasse.
+
+Så beskyttede felter er naturligt nedarvede. Til forskel fra private felter, som vi vil se nedenfor.
+```
+
+## Privat "#waterLimit"
 
 [recent browser=none]
 
-There's a finished JavaScript proposal, almost in the standard, that provides language-level support for private properties and methods.
+JavaScript har fra og med ES2022 (ES13) sprogniveau støtte for private egenskaber og metoder.
 
-Privates should start with `#`. They are only accessible from inside the class.
+Private egenskaber og metoder skal starte med `#`. De er kun tilgængelige inde i klassen.
 
-For instance, here's a private `#waterLimit` property and the water-checking private method `#fixWaterAmount`:
+For eksempel, her er en privat `#waterLimit` egenskab og den private metode `#fixWaterAmount`:
 
 ```js run
 class CoffeeMachine {
@@ -217,16 +217,16 @@ let coffeeMachine = new CoffeeMachine();
 
 *!*
 // can't access privates from outside of the class
-coffeeMachine.#fixWaterAmount(123); // Error
-coffeeMachine.#waterLimit = 1000; // Error
+coffeeMachine.#fixWaterAmount(123); // Fejl
+coffeeMachine.#waterLimit = 1000; // Fejl
 */!*
 ```
 
-On the language level, `#` is a special sign that the field is private. We can't access it from outside or from inheriting classes.
+På sprogniveau er `#` en speciel markering, der indikerer, at feltet er privat. Vi kan ikke tilgå det uden for klassen eller klasser der arver fra den.
 
-Private fields do not conflict with public ones. We can have both private `#waterAmount` and public `waterAmount` fields at the same time.
+Private felter kolliderer ikke med offentlige felter. Vi kan have både private `#waterAmount` og offentlige `waterAmount` felter samtidigt.
 
-For instance, let's make `waterAmount` an accessor for `#waterAmount`:
+For eksempel, lad os gøre `waterAmount` til en accessor for `#waterAmount`:
 
 ```js run
 class CoffeeMachine {
@@ -246,77 +246,75 @@ class CoffeeMachine {
 let machine = new CoffeeMachine();
 
 machine.waterAmount = 100;
-alert(machine.#waterAmount); // Error
+alert(machine.#waterAmount); // Fejl
 ```
 
-Unlike protected ones, private fields are enforced by the language itself. That's a good thing.
+I modsætning til beskyttede felter, er private felter tvunget af sproget selv. Det er en god ting.
 
-But if we inherit from `CoffeeMachine`, then we'll have no direct access to `#waterAmount`. We'll need to rely on `waterAmount` getter/setter:
+Men hvis vi arver fra `CoffeeMachine`, så har vi ingen direkte adgang til `#waterAmount`. Vi vil skulle stole på `waterAmount` getter/setter:
 
 ```js
 class MegaCoffeeMachine extends CoffeeMachine {
   method() {
 *!*
-    alert( this.#waterAmount ); // Error: can only access from CoffeeMachine
+    alert( this.#waterAmount ); // Fejl: kan kun tilgås fra CoffeeMachine
 */!*
   }
 }
 ```
 
-In many scenarios such limitation is too severe. If we extend a `CoffeeMachine`, we may have legitimate reasons to access its internals. That's why protected fields are used more often, even though they are not supported by the language syntax.
+I mange scenarier er denne begrænsning for streng. Hvis vi udvider en `CoffeeMachine`, kan vi have legitime grunde til at tilgå dens interne struktur. Det er derfor, beskyttede felter oftere bruges, selvom de ikke er understøttet af sproget.
 
-````warn header="Private fields are not available as this[name]"
-Private fields are special.
+````warn header="Private felter er ikke tilgængelige som this[name]"
+Private felter er specielle.
 
-As we know, usually we can access fields using `this[name]`:
+Som vi ved kan vi normalt tilgå felter ved hjælp af `this[name]`:
 
 ```js
 class User {
   ...
   sayHi() {
     let fieldName = "name";
-    alert(`Hello, ${*!*this[fieldName]*/!*}`);
+    alert(`Hej, ${*!*this[fieldName]*/!*}`);
   }
 }
 ```
 
-With private fields that's impossible: `this['#name']` doesn't work. That's a syntax limitation to ensure privacy.
+Med private felter er det umuligt: `this['#name']` virker ikke. Det er en syntaxbegrænsning for at sikre privatliv.
 ````
 
-## Summary
+## Opsummering
 
-In terms of OOP, delimiting of the internal interface from the external one is called [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)).
+I OOP sprog kaldes afgrænsningen af det interne interface fra det eksterne interface [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) (på dansk "indkapsling").
 
-It gives the following benefits:
+Det giver følgende fordele:
 
-Protection for users, so that they don't shoot themselves in the foot
-: Imagine, there's a team of developers using a coffee machine. It was made by the "Best CoffeeMachine" company, and works fine, but a protective cover was removed. So the internal interface is exposed.
+Beskyttelse for brugere, så de ikke skyder sig selv i foden
+: Forestil dig et team af udviklere der bruger en kaffemaskine. Den er lavet af firmaet "Best CoffeeMachine" og virker fint, men med beskyttelsescoveret fjernet så du kan se al indmaden.
 
-    All developers are civilized -- they use the coffee machine as intended. But one of them, John, decided that he's the smartest one, and made some tweaks in the coffee machine internals. So the coffee machine failed two days later.
+    Alle udviklere er civiliserede -- de bruger kaffemaskinen som beregnet. Men en af dem, John, besluttede at han var den smarteste af alle og lavede nogle justeringer i kaffemaskinens interne struktur. Så kaffemaskinen fejlede to dage senere.
 
-    That's surely not John's fault, but rather the person who removed the protective cover and let John do his manipulations.
+    Det er jo egentlig ikke Johns skyld, men snarere den person der fjernede det beskyttende cover og lod John gøre rode rundt i noget han ikke skulle have rørt ved.
 
-    The same in programming. If a user of a class will change things not intended to be changed from the outside -- the consequences are unpredictable.
+    Det samme gælder i programmering. Hvis en bruger af en klasse ændrer ting der ikke er beregnet til at blive ændret udefra er konsekvenserne uforudsigelige. Det skal vi prøve at undgå.
 
-Supportable
-: The situation in programming is more complex than with a real-life coffee machine, because we don't just buy it once. The code constantly undergoes development and improvement.
+Understøttelse for udvikling
+: Situationen i programmering er mere kompleks end med en virkelig kaffemaskine, fordi vi ikke bare køber den en gang. Koden undergår konstant udvikling og forbedring.
 
-    **If we strictly delimit the internal interface, then the developer of the class can freely change its internal properties and methods, even without informing the users.**
+    **Hvis vi strengt afgrænser det interne interface, kan udvikleren af klassen frit ændre dens interne egenskaber og metoder, selv uden at informere brugerne.**
 
-    If you're a developer of such class, it's great to know that private methods can be safely renamed, their parameters can be changed, and even removed, because no external code depends on them.
+    Hvis du er en udvikler af sådan en klasse, er det godt at vide, at private metoder kan ændres sikkert, deres parametre kan ændres, og de kan tilsidesættes, fordi ingen ekstern kode afhænger af dem.
 
-    For users, when a new version comes out, it may be a total overhaul internally, but still simple to upgrade if the external interface is the same.
+    Når en ny version udkommer kan den have undergået en total gennemrenovering internt, men stadig være simpel at opgradere fordi det eksterne inteface stadig er det samme.
 
-Hiding complexity
-: People adore using things that are simple. At least from outside. What's inside is a different thing.
+Skjult kompleksitet
+: Folk elsker simple ting. I det mindste udefra. Det der er indeni er en helt anden sag. Det kan være meget komplekst, og det er helt fint, så længe det ikke forstyrrer brugeren.
 
-    Programmers are not an exception.
+    Programmører er ingen undtagelse.
 
-    **It's always convenient when implementation details are hidden, and a simple, well-documented external interface is available.**
+    **Det er altid praktisk, når implementeringsdetaljer er skjulte, og et simpelt, godt dokumenteret eksternt interface er tilgængeligt.**
 
-To hide an internal interface we use either protected or private properties:
+For at skjule et internt interface bruger vi enten beskyttede eller private egenskaber:
 
-- Protected fields start with `_`. That's a well-known convention, not enforced at the language level. Programmers should only access a field starting with `_` from its class and classes inheriting from it.
-- Private fields start with `#`. JavaScript makes sure we can only access those from inside the class.
-
-Right now, private fields are not well-supported among browsers, but can be polyfilled.
+- Beskyttede felter starter med `_`. Det er en velkendt konvention, ikke pålagt på sprog niveau. Programmører bør kun tilgå et felt, der starter med `_` fra sin klasse og klasser, der nedarver fra den.
+- Private felter starter med `#`. JavaScript sikrer, at vi kun kan tilgå dem fra inde i klassen.
