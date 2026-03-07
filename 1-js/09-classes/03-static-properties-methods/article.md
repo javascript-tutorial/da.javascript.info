@@ -1,9 +1,9 @@
 
-# Static properties and methods
+# Statiske egenskaber og metoder
 
-We can also assign a method to the class as a whole. Such methods are called *static*.
+Vi kan også tildele en metode til selve klassen som sådan. Sådanne metoder kaldes *statiske metoder*.
 
-In a class declaration, they are prepended by `static` keyword, like this:
+ en klasse-deklaration er de præfikseret med `static` nøgleordet, som her:
 
 ```js run
 class User {
@@ -17,7 +17,7 @@ class User {
 User.staticMethod(); // true
 ```
 
-That actually does the same as assigning it as a property directly:
+Det gør faktisk det samme som at tildele det som en egenskab direkte:
 
 ```js run
 class User { }
@@ -29,13 +29,13 @@ User.staticMethod = function() {
 User.staticMethod(); // true
 ```
 
-The value of `this` in `User.staticMethod()` call is the class constructor `User` itself (the "object before dot" rule).
+Værdien af `this` i et `User.staticMethod()` kald er klassens konstruktør `User` selv ("objektet før punktum" reglen).
 
-Usually, static methods are used to implement functions that belong to the class as a whole, but not to any particular object of it.
+Normalt bruges statiske metoder til at implementere funktioner, der tilhører klassen som en helhed, men ikke et bestemt objekt af den.
 
-For instance, we have `Article` objects and need a function to compare them.
+For eksempel har vi `Article` objekter og har brug for en funktion til at sammenligne dem.
 
-A natural solution would be to add `Article.compare` static method:
+En naturlig løsning ville være at tilføje den statiske metode `Article.compare`, som kan sammenligne to artikler:
 
 ```js run
 class Article {
@@ -53,9 +53,9 @@ class Article {
 
 // usage
 let articles = [
-  new Article("HTML", new Date(2019, 1, 1)),
-  new Article("CSS", new Date(2019, 0, 1)),
-  new Article("JavaScript", new Date(2019, 11, 1))
+  new Article("HTML", new Date(2027, 1, 1)),
+  new Article("CSS", new Date(2027, 0, 1)),
+  new Article("JavaScript", new Date(2027, 11, 1))
 ];
 
 *!*
@@ -65,19 +65,19 @@ articles.sort(Article.compare);
 alert( articles[0].title ); // CSS
 ```
 
-Here `Article.compare` method stands "above" articles, as a means to compare them. It's not a method of an article, but rather of the whole class.
+Her vil metoden `Article.compare` stå "over" de enkelte artikler, som et middel til at sammenligne dem. Det er ikke en metode for den enkelte artikel, men mere en for hele klassen.
 
-Another example would be a so-called "factory" method.
+Et andet eksempel ville være en såkaldt "factory" metode.
 
-Let's say, we need multiple ways to create an article:
+Lad os sige, vi har brug for flere måder at oprette en artikel på:
 
-1. Create by given parameters (`title`, `date` etc).
-2. Create an empty article with today's date.
-3. ...or else somehow.
+1. Opret ved hjælp af givne parametre (`title`, `date` etc).
+2. Opret en tom artikel med dagens dato.
+3. ...eller noget helt tredje.
 
-The first way can be implemented by the constructor. And for the second one we can make a static method of the class.
+Den første måde kan implementeres ved hjælp af konstruktøren. Og for den anden måde kan vi lave en statisk metode for klassen.
 
-Such as `Article.createTodays()` here:
+Sådan som `Article.createTodays()` her:
 
 ```js run
 class Article {
@@ -88,43 +88,43 @@ class Article {
 
 *!*
   static createTodays() {
-    // remember, this = Article
-    return new this("Today's digest", new Date());
+    // husk, this = Article
+    return new this("Dagens sammendrag", new Date());
   }
 */!*
 }
 
 let article = Article.createTodays();
 
-alert( article.title ); // Today's digest
+alert( article.title ); // Dagens sammendrag
 ```
 
-Now every time we need to create a today's digest, we can call `Article.createTodays()`. Once again, that's not a method of an article, but a method of the whole class.
+Nu, hver gang vi vil oprette en dagens sammendrag, kan vi kalde `Article.createTodays()`. Igen, det er ikke en metode for den enkelte artikel, men en metode for hele klassen.
 
-Static methods are also used in database-related classes to search/save/remove entries from the database, like this:
+Statiske metoder bruges også i database-relaterede klasser til at søge/gemme/fjerne indlæg fra databasen, som dette:
 
 ```js
-// assuming Article is a special class for managing articles
-// static method to remove the article by id:
+// forudsat at Article er en speciel klasse til at håndtere artikler
+// statisk metode til at fjerne artiklen ved hjælp af id:
 Article.remove({id: 12345});
 ```
 
-````warn header="Static methods aren't available for individual objects"
-Static methods are callable on classes, not on individual objects.
+````warn header="Statiske metoder er ikke tilgængelige for individuelle objekter"
+Statiske metoder kan kun kaldes på klasser, ikke på individuelle objekter.
 
-E.g. such code won't work:
+F.eks. vil følgende kode ikke virke, fordi `createTodays` er en statisk metode og ikke findes på det enkelte artikelobjekt:
 
 ```js
 // ...
-article.createTodays(); /// Error: article.createTodays is not a function
+article.createTodays(); /// Fejl: article.createTodays is not a function
 ```
 ````
 
-## Static properties
+## Statiske egenskaber
 
 [recent browser=Chrome]
 
-Static properties are also possible, they look like regular class properties, but prepended by `static`:
+Statiske egenskaber er også mulige, de ser ud som normale klasseegenskaber, men er præfikseret med `static`:
 
 ```js run
 class Article {
@@ -134,21 +134,21 @@ class Article {
 alert( Article.publisher ); // Ilya Kantor
 ```
 
-That is the same as a direct assignment to `Article`:
+Dette er det samme som en direkte tildeling til `Article`:
 
 ```js
 Article.publisher = "Ilya Kantor";
 ```
 
-## Inheritance of static properties and methods [#statics-and-inheritance]
+## Nedarvning af statiske egenskaber og metoder [#statics-and-inheritance]
 
-Static properties and methods are inherited.
+Statiske egenskaber og metoder nedarves.
 
-For instance, `Animal.compare` and `Animal.planet` in the code below are inherited and accessible as `Rabbit.compare` and `Rabbit.planet`:
+For eksempel, `Animal.compare` og `Animal.planet` i koden nedenfor nedarves og er tilgængelige som `Rabbit.compare` og `Rabbit.planet`:
 
 ```js run
 class Animal {
-  static planet = "Earth";
+  static planet = "Jorden";
 
   constructor(name, speed) {
     this.speed = speed;
@@ -157,7 +157,7 @@ class Animal {
 
   run(speed = 0) {
     this.speed += speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} løber ${this.speed} km/t.`);
   }
 
 *!*
@@ -168,64 +168,64 @@ class Animal {
 
 }
 
-// Inherit from Animal
+// Nedarver fra Animal
 class Rabbit extends Animal {
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} skjuler sig!`);
   }
 }
 
 let rabbits = [
-  new Rabbit("White Rabbit", 10),
-  new Rabbit("Black Rabbit", 5)
+  new Rabbit("Hvid kanin", 10),
+  new Rabbit("Sort kanin", 5)
 ];
 
 *!*
 rabbits.sort(Rabbit.compare);
 */!*
 
-rabbits[0].run(); // Black Rabbit runs with speed 5.
+rabbits[0].run(); // Sort kanin løber 5 km/t.
 
-alert(Rabbit.planet); // Earth
+alert(Rabbit.planet); // Jorden
 ```
 
-Now when we call `Rabbit.compare`, the inherited `Animal.compare` will be called.
+Nu, når vi kalder `Rabbit.compare` vil `Animal.compare` blive kaldt.
 
-How does it work? Again, using prototypes. As you might have already guessed, `extends` gives `Rabbit` the `[[Prototype]]` reference to `Animal`.
+Hvordan virker det? Igen, ved hjælp af prototyper. Som du nok har gættet så vil `extends` pege `Rabbit` referencen `[[Prototype]]` til `Animal`.
 
 ![](animal-rabbit-static.svg)
 
-So, `Rabbit extends Animal` creates two `[[Prototype]]` references:
+Så, `Rabbit extends Animal` opretter to `[[Prototype]]` referencer:
 
-1. `Rabbit` function prototypally inherits from `Animal` function.
-2. `Rabbit.prototype` prototypally inherits from `Animal.prototype`.
+1. `Rabbit` funktioner nedarver via prototype fra `Animal` funktioner.
+2. `Rabbit.prototype` nedarver via prototype fra `Animal.prototype`.
 
-As a result, inheritance works both for regular and static methods.
+Som resultat virker nedarvning både for normale og statiske metoder.
 
-Here, let's check that by code:
+Lad os tjekke det med kode:
 
 ```js run
 class Animal {}
 class Rabbit extends Animal {}
 
-// for statics
+// for statiske metoder
 alert(Rabbit.__proto__ === Animal); // true
 
-// for regular methods
+// for regulære metoder
 alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
 ```
 
-## Summary
+## Opsummering
 
-Static methods are used for the functionality that belongs to the class "as a whole". It doesn't relate to a concrete class instance.
+Statiske metoder bruges til funktionalit, der hører til klassen "som en helhed". Det relaterer sig ikke til en konkrete klasseinstans.
 
-For example, a method for comparison `Article.compare(article1, article2)` or a factory method `Article.createTodays()`.
+For eksempel, en metode til sammenligning `Article.compare(article1, article2)` eller en factory-metode `Article.createTodays()`.
 
-They are labeled by the word `static` in class declaration.
+De er mærket med ordet `static` i klassedeklarationen.
 
-Static properties are used when we'd like to store class-level data, also not bound to an instance.
+Statiske egenskaber bruges, når vi vil gemme data på klasseniveau, som ikke er bundet til en instans.
 
-The syntax is:
+Syntaksen er den samme for både statiske metoder og egenskaber:
 
 ```js
 class MyClass {
@@ -237,13 +237,13 @@ class MyClass {
 }
 ```
 
-Technically, static declaration is the same as assigning to the class itself:
+Teknisk set er en statisk deklaration det samme som at tildele til selve klassen:
 
 ```js
 MyClass.property = ...
 MyClass.method = ...
 ```
 
-Static properties and methods are inherited.
+Statiske egenskaber og metoder nedarves.
 
-For `class B extends A` the prototype of the class `B` itself points to `A`: `B.[[Prototype]] = A`. So if a field is not found in `B`, the search continues in `A`.
+For `class B extends A` vil prototypen af klassen `B` selv pege på `A`: `B.[[Prototype]] = A`. Så hvis et felt ikke findes i `B`, søges der videre i `A`.
