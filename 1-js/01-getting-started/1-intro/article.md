@@ -72,8 +72,13 @@ Eksempler på sådanne begrænsninger er bl.a:
 
     Dette kaldes "Same Origin Policy" (politik om samme oprindelse). For at omgå dette skal *begge sider* være enige om dataudveksling og skal indeholde særlig JavaScript-kode, der håndterer det. Vi vil dække det i tutorialen.
 
+<<<<<<< HEAD
     Denne begrænsning er, igen, for brugerens sikkerhed. En side fra `http://anysite.com`, som en bruger har åbnet, må ikke kunne få adgang til en anden browserfane med URL-adressen `http://gmail.com`, f.eks. og stjæle oplysninger derfra.
 - JavaScript kan nemt kommunikere over nettet til den server, hvor den aktuelle side kom fra. Men dets evne til at modtage data fra andre websteder/domæner er begrænset. Selv om det er muligt, kræver det en udtrykkelig tilladelse (udtrykt i HTTP-headers) fra den eksterne side. Endnu en gang er det en sikkerhedsbegrænsning.
+=======
+    This limitation is, again, for the user's safety. A page from `http://anysite.com` which a user has opened must not be able to access another browser tab with the URL `http://gmail.com`, for example, and steal information from there.
+- JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is severely limited. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that's a safety limitation.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ![](limitations.svg)
 
