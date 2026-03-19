@@ -1,12 +1,11 @@
+# Udvid indbyggede klasser
 
-# Extending built-in classes
+Indbyggede klasser som Array, Map kan også udvides.
 
-Built-in classes like Array, Map and others are extendable also.
-
-For instance, here `PowerArray` inherits from the native `Array`:
+I dette eksempel, arver `PowerArray` fra den indbyggede `Array`:
 
 ```js run
-// add one more method to it (can do more)
+// tilføj en ekstra metode til den (nu kan den lidt mere)
 class PowerArray extends Array {
   isEmpty() {
     return this.length === 0;
@@ -21,20 +20,21 @@ alert(filteredArr); // 10, 50
 alert(filteredArr.isEmpty()); // false
 ```
 
-Please note a very interesting thing. Built-in methods like `filter`, `map` and others -- return new objects of exactly the inherited type `PowerArray`. Their internal implementation uses the object's `constructor` property for that.
+Bemærk noget interessant. Indbyggede metoder som `filter`, `map` og andre -- returnerer nye objekter af præcis den arvede type `PowerArray`. Deres interne implementering bruger objektets `constructor`-egenskab til det.
 
-In the example above,
+I eksemplet ovenfor,
+
 ```js
 arr.constructor === PowerArray
 ```
 
-When `arr.filter()` is called, it internally creates the new array of results using exactly `arr.constructor`, not basic `Array`. That's actually very cool, because we can keep using `PowerArray` methods further on the result.
+Når `arr.filter()` kaldes, vil den internt oprette det nye array af resultater ved hjælp af denne `arr.constructor`, ikke fra den underliggende `Array`. Det er praktisk, fordi vi kan fortsætte med at bruge `PowerArray`-metoderne på yderligere oprettede objekter.
 
-Even more, we can customize that behavior.
+Vi kan også tilpasse adfærden.
 
-We can add a special static getter `Symbol.species` to the class. If it exists, it should return the constructor that JavaScript will use internally to create new entities in `map`, `filter` and so on.
+Vi kan tilføje en speciel statisk getter `Symbol.species` til klassen. Hvis den eksisterer, skal den returnere konstruktøren, som JavaScript vil bruge internt til at oprette nye entiteter i `map`, `filter` og så videre.
 
-If we'd like built-in methods like `map` or `filter` to return regular arrays, we can return `Array` in `Symbol.species`, like here:
+Hvis vi gerne vil have, at indbyggede metoder som `map` eller `filter` skal returnere almindelige arrays, kan vi returnere `Array` i `Symbol.species`, som her:
 
 ```js run
 class PowerArray extends Array {
@@ -43,7 +43,7 @@ class PowerArray extends Array {
   }
 
 *!*
-  // built-in methods will use this as the constructor
+  // indyggede metoder vil bruge denne som konstruktør
   static get [Symbol.species]() {
     return Array;
   }
@@ -53,37 +53,37 @@ class PowerArray extends Array {
 let arr = new PowerArray(1, 2, 5, 10, 50);
 alert(arr.isEmpty()); // false
 
-// filter creates new array using arr.constructor[Symbol.species] as constructor
+// filter opretter nyt array ved hjælp af arr.constructor[Symbol.species] som konstruktør
 let filteredArr = arr.filter(item => item >= 10);
 
 *!*
-// filteredArr is not PowerArray, but Array
+// filteredArr er ikke PowerArray, men Array
 */!*
 alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
 ```
 
-As you can see, now `.filter` returns `Array`. So the extended functionality is not passed any further.
+Som det ses vil `.filter` nu returnere `Array`. Så den udvidede funktionalitet bliver ikke videregivet.
 
-```smart header="Other collections work similarly"
-Other collections, such as `Map` and `Set`, work alike. They also use `Symbol.species`.
+```smart header="Andre samlinger arbejder på samme måde"
+Andre samlinger, såsom `Map` og `Set`, arbejder på samme måde. De bruger også `Symbol.species`.
 ```
 
-## No static inheritance in built-ins
+## Ingen statisk nedarvning i indbyggede objekter
 
-Built-in objects have their own static methods, for instance `Object.keys`, `Array.isArray` etc.
+Indbyggede objekter har deres egne statiske metoder, for eksempel `Object.keys`, `Array.isArray` etc.
 
-As we already know, native classes extend each other. For instance, `Array` extends `Object`.
+Som vi allerede ved så udvider indbyggede klasser hinanden. For eksempel, `Array` udvider `Object`.
 
-Normally, when one class extends another, both static and non-static methods are inherited. That was thoroughly explained in the article [](info:static-properties-methods#statics-and-inheritance).
+Normalt, når en klasse udvider en anden, arves både statiske og ikke-statiske metoder. Dette blev grundigt forklaret i artiklen [](info:static-properties-methods#statics-and-inheritance).
 
-But built-in classes are an exception. They don't inherit statics from each other.
+Men indbyggede klasser er en undtagelse. De arver ikke statiske metoder fra hinanden.
 
-For example, both `Array` and `Date` inherit from `Object`, so their instances have methods from `Object.prototype`. But `Array.[[Prototype]]` does not reference `Object`, so there's no, for instance, `Array.keys()` (or `Date.keys()`) static method.
+For eksempel nedarver både `Array` og `Date` fra `Object`, så deres instanser har metoder fra `Object.prototype`. Men `Array.[[Prototype]]` refererer ikke til `Object`, så der er ingen, for eksempel, `Array.keys()` (eller `Date.keys()`) statisk metode.
 
-Here's the picture structure for `Date` and `Object`:
+Her er billedet for `Date` og `Object`:
 
 ![](object-date-inheritance.svg)
 
-As you can see, there's no link between `Date` and `Object`. They are independent, only `Date.prototype` inherits from `Object.prototype`.
+Som du ser her er der ingen sammenhæng mellem `Date` og `Object`. De er uafhængige, kun `Date.prototype` arver fra `Object.prototype`.
 
-That's an important difference of inheritance between built-in objects compared to what we get with `extends`.
+Det er en vigtig forskel i arv mellem indbyggede objekter og hvad vi får med `extends`.
