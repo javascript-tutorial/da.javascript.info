@@ -4,35 +4,35 @@ importance: 5
 
 # Finally or just the code?
 
-Compare the two code fragments.
+Sammenlign disse to kodefragmenter.
 
-1. The first one uses `finally` to execute the code after `try...catch`:
+1. Den første bruger `finally` til at køre koden efter `try...catch`:
 
     ```js
     try {
-      work work
+      arbejd' arbejd'
     } catch (err) {
-      handle errors
+      håndter fejl
     } finally {
     *!*
-      cleanup the working space
+      ryd op på arbejdspladsen
     */!*
     }
     ```
-2. The second fragment puts the cleaning right after `try...catch`:
+2. Den anden placerer oprydningen lige efter `try...catch`:
 
     ```js
     try {
-      work work
+      arbejd' arbejd'
     } catch (err) {
-      handle errors
+      håndter fejl
     }
 
     *!*
-    cleanup the working space
+    ryd op på arbejdspladsen
     */!*
     ```
 
-We definitely need the cleanup after the work, doesn't matter if there was an error or not.
+Vi skal selvfølgelig have oprydningen efter arbejdet, uanset om der var en fejl eller ej.
 
-Is there an advantage here in using `finally` or both code fragments are equal? If there is such an advantage, then give an example when it matters.
+Er der en fordel i at bruge `finally` eller er de to kodefragmenter ens? Hvis der er en sådan fordel, så giv et eksempel på, når det betyder noget.

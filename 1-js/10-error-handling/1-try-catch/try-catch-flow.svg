@@ -1,1 +1,91 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="514" height="411" viewBox="0 0 514 411"><defs><style>@import url(https://fonts.googleapis.com/css?family=Open+Sans:bold,italic,bolditalic%7CPT+Mono);@font-face{font-family:&apos;PT Mono&apos;;font-weight:700;font-style:normal;src:local(&apos;PT MonoBold&apos;),url(/font/PTMonoBold.woff2) format(&apos;woff2&apos;),url(/font/PTMonoBold.woff) format(&apos;woff&apos;),url(/font/PTMonoBold.ttf) format(&apos;truetype&apos;)}</style></defs><g id="combined" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g id="try-catch-flow.svg"><g id="Rectangle-1-+-Корень" transform="translate(207 4)"><rect id="Rectangle-1" width="78" height="28" x="1" y="1" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" rx="14"/><text id="Begin" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="21" y="20">Begin</tspan></text></g><path id="Line" fill="#C06334" fill-rule="nonzero" d="M249 34v23.049l8 .001-9.5 19-9.5-19 8-.001V34h3z"/><path id="Line-Copy" fill="#C06334" fill-rule="nonzero" d="M399 297v23.049l8 .001-9.5 19-9.5-19 8-.001V297h3z"/><path id="Path-1218" fill="#C06334" fill-rule="nonzero" d="M158.5 131.5v3h-59v85h8l-9.5 19-9.5-19h8v-88h62z"/><path id="Path-1218-Copy" fill="#C06334" fill-rule="nonzero" d="M400.5 131.5l-.001 88h8.001l-9.5 19-9.5-19h7.999v-85H315.5v-3h85z"/><g id="Rectangle-354-+-Каково-“официальное”" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" transform="translate(154 81)"><path id="Rectangle-354" d="M93.61 1.144L185.161 52l-91.55 50.856L2.058 52 93.61 1.144z"/></g><g id="Rectangle-356-+-Отмена" transform="translate(59 177)"><path id="Rectangle-356" fill="#FFF" d="M0 2h60v20H0z"/><text id="No-Errors" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="7.5" y="15">No Errors</tspan></text></g><g id="Rectangle-356-Copy-+-“Админ”" transform="translate(303 176)"><path id="Rectangle-356-Copy" fill="#FFF" d="M65 2h60v20H65z"/><text id="An-error-occured-in" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x=".652" y="15">An error occured in the code</tspan></text></g><rect id="Rectangle-1-Copy-2" width="214" height="49" x="292" y="349" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" rx="24.5"/><rect id="Rectangle-1" width="195" height="49" x="1" y="244" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" rx="24.5"/><rect id="Rectangle-1-Copy" width="216" height="49" x="290" y="244" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" rx="24.5"/><text id="Ignore-catch-block" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="39" y="272">Ignore catch block</tspan></text><text id="Ignore-the-rest-of-t" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="332" y="272">Ignore the rest of try</tspan></text><text id="Execute-catch-block" fill="#AF6E24" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal"><tspan x="333" y="379">Execute catch block</tspan></text><text id="try-{-}" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="218" y="117">try {</tspan>    <tspan x="218" y="157">}</tspan></text><text id="//-code..." fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal"><tspan x="232" y="138">// code...</tspan></text></g></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 514 411">
+  <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #fff;
+      }
+
+      .st0, .st1 {
+        fill-rule: evenodd;
+      }
+
+      .st1 {
+        fill: #fbf2ec;
+        stroke: #dbaf88;
+        stroke-width: 2px;
+      }
+
+      .st2, .st3, .st4 {
+        isolation: isolate;
+      }
+
+      .st3, .st5 {
+        font-family: PTMono-Regular, 'PT Mono';
+      }
+
+      .st3, .st5, .st4 {
+        fill: #af6e24;
+        font-size: 14px;
+      }
+
+      .st6 {
+        fill: #c06334;
+      }
+
+      .st4 {
+        font-family: OpenSans, 'Open Sans';
+      }
+    </style>
+  </defs>
+  <g id="combined">
+    <g id="try-catch-flow.svg">
+      <g id="Rectangle-1-_x2B_-Корень">
+        <path id="Rectangle-1" class="st1" d="M222,5h50c7.73,0,14,6.27,14,14h0c0,7.73-6.27,14-14,14h-50c-7.73,0-14-6.27-14-14h0c0-7.73,6.27-14,14-14Z"/>
+        <g id="Begin" class="st2">
+          <text class="st4" transform="translate(228 24)"><tspan x="0" y="0">Start</tspan></text>
+        </g>
+      </g>
+      <path id="Line" class="st6" d="M249,34v23.05h8s-9.5,19-9.5,19l-9.5-19h8v-23.05h3Z"/>
+      <path id="Line-Copy" class="st6" d="M399,297v23.05h8s-9.5,19-9.5,19l-9.5-19h8v-23.05h3Z"/>
+      <path id="Path-1218" class="st6" d="M158.5,131.5v3h-59v85h8l-9.5,19-9.5-19h8v-88h62Z"/>
+      <path id="Path-1218-Copy" class="st6" d="M400.5,131.5v88s8,0,8,0l-9.5,19-9.5-19h8v-85h-82v-3h85Z"/>
+      <g id="Rectangle-354-_x2B_-Каково-_x201C_официальное_x201D_">
+        <path id="Rectangle-354" class="st1" d="M247.61,82.14l91.55,50.86-91.55,50.86-91.55-50.86,91.55-50.86Z"/>
+      </g>
+      <g id="Rectangle-356-_x2B_-Отмена">
+        <path id="Rectangle-356" class="st0" d="M59,179h60v20h-60v-20Z"/>
+        <g id="No-Errors" class="st2">
+          <text class="st4" transform="translate(66.5 192)"><tspan x="0" y="0">Ingen fejl</tspan></text>
+        </g>
+      </g>
+      <g id="Rectangle-356-Copy-_x2B_-_x201C_Админ_x201D_">
+        <path id="Rectangle-356-Copy" class="st0" d="M368,178h60v20h-60v-20Z"/>
+        <g id="An-error-occured-in" class="st2">
+          <text class="st4" transform="translate(330.65 191)"><tspan x="0" y="0">En fejl skete i koden</tspan></text>
+        </g>
+      </g>
+      <path id="Rectangle-1-Copy-2" class="st1" d="M316.5,349h165c13.53,0,24.5,10.97,24.5,24.5h0c0,13.53-10.97,24.5-24.5,24.5h-165c-13.53,0-24.5-10.97-24.5-24.5h0c0-13.53,10.97-24.5,24.5-24.5Z"/>
+      <path id="Rectangle-11" data-name="Rectangle-1" class="st1" d="M25.5,244h146c13.53,0,24.5,10.97,24.5,24.5h0c0,13.53-10.97,24.5-24.5,24.5H25.5c-13.53,0-24.5-10.97-24.5-24.5h0c0-13.53,10.97-24.5,24.5-24.5Z"/>
+      <path id="Rectangle-1-Copy" class="st1" d="M314.5,244h167c13.53,0,24.5,10.97,24.5,24.5h0c0,13.53-10.97,24.5-24.5,24.5h-167c-13.53,0-24.5-10.97-24.5-24.5h0c0-13.53,10.97-24.5,24.5-24.5Z"/>
+      <g id="Ignore-catch-block" class="st2">
+        <text class="st4" transform="translate(39 272)"><tspan x="0" y="0">Ignorer catch blok</tspan></text>
+      </g>
+      <g id="Ignore-the-rest-of-t" class="st2">
+        <text class="st4" transform="translate(332 272)"><tspan x="0" y="0">Ignorer resten af try</tspan></text>
+      </g>
+      <g id="Execute-catch-block" class="st2">
+        <text class="st4" transform="translate(326 379)"><tspan x="0" y="0">Eksekver catch blokken</tspan></text>
+      </g>
+      <g id="try-_x7B_-_x7D_" class="st2">
+        <text class="st3" transform="translate(218 117)"><tspan x="0" y="0">try {</tspan></text>
+        <text class="st5" transform="translate(260 117)"><tspan x="0" y="0"> </tspan></text>
+        <text class="st3" transform="translate(218 157)"><tspan x="0" y="0">}</tspan></text>
+      </g>
+      <g id="_x2F__x2F_-code..." class="st2">
+        <text class="st3" transform="translate(232 138)"><tspan x="0" y="0">// code...</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
