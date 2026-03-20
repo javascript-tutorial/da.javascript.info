@@ -2,21 +2,21 @@ importance: 5
 
 ---
 
-# Inherit from SyntaxError
+# Nedarv fra SyntaxError
 
-Create a class `FormatError` that inherits from the built-in `SyntaxError` class.
+Opret en klasse `FormatError` som nedarver fra den indbyggede `SyntaxError`-klasse.
 
-It should support `message`, `name` and `stack` properties.
+Den bør understøtte `message`, `name` og `stack` egenskaber.
 
-Usage example:
+Brugseksempel:
 
 ```js
-let err = new FormatError("formatting error");
+let err = new FormatError("formatteringsfejl");
 
-alert( err.message ); // formatting error
+alert( err.message ); // formatteringsfejl
 alert( err.name ); // FormatError
 alert( err.stack ); // stack
 
 alert( err instanceof FormatError ); // true
-alert( err instanceof SyntaxError ); // true (because inherits from SyntaxError)
+alert( err instanceof SyntaxError ); // true (fordi den nedarver fra SyntaxError)
 ```
