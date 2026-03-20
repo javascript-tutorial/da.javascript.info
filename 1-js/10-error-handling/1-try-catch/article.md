@@ -1,98 +1,98 @@
-# Error handling, "try...catch"
+# Håndtering af fejl, "try...catch"
 
-No matter how great we are at programming, sometimes our scripts have errors. They may occur because of our mistakes, an unexpected user input, an erroneous server response, and for a thousand other reasons.
+Uanset hvor gode vi er til programmering, så har vores scripts periodisk fejl. De kan opstå på grund af vores fejl, et uventet brugerinput, et fejlbehæftet server svar, og for tusind andre grunde.
 
-Usually, a script "dies" (immediately stops) in case of an error, printing it to console.
+Normalt dør et script (stoppes øjeblikkeligt) når en fejl opstår, og fejlen udskrives til konsollen.
 
-But there's a syntax construct `try...catch` that allows us to "catch" errors so the script can, instead of dying, do something more reasonable.
+Men der er en konstruktion `try...catch` som tillader os at "fange" fejl, så scriptet kan gøre noget mere fornuftigt end at dø.
 
-## The "try...catch" syntax
+## Syntaksen "try...catch"
 
-The `try...catch` construct has two main blocks: `try`, and then `catch`:
+Konstruktionen `try...catch` har to hovedblokke: `try`, og derefter `catch`:
 
 ```js
 try {
 
-  // code...
+  // kode...
 
 } catch (err) {
 
-  // error handling
+  // fejlhåndtering
 
 }
 ```
 
-It works like this:
+Det virker sådan:
 
-1. First, the code in `try {...}` is executed.
-2. If there were no errors, then `catch (err)` is ignored: the execution reaches the end of `try` and goes on, skipping `catch`.
-3. If an error occurs, then the `try` execution is stopped, and control flows to the beginning of `catch (err)`. The `err` variable (we can use any name for it) will contain an error object with details about what happened.
+1. Først vil koden i `try {...}` blive kørt.
+2. Hvis der ikke er nogen fejl, så ignoreres `catch (err)`: eksekveringen når til slutningen af `try` og går videre, springer over `catch`.
+3. Hvis en fejl opstår, så stoppes `try`-eksekveringen, og kontrol flyttes til begyndelsen af `catch (err)`. Den `err`-variabel (vi kan bruge et hvilket som helst navn) vil indeholde et fejlobjekt med detaljer om, hvad der skete.
 
 ![](try-catch-flow.svg)
 
-So, an error inside the `try {...}` block does not kill the script -- we have a chance to handle it in `catch`.
+Så, hvis der sker en fejl inde i `try {...}` blokken, så dør scriptet ikke -- vi har en chance til at håndtere den i `catch`.
 
-Let's look at some examples.
+Lad os se på et par eksempler.
 
-- An errorless example: shows `alert` `(1)` and `(2)`:
+- Et eksempel uden fejl: viser `alert` `(1)` og `(2)`:
 
     ```js run
     try {
 
-      alert('Start of try runs');  // *!*(1) <--*/!*
+      alert('Start på "try runs"');  // *!*(1) <--*/!*
 
-      // ...no errors here
+      // ...ingen fejl her
 
-      alert('End of try runs');   // *!*(2) <--*/!*
+      alert('Slut på "try runs"');   // *!*(2) <--*/!*
 
     } catch (err) {
 
-      alert('Catch is ignored, because there are no errors'); // (3)
+      alert('Catch ignoreres fordi der ikke var fejl'); // (3)
 
     }
     ```
-- An example with an error: shows `(1)` and `(3)`:
+- Et eksempel med en fejl: viser `(1)` og `(3)`:
 
     ```js run
     try {
 
-      alert('Start of try runs');  // *!*(1) <--*/!*
+      alert('Start på "try runs"');  // *!*(1) <--*/!*
 
     *!*
-      lalala; // error, variable is not defined!
+      lalala; // fejl, variable is not defined!
     */!*
 
-      alert('End of try (never reached)');  // (2)
+      alert('Slut på "try runs"');  // (2)
 
     } catch (err) {
 
-      alert(`Error has occurred!`); // *!*(3) <--*/!*
+      alert(`Der skete en fejl!`); // *!*(3) <--*/!*
 
     }
     ```
 
 
-````warn header="`try...catch` only works for runtime errors"
-For `try...catch` to work, the code must be runnable. In other words, it should be valid JavaScript.
+````warn header="`try...catch` virker kun for runtime errors"
+For at `try...catch` skal virke skal koden kunne køre. Med anre ord skal det være gyldig (valid) JavaScript.
 
-It won't work if the code is syntactically wrong, for instance it has unmatched curly braces:
+Den virker ikke hvis syntaksen er forkert. For eksempel hvis der er rod med parenteser:
 
 ```js run
 try {
   {{{{{{{{{{{{
 } catch (err) {
-  alert("The engine can't understand this code, it's invalid");
+  alert("Motoren forstår ikke denne kode, den er ugyldig");
 }
 ```
 
-The JavaScript engine first reads the code, and then runs it. The errors that occur on the reading phase are called "parse-time" errors and are unrecoverable (from inside that code). That's because the engine can't understand the code.
+JavaScript-motoren læser koden først, og derefter kører den. De fejl, der opstår under læsningen, kaldes "parse-time" fejl og er unrecoverable (fra inde i koden). Det er fordi motoren ikke kan forstå koden.
 
-So, `try...catch` can only handle errors that occur in valid code. Such errors are called "runtime errors" or, sometimes, "exceptions".
-````
+Så, `try...catch` kan kun håndtere fejl, der opstår i gyldig kode. Sådanne fejl kaldes "runtime errors" eller, nogle gange, "exceptions".
+```
 
 
-````warn header="`try...catch` works synchronously"
-If an exception happens in "scheduled" code, like in `setTimeout`, then `try...catch` won't catch it:
+````warn header="`try...catch` virker synkront"
+Hvis en exception opstår i "planlagt" kode, som i `setTimeout`, så vil `try...catch` ikke fange den:
 
 ```js run
 try {
@@ -100,112 +100,112 @@ try {
     noSuchVariable; // script will die here
   }, 1000);
 } catch (err) {
-  alert( "won't work" );
+  alert( "det her virker ikke" );
 }
 ```
 
-That's because the function itself is executed later, when the engine has already left the `try...catch` construct.
+Det er fordi at selve funktionen først afvikles senere - det har motoren allerede forladt `try...catch` konstruktionen.
 
-To catch an exception inside a scheduled function, `try...catch` must be inside that function:
+For at fange en exception inde i en planlagt funktion, skal `try...catch` være inde i selve funktionen:
 ```js run
 setTimeout(function() {
   try {    
-    noSuchVariable; // try...catch handles the error!
+    noSuchVariable; // try...catch håndterer fejlen!
   } catch {
-    alert( "error is caught here!" );
+    alert( "fejlen fanges her!" );
   }
 }, 1000);
 ```
 ````
 
-## Error object
+## Error objekt
 
-When an error occurs, JavaScript generates an object containing the details about it. The object is then passed as an argument to `catch`:
+Når der opstår en fejl, genererer JavaScript et objekt, der indeholder detaljerne om fejlen. Objektet sendes derefter som et argument til `catch`:
 
 ```js
 try {
   // ...
-} catch (err) { // <-- the "error object", could use another word instead of err
+} catch (err) { // <-- her er "error objektet", du kan sagtens bruge et andet navn istedet for err
   // ...
 }
 ```
 
-For all built-in errors, the error object has two main properties:
+For alle indbyggede fejl har error objektet to hovedegenskaber:
 
 `name`
-: Error name. For instance, for an undefined variable that's `"ReferenceError"`.
+: Navnet på fejlen. Hvis det for eksempel er en ikke-defineret variabel, så indeholder den `"ReferenceError"`.
 
 `message`
-: Textual message about error details.
+: En tekst der beskriver fejlen.
 
-There are other non-standard properties available in most environments. One of most widely used and supported is:
+Der er andre ikke-standard egenskaber tilgængelige i de fleste miljøer. En af de mest brugte og understøttede er:
 
 `stack`
-: Current call stack: a string with information about the sequence of nested calls that led to the error. Used for debugging purposes.
+: Aktuel kaldestak: en streng med information om sekvensen af indlejrede kald, der ledte til fejlen. Bruges til fejlfinding.
 
-For instance:
+For eksempel:
 
 ```js run untrusted
 try {
 *!*
-  lalala; // error, variable is not defined!
+  lalala; // fejl, variablen er ikke defineret!
 */!*
 } catch (err) {
   alert(err.name); // ReferenceError
   alert(err.message); // lalala is not defined
   alert(err.stack); // ReferenceError: lalala is not defined at (...call stack)
 
-  // Can also show an error as a whole
-  // The error is converted to string as "name: message"
+  // Kan også vise en fejl som et samlet output
+  // Fejlen konverteres til en streng som "name: message"
   alert(err); // ReferenceError: lalala is not defined
 }
 ```
 
-## Optional "catch" binding
+## Frivillig "catch" binding
 
 [recent browser=new]
 
-If we don't need error details, `catch` may omit it:
+Hvis vi ikke behøver detaljer om fejlen, kan `catch` udelade den:
 
 ```js
 try {
   // ...
-} catch { // <-- without (err)
+} catch { // <-- uden (err)
   // ...
 }
 ```
 
-## Using "try...catch"
+## Brug af "try...catch"
 
-Let's explore a real-life use case of `try...catch`.
+Lad os udforske brugsscenarier for `try...catch`.
 
-As we already know, JavaScript supports the [JSON.parse(str)](mdn:js/JSON/parse) method to read JSON-encoded values.
+Som vi allerede ved så understøtter JavaScript metoden [JSON.parse(str)](mdn:js/JSON/parse) til at læse JSON værdier.
 
-Usually it's used to decode data received over the network, from the server or another source.
+Normalt bruges den til at afkode data der er modtaget over netværket, fra serveren eller anden kilde.
 
-We receive it and call `JSON.parse` like this:
+Vi modtager det og kalder `JSON.parse` sådan her:
 
 ```js run
 let json = '{"name":"John", "age": 30}'; // data from the server
 
 *!*
-let user = JSON.parse(json); // convert the text representation to JS object
+let user = JSON.parse(json); // konverterer tekstrepræsentation til JS-objekt
 */!*
 
-// now user is an object with properties from the string
+// nu er user et objekt med egenskaber fra strengen
 alert( user.name ); // John
 alert( user.age );  // 30
 ```
 
-You can find more detailed information about JSON in the <info:json> chapter.
+Du kan finde mere detaljeret information om JSON i kapitlet <info:json>.
 
-**If `json` is malformed, `JSON.parse` generates an error, so the script "dies".**
+**Hvis `json` indeholder fejl vil `JSON.parse` generere en fejl, så scriptet "dør".**
 
-Should we be satisfied with that? Of course not!
+Skal vi stille os tilfreds med det? Nej, selvfølgelig ikke!
 
-This way, if something's wrong with the data, the visitor will never know that (unless they open the developer console). And people really don't like when something "just dies" without any error message.
+På denne måde, hvis der er noget galt med data, vil besøgende aldrig vide det (medmindre de åbner konsollen). Og folk kan ikke li', når noget "bare dør" uden nogen fejlbesked.
 
-Let's use `try...catch` to handle the error:
+Lad os bruge `try...catch` til at håndtere fejlen:
 
 ```js run
 let json = "{ bad json }";
@@ -213,74 +213,74 @@ let json = "{ bad json }";
 try {
 
 *!*
-  let user = JSON.parse(json); // <-- when an error occurs...
+  let user = JSON.parse(json); // <-- når en fejl opstår...
 */!*
-  alert( user.name ); // doesn't work
+  alert( user.name ); // virker ikke
 
 } catch (err) {
 *!*
-  // ...the execution jumps here
-  alert( "Our apologies, the data has errors, we'll try to request it one more time." );
+  // ...hopper afviklingen her til
+  alert( "Desværre indeholder vores data fejl, vi vil forsøge at anmode om den en gang til." );
   alert( err.name );
   alert( err.message );
 */!*
 }
 ```
 
-Here we use the `catch` block only to show the message, but we can do much more: send a new network request, suggest an alternative to the visitor, send information about the error to a logging facility, ... . All much better than just dying.
+Her bruger vi kun `catch` blokken til at vise en besked, men vi kan gøre meget andet: sende et nyt netværkskald, foreslå et alternativ til besøgende, send information om fejlen til en log, ... alle muligheder der er meget bedre end bare at dø.
 
-## Throwing our own errors
+## Kaste vores egne fejl
 
-What if `json` is syntactically correct, but doesn't have a required `name` property?
+Hvad hvis `json` er syntactisk korrekt, men ikke har en påkrævet `name` egenskab?
 
-Like this:
+Som dette:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // ufuldstændige data
 
 try {
 
-  let user = JSON.parse(json); // <-- no errors
+  let user = JSON.parse(json); // <-- ingen fejl
 *!*
-  alert( user.name ); // no name!
+  alert( user.name ); // intet navn!
 */!*
 
 } catch (err) {
-  alert( "doesn't execute" );
+  alert( "afvikles ikke" );
 }
 ```
 
-Here `JSON.parse` runs normally, but the absence of `name` is actually an error for us.
+Her kører `JSON.parse` normalt, men fraværet af `name` er faktisk en fejl for os.
 
-To unify error handling, we'll use the `throw` operator.
+For at ensrette fejlhåndteringen, vil vi bruge `throw` operatoren.
 
 ### "Throw" operator
 
-The `throw` operator generates an error.
+Operatoren `throw` genererer en fejl.
 
-The syntax is:
+Syntaksen er:
 
 ```js
 throw <error object>
 ```
 
-Technically, we can use anything as an error object. That may be even a primitive, like a number or a string, but it's better to use objects, preferably with `name` and `message` properties (to stay somewhat compatible with built-in errors).
+Teknisk set kan vi kaste hvad som helst som et error objekt. Det kan endda være en primitiv, som et tal eller en streng, men det er bedre at bruge objekter, især med `name` og `message` egenskaber (for at forblive nogenlunde kompatibel med de indbyggede fejl).
 
-JavaScript has many built-in constructors for standard errors: `Error`, `SyntaxError`, `ReferenceError`, `TypeError` and others. We can use them to create error objects as well.
+JavaScript har mange indbyggede konstruktører for standardfejl: `Error`, `SyntaxError`, `ReferenceError`, `TypeError` og andre. Vi kan bruge dem til at oprette fejlobjekter.
 
-Their syntax is:
+Deres syntaks er:
 
 ```js
 let error = new Error(message);
-// or
+// eller
 let error = new SyntaxError(message);
 let error = new ReferenceError(message);
 // ...
 ```
 
-For built-in errors (not for any objects, just for errors), the `name` property is exactly the name of the constructor. And `message` is taken from the argument.
+For indbyggede fejl (ikke for objekter generelt, kun for fejl) er `name` egenskaben præcis det samme som navnet på konstruktøren, og `message` er taget fra argumentet.
 
-For instance:
+For eksempel:
 
 ```js run
 let error = new Error("Things happen o_O");
@@ -289,7 +289,7 @@ alert(error.name); // Error
 alert(error.message); // Things happen o_O
 ```
 
-Let's see what kind of error `JSON.parse` generates:
+Lad os se hvilken fejl `JSON.parse` genererer, når den ikke kan læse data:
 
 ```js run
 try {
@@ -302,14 +302,14 @@ try {
 }
 ```
 
-As we can see, that's a `SyntaxError`.
+Som vi kan se er det en `SyntaxError`.
 
-And in our case, the absence of `name` is an error, as users must have a `name`.
+Og i vores tilfælde er fraværet af `name` en fejl, da brugere skal have et `name`.
 
-So let's throw it:
+Så lad os kaste den fejl, og håndtere den i `catch`:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // ufuldstændige data
 
 try {
 
@@ -317,55 +317,55 @@ try {
 
   if (!user.name) {
 *!*
-    throw new SyntaxError("Incomplete data: no name"); // (*)
+    throw new SyntaxError("Ufuldstændige data: name mangler"); // (*)
 */!*
   }
 
   alert( user.name );
 
 } catch (err) {
-  alert( "JSON Error: " + err.message ); // JSON Error: Incomplete data: no name
+  alert( "JSON Error: " + err.message ); // JSON Error: Ufuldstændige data: name mangler
 }
 ```
 
-In the line `(*)`, the `throw` operator generates a `SyntaxError` with the given `message`, the same way as JavaScript would generate it itself. The execution of `try` immediately stops and the control flow jumps into `catch`.
+I linjen med `(*)`, genererer `throw` operatoren en `SyntaxError` med den angivne `message`, på samme måde som JavaScript ville generere det selv. Afviklingen af `try` stopper med det samme og kontrollen af flower overgår til `catch`.
 
-Now `catch` became a single place for all error handling: both for `JSON.parse` and other cases.
+Nu bliver `catch` det eneste sted for al fejlhåndtering: både for `JSON.parse` og for andre scenarier.
 
 ## Rethrowing
 
-In the example above we use `try...catch` to handle incorrect data. But is it possible that *another unexpected error* occurs within the `try {...}` block? Like a programming error (variable is not defined) or something else, not just this "incorrect data" thing.
+I eksemplet ovenfor bruger vi `try...catch` til at håndtere forkert data i JSON filen. Men er det muligt at *en anden uventet fejl* opstår inden for `try {...}` blokken? Som en programmeringsfejl (variabel er ikke defineret) eller noget andet, ikke bare denne "forkerte data" ting.
 
-For example:
+For eksempel:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // ufuldstændige data
 
 try {
-  user = JSON.parse(json); // <-- forgot to put "let" before user
+  user = JSON.parse(json); // <-- glemte at putte "let" foran user
 
   // ...
 } catch (err) {
-  alert("JSON Error: " + err); // JSON Error: ReferenceError: user is not defined
-  // (no JSON Error actually)
+  alert("JSON Fejl: " + err); // JSON Fejl: ReferenceError: user is not defined
+  // (faktisk ikke en JSON fejl)
 }
 ```
 
-Of course, everything's possible! Programmers do make mistakes. Even in open-source utilities used by millions for decades -- suddenly a bug may be discovered that leads to terrible hacks.
+Selvfølgelig, alt er muligt! Programmører laver fejl. Selv i open-source værktøjer der er brugt af millioner i årtier -- pludselig kan en fejl blive opdaget, der fører til frygtelige hacks.
 
-In our case, `try...catch` is placed to catch "incorrect data" errors. But by its nature, `catch` gets *all* errors from `try`. Here it gets an unexpected error, but still shows the same `"JSON Error"` message. That's wrong and also makes the code more difficult to debug.
+I vores tilfælde, `try...catch` er placeret for at fange "forkerte data" fejl. Men selve konstrulktionen dikterer at `catch` får *alle* fejl fra `try`. Her får det en uventet fejl, men viser stadig den samme `"JSON Error"` besked. Det er forkert og gør også koden sværere at debugge.
 
-To avoid such problems, we can employ the "rethrowing" technique. The rule is simple:
+For at undgå sådanne problemer, kan vi bruge "rethrowing" teknikken. Reglen er simpel:
 
-**Catch should only process errors that it knows and "rethrow" all others.**
+**Catch skal kun behandle fejl, den kender, og "rethrow" alle andre.**
 
-The "rethrowing" technique can be explained in more detail as:
+Teknikken "rethrowing" kan forklares lidt mere detaljeret som:
 
-1. Catch gets all errors.
-2. In the `catch (err) {...}` block we analyze the error object `err`.
-3. If we don't know how to handle it, we do `throw err`.
+1. Opfang alle fejl.
+2. I blokken `catch (err) {...}` analyserer vi error objektet.
+3. Hvis vi ikke ved, hvordan vi skal håndtere den, kaster vi den med `throw err`.
 
-Usually, we can check the error type using the `instanceof` operator:
+Normalt kan vi tjekke fejltypen ved hjælp af `instanceof` operatoren:
 
 ```js run
 try {
@@ -374,27 +374,27 @@ try {
 *!*
   if (err instanceof ReferenceError) {
 */!*
-    alert('ReferenceError'); // "ReferenceError" for accessing an undefined variable
+    alert('ReferenceError'); // "ReferenceError" for at tilgå en variabel der er undefineret
   }
 }
 ```
 
-We can also get the error class name from `err.name` property. All native errors have it. Another option is to read `err.constructor.name`.
+Vi kan også få fejlens navn fra `err.name` egenskaben. Alle indbyggede fejl har den. En anden option er at læse `err.constructor.name`.
 
-In the code below, we use rethrowing so that `catch` only handles `SyntaxError`:
+I koden nedenfor, vi bruger rethrowing så `catch` kun håndterer `SyntaxError`:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // ufuldstændige data
 try {
 
   let user = JSON.parse(json);
 
   if (!user.name) {
-    throw new SyntaxError("Incomplete data: no name");
+    throw new SyntaxError("Ufuldstændige data: name mangler");
   }
 
 *!*
-  blabla(); // unexpected error
+  blabla(); // uventet fejl
 */!*
 
   alert( user.name );
@@ -403,7 +403,7 @@ try {
 
 *!*
   if (err instanceof SyntaxError) {
-    alert( "JSON Error: " + err.message );
+    alert( "JSON fejl: " + err.message );
   } else {
     throw err; // rethrow (*)
   }
@@ -412,11 +412,11 @@ try {
 }
 ```
 
-The error throwing on line `(*)` from inside `catch` block "falls out" of `try...catch` and can be either caught by an outer `try...catch` construct (if it exists), or it kills the script.
+Fejlkastningen på linjen med `(*)` inde i `catch` blokken "falder ud" af `try...catch` og kan enten blive fanget af en ydre `try...catch` construct (hvis den eksisterer), eller også dør scriptet.
 
-So the `catch` block actually handles only errors that it knows how to deal with and "skips" all others.
+Så `catch` blokken håndterer faktisk kun fejl, den ved hvordan den skal håndtere, og "dropper" alle andre.
 
-The example below demonstrates how such errors can be caught by one more level of `try...catch`:
+Eksemplet nedenfor viser, hvordan sådanne fejl kan blive fanget af et ekstra niveau af `try...catch`:
 
 ```js run
 function readData() {
@@ -425,13 +425,13 @@ function readData() {
   try {
     // ...
 *!*
-    blabla(); // error!
+    blabla(); // fejl!
 */!*
   } catch (err) {
     // ...
     if (!(err instanceof SyntaxError)) {
 *!*
-      throw err; // rethrow (don't know how to deal with it)
+      throw err; // rethrow (ved ikke hvordan man skal håndtere det)
 */!*
     }
   }
@@ -441,42 +441,42 @@ try {
   readData();
 } catch (err) {
 *!*
-  alert( "External catch got: " + err ); // caught it!
+  alert( "Ydre catch modtog: " + err ); // fangede den!
 */!*
 }
 ```
 
-Here `readData` only knows how to handle `SyntaxError`, while the outer `try...catch` knows how to handle everything.
+Her ved `readData` kun hvordan den skal håndtere `SyntaxError`, mens den ydre `try...catch` ved hvordan den skal håndtere alt.
 
 ## try...catch...finally
 
-Wait, that's not all.
+vent, der er mere endnu.
 
-The `try...catch` construct may have one more code clause: `finally`.
+Konstruktionen `try...catch` har en såkaldt klausul mere, nemlig `finally`.
 
-If it exists, it runs in all cases:
+Hvis den eksisterer, kører den i alle tilfælde:
 
-- after `try`, if there were no errors,
-- after `catch`, if there were errors.
+- efter `try`, hvis der ikke var nogen fejl,
+- efter `catch`, hvis der var fejl.
 
-The extended syntax looks like this:
+Den udvidede syntaks ser sådan ud:
 
 ```js
 *!*try*/!* {
-   ... try to execute the code ...
+   ... prøv at afvikle noget kode ...
 } *!*catch*/!* (err) {
-   ... handle errors ...
+   ... håndter fejl ...
 } *!*finally*/!* {
-   ... execute always ...
+   ... kører altid til sidst ...
 }
 ```
 
-Try running this code:
+Prøv at køre denne kode for at se, hvordan det fungerer:
 
 ```js run
 try {
   alert( 'try' );
-  if (confirm('Make an error?')) BAD_CODE();
+  if (confirm('Skal der laves en fejl?')) BAD_CODE();
 } catch (err) {
   alert( 'catch' );
 } finally {
@@ -484,27 +484,27 @@ try {
 }
 ```
 
-The code has two ways of execution:
+Koden har to måder at blive afviklet på:
 
-1. If you answer "Yes" to "Make an error?", then `try -> catch -> finally`.
-2. If you say "No", then `try -> finally`.
+1. Hvis du svarer "Ja" til "Skal der laves en fejl?", så `try -> catch -> finally`.
+2. Hvis du svarer "Nej", så `try -> finally`.
 
-The `finally` clause is often used when we start doing something and want to finalize it in any case of outcome.
+Klausulen `finally` bruges ofte, når vi starter noget og vil have det afsluttet uanset resultatet.
 
-For instance, we want to measure the time that a Fibonacci numbers function `fib(n)` takes. Naturally, we can start measuring before it runs and finish afterwards. But what if there's an error during the function call? In particular, the implementation of `fib(n)` in the code below returns an error for negative or non-integer numbers.
+For eksempel, vi vil måle tiden, det tager at køre en Fibonacci tal funktion `fib(n)`. Naturligvis kan vi starte måling før den kører og afslutte efterfølgende. Men hvad hvis der er en fejl under funktionskaldet? Især implementationen af `fib(n)` i koden nedenfor returnerer en fejl for negative eller ikke-heltalstal.
 
-The `finally` clause is a great place to finish the measurements no matter what.
+`finally` klausulen er et godt sted at afslutte målingerne uanset hvad.
 
-Here `finally` guarantees that the time will be measured correctly in both situations -- in case of a successful execution of `fib` and in case of an error in it:
+Her garanterer `finally` at tiden vil blive målt korrekt i begge situationer -- i tilfælde af en succesfuld udførelse af `fib` og i tilfælde af en fejl i den:
 
 ```js run
-let num = +prompt("Enter a positive integer number?", 35)
+let num = +prompt("Skriv et positivt heltal?", 35)
 
 let diff, result;
 
 function fib(n) {
   if (n < 0 || Math.trunc(n) != n) {
-    throw new Error("Must not be negative, and also an integer.");
+    throw new Error("Tallet må ikke være negativt, og det skal være et heltal.");
   }
   return n <= 1 ? n : fib(n - 1) + fib(n - 2);
 }
@@ -521,26 +521,26 @@ try {
 }
 */!*
 
-alert(result || "error occurred");
+alert(result || "der skete en fejl");
 
-alert( `execution took ${diff}ms` );
+alert( `udførelsen tog ${diff}ms` );
 ```
 
-You can check by running the code with entering `35` into `prompt` -- it executes normally, `finally` after `try`. And then enter `-1` -- there will be an immediate error, and the execution will take `0ms`. Both measurements are done correctly.
+Du kan nu køre koden med at indtaste `35` i `prompt` -- den kører normalt, `finally` efter `try`. Prøv bagefter at indtaste `-1` -- der vil umiddelbart være en fejl, og udførelsen vil tage `0ms`. Begge målinger er udført korrekt.
 
-In other words, the function may finish with `return` or `throw`, that doesn't matter. The `finally` clause executes in both cases.
+Med andre ord, funktionen kan slutte med `return` eller `throw`, det spiller ingen rolle. Klausulen `finally` udføres i begge tilfælde.
 
 
-```smart header="Variables are local inside `try...catch...finally`"
-Please note that `result` and `diff` variables in the code above are declared *before* `try...catch`.
+```smart header="Variable er lokale inde i `try...catch...finally`"
+Bemærk at `result` og `diff` variablene i koden ovenfor er deklareret *før* `try...catch`.
 
-Otherwise, if we declared `let` in `try` block, it would only be visible inside of it.
+Ellers, hvis vi deklarerede `let` i `try` blokken, ville den kun være synlig inden for den.
 ```
 
-````smart header="`finally` and `return`"
-The `finally` clause works for *any* exit from `try...catch`. That includes an explicit `return`.
+````smart header="`finally` og `return`"
+Klausulen `finally` virker for *alle* udgange fra `try...catch`. Det indbefatter også en eksplicit `return`.
 
-In the example below, there's a `return` in `try`. In this case, `finally` is executed just before the control returns to the outer code.
+I eksemplet nedenfor, er der en `return` i `try`. I dette tilfælde, udføres `finally` lige før kontrol returnerer til den ydre kode.
 
 ```js run
 function func() {
@@ -559,40 +559,40 @@ function func() {
   }
 }
 
-alert( func() ); // first works alert from finally, and then this one
+alert( func() ); // først kommer alert fra finally, og derefter kommer denne der kalder func()
 ```
 ````
 
 ````smart header="`try...finally`"
 
-The `try...finally` construct, without `catch` clause, is also useful. We apply it when we don't want to handle errors here (let them fall through), but want to be sure that processes that we started are finalized.
+Konstruktionen `try...finally` uden klausulen `catch` kan også være brugbar. Den bruger vi, hvis vi ikke vil håndtere fejl her (lad dem falde gennem), men vil være sikker på, at processer, vi har startet, bliver afsluttet.
 
 ```js
 function func() {
-  // start doing something that needs completion (like measurements)
+  // start noget der skal afsluttes (som målinger, eller en databaseforbindelse, eller noget andet)
   try {
     // ...
   } finally {
-    // complete that thing even if all dies
+    // førdiggør eller ryd op lige meget om det fejler eller ej
   }
 }
 ```
-In the code above, an error inside `try` always falls out, because there's no `catch`. But `finally` works before the execution flow leaves the function.
+I koden ovenfor vil en fejl inde `try` altid falde ud, fordi der ikke er en `catch`. Men `finally` virker før afviklingsflowet forlader funktionen.
 ````
 
 ## Global catch
 
-```warn header="Environment-specific"
-The information from this section is not a part of the core JavaScript.
+```warn header="Miljøspecifikt"
+Informationen i denne sektion er ikke en del af selve JavaScript sproget.
 ```
 
-Let's imagine we've got a fatal error outside of `try...catch`, and the script died. Like a programming error or some other terrible thing.
+Lad os forestille os, at vi får en fatal fejl uden for `try...catch`, og scriptet dør. Som en programmeringsfejl eller noget andet skrækkeligt.
 
-Is there a way to react on such occurrences? We may want to log the error, show something to the user (normally they don't see error messages), etc.
+Er der en måde at reagere på sådanne tilfælde? Vi vil måske logge fejlen, vise noget til brugeren (normalt ser de ikke fejlbeskeder), etc.
 
-There is none in the specification, but environments usually provide it, because it's really useful. For instance, Node.js has [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#process_event_uncaughtexception) for that. And in the browser we can assign a function to the special [window.onerror](mdn:api/GlobalEventHandlers/onerror) property, that will run in case of an uncaught error.
+Der er ingen i specifikationen, men miljøer ofte leverer det, fordi det er virkelig nyttigt. For eksempel har Node.js [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#process_event_uncaughtexception) for det. Og i browseren kan vi tildele en funktion til den specielle [window.onerror](mdn:api/GlobalEventHandlers/onerror) egenskab, som vil køre i tilfælde af en ikke-fanget fejl.
 
-The syntax:
+Syntaksen er:
 
 ```js
 window.onerror = function(message, url, line, col, error) {
@@ -601,18 +601,18 @@ window.onerror = function(message, url, line, col, error) {
 ```
 
 `message`
-: Error message.
+: Fejlmeddelelsen.
 
 `url`
-: URL of the script where error happened.
+: URL for det script hvor fejlen opstod.
 
 `line`, `col`
-: Line and column numbers where error happened.
+: Linje og kolonne numre hvor fejlen opstod.
 
 `error`
-: Error object.
+: Error objekt.
 
-For instance:
+For eksempel, denne kode har en fejl, og den vil blive fanget af `window.onerror`:
 
 ```html run untrusted refresh height=1
 <script>
@@ -623,53 +623,52 @@ For instance:
 */!*
 
   function readData() {
-    badFunc(); // Whoops, something went wrong!
+    badFunc(); // Ups, noget gik galt!
   }
 
   readData();
 </script>
 ```
 
-The role of the global handler `window.onerror` is usually not to recover the script execution -- that's probably impossible in case of programming errors, but to send the error message to developers.
+Rollen for den globale håndtering med `window.onerror` er normalt ikke for at genskabe scripteksekveringen -- det er sandsynligvis umuligt i tilfælde af programmeringsfejl, men for at sende fejlmeddelelsen til udviklerne.
 
-There are also web-services that provide error-logging for such cases, like <https://muscula.com> or <https://www.sentry.io>.
+Der er også web-tjenester, der leverer fejllogning for sådanne tilfælde, som <https://muscula.com> eller <https://www.sentry.io>.
 
-They work like this:
+De virker sådan her:
+1.Vi registrerer os hos services og får et stykke JS-kode (eller en URL til et script) fra dem til at indsætte på sider.
+2. Dette JS-script sætter en brugerdefineret `window.onerror` funktion.
+3. Når der sker en fejl, sender den en network request omkring det til tjenesten.
+4. Vi kan så logge ind på tjenestens webinterface og se fejl.
 
-1. We register at the service and get a piece of JS (or a script URL) from them to insert on pages.
-2. That JS script sets a custom `window.onerror` function.
-3. When an error occurs, it sends a network request about it to the service.
-4. We can log in to the service web interface and see errors.
+## Opsummering
 
-## Summary
+Konstruktionen `try...catch` tillade os at håndtere runtime-fejl. Det tillader os bogstaveligt talt at "prøve" at køre koden og "fange" fejl, der kan opstå i den.
 
-The `try...catch` construct allows to handle runtime errors. It literally allows to "try" running the code and "catch" errors that may occur in it.
-
-The syntax is:
+Syntaksen er:
 
 ```js
 try {
-  // run this code
+  // kør denne kode
 } catch (err) {
-  // if an error happened, then jump here
-  // err is the error object
+  // hvis der sker en fejl, så hop hertil
+  // err er et objekt der indeholder fejlinformationen
 } finally {
-  // do in any case after try/catch
+  // gør dette uanset om der sker en fejl eller ej
 }
 ```
 
-There may be no `catch` section or no `finally`, so shorter constructs `try...catch` and `try...finally` are also valid.
+Der behøver ikke at være en `catch` klausul eller en `finally` klausul, så kortere konstruktioner `try...catch` og `try...finally` er også gyldige.
 
-Error objects have following properties:
+Error objekter har følgende egenskaber:
 
-- `message` -- the human-readable error message.
-- `name` -- the string with error name (error constructor name).
-- `stack` (non-standard, but well-supported) -- the stack at the moment of error creation.
+- `message` -- fejlmeddelelsen.
+- `name` -- strengen med fejlnavnet (konstruktoren navn).
+- `stack` (ikke-standard, men ret udbredt) -- stakken ved øjeblikket for fejl oprettelsen.
 
-If an error object is not needed, we can omit it by using `catch {` instead of `catch (err) {`.
+Hvis vi ikke behøver et error object, kan du udelade det ved at bruge `catch {` i stedet for `catch (err) {`.
 
-We can also generate our own errors using the `throw` operator. Technically, the argument of `throw` can be anything, but usually it's an error object inheriting from the built-in `Error` class. More on extending errors in the next chapter.
+Vi kan også generere vores egne fejl ved hjælp af `throw` operatoren. Teknisk set kan argumentet for `throw` være hvad som helst, men normalt er det et error object, der nedarver fra den indbyggede `Error` klasse. Mere om at udvide fejl i næste kapitel.
 
-*Rethrowing* is a very important pattern of error handling: a `catch` block usually expects and knows how to handle the particular error type, so it should rethrow errors it doesn't know.
+*Rethrowing* er en meget vigtig mønster for fejlhåndtering: en `catch` blok forventes typisk at vide, hvordan den skal håndtere den specifikke fejltype, så den bør kaste fejlen igen, hvis den ikke kender til den.
 
-Even if we don't have `try...catch`, most environments allow us to setup a "global" error handler to catch errors that "fall out". In-browser, that's `window.onerror`.
+Selv hvis vi ikke har `try...catch`, tillader de fleste miljøer os at opsætte en "global" fejlhåndtering for at fange fejl, der "falder ud". I browseren er det `window.onerror`.
