@@ -1,68 +1,66 @@
+# Introduktion: callbacks
 
+```warn header="Vi bruger browser metoder i eksemplerne her"
+For at demonstrere brugen af callbacks, promises og andre abstrakte koncepter, vil vi bruge nogle browser metoder: specifikt, indlæsning af scripts og udførelse af simple manipulationer af dokumentet.
 
-# Introduction: callbacks
+Hvis du ikke er fortrolig med disse metoder, og brugen af dem i eksemplerne er forvirrende, kan du med fordel læse et par kapitler fra den [næste del](/document) af tutorialen.
 
-```warn header="We use browser methods in examples here"
-To demonstrate the use of callbacks, promises and other abstract concepts, we'll be using some browser methods: specifically, loading scripts and performing simple document manipulations.
-
-If you're not familiar with these methods, and their usage in the examples is confusing, you may want to read a few chapters from the [next part](/document) of the tutorial.
-
-Although, we'll try to make things clear anyway. There won't be anything really complex browser-wise.
+Vi vil dog forsøge at gøre tingene så simple og klare som muligt. Der vil ikke være noget virkelig komplekst browser-baseret.
 ```
 
-Many functions are provided by JavaScript host environments that allow you to schedule *asynchronous* actions. In other words, actions that we initiate now, but they finish later.
+Mange funktioner leveret af JavaScript host miljøer tillader dig at planlægge *asynkrone* handlinger. Med andre ord, handlinger som vi starter nu, men de afsluttes senere.
 
-For instance, one such function is the `setTimeout` function.
+For eksempel, en sådan funktion er `setTimeout` funktionen.
 
-There are other real-world examples of asynchronous actions, e.g. loading scripts and modules (we'll cover them in later chapters).
+Der er andre eksempler på asynkrone handlinger i den virkelige verden, f.eks. indlæsning af scripts og moduler (vi vil dække dem i senere kapitler).
 
-Take a look at the function `loadScript(src)`, that loads a script with the given `src`:
+Tag et kig på funktionen `loadScript(src)`, som loader et script med det givne `src`:
 
 ```js
 function loadScript(src) {
-  // creates a <script> tag and append it to the page
-  // this causes the script with given src to start loading and run when complete
+  // opretter et <script> tag og tilføjer det til siden
+  // dette vil få scriptet med den givne src til at starte indlæsning og køre når det er færdigt
   let script = document.createElement('script');
   script.src = src;
   document.head.append(script);
 }
 ```
 
-It inserts into the document a new, dynamically created, tag `<script src="…">` with the given `src`. The browser automatically starts loading it and executes when complete.
+Det sætter et dynamisk oprettet <script> tag til dokumentet med den givne `src`. Browseren starter automatisk indlæsningen og kører scriptet når det er færdigt.
 
-We can use this function like this:
+Vi kan bruge funktionen sådan:
 
 ```js
-// load and execute the script at the given path
+// hent og udfør scriptet på det givne sted
 loadScript('/my/script.js');
 ```
 
-The script is executed "asynchronously", as it starts loading now, but runs later, when the function has already finished.
+Dette script udføres "asynkront", da det starter indlæsningen nu, men kører senere, når funktionen allerede er færdig.
 
-If there's any code below `loadScript(…)`, it doesn't wait until the script loading finishes.
+Hvis der er noget kode under `loadScript(…)`, venter det ikke på at scriptet er færdig med at blive indlæst.
 
 ```js
 loadScript('/my/script.js');
-// the code below loadScript
-// doesn't wait for the script loading to finish
+// kode under loadScript
+// venter ikke på at scriptet er færdig med at blive indlæst
 // ...
 ```
 
-Let's say we need to use the new script as soon as it loads. It declares new functions, and we want to run them.
+Lad os antage at vi vil bruge det nye script så snart det er indlæst. Det deklarerer nye funktioner, og vi vil køre dem.
 
-But if we do that immediately after the `loadScript(…)` call, that wouldn't work:
+Men hvis vi gør det umiddelbart efter `loadScript(…)` kaldet, vil det ikke virke, fordi scriptet ikke er indlæst endnu:
 
 ```js
-loadScript('/my/script.js'); // the script has "function newFunction() {…}"
+loadScript('/my/script.js'); // scriptet har "function newFunction() {…}"
 
 *!*
-newFunction(); // no such function!
+newFunction(); // funktionen findes ikke endnu!
 */!*
 ```
 
-Naturally, the browser probably didn't have time to load the script. As of now, the `loadScript` function doesn't provide a way to track the load completion. The script loads and eventually runs, that's all. But we'd like to know when it happens, to use new functions and variables from that script.
+Naturligvis har browseren med al sandsynlighed ikke haft tid til at indlæse scriptet - funktioner tilbyder ikke en måde at spore en indlæsning. Scriptet indlæses og kører til sidst, det er alt vi kan bede om. Men her vil vi gerne vide, når det sker, så vi kan bruge de nye funktioner og variabler fra scriptet.
 
-Let's add a `callback` function as a second argument to `loadScript` that should execute when the script loads:
+Lad os tilføje en `callback` funktion som andet argument til `loadScript` som skal køre når scriptet er indlæst:
 
 ```js
 function loadScript(src, *!*callback*/!*) {
@@ -77,21 +75,21 @@ function loadScript(src, *!*callback*/!*) {
 }
 ```
 
-The `onload` event is described in the article <info:onload-onerror#loading-a-script>, it basically executes a function after the script is loaded and executed.
+Hændelsen `onload` er beskrevet i artiklen <info:onload-onerror#loading-a-script>, den eksekverer grundlæggende en funktion efter at scriptet er indlæst og udført.
 
-Now if we want to call new functions from the script, we should write that in the callback:
+Nu, hvis vi vil køre nye funktioner fra scriptet, skal vi skrive det i callbacken:
 
 ```js
 loadScript('/my/script.js', function() {
-  // the callback runs after the script is loaded
-  newFunction(); // so now it works
+  // denne callback kører efter at scriptet er indlæst
+  newFunction(); // så det virker nu
   ...
 });
 ```
 
-That's the idea: the second argument is a function (usually anonymous) that runs when the action is completed.
+Det er ideen: det andet argument er en funktion (ofte anonym) som kører når handlingen er færdig.
 
-Here's a runnable example with a real script:
+Her er et eksempel med et virkeligt script:
 
 ```js run
 function loadScript(src, callback) {
@@ -103,39 +101,39 @@ function loadScript(src, callback) {
 
 *!*
 loadScript('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js', script => {
-  alert(`Cool, the script ${script.src} is loaded`);
-  alert( _ ); // _ is a function declared in the loaded script
+  alert(`Sådan! Scriptet ${script.src} er indlæst`);
+  alert( _ ); // _ er en funktion som er deklareret i det indlæste script
 });
 */!*
 ```
 
-That's called a "callback-based" style of asynchronous programming. A function that does something asynchronously should provide a `callback` argument where we put the function to run after it's complete.
+Dette kaldes en "callback-baseret" form for asynkron programmering. En funktion som gør noget asynkront bør levere et `callback` argument hvor vi putter funktionen som skal køres efter at den er færdig.
 
-Here we did it in `loadScript`, but of course it's a general approach.
+Her gjorde vi det i `loadScript`, men det er en generel tilgang.
 
-## Callback in callback
+## Callback ii callback
 
-How can we load two scripts sequentially: the first one, and then the second one after it?
+Hvordan kan vi hente to scripts sekventielt: det første og så det andet efter det?
 
-The natural solution would be to put the second `loadScript` call inside the callback, like this:
+Den naturlige løsning ville være at putte det andet `loadScript` kald inden i callbacken, sådan her:
 
 ```js
 loadScript('/my/script.js', function(script) {
 
-  alert(`Cool, the ${script.src} is loaded, let's load one more`);
+  alert(`Scriptet ${script.src} er indlæst, lad os hente et til`);
 
 *!*
   loadScript('/my/script2.js', function(script) {
-    alert(`Cool, the second script is loaded`);
+    alert(`Sådan! Det andet script er indlæst`);
   });
 */!*
 
 });
 ```
 
-After the outer `loadScript` is complete, the callback initiates the inner one.
+Efter det ydre `loadScript` er færdig, initierer callbacken det indre kald.
 
-What if we want one more script...?
+Hvad hvis vi vil have endnu et script...?
 
 ```js
 loadScript('/my/script.js', function(script) {
@@ -144,7 +142,7 @@ loadScript('/my/script.js', function(script) {
 
 *!*
     loadScript('/my/script3.js', function(script) {
-      // ...continue after all scripts are loaded
+      // ... fortsætter efter alle scripts er indlæst
     });
 */!*
 
@@ -153,13 +151,13 @@ loadScript('/my/script.js', function(script) {
 });
 ```
 
-So, every new action is inside a callback. That's fine for few actions, but not good for many, so we'll see other variants soon.
+Så enhver ny handling er inde i en callback. Det er fint et par gange, men ikke godt hvis det bliver for dybt. Vi ser på andre muligheder om lidt.
 
-## Handling errors
+## Håndtering af fejl
 
-In the above examples we didn't consider errors. What if the script loading fails? Our callback should be able to react on that.
+I eksemplet ovenfor har vi ikke taget højde for fejl. Hvad hvis scriptet ikke kan indlæses? Vores callback bør være i stand til at reagere på det.
 
-Here's an improved version of `loadScript` that tracks loading errors:
+Her er en forbedret version af `loadScript` der fanger indlæsningsfejl:
 
 ```js
 function loadScript(src, callback) {
@@ -168,16 +166,16 @@ function loadScript(src, callback) {
 
 *!*
   script.onload = () => callback(null, script);
-  script.onerror = () => callback(new Error(`Script load error for ${src}`));
+  script.onerror = () => callback(new Error(`Fejl under indlæsning af script ${src}`));
 */!*
 
   document.head.append(script);
 }
 ```
 
-It calls `callback(null, script)` for successful load and `callback(error)` otherwise.
+Den kalder `callback(null, script)` hvis det lykkedes med at indlæse scriptet og ellers `callback(error)`.
 
-The usage:
+Brug af det ser sådan ud:
 ```js
 loadScript('/my/script.js', function(error, script) {
   if (error) {
@@ -188,19 +186,19 @@ loadScript('/my/script.js', function(error, script) {
 });
 ```
 
-Once again, the recipe that we used for `loadScript` is actually quite common. It's called the "error-first callback" style.
+Igen, denne opskrift på `loadScript` er faktisk ret udbredt. Denne stil kaldes for "error-first callback".
 
-The convention is:
-1. The first argument of the `callback` is reserved for an error if it occurs. Then `callback(err)` is called.
-2. The second argument (and the next ones if needed) are for the successful result. Then `callback(null, result1, result2…)` is called.
+Konventionen er:
+1. Det første argument af `callback` er reserveret for en fejl, hvis den opstår. Så kaldes `callback(err)`.
+2. Det andet argument (og de næste, hvis det er nødvendigt) er for det succesfulde resultat. Så kaldes `callback(null, result1, result2…)`.
 
-So the single `callback` function is used both for reporting errors and passing back results.
+Så bruges den ene `callback`-funktion både til at rapportere fejl og til at sende resultater tilbage.
 
-## Pyramid of Doom
+## Dommedagspyramiden (Pyramid of Doom)
 
-At first glance, it looks like a viable approach to asynchronous coding. And indeed it is. For one or maybe two nested calls it looks fine.
+Ved første øjekast ser det ud til at være en mulig tilgang til asynkron programmering. Og faktisk er det det. For en eller to indlejrede kald er det ok.
 
-But for multiple asynchronous actions that follow one after another, we'll have code like this:
+Men for flere asynkrone handlinger der følger efter hinanden, vil vi have kode som denne:
 
 ```js
 loadScript('1.js', function(error, script) {
@@ -219,7 +217,7 @@ loadScript('1.js', function(error, script) {
             handleError(error);
           } else {
   *!*
-            // ...continue after all scripts are loaded (*)
+            // ... fortsæt efter alle scripts er indlæst (*)
   */!*
           }
         });
@@ -230,14 +228,14 @@ loadScript('1.js', function(error, script) {
 });
 ```
 
-In the code above:
-1. We load `1.js`, then if there's no error...
-2. We load `2.js`, then if there's no error...
-3. We load `3.js`, then if there's no error -- do something else `(*)`.
+I koden ovenfor:
+1. Vi henter `1.js`, derefter, hvis der ikke er nogen fejl...
+2. Vi henter `2.js`, derefter, hvis der ikke er nogen fejl...
+3. Vi henter `3.js`, derefter, hvis der ikke er nogen fejl -- gør noget andet `(*)`.
 
-As calls become more nested, the code becomes deeper and increasingly more difficult to manage, especially if we have real code instead of `...` that may include more loops, conditional statements and so on.
+Efterhånden som kald bliver mere indlejrede, bliver koden dybere og stadig vanskeligere at administrere, især hvis vi har rigtig kode i stedet for `...` som kan inkludere flere loops, betingede udsagn og så videre.
 
-That's sometimes called "callback hell" or "pyramid of doom."
+Det kaldes nogle gange "callback hell" eller ["pyramid of doom"](https://en.wikipedia.org/wiki/Pyramid_of_doom_(programming)).
 
 <!--
 loadScript('1.js', function(error, script) {
@@ -265,11 +263,11 @@ loadScript('1.js', function(error, script) {
 
 ![](callback-hell.svg)
 
-The "pyramid" of nested calls grows to the right with every asynchronous action. Soon it spirals out of control.
+Denne "pyramide" af indlejrede kald vokser til højre med hvert asynkrone handling og ender ude af kontrol.
 
-So this way of coding isn't very good.
+Så, det er ikke en god måde at kode på.
 
-We can try to alleviate the problem by making every action a standalone function, like this:
+Vi kan afhjælpe problemet ved at gøre hver handling til en selvstændig funktion, som dette:
 
 ```js
 loadScript('1.js', step1);
@@ -296,17 +294,17 @@ function step3(error, script) {
   if (error) {
     handleError(error);
   } else {
-    // ...continue after all scripts are loaded (*)
+    // ... fortsæt efter alle scripts er indlæst (*)
   }
 }
 ```
 
-See? It does the same thing, and there's no deep nesting now because we made every action a separate top-level function.
+Kan du set det? Det gør det samme, og der er ikke nogen dyb indlejring mere, fordi vi gjorde hver handling til en separat top-level funktion.
 
-It works, but the code looks like a torn apart spreadsheet. It's difficult to read, and you probably noticed that one needs to eye-jump between pieces while reading it. That's inconvenient, especially if the reader is not familiar with the code and doesn't know where to eye-jump.
+Det virker, men koden ligner mere et regneark, der er revet i stykker. Det er svært at læse, og du har sandsynligvis bemærket, at øjet skal springe mellem stykkerne mens man læser det. Det er ukomfortabelt, især hvis læseren ikke er vant til koden og ikke ved hvor man skal kigge.
 
-Also, the functions named `step*` are all of single use, they are created only to avoid the "pyramid of doom." No one is going to reuse them outside of the action chain. So there's a bit of namespace cluttering here.
+Endelig er alle funktionerne med navnet `step*` kun brugt en gang - de er der kun for at undgå "pyramid of doom." Ingen vil genbruge dem uden for "kæden af funktioner". Så der er en lille smule namespace kludder her.
 
-We'd like to have something better.
+Vi vil gerne have noget bedre.
 
-Luckily, there are other ways to avoid such pyramids. One of the best ways is to use "promises", described in the next chapter.
+Heldigvis er der andre måder at undgå sådanne pyramider. En af de bedste måder er at bruge "promises", beskrevet i næste kapitel.
