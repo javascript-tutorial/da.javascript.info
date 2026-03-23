@@ -1,15 +1,15 @@
 
-# Animated circle with promise
+# Animeret cirkel med promise
 
-Rewrite the `showCircle` function in the solution of the task <info:task/animate-circle-callback> so that it returns a promise instead of accepting a callback.
+Omskriv funktionen `showCircle` i løsningen fra opgaven <info:task/animate-circle-callback> så den returnerer et promise i stedet for at acceptere en callback.
 
-The new usage:
+Den nye brug:
 
 ```js
 showCircle(150, 150, 100).then(div => {
   div.classList.add('message-ball');
-  div.append("Hello, world!");
+  div.append("Hej, verden!");
 });
 ```
 
-Take the solution of the task <info:task/animate-circle-callback> as the base.
+Brug løsningen fra <info:task/animate-circle-callback> som udgangspunkt.
