@@ -1,13 +1,13 @@
 
-# Promises chaining
+# Sammenkædning af promises (chaining)
 
-Let's return to the problem mentioned in the chapter <info:callbacks>: we have a sequence of asynchronous tasks to be performed one after another — for instance, loading scripts. How can we code it well?
+Lad os vende tilbage til problemet nævnt i kapitlet <info:callbacks>: vi har en sekvens af asynkrone opgaver, der skal udføres efter hinanden — for eksempel, indlæsning af scripts. Hvordan kan vi kode det godt?
 
-Promises provide a couple of recipes to do that.
+Promises leverer et par metoder til at gøre det.
 
-In this chapter we cover promise chaining.
+I dette kapitel dækker vi promise chaining.
 
-It looks like this:
+Det ser ud som dette:
 
 ```js run
 new Promise(function(resolve, reject) {
@@ -32,23 +32,23 @@ new Promise(function(resolve, reject) {
 });
 ```
 
-The idea is that the result is passed through the chain of `.then` handlers.
+Idéen her er, at resultatet sendes gennem en kæde af `.then`-håndteringer.
 
-Here the flow is:
-1. The initial promise resolves in 1 second `(*)`,
-2. Then the `.then` handler is called `(**)`, which in turn creates a new promise (resolved with `2` value).
-3. The next `then` `(***)` gets the result of the previous one, processes it (doubles) and passes it to the next handler.
-4. ...and so on.
+Her er flowet:
+1. Det indledende promise løser sig efter 1 sekund `(*)`,
+2. Derefter kaldes `.then` handleren `(**)`, der derefter opretter et nyt promise (løst med værdien `2`).
+3. Det næste `then` `(***)` får resultatet fra den forrige, behandler det (dobbelt) og sender det videre til den næste handler.
+4. ...og sådan videre.
 
-As the result is passed along the chain of handlers, we can see a sequence of `alert` calls: `1` -> `2` -> `4`.
+Efterhånden som resultatet sendes gennem kæden af håndteringer, kan vi se en sekvens af `alert`-kald: `1` -> `2` -> `4`.
 
 ![](promise-then-chain.svg)
 
-The whole thing works, because every call to a `.then` returns a new promise, so that we can call the next `.then` on it.
+Dette virker, fordi hvert kald til en `.then` returnerer et nyt promise, så vi kan kalde næste `.then` på det.
 
-When a handler returns a value, it becomes the result of that promise, so the next `.then` is called with it.
+Når en handler returnerer en værdi, bliver den til resultatet af det promise, så næste `.then` kaldes med den.
 
-**A classic newbie error: technically we can also add many `.then` to a single promise. This is not chaining.**
+**En klassisk begynderfejl: teknisk set kan vi også tilføje mange `.then` til et enkelt promise. Dette er ikke chaining.**
 
 For example:
 ```js run
@@ -72,23 +72,23 @@ promise.then(function(result) {
 });
 ```
 
-What we did here is just adding several handlers to one promise. They don't pass the result to each other; instead they process it independently.
+Det vi har gjort her er blot at tilføje flere håndteringer til et enkelt promise. De sender ikke resultatet videre til hinanden; de behandler det uafhængigt.
 
-Here's the picture (compare it with the chaining above):
+Her er et billede (til sammenligning med kæden ovenfor):
 
 ![](promise-then-many.svg)
 
-All `.then` on the same promise get the same result -- the result of that promise. So in the code above all `alert` show the same: `1`.
+Alle `.then` der direkte er tilknyttet det samme promise får det samme resultat -- resultatet af det promise. Så i koden ovenfor viser alle `alert` den samme værdi: `1`.
 
-In practice we rarely need multiple handlers for one promise. Chaining is used much more often.
+I praksis har vi sjældent brug for flere håndteringer for et enkelt promise. Kæden bruges meget mere ofte.
 
-## Returning promises
+## Returnering af promises
 
-A handler, used in `.then(handler)` may create and return a promise.
+En handler brugt i `.then(handler)` må oprette og returnere et promise.
 
-In that case further handlers wait until it settles, and then get its result.
+I det tilfælde venter næste håndteringer på, at det promise bliver løst, og derefter får de dets resultat.
 
-For instance:
+For eksempel:
 
 ```js run
 new Promise(function(resolve, reject) {
@@ -120,15 +120,15 @@ new Promise(function(resolve, reject) {
 });
 ```
 
-Here the first `.then` shows `1` and returns `new Promise(…)` in the line `(*)`. After one second it resolves, and the result (the argument of `resolve`, here it's `result * 2`) is passed on to the handler of the second `.then`. That handler is in the line `(**)`, it shows `2` and does the same thing.
+Her viser den første `.then` `1` og returnerer `new Promise(…)` i linjen `(*)`. Efter et sekund løser den sig, og resultatet (argumentet for `resolve`, her er det `result * 2`) sendes videre til håndtereren for den anden `.then`. Den håndterer er i linjen `(**)`, den viser `2` og gør det samme.
 
-So the output is the same as in the previous example: 1 -> 2 -> 4, but now with 1 second delay between `alert` calls.
+Så outputtet er det samme som i det forrige eksempel: 1 -> 2 -> 4, men nu med 1 sekund forsinkelse mellem `alert`-kald.
 
-Returning promises allows us to build chains of asynchronous actions.
+Returnering af promises tillader os at bygge kæder af asynchronous handlinger.
 
-## Example: loadScript
+## Eksempel: loadScript
 
-Let's use this feature with the promisified `loadScript`, defined in the [previous chapter](info:promise-basics#loadscript), to load scripts one by one, in sequence:
+Lad os bruge den mulighed i vores "promisificerede" `loadScript`, som vi oprettede i [sidste kapitel](info:promise-basics#loadscript), til at hente scripts et ad gangen, i sekvens:
 
 ```js run
 loadScript("/article/promise-chaining/one.js")
@@ -139,22 +139,22 @@ loadScript("/article/promise-chaining/one.js")
     return loadScript("/article/promise-chaining/three.js");
   })
   .then(function(script) {
-    // use functions declared in scripts
-    // to show that they indeed loaded
+    // udfør funktionerne deklareret i de hentede scripts
+    // for at vise, at de rent faktisk er hentet
     one();
     two();
     three();
   });
 ```
 
-This code can be made bit shorter with arrow functions:
+Denne kode kan gøres lidt kortere med arrow funktioner:
 
 ```js run
 loadScript("/article/promise-chaining/one.js")
   .then(script => loadScript("/article/promise-chaining/two.js"))
   .then(script => loadScript("/article/promise-chaining/three.js"))
   .then(script => {
-    // scripts are loaded, we can use functions declared there
+    // scripts er alle hentet. Nu kan vi bruge funktionerne
     one();
     two();
     three();
@@ -162,17 +162,17 @@ loadScript("/article/promise-chaining/one.js")
 ```
 
 
-Here each `loadScript` call returns a promise, and the next `.then` runs when it resolves. Then it initiates the loading of the next script. So scripts are loaded one after another.
+Her returnerer hvert kald til `loadScript` et promise og den næste `.then` kører, når det løses (resolve). Derefter initialiseres hentning af det næste script. Så scripts er hentet en efter en.
 
-We can add more asynchronous actions to the chain. Please note that the code is still "flat" — it grows down, not to the right. There are no signs of the "pyramid of doom".
+Vi kan tilføje endnu flere asynkrone handlinger til kæden. Bemærk, at koden stadig er "flad" — den vokser ned, ikke til højre. Der er ingen tegn på "pyramid of doom".
 
-Technically, we could add `.then` directly to each `loadScript`, like this:
+Teknisk set kunne vi tilføje `.then` direkte til hvert `loadScript`, som dette:
 
 ```js run
 loadScript("/article/promise-chaining/one.js").then(script1 => {
   loadScript("/article/promise-chaining/two.js").then(script2 => {
     loadScript("/article/promise-chaining/three.js").then(script3 => {
-      // this function has access to variables script1, script2 and script3
+      // denne funktion har adgang til variablene script1, script2 and script3
       one();
       two();
       three();
@@ -181,19 +181,19 @@ loadScript("/article/promise-chaining/one.js").then(script1 => {
 });
 ```
 
-This code does the same: loads 3 scripts in sequence. But it "grows to the right". So we have the same problem as with callbacks.
+Denne kode gør det samme: henter 3 scripts i sekvens. Men den "vokser til højre". Så vi har det samme problem som med callbacks.
 
-People who start to use promises sometimes don't know about chaining, so they write it this way. Generally, chaining is preferred.
+Folk der starter med at bruge promises ved ikke altid om chaining, så de skriver det på denne måde. Generelt set er chaining at foretrække.
 
-Sometimes it's ok to write `.then` directly, because the nested function has access to the outer scope. In the example above the most nested callback has access to all variables `script1`, `script2`, `script3`. But that's an exception rather than a rule.
+Nogle gange er det i orden at skrive `.then` direkte, fordi den indlejrede funktion har adgang til det ydre scope. I eksemplet ovenfor har den mest indlejrede callback adgang til alle variabler `script1`, `script2`, `script3`. Men det er mere en undtagelse end en regel.
 
 
 ````smart header="Thenables"
-To be precise, a handler may return not exactly a promise, but a so-called "thenable" object - an arbitrary object that has a method `.then`. It will be treated the same way as a promise.
+For at være præcis, kan en handler returnerer ikke nødvendigvis et promise, men et såkaldt "thenable" objekt - et vilkårligt objekt som har en metode `.then`. Det vil blive behandlet på samme måde som en promise.
 
-The idea is that 3rd-party libraries may implement "promise-compatible" objects of their own. They can have an extended set of methods, but also be compatible with native promises, because they implement `.then`.
+Ideen er, at 3rd-party biblioteker kan implementere deres egne "promise-kompatible" objekter. De kan have et udvidet sæt af metoder, men også være kompatible med native promises, fordi de implementerer `.then`.
 
-Here's an example of a thenable object:
+Her er et eksempel på et thenable objekt:
 
 ```js run
 class Thenable {
@@ -201,8 +201,8 @@ class Thenable {
     this.num = num;
   }
   then(resolve, reject) {
-    alert(resolve); // function() { native code }
-    // resolve with this.num*2 after the 1 second
+    alert(resolve); // function() { native kode }
+    // resolve med this.num*2 efter 1 sekund
     setTimeout(() => resolve(this.num * 2), 1000); // (**)
   }
 }
@@ -213,70 +213,69 @@ new Promise(resolve => resolve(1))
     return new Thenable(result); // (*)
 */!*
   })
-  .then(alert); // shows 2 after 1000ms
+  .then(alert); // vis 2 efter 1000ms
 ```
 
-JavaScript checks the object returned by the `.then` handler in line `(*)`: if it has a callable method named `then`, then it calls that method providing native functions `resolve`, `reject` as arguments (similar to an executor) and waits until one of them is called. In the example above `resolve(2)` is called after 1 second `(**)`. Then the result is passed further down the chain.
+JavaScript tjekker objektet der returneres af `.then` handleren i linje `(*)`: Hvis den har en kaldbar metode kaldet `then`, så kalder den den metode og giver native funktioner `resolve`, `reject` som argumenter (ligner en executor) og venter indtil en af dem bliver kaldt. I eksemplet ovenfor bliver `resolve(2)` kaldt efter 1 sekund `(**)`. Derefter sendes resultatet videre ned ad kæden.
 
-This feature allows us to integrate custom objects with promise chains without having to inherit from `Promise`.
-````
+Denne feature tillader os at integrere custom objekter med promise kæder uden at skulle arve fra `Promise`.
+```
 
+## Et større eksempel: fetch
 
-## Bigger example: fetch
+I frontend programmering bruges promises ofte til forespørgsler over netværket. Så lad os se på et eksempel på det.
 
-In frontend programming, promises are often used for network requests. So let's see an extended example of that.
-
-We'll use the [fetch](info:fetch) method to load the information about the user from the remote server. It has a lot of optional parameters covered in [separate chapters](info:fetch), but the basic syntax is quite simple:
+Vi vil bruge metoden [fetch](info:fetch) til at indlæse informationen om brugeren fra den eksterne server. Den har en masse valgfrie parametre dækket i [separate kapitler](info:fetch), men den grundlæggende syntaks er ganske enkel:
 
 ```js
 let promise = fetch(url);
 ```
 
-This makes a network request to the `url` and returns a promise. The promise resolves with a `response` object when the remote server responds with headers, but *before the full response is downloaded*.
+Dette opretter en netværksforespørgsel til `url` og returnerer en promise. Promise'en løser med et `response`-objekt, når den eksterne server svarer med headers, men *før hele svaret er downloadet*.
 
-To read the full response, we should call the method `response.text()`: it returns a promise that resolves when the full text is downloaded from the remote server, with that text as a result.
+For at læse hele svaret, bør vi kalde metoden `response.text()`: den returnerer en promise, der løser, når hele teksten er downloadet fra den eksterne server, med den tekst som resultat.
 
-The code below makes a request to `user.json` and loads its text from the server:
+Koden nedenfor laver en forespørgsel til `user.json` og indlæser dens tekst fra serveren:
 
 ```js run
 fetch('/article/promise-chaining/user.json')
-  // .then below runs when the remote server responds
+  // .then nedenfor kører når remote serveren svarer
   .then(function(response) {
-    // response.text() returns a new promise that resolves with the full response text
-    // when it loads
+    // response.text() returnerer et nyt promise der løses med den fulde tekst af det eksterne fil, 
+    // når den er indlæst
     return response.text();
   })
   .then(function(text) {
-    // ...and here's the content of the remote file
+    // ... og her er indholdet af det eksterne fil
     alert(text); // {"name": "iliakan", "isAdmin": true}
   });
 ```
 
-The `response` object returned from `fetch` also includes the method `response.json()` that reads the remote data and parses it as JSON. In our case that's even more convenient, so let's switch to it.
+`response` objektet der returneres fra `fetch` indeholder også metoden `response.json()` som læser de eksterne data og parser dem som JSON. I vores tilfælde er det endnu mere praktisk, så lad os skifte til det.
 
-We'll also use arrow functions for brevity:
+Vi vil også bruge arrow funktioner for at gøre koden kortere:
 
 ```js run
-// same as above, but response.json() parses the remote content as JSON
+// samme som ovenfor, men response.json() oversætter det hentede indhold som JSON
 fetch('/article/promise-chaining/user.json')
   .then(response => response.json())
-  .then(user => alert(user.name)); // iliakan, got user name
+  .then(user => alert(user.name)); // iliakan, tog user.name
 ```
 
-Now let's do something with the loaded user.
+Lad os gøre noget med den hentede bruger.
 
-For instance, we can make one more request to GitHub, load the user profile and show the avatar:
+For eksempel, vi kan lave et kald mere til GitHub, hente brugerens profil og vise en avatar:
 
 ```js run
-// Make a request for user.json
+// Opret en forespørgsel på user.json
 fetch('/article/promise-chaining/user.json')
-  // Load it as json
+  // Hent det ind som JSON
   .then(response => response.json())
-  // Make a request to GitHub
+  // Lav en forespørgsel til GitHub
   .then(user => fetch(`https://api.github.com/users/${user.name}`))
-  // Load the response as json
+  // Hent svaret som JSON
   .then(response => response.json())
-  // Show the avatar image (githubUser.avatar_url) for 3 seconds (maybe animate it)
+  // Vis avatar billedet (githubUser.avatar_url) i 3 sekunder (måske animér det)
   .then(githubUser => {
     let img = document.createElement('img');
     img.src = githubUser.avatar_url;
@@ -287,13 +286,13 @@ fetch('/article/promise-chaining/user.json')
   });
 ```
 
-The code works; see comments about the details. However, there's a potential problem in it, a typical error for those who begin to use promises.
+Koden virker; se eventuelt kommentarer for flere detaljer. Men, der er et potentielt problem - en typisk fejl for dem, der begynder at bruge promises.
 
-Look at the line `(*)`: how can we do something *after* the avatar has finished showing and gets removed? For instance, we'd like to show a form for editing that user or something else. As of now, there's no way.
+Kig på linjen `(*)`: hvordan kan vi gøre noget *efter* at avataren er færdig med at blive vist og fjernet? Hvis vi for eksempel vil vise muligheder for at redigere brugeren eller noget i den stil. Som det er nu, er det ikke muligt.
 
-To make the chain extendable, we need to return a promise that resolves when the avatar finishes showing.
+For at kunne udvide kæden, må vi returnere en promise, der løses, når avataren er færdig med at blive vist.
 
-Like this:
+Som dette:
 
 ```js run
 fetch('/article/promise-chaining/user.json')
@@ -315,15 +314,15 @@ fetch('/article/promise-chaining/user.json')
 */!*
     }, 3000);
   }))
-  // triggers after 3 seconds
-  .then(githubUser => alert(`Finished showing ${githubUser.name}`));
+  // trigger efter 3 sekunder
+  .then(githubUser => alert(`Færdig med at vise ${githubUser.name}`));
 ```
 
-That is, the `.then` handler in line `(*)` now returns `new Promise`, that becomes settled only after the call of `resolve(githubUser)` in `setTimeout` `(**)`. The next `.then` in the chain will wait for that.
+Nu vil `.then` handleren i linje `(*)` returnere et `new Promise`, der først afsluttes efter kaldet til `resolve(githubUser)` i `setTimeout` `(**)`. Det næste `.then` i kæden vil vente på det.
 
-As a good practice, an asynchronous action should always return a promise. That makes it possible to plan actions after it; even if we don't plan to extend the chain now, we may need it later.
+Det er god praksis at en asynkron handling altid bør returnere et promise. Det gør det muligt at planlægge handlinger efter den; selv hvis vi ikke planlægger at udvide kæden nu, kan vi have brug for det senere.
 
-Finally, we can split the code into reusable functions:
+Endelig kan vi splitte koden op i funktioner der kan genbruges:
 
 ```js run
 function loadJson(url) {
@@ -349,18 +348,18 @@ function showAvatar(githubUser) {
   });
 }
 
-// Use them:
+// Brug dem således:
 loadJson('/article/promise-chaining/user.json')
   .then(user => loadGithubUser(user.name))
   .then(showAvatar)
-  .then(githubUser => alert(`Finished showing ${githubUser.name}`));
+  .then(githubUser => alert(`Færdig med at vise ${githubUser.name}`));
   // ...
 ```
 
-## Summary
+## Opsummering
 
-If a `.then` (or `catch/finally`, doesn't matter) handler returns a promise, the rest of the chain waits until it settles. When it does, its result (or error) is passed further.
+Hvis en `.then` (eller `catch/finally`, for den sags skyld) handler returnerer et promise, vil resten af kæden vente indtil den bliver løst. Når det sker, videregives resultatet (eller fejlen) videre.
 
-Here's a full picture:
+Her er et overbliksbillede:
 
 ![](promise-handler-variants.svg)
