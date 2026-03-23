@@ -1,3 +1,3 @@
-The output is: `1`.
+Outputtet er: `1`.
 
-The second call to `resolve` is ignored, because only the first call of `reject/resolve` is taken into account. Further calls are ignored.
+Det andet kald til `resolve` ignoreres, fordi kun det første kald til `reject/resolve` tages i betragtning. Yderligere kald ignoreres.

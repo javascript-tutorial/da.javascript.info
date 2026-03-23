@@ -1,14 +1,14 @@
 
-# Delay with a promise
+# Forsinkelse med et promise
 
-The built-in function `setTimeout` uses callbacks. Create a promise-based alternative.
+Den indbyggede funktion `setTimeout` bruger callbacks. Opret et promise-baseret alternativ.
 
-The function `delay(ms)` should return a promise. That promise should resolve after `ms` milliseconds, so that we can add `.then` to it, like this:
+Funktionen `delay(ms)` bør returnere et promise. Det promise bør indfries efter `ms` millisekunder. Vi kan så tilføje `.then` til det, sådan her:
 
 ```js
 function delay(ms) {
-  // your code
+  // din kode
 }
 
-delay(3000).then(() => alert('runs after 3 seconds'));
+delay(3000).then(() => alert('kører efter 3 sekunder'));
 ```
