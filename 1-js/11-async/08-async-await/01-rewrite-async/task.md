@@ -1,7 +1,7 @@
 
-# Rewrite using async/await
+# Omskriv ved brug af async/await
 
-Rewrite this example code from the chapter <info:promise-chaining> using `async/await` instead of `.then/catch`:
+Omskriv dette eksempelkode fra kapitlet <info:promise-chaining> ved hjælp af `async/await` i stedet for `.then/catch`:
 
 ```js run
 function loadJson(url) {
