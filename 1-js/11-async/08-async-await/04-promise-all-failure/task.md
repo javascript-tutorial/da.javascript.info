@@ -1,17 +1,17 @@
 
-# Dangerous Promise.all
+# Farlig Promise.all
 
-`Promise.all` is a great way to parallelize multiple operations. It's especially useful when we need to make parallel requests to multiple services.
+`Promise.all` er en fantastisk måde at køre flere operationer parallelt. Det er især nyttigt når vi har brug for at lave flere forespørgsler til forskellige services samtidigt.
 
-However, there's a hidden danger. We'll see an example in this task and explore how to avoid it.
+Men, der er en skjult fare. Vi vil se et eksempel i denne opgave og udforske, hvordan man undgår den.
 
-Let's say we have a connection to a remote service, such as a database.
+Lad os sige, vi har en forbindelse til en ekstern service, såsom en database.
 
-There're two functions: `connect()` and `disconnect()`.
+Der er to funktioner: `connect()` og `disconnect()`.
 
-When connected, we can send requests using `database.query(...)` - an async function which usually returns the result but also may throw an error.
+Når den er forbundet, kan vi sende forespørgsler ved hjælp af `database.query(...)` - en async function, som normalt returnerer resultatet, men også kan kaste en fejl.
 
-Here's a simple implementation:
+Her er en simpel implementering af det:
 
 ```js
 let database;
@@ -28,21 +28,21 @@ function disconnect() {
   database = null;
 }
 
-// intended usage:
+// beregnet brug:
 // connect()
 // ...
-// database.query(true) to emulate a successful call
-// database.query(false) to emulate a failed call
+// database.query(true) for at emulere et succesfuldt kald
+// database.query(false) for at emulere et mislykket kald
 // ...
 // disconnect()
 ```
 
-Now here's the problem.
+Se her er problemet.
 
-We wrote the code to connect and send 3 queries in parallel (all of them take different time, e.g. 100, 200 and 300ms), then disconnect:
+Vi skrev koden til at forbinde og sende 3 forespørgsler parallelt (alle tager forskellig tid, f.eks. 100, 200 og 300 ms), for derefter at frakoble igen:
 
 ```js
-// Helper function to call async function `fn` after `ms` milliseconds
+// Hjælperfunktion til at kalde async funktion `fn` efter `ms` millisekunder
 function delay(fn, ms) {
   return new Promise((resolve, reject) => {
     setTimeout(() => fn().then(resolve, reject), ms);
@@ -54,8 +54,8 @@ async function run() {
 
   try {
     await Promise.all([
-      // these 3 parallel jobs take different time: 100, 200 and 300 ms
-      // we use the `delay` helper to achieve this effect
+      // disse 3 paralelle jobs tager forskellig tid: 100, 200 og 300 ms
+      // vi bruger `delay` hjælperen for at opnå denne effekt
 *!*
       delay(() => database.query(true), 100),
       delay(() => database.query(false), 200),
@@ -63,7 +63,7 @@ async function run() {
 */!*
     ]);
   } catch(error) {
-    console.log('Error handled (or was it?)');
+    console.log('Fejl håndteret (eller er den?)');
   }
 
   disconnect();
@@ -72,8 +72,8 @@ async function run() {
 run();
 ```
 
-Two of these queries happen to be unsuccessful, but we're smart enough to wrap the `Promise.all` call into a `try..catch` block.
+To af disse forespørgsler viser sig at fejle, men vi var smarte nok til at wrappe `Promise.all` kaldet i en `try..catch` block.
 
-However, this doesn't help! This script actually leads to an uncaught error in console!
+Men lige meget hvad, så hjælper det ikke! Dette script fører faktisk til en ikke-fanget fejl i konsollen!
 
-Why? How to avoid it?
+Hvorfor? Hvordan undgår man det?

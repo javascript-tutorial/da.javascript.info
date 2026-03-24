@@ -1,52 +1,52 @@
 
-The root of the problem is that `Promise.all` immediately rejects when one of its promises rejects, but it do nothing to cancel the other promises.
+Roden til problemet er, at `Promise.all` umiddelbart afviser, når en af dens promises afviser, men den gør intet for at annullere de andre promises.
 
-In our case, the second query fails, so `Promise.all` rejects, and the `try...catch` block catches this error.Meanwhile, other promises are *not affected* - they independently continue their execution. In our case, the third query throws an error of its own after a bit of time. And that error is never caught, we can see it in the console.
+I vores tilfælde fejler den anden forespørgsel, så `Promise.all` afviser, og `try...catch` blokken fanger denne fejl. Mens de andre promises ikke er påvirket - de fortsætter uafhængigt deres eksekvering. I vores tilfælde kaster den tredje forespørgsel en fejl selv efter et stykke tid. Og den fejl bliver aldrig fanget, vi kan se den i konsollen.
 
-The problem is especially dangerous in server-side environments, such as Node.js, when an uncaught error may cause the process to crash.
+Problemet er især farligt i server-side miljøer, såsom Node.js, hvor en ikke-fanget fejl kan forårsage, at processen går ned.
 
-How to fix it?
+Hvordan fikser vi det?
 
-An ideal solution would be to cancel all unfinished queries when one of them fails. This way we avoid any potential errors.
+En idéel løsning ville være at annullere alle uafsluttede forespørgsler, når en af dem fejler. På denne måde undgår vi eventuelle fejl.
 
-However, the bad news is that service calls (such as `database.query`) are often implemented by a 3rd-party library which doesn't support cancellation. Then there's no way to cancel a call.
+Men den dårlige nyheder er, at servicekald (såsom `database.query`) ofte er implementeret af en 3rd-parts bibliotek, som ikke understøtter annullering. Så der er ingen måde at annullere et kald.
 
-As an alternative, we can write our own wrapper function around `Promise.all` which adds a custom `then/catch` handler to each promise to track them: results are gathered and, if an error occurs, all subsequent promises are ignored.
+Som et alternativ kan vi skrive vores egen wrapper omkring `Promise.all` som tilføjer en custom `then/catch` handler til hver promise for at spore dem: resultaterne samles og, hvis en fejl opstår, ignoreres alle efterfølgende promises.
 
 ```js
 function customPromiseAll(promises) {
   return new Promise((resolve, reject) => {
     const results = [];
     let resultsCount = 0;
-    let hasError = false; // we'll set it to true upon first error
+    let hasError = false; // vi sætter den til true ved første fejl vi møder
 
     promises.forEach((promise, index) => {
       promise
         .then(result => {
-          if (hasError) return; // ignore the promise if already errored
+          if (hasError) return; // ignorer promise hvis den allerede er fejlet
           results[index] = result;
           resultsCount++;
           if (resultsCount === promises.length) {
-            resolve(results); // when all results are ready - successs
+            resolve(results); // når alle resultater er klar - succes
           }
         })
         .catch(error => {
-          if (hasError) return; // ignore the promise if already errored
-          hasError = true; // wops, error!
-          reject(error); // fail with rejection
+          if (hasError) return; // ignorer promise hvis den allerede er fejlet
+          hasError = true; // ups, fejl!
+          reject(error); // fejl med reject
         });
     });
   });
 }
 ```
 
-This approach has an issue of its own - it's often undesirable to `disconnect()` when queries are still in the process.
+Denne tilgang har sine egne udfordringer - det er ofte uønsket at kalde `disconnect()` når der stadig er forespørgsler i processen.
 
-It may be important that all queries complete, especially if some of them make important updates.
+Det kan være vigtigt at alle forespørgsler gennemføres, især hvis nogle af dem indeholder vigtige opdateringer.
 
-So we should wait until all promises are settled before going further with the execution and eventually disconnecting.
+Så vi bør vente indtil alle promise er afsluttet, før vi går videre med eksekveringen og til sidst frakobler.
 
-Here's another implementation. It behaves similar to `Promise.all` - also resolves with the first error, but waits until all promises are settled.
+Her er en anden implementering. Den opfører sig i stil med `Promise.all` - den resolver også ved den første fejl, men venter indtil alle promise er afsluttet.
 
 ```js
 function customPromiseAllWait(promises) {
@@ -80,16 +80,16 @@ function customPromiseAllWait(promises) {
 }
 ```
 
-Now `await customPromiseAllWait(...)` will stall the execution until all queries are processed.
+Nu vil `await customPromiseAllWait(...)` tilbageholde udførelsen indtil alle forespørgsler er behandlet. Hvis der opstår en fejl, vil den blive fanget i `try...catch` blokken, og vi kan være sikre på, at alle forespørgsler er afsluttet, før vi går videre.
 
-This is a more reliable approach, as it guarantees a predictable execution flow.
+Dette er en mere pålidelig tilgang, da den garanterer et forudsigeligt eksekveringsflow.
 
-Lastly, if we'd like to process all errors, we can use either use `Promise.allSettled` or write a wrapper around it to gathers all errors in a single [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) object and rejects with it.
+Til sidst, hvis vi vil behandle alle fejl, kan vi bruge enten `Promise.allSettled` eller skrive en wrapper omkring for at samle alle fejl i et enkelt [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) objekt og afvise med det.
 
 ```js
-// wait for all promises to settle
-// return results if no errors
-// throw AggregateError with all errors if any
+// vent på at alle promise er afsluttet
+// returner resultater hvis ingen fejl
+// kast AggregateError med alle fejl hvis nogen
 function allOrAggregateError(promises) {
   return Promise.allSettled(promises).then(results => {
     const errors = [];
@@ -104,7 +104,7 @@ function allOrAggregateError(promises) {
     });
 
     if (errors.length > 0) {
-      throw new AggregateError(errors, 'One or more promises failed');
+      throw new AggregateError(errors, 'En eller flere promises fejlede');
     }
 
     return values;
