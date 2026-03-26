@@ -1,29 +1,29 @@
 
 # Pseudo-random generator
 
-There are many areas where we need random data.
+Der findes mange situationer, hvor vi har brug for tilfældige data.
 
-One of them is testing. We may need random data: text, numbers, etc. to test things out well.
+En af dem er testning. Vi kan have brug for tilfældige data: tekst, tal osv. for at teste funktioner grundigt.
 
-In JavaScript, we could use `Math.random()`. But if something goes wrong, we'd like to be able to repeat the test, using exactly the same data.
+I JavaScript kan vi bruge `Math.random()`. Men hvis noget går galt, vil vi gerne være i stand til at kunne gentage testen ved hjælp af præcis de samme data.
 
-For that, so called "seeded pseudo-random generators" are used. They take a "seed", the first value, and then generate the next ones using a formula so that the same seed yields the same sequence, and hence the whole flow is easily reproducible. We only need to remember the seed to repeat it.
+Til dette kan såkaldte "seeded pseudo-random generators" bruges. De tager en "seed", den første værdi, og genererer derefter de næste ved hjælp af en formel, så den samme seed giver den samme sekvens, og dermed er hele flowet nemt reproducibelt. Vi behøver kun at huske seed'en for at gentage den.
 
-An example of such formula, that generates somewhat uniformly distributed values:
+Et eksempel på en sådan formel, som genererer nogle lidt uniformt fordelte værdier:
 
 ```
 next = previous * 16807 % 2147483647
 ```
 
-If we use `1` as the seed, the values will be:
+Hvis vi bruger `1` som seed, vil værdierne være:
 1. `16807`
 2. `282475249`
 3. `1622650073`
-4. ...and so on...
+4. ...og så videre...
 
-The task is to create a generator function `pseudoRandom(seed)` that takes `seed` and creates the generator with this formula.
+Opgaven er at oprette en generatorfunktion `pseudoRandom(seed)` som tager `seed` og opretter generator med denne formel.
 
-Usage example:
+Brugseksempel:
 
 ```js
 let generator = pseudoRandom(1);
