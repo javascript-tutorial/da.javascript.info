@@ -1,108 +1,108 @@
 
-# Modules, introduction
+# Moduler, introduktion
 
-As our application grows bigger, we want to split it into multiple files, so called "modules". A module may contain a class or a library of functions for a specific purpose.
+Efterhånden som vores applikation vokser sig større, stiger behovet for at splitte den op i flere filer, såkaldte "moduler". Et modul kan indeholde en klasse eller et bibliotek af funktioner til et specifikt formål.
 
-For a long time, JavaScript existed without a language-level module syntax. That wasn't a problem, because initially scripts were small and simple, so there was no need.
+I mange år levede JavaScript uden nogen syntaks for moduler på sprogniveau. Det var ikke det helt store problem, da scripts ofte var små og simple - så der var ikke det store behov for det.
 
-But eventually scripts became more and more complex, so the community invented a variety of ways to organize code into modules, special libraries to load modules on demand.
+Men i takt med at scripts blev mere og mere komplekse, opfandt fællesskabet en række måder at organisere kode i moduler, samt specielle biblioteker til at indlæse moduler efter behov.
 
-To name some (for historical reasons):
+For at nævne nogle (af historiske grunde, da de ikke længere er så relevante):
 
-- [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- one of the most ancient module systems, initially implemented by the library [require.js](https://requirejs.org/).
-- [CommonJS](https://wiki.commonjs.org/wiki/Modules/1.1) -- the module system created for Node.js server.
-- [UMD](https://github.com/umdjs/umd) -- one more module system, suggested as a universal one, compatible with AMD and CommonJS.
+- [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- en af de helt gamle modulsystemer, oprindeligt implementeret af biblioteket [require.js](https://requirejs.org/).
+- [CommonJS](https://wiki.commonjs.org/wiki/Modules/1.1) -- et modulsystem skal til Node.js server.
+- [UMD](https://github.com/umdjs/umd) -- endnu et modulsystem, foreslået som et universelt system og kompatibelt med AMD og CommonJS.
 
-Now these all slowly became a part of history, but we still can find them in old scripts.
+Nu bliver alle disse langsomt en del af historien, men vi kan stadig finde dem i gamle scripts.
 
-The language-level module system appeared in the standard in 2015, gradually evolved since then, and is now supported by all major browsers and in Node.js. So we'll study the modern JavaScript modules from now on.
+Moduler på sprogniveau så dagens lys i standarden i 2015. Den har gradvist udviklet sig siden og er nu understøttet i alle større browsere og i Node.js - så vil vil studere disse moderne moduler implementeret i JavaScript og lade de andre systemer i fred.
 
-## What is a module?
+## Hvad er et modul?
 
-A module is just a file. One script is one module. As simple as that.
+Et modul er bare en fil. Et script er ét modul. Det er så simpelt som det kan være.
 
-Modules can load each other and use special directives `export` and `import` to interchange functionality, call functions of one module from another one:
+Moduler kan hente hinanden og bruge specielle direktiver `export` og `import` til at bytte funktionalitet, kalde funktioner fra et modul i et andet:
 
-- `export` keyword labels variables and functions that should be accessible from outside the current module.
-- `import` allows the import of functionality from other modules.
+- `export` nøgleordet mærker variabler og funktioner, der skal være tilgængelige fra uden for det nuværende modul.
+- `import` tillader import af funktionalitet fra andre moduler.
 
-For instance, if we have a file `sayHi.js` exporting a function:
+For eksempel, hvis vi har en fil `sayHi.js` der eksporterer en funktion:
 
 ```js
 // 📁 sayHi.js
 export function sayHi(user) {
-  alert(`Hello, ${user}!`);
+  alert(`Hej, ${user}!`);
 }
 ```
 
-...Then another file may import and use it:
+...Så kan en anden fil importere og bruge den:
 
 ```js
 // 📁 main.js
 import {sayHi} from './sayHi.js';
 
 alert(sayHi); // function...
-sayHi('John'); // Hello, John!
+sayHi('John'); // Hej, John!
 ```
 
-The `import` directive loads the module by path `./sayHi.js` relative to the current file, and assigns exported function `sayHi` to the corresponding variable.
+Direktivet `import` henter modulet med stien `./sayHi.js` relativt til den nuværende fil. Den tildeler den eksporterede funktion `sayHi` til den tilsvarende variabel skrevet i de krøllede parenteser.
 
-Let's run the example in-browser.
+Lad os køre eksemplet i browseren.
 
-As modules support special keywords and features, we must tell the browser that a script should be treated as a module, by using the attribute `<script type="module">`.
+Da moduler understøtter specielle nøgleord og funktioner, skal vi fortælle browseren, at et script skal behandles som et modul, ved at bruge attributten `<script type="module">`.
 
-Like this:
+Som her:
 
 [codetabs src="say" height="140" current="index.html"]
 
-The browser automatically fetches and evaluates the imported module (and its imports if needed), and then runs the script.
+Browseren henter og evaluerer automatisk det importerede modul (og dets importerede moduler hvis nødvendigt), for derefter at køre scriptet.
 
-```warn header="Modules work only via HTTP(s), not locally"
-If you try to open a web-page locally, via `file://` protocol, you'll find that `import/export` directives don't work. Use a local web-server, such as [static-server](https://www.npmjs.com/package/static-server#getting-started) or use the "live server" capability of your editor, such as VS Code [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) to test modules.
+```warn header="Moduler virker kun via HTTP(s), ikke lokalt"
+Hvis du forsøger at åbne en web-side som en fil lokalt (via `file://` protocol), vil du opleve at `import/export` direktiverne ikke virker. Brug en lokal web-server, såsom [static-server](https://www.npmjs.com/package/static-server#getting-started) eller brug "live server" muligheden i din editor, såsom VS Code [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) til at teste moduler.
 ```
 
-## Core module features
+## Fundamentale modul funktionaliteter
 
-What's different in modules, compared to "regular" scripts?
+Hvad er forskellen mellem moduler og "normale" scripts?
 
-There are core features, valid both for browser and server-side JavaScript.
+Der er en række grundlæggende træk, som er gyldige både for browser og server-side JavaScript.
 
-### Always "use strict"
+### Altid "use strict"
 
-Modules always work in strict mode. E.g. assigning to an undeclared variable will give an error.
+Moduler arbejder altid i strict mode. Hvis du f.eks. forsøger at tildele en variabel uden at deklarere den først, vil det give en fejl.
 
 ```html run
 <script type="module">
-  a = 5; // error
+  a = 5; // fejl, a er ikke deklareret
 </script>
 ```
 
-### Module-level scope
+### Scope på modul-niveau
 
-Each module has its own top-level scope. In other words, top-level variables and functions from a module are not seen in other scripts.
+Hvert modul har sit eget top-level scope. Med andre ord, top-level variable og funktioner fra et modul er ikke synlige i andre scripts.
 
-In the example below, two scripts are imported, and `hello.js` tries to use `user` variable declared in `user.js`. It fails, because it's a separate module (you'll see the error in the console):
+I eksemplet nedenfor importeres to scripts, og `hello.js` forsøger at bruge `user` variablen deklareret i `user.js`. Det mislykkes, fordi det er et separat modul (du vil se fejlen i konsollen):
 
 [codetabs src="scopes" height="140" current="index.html"]
 
-Modules should `export` what they want to be accessible from outside and `import` what they need.
+Moduler skal bruge `export` til at fortælle, hvad der skal være tilgængeligt udenfor modulet og selv bruge `import` til det der er brug for udefra.
 
-- `user.js` should export the `user` variable.
-- `hello.js` should import it from `user.js` module.
+- `user.js` bør eksportere variablen `user`.
+- `hello.js` bør importere den fra `user.js` modulet.
 
-In other words, with modules we use import/export instead of relying on global variables.
+Med andre ord: Med moduler bruger vi import/export i stedet for at stole på globale variabler.
 
-This is the correct variant:
+Her er den korrekte udgave af koden før:
 
 [codetabs src="scopes-working" height="140" current="hello.js"]
 
-In the browser, if we talk about HTML pages, independent top-level scope also exists for each `<script type="module">`.
+I browseren, hvis vi taler om HTML sider, eksisterer der også et uafhængigt top-level scope for hvert `<script type="module">`.
 
-Here are two scripts on the same page, both `type="module"`. They don't see each other's top-level variables:
+Her ser du to scripts på den samme side, begge med `type="module"`. De ser ikke hinandens top-level variable, fordi de er separate moduler:
 
 ```html run
 <script type="module">
-  // The variable is only visible in this module script
+  // Variablen er kun synlig i dette module script
   let user = "John";
 </script>
 
@@ -114,45 +114,45 @@ Here are two scripts on the same page, both `type="module"`. They don't see each
 ```
 
 ```smart
-In the browser, we can make a variable window-level global by explicitly assigning it to a `window` property, e.g. `window.user = "John"`. 
+I browseren, kan vi lave en variabel window-level global ved at eksplicit tildele den til en `window` egenskab, f.eks. `window.user = "John"`. 
 
-Then all scripts will see it, both with `type="module"` and without it. 
+Derefter vil alle scripts se den, både med `type="module"` og uden for det. 
 
-That said, making such global variables is frowned upon. Please try to avoid them.
+Det skal dog understreges, at den måde at oprette globale variable på "giver panderynker" hos andre udviklere. Så prøv at undgå det med mindre at det er nødvendigt.
 ```
 
-### A module code is evaluated only the first time when imported
+### Koden i et modul evalueres kun den første gang det importeres
 
-If the same module is imported into multiple other modules, its code is executed only once, upon the first import. Then its exports are given to all further importers.
+Hvis det samme modulet importeres af flere andre moduler, evalueres dens kode kun én gang, når det importeres første gang. Derefter gives dens eksporteringer til alle yderligere importører.
 
-The one-time evaluation has important consequences, that we should be aware of. 
+Den ene evaluering har vigtige konsekvenser, som vi bør være opmærksomme på.
 
-Let's see a couple of examples.
+Lad os se et par eksempler.
 
-First, if executing a module code brings side-effects, like showing a message, then importing it multiple times will trigger it only once -- the first time:
+Først, hvis det at eksekvere koden i et modul medfører sideeffekter, f.eks. visning af en besked, så vil import af det samme modul flere gange kun udløse sideeffekten én gang -- første gang:
 
 ```js
 // 📁 alert.js
-alert("Module is evaluated!");
+alert("Modulet er evalueret!");
 ```
 
 ```js
-// Import the same module from different files
+// Importer det samme modul fra forskellige filer
 
 // 📁 1.js
-import `./alert.js`; // Module is evaluated!
+import `./alert.js`; // Modulet er evalueret!
 
 // 📁 2.js
-import `./alert.js`; // (shows nothing)
+import `./alert.js`; // (viser intet)
 ```
 
-The second import shows nothing, because the module has already been evaluated.
+Den anden gang modulet importeres, vises intet, fordi modulet allerede er blevet evalueret.
 
-There's a rule: top-level module code should be used for initialization, creation of module-specific internal data structures. If we need to make something callable multiple times - we should export it as a function, like we did with `sayHi` above.
+Der er en regel: top-level modul-kode skal bruges til initialisering, oprettelse af modulspecifikke insterne datastrukture. Hvis vi har behov for at gøre noget kaldbart flere gange - bør vi eksportere det som en funktion, som vi gjorde med `sayHi` ovenfor.
 
-Now, let's consider a deeper example.
+Lad os nu se et mere komplekst eksempel.
 
-Let's say, a module exports an object:
+Lad os sige, at et modul eksporterer et objekt:
 
 ```js
 // 📁 admin.js
@@ -161,9 +161,9 @@ export let admin = {
 };
 ```
 
-If this module is imported from multiple files, the module is only evaluated the first time, `admin` object is created, and then passed to all further importers.
+Hvis dette modul importeres fra flere filer, evalueres modulet kun første gang, `admin` objektet oprettes, og derefter sendes det til alle yderligere importører.
 
-All importers get exactly the one and only `admin` object:
+Alle importører får præcis det samme `admin` objekt:
 
 ```js
 // 📁 1.js
@@ -175,38 +175,38 @@ import {admin} from './admin.js';
 alert(admin.name); // Pete
 
 *!*
-// Both 1.js and 2.js reference the same admin object
-// Changes made in 1.js are visible in 2.js
+// Både 1.js og 2.js refererer til samme admin objekt
+// Ændringer lavet i 1.js er synlige i 2.js
 */!*
 ```
 
-As you can see, when `1.js` changes the `name` property in the imported `admin`, then `2.js` can see the new `admin.name`.
+Som du kan se, når `1.js` ændrer `name` egenskaben i det importerede `admin`, så kan `2.js` se den nye `admin.name`.
 
-That's exactly because the module is executed only once. Exports are generated, and then they are shared between importers, so if something changes the `admin` object, other importers will see that.
+Det er netop fordi modulet kun bliver eksekveret én gang. Eksporteringer genereres, og derefter deles de mellem importørerne, så hvis noget ændrer `admin` objektet, vil andre importører se det.
 
-**Such behavior is actually very convenient, because it allows us to *configure* modules.**
+**Sådan adfærd er faktisk meget praktisk, fordi den tillader os at *konfigurere* moduler.**
 
-In other words, a module can provide a generic functionality that needs a setup. E.g. authentication needs credentials. Then it can export a configuration object expecting the outer code to assign to it.
+Med andre ord kan moduler levere generisk funktionalitet, der har brug for opsætning - f.eks. noget der kræver autentifikation. Så kan det eksportere et konfigurationsobjekt, som det forventes, at den ydre kode tildele det.
 
-Here's the classical pattern:
-1. A module exports some means of configuration, e.g. a configuration object.
-2. On the first import we initialize it, write to its properties. The top-level application script may do that.
-3. Further imports use the module.
+Her er det klassiske mønster for at konfigurere moduler:
+1. Et modul eksporterer nogle metoder til konfiguration, f.eks. et konfigurationsobjekt.
+2. Ved første import initialiserer vi det og skriver til dets egenskaber. Det kan et top-level applikationsscript f.eks. gøre.
+3. Yderligere importeringer bruger modulet.
 
-For instance, the `admin.js` module may provide certain functionality (e.g. authentication), but expect the credentials to come into the `config` object from outside:
+For eksempel kan `admin.js` modulet levere bestemte funktionaliteter (f.eks. autentifikation), men forvente, at legitimationsoplysningerne kommer ind i `config` objektet udefra:
 
 ```js
 // 📁 admin.js
 export let config = { };
 
 export function sayHi() {
-  alert(`Ready to serve, ${config.user}!`);
+  alert(`Jeg er klar, ${config.user}!`);
 }
 ```
 
-Here, `admin.js` exports the `config` object (initially empty, but may have default properties too).
+Her eksporterer, `admin.js` selve objektet `config` (Her er det helt tomt, men det kan også indeholde standard egenskaber).
 
-Then in `init.js`, the first script of our app, we import `config` from it and set `config.user`:
+Så i `init.js`, det første script i vores app, importerer vi `config` og sætter `config.user`:
 
 ```js
 // 📁 init.js
@@ -214,38 +214,38 @@ import {config} from './admin.js';
 config.user = "Pete";
 ```
 
-...Now the module `admin.js` is configured. 
+...Nu er modulet `admin.js` konfigureret. 
 
-Further importers can call it, and it correctly shows the current user:
+Yderligere importører kan kalde det, og det viser korrekt den nuværende bruger:
 
 ```js
 // 📁 another.js
 import {sayHi} from './admin.js';
 
-sayHi(); // Ready to serve, *!*Pete*/!*!
+sayHi(); // Jeg er klar, *!*Pete*/!*!
 ```
 
 
 ### import.meta
 
-The object `import.meta` contains the information about the current module.
+Objektet `import.meta` indeholder informationen om det nuværende modul.
 
-Its content depends on the environment. In the browser, it contains the URL of the script, or a current webpage URL if inside HTML:
+Dets indhold afhænger af miljøet. I browseren indeholder det URL'en for scriptet, eller en nuværende webpage URL hvis det er inde i HTML:
 
 ```html run height=0
 <script type="module">
   alert(import.meta.url); // script URL
-  // for an inline script - the URL of the current HTML-page
+  // for et inline script er URL den aktuelle HTML-sides URL
 </script>
 ```
 
-### In a module, "this" is undefined
+### I et modul har "this" værdien undefined
 
-That's kind of a minor feature, but for completeness we should mention it.
+Det er måske en mindre ting, men for komplethedens skyld bør vi nævne det.
 
-In a module, top-level `this` is undefined.
+I et modul er `this` undefined.
 
-Compare it to non-module scripts, where `this` is a global object:
+Sammenlign det med scripts der ikke er sat som moduler, hvor `this` er det globale objekt:
 
 ```html run height=0
 <script>
@@ -257,66 +257,66 @@ Compare it to non-module scripts, where `this` is a global object:
 </script>
 ```
 
-## Browser-specific features
+## Browserspecifikke features
 
-There are also several browser-specific differences of scripts with `type="module"` compared to regular ones.
+Der er også flere browser-specifikke forskelle på scripts med `type="module"` i forhold til regulære scripts.
 
-You may want to skip this section for now if you're reading for the first time, or if you don't use JavaScript in a browser.
+Du kan vælge at springe denne sektion over for nu, hvis du læser om JavaScript for første gang, eller hvis du ikke bruger JavaScript i en browser.
 
-### Module scripts are deferred
+### Scripts der er moduler er deferred
 
-Module scripts are *always* deferred, same effect as `defer` attribute (described in the chapter [](info:script-async-defer)), for both external and inline scripts.
+Når du sætter et script som et modul, er det *altid* deferred. Så har det samme effekt som `defer` attributten (beskrevet i kapitlet [](info:script-async-defer)), for både eksterne og inline scripts.
 
-In other words:
-- downloading external module scripts `<script type="module" src="...">` doesn't block HTML processing, they load in parallel with other resources.
-- module scripts wait until the HTML document is fully ready (even if they are tiny and load faster than HTML), and then run.
-- relative order of scripts is maintained: scripts that go first in the document, execute first.
+Med andre ord:
+- Hentning af externe modul-scripts `<script type="module" src="...">` blokerer ikke processering af HTML. De bliver hentet ind parallelt med andre ressourcer.
+- modul-scripts venter indtil HTML-dokumentet er fuldt indlæst (selv hvis de er små og loader hurtigere end HTML).- Først når al HTML er hentet kører de.
+- Den relative orden af scripts er bevaret: Scripts der er først i dokumentet, eksekvereres først.
 
-As a side effect, module scripts always "see" the fully loaded HTML-page, including HTML elements below them.
+Som en praktisk sideeffekt af dette vil modul-scripts altid "se" den fuldt indlæste HTML-side - også HTML-elementer der kommer efter dem.
 
-For instance:
+For eksempel:
 
 ```html run
 <script type="module">
 *!*
-  alert(typeof button); // object: the script can 'see' the button below
+  alert(typeof button); // object: scriptet kan 'se' knappen under den
 */!*
-  // as modules are deferred, the script runs after the whole page is loaded
+  // da moduler er deferred, kører scriptet efter at hele siden er indlæst
 </script>
 
-Compare to regular script below:
+Sammelignet med et regulært script nedenfor:
 
 <script>
 *!*
-  alert(typeof button); // button is undefined, the script can't see elements below
+  alert(typeof button); // button er undefined - scriptet kan ikke se elementer nedenfor
 */!*
-  // regular scripts run immediately, before the rest of the page is processed
+  // regulære scripts kører med det samme, før resten af siden er processeret.
 </script>
 
 <button id="button">Button</button>
 ```
 
-Please note: the second script actually runs before the first! So we'll see `undefined` first, and then `object`.
+Bemærk: Det andet script afvikles faktisk før det første! Så vi ser`undefined` først, efterfulgt af `object`.
 
-That's because modules are deferred, so we wait for the document to be processed. The regular script runs immediately, so we see its output first.
+Det er fordi moduler er deferred, så vi venter på, at dokumentet bliver processeret. Det regulære script kører med det samme, så vi ser dens output først.
 
-When using modules, we should be aware that the HTML page shows up as it loads, and JavaScript modules run after that, so the user may see the page before the JavaScript application is ready. Some functionality may not work yet. We should put "loading indicators", or otherwise ensure that the visitor won't be confused by that.
+Når man bruger moduler, bør man være opmærksom på, at HTML-siden vises, mens den indlæses, og JavaScript-moduler først kører efter, så brugeren måske ser siden før JavaScript-applikationen er klar. Noget funktionalitet virker muligvis endnu ikke. Vi bør tilføje "loading indicators", eller på anden måde sikre, at besøgende ikke bliver forvirret af det.
 
-### Async works on inline scripts
+### Async virker på inline scripts
 
-For non-module scripts, the `async` attribute only works on external scripts. Async scripts run immediately when ready, independently of other scripts or the HTML document.
+For scripts der ikke er moduler, virker `async` attributten kun på eksterne scripts. Async scripts kører med det samme, når de er klare, uafhængigt af andre scripts eller HTML-dokumentet.
 
-For module scripts, it works on inline scripts as well.
+For modul-scripts, virker det også på inline scripts.
 
-For example, the inline script below has `async`, so it doesn't wait for anything.
+For eksempel har inline scriptet nedenfor `async`, så det venter ikke på noget.
 
-It performs the import (fetches `./analytics.js`) and runs when ready, even if the HTML document is not finished yet, or if other scripts are still pending.
+Det udfører importen (henter `./analytics.js`) og kører når det er klart, selv hvis HTML-dokumentet ikke er færdigt endnu, eller hvis andre scripts stadig afventer.
 
-That's good for functionality that doesn't depend on anything, like counters, ads, document-level event listeners.
+Det er godt for funktionalitet, der ikke afhænger af noget, som tællere, reklamer, og dokumentniveau event listeners.
 
 ```html
-<!-- all dependencies are fetched (analytics.js), and the script runs -->
-<!-- doesn't wait for the document or other <script> tags -->
+<!-- alle afhængigheder er hentet (analytics.js), og scriptet kører -->
+<!-- venter ikke på dokumentet eller andre <script> tags -->
 <script *!*async*/!* type="module">
   import {counter} from './analytics.js';
 
@@ -324,95 +324,95 @@ That's good for functionality that doesn't depend on anything, like counters, ad
 </script>
 ```
 
-### External scripts
+### Eksterne scripts
 
-External scripts that have `type="module"` are different in two aspects:
+Eksterne scripts der har `type="module"` er forskellige i to aspekter:
 
-1. External scripts with the same `src` run only once:
+1. Eksterne scripts med samme `src` kører kun én gang:
     ```html
-    <!-- the script my.js is fetched and executed only once -->
+    <!-- script my.js hentes og eksekveres kun én gang -->
     <script type="module" src="my.js"></script>
     <script type="module" src="my.js"></script>
     ```
 
-2. External scripts that are fetched from another origin (e.g. another site) require [CORS](mdn:Web/HTTP/CORS) headers, as described in the chapter <info:fetch-crossorigin>. In other words, if a module script is fetched from another origin, the remote server must supply a header `Access-Control-Allow-Origin` allowing the fetch.
+2. Eksterne scripts der er hentet fra en anden såkaldt *origin* (f.eks. en anden hjemmeside) kræver [CORS](mdn:Web/HTTP/CORS) headers, som beskrevet i kapitlet <info:fetch-crossorigin>. Med andre ord, hvis et modul-script er hentet fra en anden origin, skal den eksterne server tilbyde en header `Access-Control-Allow-Origin` som tillader fetch.
     ```html
-    <!-- another-site.com must supply Access-Control-Allow-Origin -->
-    <!-- otherwise, the script won't execute -->
+    <!-- another-site.com skal tilbyde Access-Control-Allow-Origin -->
+    <!-- ellers vil scriptet ikke virke -->
     <script type="module" src="*!*http://another-site.com/their.js*/!*"></script>
     ```
 
-    That ensures better security by default.
+    Dette sikrer bedre sikkerhed som standard.
 
-### No "bare" modules allowed
+### Ingen "bare" modules er tilladt
 
-In the browser, `import` must get either a relative or absolute URL. Modules without any path are called "bare" modules. Such modules are not allowed in `import`.
+I browseren skal `import` modtage en relative eller absolut URL. Moduler uden nogen sti kaldes "bare" modules. Sådanne moduler er ikke tilladt i `import`.
 
-For instance, this `import` is invalid:
+Denne `import` er derfor ugyldig:
 ```js
 import {sayHi} from 'sayHi'; // Error, "bare" module
-// the module must have a path, e.g. './sayHi.js' or wherever the module is
+// modulet skal have en sti, f.eks. './sayHi.js' der peger på hvor modulet er
 ```
 
-Certain environments, like Node.js or bundle tools allow bare modules, without any path, as they have their own ways for finding modules and hooks to fine-tune them. But browsers do not support bare modules yet.
+Nogle miljøer, som f.eks. Node.js eller bundle tools, tillader "bare" modules, uden nogen sti, da de har deres egne måder at finde moduler og hooks til at justere dem. Men browsere understøtter ikke "bare" modules endnu.
 
-### Compatibility, "nomodule"
+### Kompatibilitet, "nomodule"
 
-Old browsers do not understand `type="module"`. Scripts of an unknown type are just ignored. For them, it's possible to provide a fallback using the `nomodule` attribute:
+Gamel browsere forstår ikke `type="module"`. Scripts der har en ukendt type ignoreres. For dem er det muligt at give en fallback ved hjælp af `nomodule` attributten, som fortæller browseren at det script kun skal køres hvis den ikke forstår `type="module"`.:
 
 ```html run
 <script type="module">
-  alert("Runs in modern browsers");
+  alert("Kører i moderne browsere der forstår moduler");
 </script>
 
 <script nomodule>
-  alert("Modern browsers know both type=module and nomodule, so skip this")
-  alert("Old browsers ignore script with unknown type=module, but execute this.");
+  alert("Moderne browsere kender både type=module og nomodule, så denne springes over")
+  alert("Gamle browsere ignorerer script med ukendt type=module, men eksekverer denne.");
 </script>
 ```
 
 ## Build tools
 
-In real-life, browser modules are rarely used in their "raw" form. Usually, we bundle them together with a special tool such as [Webpack](https://webpack.js.org/) and deploy to the production server.
+I virkelige projekter bliver moduler bundlet sammen med et specielt værktøj såsom [Vite](https://vite.dev/) og distribueret til produktionsserveren.
 
-One of the benefits of using bundlers -- they give more control over how modules are resolved, allowing bare modules and much more, like CSS/HTML modules.
+Der er flere fordele ved at bruge bundlere. De giver mere kontrol over hvordan moduler løses, hvilket tillader "bare" moduler og meget mere, som f.eks. CSS/HTML moduler.
 
-Build tools do the following:
+Build tools gør følgende:
 
-1. Take a "main" module, the one intended to be put in `<script type="module">` in HTML.
-2. Analyze its dependencies: imports and then imports of imports etc.
-3. Build a single file with all modules (or multiple files, that's tunable), replacing native `import` calls with bundler functions, so that it works. "Special" module types like HTML/CSS modules are also supported.
-4. In the process, other transformations and optimizations may be applied:
-    - Unreachable code removed.
-    - Unused exports removed ("tree-shaking").
-    - Development-specific statements like `console` and `debugger` removed.
-    - Modern, bleeding-edge JavaScript syntax may be transformed to older one with similar functionality using [Babel](https://babeljs.io/).
-    - The resulting file is minified (spaces removed, variables replaced with shorter names, etc).
+1. Tager et "main" module, det modul som er beregnet til at blive placeret i `<script type="module">` i HTML.
+2. Analyserer dets afhængigheder: imports og derefter imports af imports osv.
+3. Bygger en enkelt fil med alle moduler (eller flere filer, hvis det er valgt), erstatter native `import` kald med bundler funktioner, så det virker. "Special" typer af moduler som HTML/CSS moduler er også understøttet.
+4. I processen, kan andre transformationer og optimieringer anvendes:
+    - Ikke-tilgængelig kode fjernes.
+    - Ubrugte eksporteringer fjernes ("tree-shaking").
+    - Udvikingsspecifikke udtryk som `console` og `debugger` fjernes.
+    - Helt ny JavaScript syntaks kan transformeres til en ældre version med lignende funktionalitet ved hjælp af [Babel](https://babeljs.io/) eller andre værktøjer.
+    - Den endelige fil bliver formindsket eller *minified* (mellemrum fjernes, variabelnavne erstattes med korte navne, etc).
 
-If we use bundle tools, then as scripts are bundled together into a single file (or few files), `import/export` statements inside those scripts are replaced by special bundler functions. So the resulting "bundled" script does not contain any `import/export`, it doesn't require `type="module"`, and we can put it into a regular script:
+Hvis vi bruger bundlere, såsom [Vite](https://vite.dev/), så bliver moduler bundlet sammen til en enkelt fil (eller flere filer), og `import/export`-sætninger indeni disse scripts erstattes af specielle bundler-funktioner. Så det resulterende "bundled" script indeholder ikke nogle `import/export`, det kræver ikke `type="module"`, og vi kan putte det ind i et almindeligt script:
 
 ```html
-<!-- Assuming we got bundle.js from a tool like Webpack -->
+<!-- Forudsat at vi fik bundle.js fra et værktøj som Vite -->
 <script src="bundle.js"></script>
 ```
 
-That said, native modules are also usable. So we won't be using Webpack here: you can configure it later.
+Med det sagt er native modules også brugbare. Vi vil ikke bruge Vite her: du kan konfigurere det senere.
 
-## Summary
+## Opsummering
 
-To summarize, the core concepts are:
+For at opsummere, er de vigtigste ting at huske om moduler:
 
-1. A module is a file. To make `import/export` work, browsers need `<script type="module">`. Modules have several differences:
-    - Deferred by default.
-    - Async works on inline scripts.
-    - To load external scripts from another origin (domain/protocol/port), CORS headers are needed.
-    - Duplicate external scripts are ignored.
-2. Modules have their own, local top-level scope and interchange functionality via `import/export`.
-3. Modules always `use strict`.
-4. Module code is executed only once. Exports are created once and shared between importers.
+1. Et modul er en fil. For at `import/export` skal virke, har browsere brug for `<script type="module">`. Moduler har flere forskelle i forhold til almindelige scripts:
+    - Deferred som standard.
+    - Async virker på inline scripts.
+    - At hente eksterne scripts fra en anden origin (domain/protocol/port), kræver såkaldte CORS headers.
+    - Duplikerede eksterne scripts ignoreres.
+2. Moduler har deres egen lokale scope og udveksler funktionalitet via `import/export`.
+3. Moduler bruger altid `use strict`.
+4. Moduler kode eksekveres kun én gang. Exports skabes en gang og deles mellem imports.
 
-When we use modules, each module implements the functionality and exports it. Then we use `import` to directly import it where it's needed. The browser loads and evaluates the scripts automatically.
+Når vi bruger moduler vil hvert modul implementere sin egen funktionalitet og eksportere den. Derefter bruger vi `import` til at importere det hvor det er nødvendigt. Browseren loader og evaluerer scriptene automatisk.
 
-In production, people often use bundlers such as [Webpack](https://webpack.js.org) to bundle modules together for performance and other reasons.
+I produktion bruger folk ofte bundlere såsom [Vite](https://vite.dev/) til at bandle moduler sammen for ydeevne og andre grunde.
 
-In the next chapter we'll see more examples of modules, and how things can be exported/imported.
+ næste kapitel vil vi se flere eksempler på moduler, og hvordan ting kan eksporteres/importeres.
