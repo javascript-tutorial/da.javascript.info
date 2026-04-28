@@ -1,3 +1,3 @@
-# Browser: Document, Events, Interfaces 
+# Browser: Dokumenter, Hændelser, brugergrænseflader 
 
-Learning how to manage the browser page: add elements, manipulate their size and position, dynamically create interfaces and interact with the visitor.
+Lær hvordan man håndterer browserens side: tilføj elementer, manipuler deres størrelse og position, opret grænseflader dynamisk og interager med brugeren.

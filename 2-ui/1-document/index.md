@@ -1,3 +1,3 @@
-# Document
+# Dokumentet
 
-Here we'll learn to manipulate a web-page using JavaScript.
+Her vil vi lære at manipulere en web-side ved hjælp af JavaScript.

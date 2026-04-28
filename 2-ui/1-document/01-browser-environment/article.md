@@ -1,113 +1,113 @@
-# Browser environment, specs
+# Browser miljø, specs
 
-The JavaScript language was initially created for web browsers. Since then, it has evolved into a language with many uses and platforms.
+JavaScript blev oprindelig skabt for webbrowsere. Siden da har det udviklet sig til et sprog med mange brugsområder og platforme.
 
-A platform may be a browser, or a web-server or another *host*, or even a "smart" coffee machine if it can run JavaScript. Each of these provides platform-specific functionality. The JavaScript specification calls that a *host environment*.
+En platform kan være en browser, eller en web-server eller en anden *host*. Den kan endda en "smart" kaffemaskine hvis den kan køre JavaScript. Hver af disse leverer platform-specifik funktionalitet. JavaScript specifikationen kalder det en *host miljø*.
 
-A host environment provides its own objects and functions in addition to the language core. Web browsers give a means to control web pages. Node.js provides server-side features, and so on.
+Et host miljø leverer dets egne objekter og funktioner i tilføjelse til sprogkernen. Webbrowsere giver et middel til at kontrollere web sider. Node.js leverer server-side funktioner, og så videre.
 
-Here's a bird's-eye view of what we have when JavaScript runs in a web browser:
+Her er et simpelt billede af, hvad vi har, når JavaScript kører i en web browser:
 
 ![](windowObjects.svg)
 
-There's a "root" object called `window`. It has two roles:
+Der er et "root" objekt kaldet `window`. Det har to roller:
 
-1. First, it is a global object for JavaScript code, as described in the chapter <info:global-object>.
-2. Second, it represents the "browser window" and provides methods to control it.
+1. Det er et globalt objekt for JavaScript kode, som beskrevet i kapitlet <info:global-object>.
+2. Det repræsenterer "browser vinduet" og leverer metoder til at kontrollere det.
 
-For instance, we can use it as a global object:
+Vi kan for eksempel bruge det som et globalt objekt, for at definere en global funktion:
 
-```js run global
+```js Kør globalt
 function sayHi() {
-  alert("Hello");
+  alert("Hej!");
 }
 
-// global functions are methods of the global object:
+// globale funktioner er metoder i det globale objekt:
 window.sayHi();
 ```
 
-And we can use it as a browser window, to show the window height:
+Og vi kan bruge det som et browser vindue, for at vise vinduets højde:
 
 ```js run
-alert(window.innerHeight); // inner window height
+alert(window.innerHeight); // indre højde på browser vinduet
 ```
 
-There are more window-specific methods and properties, which we'll cover later.
+Der er flere window-specifikke metoder og egenskaber, som vi vil dække senere.
 
 ## DOM (Document Object Model)
 
-The Document Object Model, or DOM for short, represents all page content as objects that can be modified.
+Document Object Model, ofte bare kaldt DOM, repræsenterer alt indhold på siden der kan ændres.
 
-The `document` object is the main "entry point" to the page. We can change or create anything on the page using it.
+Objektet `document` er "hoveddøren" til siden. Vi kan ændre eller oprette noget på siden ved hjælp af det.
 
-For instance:
+For eksempel, for at ændre baggrundsfarven på siden, kan vi bruge `document.body.style`:
 ```js run
-// change the background color to red
+// gør baggrundsfarven rød
 document.body.style.background = "red";
 
-// change it back after 1 second
+// nulstil den efter 1 sekund
 setTimeout(() => document.body.style.background = "", 1000);
 ```
 
-Here, we used `document.body.style`, but there's much, much more. Properties and methods are described in the specification: [DOM Living Standard](https://dom.spec.whatwg.org).
+Her bruger vi `document.body.style`, men der er mange andre muligheder. Egenskaber og metoder er beskrevet i specificationen for: [DOM Living Standard](https://dom.spec.whatwg.org).
 
-```smart header="DOM is not only for browsers"
-The DOM specification explains the structure of a document and provides objects to manipulate it. There are non-browser instruments that use DOM too.
+```smart header="DOM er ikke kun for browseren"
+DOM specifikationen forklarer strukturen af et dokument og leverer objekter til at manipulere det. Der er ikke-browser instrumenter som også bruger DOM.
 
-For instance, server-side scripts that download HTML pages and process them can also use the DOM. They may support only a part of the specification though.
+For eksempel, server-side scripts som downloader HTML sider og behandler dem kan også bruge DOM. De kan måske kun supportere en del af specifikationen.
 ```
 
-```smart header="CSSOM for styling"
-There's also a separate specification, [CSS Object Model (CSSOM)](https://www.w3.org/TR/cssom-1/) for CSS rules and stylesheets, that explains how they are represented as objects, and how to read and write them.
+```smart header="CSSOM til styling"
+Der er også en seperat specifikation, [CSS Object Model (CSSOM)](https://www.w3.org/TR/cssom-1/) for CSS-regler og stylesheets, som forklarer, hvordan de repræsenteres som objekter, og hvordan man læser og skriver dem.
 
-The CSSOM is used together with the DOM when we modify style rules for the document. In practice though, the CSSOM is rarely required, because we rarely need to modify CSS rules from JavaScript (usually we just add/remove CSS classes, not modify their CSS rules), but that's also possible.
+CSSOM bruges sammen med DOM, når vi ændrer style-regler for dokumentet. I praksis er CSSOM dog sjældent nødvendigt, fordi vi sjælden har brug for at ændre CSS-regler fra JavaScript. For det meste tilføjer eller fjerner vi bare CSS-klasser. Kun i sjældne tilfælde ændrer vi CSS-regler, men det er muligt.
 ```
 
 ## BOM (Browser Object Model)
 
-The Browser Object Model (BOM) represents additional objects provided by the browser (host environment) for working with everything except the document.
+Browser Object Model (BOM) repræsenterer yderligere objekter leveret af browseren (hostmiljøet) til at arbejde med alt undtagen dokumentet.
 
-For instance:
+For eksempel:
 
-- The [navigator](mdn:api/Window/navigator) object provides background information about the browser and the operating system. There are many properties, but the two most widely known are: `navigator.userAgent` -- about the current browser, and `navigator.platform` -- about the platform (can help to differentiate between Windows/Linux/Mac etc).
-- The [location](mdn:api/Window/location) object allows us to read the current URL and can redirect the browser to a new one.
+- Objektet [navigator](mdn:api/Window/navigator) leverer baggrundsinformation om browseren ogopretaivsystemet. Det indeholder mange egenskaber, men de to mest kendte er: `navigator.userAgent` -- den aktuelle browser, og `navigator.platform` -- platformen der kører browseren (kan hjælpe med at differentiere mellem Windows/Linux/Mac etc).
+- Objektet [location](mdn:api/Window/location) tillader dig at læse den nuværende URL og kan omdirigere browseren til en ny URL.
 
-Here's how we can use the `location` object:
+Her er hvordan vi kan bruge `location`-objektet til at vise den nuværende URL og omdirigere browseren til Wikipedia, hvis brugeren bekræfter det:
 
 ```js run
-alert(location.href); // shows current URL
+alert(location.href); // Vis den nuværende URL
 if (confirm("Go to Wikipedia?")) {
-  location.href = "https://wikipedia.org"; // redirect the browser to another URL
+  location.href = "https://wikipedia.org"; // omdirigere browseren til en ny URL
 }
 ```
 
-The functions `alert/confirm/prompt` are also a part of the BOM: they are not directly related to the document, but represent pure browser methods for communicating with the user.
+Funktionerne `alert/confirm/prompt` er også en del af BOM: de er ikke direkte relaterede til dokumentet, men repræsenterer rene browsermetoder til kommunikation med brugeren.
 
-```smart header="Specifications"
-The BOM is a part of the general [HTML specification](https://html.spec.whatwg.org).
+```smart header="Specifikationer"
+BOM er en del af den generelle [HTML specifikation](https://html.spec.whatwg.org).
 
-Yes, you heard that right. The HTML spec at <https://html.spec.whatwg.org> is not only about the "HTML language" (tags, attributes), but also covers a bunch of objects, methods, and browser-specific DOM extensions. That's "HTML in broad terms". Also, some parts have additional specs listed at <https://spec.whatwg.org>.
+Ja, du hørte rigtigt. HTML specifikationen fra <https://html.spec.whatwg.org> handler ikke kun om "HTML sproget" (tags, attributter, etc), men dækker også over en stor bunke objekter, metoder og browser-specifikke DOM-udvidelser. Det er "HTML i bred betydning". Desuden har nogle dele yderligere specifikationer opført andre steder på <https://spec.whatwg.org>.
 ```
 
-## Summary
+## Opsummering
 
-Talking about standards, we have:
+Når vi taler om standarder, så har vi:
 
-DOM specification
-: Describes the document structure, manipulations, and events, see <https://dom.spec.whatwg.org>.
+DOM specifikationen
+: Beskriver strukturen af et dokument, manipulation af den og hændelser (events), se <https://dom.spec.whatwg.org>.
 
-CSSOM specification
-: Describes stylesheets and style rules, manipulations with them, and their binding to documents, see <https://www.w3.org/TR/cssom-1/>.
+CSSOM specifikation
+: Beskriver stylesheet og regler for styling, manipulation af dem, og deres binding til dokumenter, se <https://www.w3.org/TR/cssom-1/>.
 
-HTML specification
-: Describes the HTML language (e.g. tags) and also the BOM (browser object model) -- various browser functions: `setTimeout`, `alert`, `location` and so on, see <https://html.spec.whatwg.org>. It takes the DOM specification and extends it with many additional properties and methods.
+HTML specifikation
+: Beskriver HTML sproget (f.eks. tags) og også BOM (browser object model) -- forskellige browserfunktioner: `setTimeout`, `alert`, `location` og så videre, se <https://html.spec.whatwg.org>. Den tager DOM specifikationen og udvider den med mange yderligere egenskaber og metoder.
 
-Additionally, some classes are described separately at <https://spec.whatwg.org/>.
+Ud over disse specifikationer er der også flere klasser beskrevet separat på <https://spec.whatwg.org/>.
 
-Please note these links, as there's so much to learn that it's impossible to cover everything and remember it all.
+Gem disse links, da der er så meget at lære og det er umuligt at dække eller huske det hele.
 
-When you'd like to read about a property or a method, the Mozilla manual at <https://developer.mozilla.org/en-US/> is also a nice resource, but the corresponding spec may be better: it's more complex and longer to read, but will make your fundamental knowledge sound and complete.
+Når du vil læse om en egenskab eller en metode, er Mozilla manualen på <https://developer.mozilla.org/en-US/> også en god ressource. Du kan starte med den, men den tilsvarende spec kan nogle gange være bedre for den øvede. Den er mere kompleks og længere at læse, men vil gøre din fundamentale viden komplet.
 
-To find something, it's often convenient to use an internet search "WHATWG [term]" or "MDN [term]", e.g <https://google.com?q=whatwg+localstorage>, <https://google.com?q=mdn+localstorage>.
+For at finde noget, er det ofte praktisk at bruge en internet søgning "WHATWG [term]" eller "MDN [term]", f.eks <https://google.com?q=whatwg+localstorage>, <https://google.com?q=mdn+localstorage>.
 
-Now, we'll get down to learning the DOM, because the document plays the central role in the UI.
+Nu er det tid til at lære DOM nærmere at kende, fordi dokumentet spiller en central rolle i UI.
