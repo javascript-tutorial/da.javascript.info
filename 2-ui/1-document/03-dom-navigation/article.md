@@ -5,37 +5,37 @@ libs:
 ---
 
 
-# Walking the DOM
+# Gennemløbe DOM'en
 
-The DOM allows us to do anything with elements and their contents, but first we need to reach the corresponding DOM object.
+DOM'en tillader os at gøre alt med dens elementer og deres indhold, men først skal vi "nå det" tilsvarende DOM-objekt.
 
-All operations on the DOM start with the `document` object. That's the main "entry point" to DOM. From it we can access any node.
+Alle operationer på DOM'en starter med `document`-objektet. Det er "hoveddøren" til din DOM. Fra det kan vi tilgå enhver node.
 
-Here's a picture of links that allow for travel between DOM nodes:
+Her er et billede af links, der tillader rejse mellem DOM-noder:
 
 ![](dom-links.svg)
 
-Let's discuss them in more detail.
+Lad os diskutere dem lidt i detaljer.
 
-## On top: documentElement and body
+## I toppen: documentElement og body
 
-The topmost tree nodes are available directly as `document` properties:
+De øverste trænoder er tilgængelige direkte som `document`-egenskaber:
 
 `<html>` = `document.documentElement`
-: The topmost document node is `document.documentElement`. That's the DOM node of the `<html>` tag.
+: Den øverste document node er `document.documentElement`. Det er DOM-noden for `<html>` tagget.
 
 `<body>` = `document.body`
-: Another widely used DOM node is the `<body>` element -- `document.body`.
+: En anden meget brugt DOM-node er `<body>`-elementet -- `document.body`.
 
 `<head>` = `document.head`
-: The `<head>` tag is available as `document.head`.
+: Tagget `<head>` er tilgængeligt som `document.head`.
 
-````warn header="There's a catch: `document.body` can be `null`"
-A script cannot access an element that doesn't exist at the moment of running.
+````warn header="Der er en hage: `document.body` kan være `null`"
+Et script kan ikke tilgå et element, der ikke eksisterer ved det øjeblik, hvor scriptet kører.
 
-In particular, if a script is inside `<head>`, then `document.body` is unavailable, because the browser did not read it yet.
+I særdeleshed, hvis et script er indeni `<head>`, så er `document.body` ikke tilgængeligt, fordi browseren har endnu ikke læst det.
 
-So, in the example below the first `alert` shows `null`:
+Så, i eksemplet nedenfor viser den første `alert` `null`:
 
 ```html run
 <html>
@@ -43,7 +43,7 @@ So, in the example below the first `alert` shows `null`:
 <head>
   <script>
 *!*
-    alert( "From HEAD: " + document.body ); // null, there's no <body> yet
+    alert( "Fra HEAD: " + document.body ); // null, der er ikke noget <body> endnu
 */!*
   </script>
 </head>
@@ -51,7 +51,7 @@ So, in the example below the first `alert` shows `null`:
 <body>
 
   <script>
-    alert( "From BODY: " + document.body ); // HTMLBodyElement, now it exists
+    alert( "Fra BODY: " + document.body ); // HTMLBodyElement, findes nu
   </script>
 
 </body>
@@ -59,23 +59,23 @@ So, in the example below the first `alert` shows `null`:
 ```
 ````
 
-```smart header="In the DOM world `null` means \"doesn't exist\""
-In the DOM, the `null` value means "doesn't exist" or "no such node".
+```smart header="På DOM sprog betyder `null` at det \"ikke eksisterer\""
+Hvis du møder `null` i DOM'en, betyder det "eksisterer ikke" eller "ingen sådan node".
 ```
 
 ## Children: childNodes, firstChild, lastChild
 
-There are two terms that we'll use from now on:
+Der er to termer vi vil bruge fra nu af:
 
-- **Child nodes (or children)** -- elements that are direct children. In other words, they are nested exactly in the given one. For instance, `<head>` and `<body>` are children of `<html>` element.
-- **Descendants** -- all elements that are nested in the given one, including children, their children and so on.
+- **Child nodes (eller children/børn)** -- elementer der er direkte børn af et element. For eksempel er `<head>` og `<body>` børn af `<html>` elementet.
+- **Descendants** (eller efterkommere) -- alle elementer der er indlejret i et givent element, inklusivt deres bør og børn af børn osv.
 
-For instance, here `<body>` has children `<div>` and `<ul>` (and few blank text nodes):
+For eksempelt har `<body>` her `<div>` og `<ul>` som børn (og nogle tomme tekstnoder):
 
 ```html run
 <html>
 <body>
-  <div>Begin</div>
+  <div>Start</div>
 
   <ul>
     <li>
@@ -86,22 +86,22 @@ For instance, here `<body>` has children `<div>` and `<ul>` (and few blank text 
 </html>
 ```
 
-...And descendants of `<body>` are not only direct children `<div>`, `<ul>` but also more deeply nested elements, such as `<li>` (a child of `<ul>`) and `<b>` (a child of `<li>`) -- the entire subtree.
+... og efterkommere af `<body>` er ikke kun børnene `<div>`, `<ul>` men også elementer der ligger dybere indlejret, såsom `<li>` (barn af `<ul>`) og `<b>` (et barn af `<li>`) -- hele den del af træet.
 
-**The `childNodes` collection lists all child nodes, including text nodes.**
+**Samlingen `childNodes` lister alle child nodes, inklusiv tekstnoder.**
 
-The example below shows children of `document.body`:
+Eksemplet nedenfor viser børn af `document.body`:
 
 ```html run
 <html>
 <body>
-  <div>Begin</div>
+  <div>Start</div>
 
   <ul>
     <li>Information</li>
   </ul>
 
-  <div>End</div>
+  <div>Slut</div>
 
   <script>
 *!*
@@ -110,81 +110,81 @@ The example below shows children of `document.body`:
     }
 */!*
   </script>
-  ...more stuff...
+  ...mere her...
 </body>
 </html>
 ```
 
-Please note an interesting detail here. If we run the example above, the last element shown is `<script>`. In fact, the document has more stuff below, but at the moment of the script execution the browser did not read it yet, so the script doesn't see it.
+Bemærk en interessant detalje her. Hvis vi kører eksemplet ovenfor, er det sidste element vist `<script>`. Faktisk har dokumentet mere indhold nedenfor, men på det tidspunkt hvor scriptet kører har browseren ikke læst det endnu, så scriptet ser det ikke.
 
-**Properties `firstChild` and `lastChild` give fast access to the first and last children.**
+**Egenskaberne `firstChild` og `lastChild` giver hurtig adgang til første og sidste barn.**
 
-They are just shorthands. If there exist child nodes, then the following is always true:
+De er bare hurtige genveje. Hvis der findes børn, så er det altid sandt:
 ```js
 elem.childNodes[0] === elem.firstChild
 elem.childNodes[elem.childNodes.length - 1] === elem.lastChild
 ```
 
-There's also a special function `elem.hasChildNodes()` to check whether there are any child nodes.
+Der er også en særlig funktion `elem.hasChildNodes()` til at tjekke om der er nogle børn.
 
-### DOM collections
+### DOM samlinger
 
-As we can see, `childNodes` looks like an array. But actually it's not an array, but rather a *collection* -- a special array-like iterable object.
+Som vi kan se så ligner `childNodes` et array. Men det er faktisk ikke et array, men en *collection* (samling) -- et særligt array-lignende objekt.
 
-There are two important consequences:
+Det har derfor to vigtige konsekvenser for os:
 
-1. We can use `for..of` to iterate over it:
+1. Vi kan bruge `for..of` til at iterere over den:
   ```js
   for (let node of document.body.childNodes) {
-    alert(node); // shows all nodes from the collection
+    alert(node); // viser alle noder fra samlingen
   }
   ```
-  That's because it's iterable (provides the `Symbol.iterator` property, as required).
+  Det er fordi den er itererbar (leverer egenskaben `Symbol.iterator`, som det kræves).
 
-2. Array methods won't work, because it's not an array:
+2. Array metode virker ikke fordi det ikke er et array:
   ```js run
-  alert(document.body.childNodes.filter); // undefined (there's no filter method!)
+  alert(document.body.childNodes.filter); // undefined (der er ikke nogen filter-metode!)
   ```
 
-The first thing is nice. The second is tolerable, because we can use `Array.from` to create a "real" array from the collection, if we want array methods:
+Det første er skønt. Det andet er håndterbart, fordi vi kan bruge `Array.from` til at skabe en "rigtig" array fra samlingen, hvis vi vil have array-metoder:
 
   ```js run
   alert( Array.from(document.body.childNodes).filter ); // function
   ```
 
-```warn header="DOM collections are read-only"
-DOM collections, and even more -- *all* navigation properties listed in this chapter are read-only.
+```warn header="DOM samlinger er kun til at læse fra"
+DOM samlinger, eller i det hele taget -- *alle* egenskaber til navigation som vi taler om i dette kapitel er kun til at læse fra.
 
-We can't replace a child by something else by assigning `childNodes[i] = ...`.
+Vi kan ikke erstatte et barn med noget andet ved at tildele `childNodes[i] = ...`.
 
-Changing DOM needs other methods. We will see them in the next chapter.
+At ændre DOM kræver andre metoder. Vi vil se dem i næste kapitel.
 ```
 
-```warn header="DOM collections are live"
-Almost all DOM collections with minor exceptions are *live*. In other words, they reflect the current state of DOM.
+```warn header="DOM samlinger er live"
+Næsten alle DOM samlinger, med enkelte undtagelser, er *live*. Med andre ord, de afspejler den nuværende tilstand af din DOM.
 
-If we keep a reference to `elem.childNodes`, and add/remove nodes into DOM, then they appear in the collection automatically.
+Hvis vi holder en reference til `elem.childNodes`, og tilføjer/fjerner noder til DOM, så vises de automatisk i samlingen.
 ```
 
-````warn header="Don't use `for..in` to loop over collections"
-Collections are iterable using `for..of`. Sometimes people try to use `for..in` for that.
+````warn header="Brug ikke `for..in` til at loope over samlinger"
+Samlinger er itererbare ved brug af `for..of`. Nogle gange prøver folk at bruge `for..in` til det.
 
-Please, don't. The `for..in` loop iterates over all enumerable properties. And collections have some "extra" rarely used properties that we usually do not want to get:
+Lad være med det. Et `for..in`-loop itererer over alle enumerable egenskaber. Og samlinger har nogle "ekstra" sjældent brugte egenskaber, som vi normalt ikke vil have:
 
 ```html run
 <body>
 <script>
-  // shows 0, 1, length, item, values and more.
+  // viser 0, 1, length, item, values and more.
   for (let prop in document.body.childNodes) alert(prop);
 </script>
 </body>
 ````
 
-## Siblings and the parent
+## Søskende og forældre (siblings og parents)
 
-*Siblings* are nodes that are children of the same parent.
+*Siblings* er noder som er børn af samme forælder.
 
-For instance, here `<head>` and `<body>` are siblings:
+For eksempel så er `<head>` og `<body>` søskende her:
 
 ```html
 <html>
@@ -192,75 +192,75 @@ For instance, here `<head>` and `<body>` are siblings:
 </html>
 ```
 
-- `<body>` is said to be the "next" or "right" sibling of `<head>`,
-- `<head>` is said to be the "previous" or "left" sibling of `<body>`.
+- `<body>` bliver kaldt den "næste" eller "højre" søskende af `<head>`,
+- `<head>` bliver kaldt den "forrige" eller "venstre" søskende af `<body>`.
 
-The next sibling is in `nextSibling` property, and the previous one - in `previousSibling`.
+Den næste søskende er kan hentes med egenskaben `nextSibling`, og den forrige - med `previousSibling`.
 
-The parent is available as `parentNode`.
+Forældren er tilgængelig som `parentNode`.
 
-For example:
+For eksempel:
 
 ```js run
-// parent of <body> is <html>
+// forælder til <body> er <html>
 alert( document.body.parentNode === document.documentElement ); // true
 
-// after <head> goes <body>
+// efter <head> kommer <body>
 alert( document.head.nextSibling ); // HTMLBodyElement
 
-// before <body> goes <head>
+// før <body> kommer <head>
 alert( document.body.previousSibling ); // HTMLHeadElement
 ```
 
-## Element-only navigation
+## Navigation af elementer alene
 
-Navigation properties listed above refer to *all* nodes. For instance, in `childNodes` we can see both text nodes, element nodes, and even comment nodes if they exist.
+Egenskaberne til navigation som set ovenfor refererer til *alle* noder. Vi kan for eksempel med `childNodes` se både tekstnoder, elementnoder, og endda kommentar noder hvis de eksisterer.
 
-But for many tasks we don't want text or comment nodes. We want to manipulate element nodes that represent tags and form the structure of the page.
+Men i mange tilfælde har vi ikke lyst til at arbejde med tekst- eller kommentar noder. Vi vil gerne manipulere elementnoder, som repræsenterer HTML-tags og udgør strukturen af siden.
 
-So let's see more navigation links that only take *element nodes* into account:
+Så lad os se flere navigations links, som kun tager *element noder* i betragtning:
 
 ![](dom-links-elements.svg)
 
-The links are similar to those given above, just with `Element` word inside:
+De minder om dem vi har set tidligere, de har bare fået ordet `Element` tilføjet:
 
-- `children` -- only those children that are element nodes.
-- `firstElementChild`, `lastElementChild` -- first and last element children.
-- `previousElementSibling`, `nextElementSibling` -- neighbor elements.
-- `parentElement` -- parent element.
+- `children` -- kun de børn der er elementnoder.
+- `firstElementChild`, `lastElementChild` -- første og sidste barn der er elementnode.
+- `previousElementSibling`, `nextElementSibling` -- naboelementer.
+- `parentElement` -- forældre-element.
 
-````smart header="Why `parentElement`? Can the parent be *not* an element?"
-The `parentElement` property returns the "element" parent, while `parentNode` returns "any node" parent. These properties are usually the same: they both get the parent.
+````smart header="Why `parentElement`? Kan en forælder *undgå* at være et element?"
+Egenskaben `parentElement` returnerer "element" forælderen, mens `parentNode` returnerer "alle typer af node" forælder. Disse egenskaber der normalt de samme: de henter begge forælderen.
 
-With the one exception of `document.documentElement`:
+Der er dog én undtagelse med `document.documentElement`:
 
 ```js run
 alert( document.documentElement.parentNode ); // document
 alert( document.documentElement.parentElement ); // null
 ```
 
-The reason is that the root node `document.documentElement` (`<html>`) has `document` as its parent. But `document` is not an element node, so `parentNode` returns it and `parentElement` does not.
+Grunden til dette er at roden `document.documentElement` (`<html>`) har `document` som sin forælder. Men `document` er ikke en element node så `parentNode` returner den mens `parentElement` ikke gør.
 
-This detail may be useful when we want to travel up from an arbitrary element `elem` to `<html>`, but not to the `document`:
+Den lille detalje kan være brugbar, hvis vi vil "rejse" op gennem træet fra et vilkårligt element `elem` til `<html>`, men ikke til `document`:
 ```js
-while(elem = elem.parentElement) { // go up till <html>
+while(elem = elem.parentElement) { // gå op til <html>
   alert( elem );
 }
 ```
 ````
 
-Let's modify one of the examples above: replace `childNodes` with `children`. Now it shows only elements:
+Lad os modificere et af eksemplerne ovenfor: erstat `childNodes` med `children`. Nu viser det kun elementerne, og ignorerer tekstnoderne:
 
 ```html run
 <html>
 <body>
-  <div>Begin</div>
+  <div>Start</div>
 
   <ul>
     <li>Information</li>
   </ul>
 
-  <div>End</div>
+  <div>Slut</div>
 
   <script>
 *!*
@@ -274,60 +274,60 @@ Let's modify one of the examples above: replace `childNodes` with `children`. No
 </html>
 ```
 
-## More links: tables [#dom-navigation-tables]
+## Flere links: tabeller [#dom-navigation-tables]
 
-Till now we described the basic navigation properties.
+Indtil nu har vi beskrevet de grundlæggende navigationsegenskaber.
 
-Certain types of DOM elements may provide additional properties, specific to their type, for convenience.
+Bestemte typer af DOM-elementer kan levere yderligere egenskaber, specifikke for deres type, for nemhedens skyld.
 
-Tables are a great example of that, and represent a particularly important case:
+Tabeller er et godt eksempel, og de repræsenterer en særlig vigtig case:
 
-**The `<table>`** element supports (in addition to the given above) these properties:
-- `table.rows` -- the collection of `<tr>` elements of the table.
-- `table.caption/tHead/tFoot` -- references to elements `<caption>`, `<thead>`, `<tfoot>`.
-- `table.tBodies` -- the collection of `<tbody>` elements (can be many according to the standard, but there will always be at least one -- even if it is not in the source HTML, the browser will put it in the DOM).
+**`<table>`** elementet undestøtter (ud over det vi har lært) disse egenskaber:
+- `table.rows` -- en samling af `<tr>` elementer fra tabellen.
+- `table.caption/tHead/tFoot` -- referencer til elementerne `<caption>`, `<thead>`, `<tfoot>`.
+- `table.tBodies` -- samlingen af `<tbody>` elementer (kan være mange ifølge standarden, men der vil altid være mindst en -- selvom den ikke er i din egen kilde HTML, vil browseren sætte den i DOM).
 
-**`<thead>`, `<tfoot>`, `<tbody>`** elements provide the `rows` property:
-- `tbody.rows` -- the collection of `<tr>` inside.
+**`<thead>`, `<tfoot>`, `<tbody>`** elementer leverer egenskaben `rows`:
+- `tbody.rows` -- samlingen af `<tr>` elementer indeni.
 
 **`<tr>`:**
-- `tr.cells` -- the collection of `<td>` and `<th>` cells inside the given `<tr>`.
-- `tr.sectionRowIndex` -- the position (index) of the given `<tr>` inside the enclosing `<thead>/<tbody>/<tfoot>`.
-- `tr.rowIndex` -- the number of the `<tr>` in the table as a whole (including all table rows).
+- `tr.cells` -- samlingen af `<td>` og `<th>` celler indeni det givne `<tr>`.
+- `tr.sectionRowIndex` -- positionen (indeks) af det givne `<tr>` indeni det omkringliggende `<thead>/<tbody>/<tfoot>`.
+- `tr.rowIndex` -- nummeret på den givne `<tr>` i tabellen som helhed (inklusiv alle tabelrækker).
 
 **`<td>` and `<th>`:**
-- `td.cellIndex` -- the number of the cell inside the enclosing `<tr>`.
+- `td.cellIndex` -- nummeret på cellen indeni den omkransende `<tr>`.
 
-An example of usage:
+Et eksempel på brug:
 
 ```html run height=100
 <table id="table">
   <tr>
-    <td>one</td><td>two</td>
+    <td>en</td><td>to</td>
   </tr>
   <tr>
-    <td>three</td><td>four</td>
+    <td>tre</td><td>fire</td>
   </tr>
 </table>
 
 <script>
-  // get td with "two" (first row, second column)
+  // hent td med "to" (første række, anden kolonne)
   let td = table.*!*rows[0].cells[1]*/!*;
-  td.style.backgroundColor = "red"; // highlight it
+  td.style.backgroundColor = "red"; // fremhæv den
 </script>
 ```
 
-The specification: [tabular data](https://html.spec.whatwg.org/multipage/tables.html).
+Specifikationen: [tabular data](https://html.spec.whatwg.org/multipage/tables.html).
 
-There are also additional navigation properties for HTML forms. We'll look at them later when we start working with forms.
+Der er også yderligere muligheder for at navigere formularer. Dem kigger vi på senere når vi skal til at arbejde med formularer.
 
-## Summary
+## Opsummering
 
-Given a DOM node, we can go to its immediate neighbors using navigation properties.
+Givet en hvilken som helst DOM-node, kan vi gå til dens umiddelbare naboer ved at bruge navigationsegenskaber.
 
-There are two main sets of them:
+Der er to hovedsæt af dem:
 
-- For all nodes: `parentNode`, `childNodes`, `firstChild`, `lastChild`, `previousSibling`, `nextSibling`.
-- For element nodes only: `parentElement`, `children`, `firstElementChild`, `lastElementChild`, `previousElementSibling`, `nextElementSibling`.
+- For alle noder: `parentNode`, `childNodes`, `firstChild`, `lastChild`, `previousSibling`, `nextSibling`.
+- For elementnoder alene: `parentElement`, `children`, `firstElementChild`, `lastElementChild`, `previousElementSibling`, `nextElementSibling`.
 
-Some types of DOM elements, e.g. tables, provide additional properties and collections to access their content.
+Nogle typer af DOM-elementer, f.eks. tabeller, leverer yderligere egenskaber og samlinger til at tilgå deres indhold.

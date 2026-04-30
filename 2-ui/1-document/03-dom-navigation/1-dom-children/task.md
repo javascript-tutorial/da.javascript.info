@@ -2,23 +2,23 @@ importance: 5
 
 ---
 
-# DOM children
+# DOM børn
 
-Look at this page:
+Se på følgende side:
 
 ```html
 <html>
 <body>
-  <div>Users:</div>
+  <div>Brugere:</div>
   <ul>
-    <li>John</li>
-    <li>Pete</li>
+    <li>Lisbeth</li>
+    <li>Mikkel</li>
   </ul>
 </body>
 </html>
 ```
 
-For each of the following, give at least one way of how to access them:
-- The `<div>` DOM node?
-- The `<ul>` DOM node?
-- The second `<li>` (with Pete)?
+For hver af de følgende, giv mindst en måde at tilgå dem:
+- `<div>` DOM noden?
+- `<ul>` DOM noden?
+- Den anden `<li>` (med Mikkel)?

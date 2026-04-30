@@ -1,1 +1,1 @@
-We'll be using `rows` and `cells` properties to access diagonal table cells.
+Vi vil bruge `rows` og `cells` egenskaberne til at tilgå diagonale tabelceller.
