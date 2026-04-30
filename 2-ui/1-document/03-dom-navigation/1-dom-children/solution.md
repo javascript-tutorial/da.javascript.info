@@ -1,27 +1,27 @@
-There are many ways, for instance:
+Der er mange måder at gå til det på. Det kunne for eksempel være:
 
 
-The `<div>` DOM node:
+`<div>` DOM noden:
 
 ```js
 document.body.firstElementChild
-// or
+// eller
 document.body.children[0]
-// or (the first node is space, so we take 2nd)
+// eller (den første node er et mellemrum, så vi tager den anden)
 document.body.childNodes[1]
 ```
 
-The `<ul>` DOM node:
+`<ul>` DOM noden:
 
 ```js
 document.body.lastElementChild
-// or
+// eller
 document.body.children[1]
 ```
 
-The second `<li>` (with Pete):
+Den anden `<li>` (med Mikkel):
 
 ```js
-// get <ul>, and then get its last element child
+// hent <ul>, og derefter hent det sidste barn der er et element
 document.body.lastElementChild.lastElementChild
 ```
