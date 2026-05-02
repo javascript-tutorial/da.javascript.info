@@ -1,14 +1,14 @@
-# Searching: getElement*, querySelector*
+# Søgning: getElement*, querySelector*
 
-DOM navigation properties are great when elements are close to each other. What if they are not? How to get an arbitrary element of the page?
+Egenskaberne til DOM navigation properties er gode når elementerne er tætte på hinanden. Hvad nu hvis de ikke er det? Hvordan får man adgang til et vilkårligt element på siden?
 
-There are additional searching methods for that.
+Der er heldigvis flere søgemetoder til rådighed.
 
 ## document.getElementById or just id
 
-If an element has the `id` attribute, we can get the element using the method `document.getElementById(id)`, no matter where it is.
+Hvis et element har `id` attributten, kan vi få adgang til elementet ved hjælp af metoden `document.getElementById(id)`, uanset hvor det er.
 
-For instance:
+For eksempel:
 
 ```html run
 <div id="elem">
@@ -16,17 +16,17 @@ For instance:
 </div>
 
 <script>
-  // get the element
+  // hent elementet
 *!*
   let elem = document.getElementById('elem');
 */!*
 
-  // make its background red
+  // gør baggrunden rød
   elem.style.background = 'red';
 </script>
 ```
 
-Also, there's a global variable named by `id` that references the element:
+Der er også en global variabel kaldet `id`der refererer til elementet:
 
 ```html run
 <div id="*!*elem*/!*">
@@ -34,60 +34,60 @@ Also, there's a global variable named by `id` that references the element:
 </div>
 
 <script>
-  // elem is a reference to DOM-element with id="elem"
+  // elem er en reference til DOM-elementet med id="elem"
   elem.style.background = 'red';
 
-  // id="elem-content" has a hyphen inside, so it can't be a variable name
-  // ...but we can access it using square brackets: window['elem-content']
+  // id="elem-content" har en bindestreg i navnet, så det ikke kan være et variabelnavn
+  // ...men vi kan tilgå det ved hjælp af firkantede parenteser: window['elem-content']
 </script>
 ```
 
-...That's unless we declare a JavaScript variable with the same name, then it takes precedence:
+...Det sker med mindre at du deklarerer en JavaScript variabel med det samme navn - så vil den tage præcedens.
 
 ```html run untrusted height=0
 <div id="elem"></div>
 
 <script>
-  let elem = 5; // now elem is 5, not a reference to <div id="elem">
+  let elem = 5; // elem er nu 5, ikke en reference til <div id="elem">
 
   alert(elem); // 5
 </script>
 ```
 
-```warn header="Please don't use id-named global variables to access elements"
-This behavior is described [in the specification](https://html.spec.whatwg.org/multipage/window-object.html#named-access-on-the-window-object), but it is supported mainly for compatibility.
+```warn header="Du skal helst ikke bruge id-navngivede globale variable til at tilgå elememnter"
+Denne adfærd er beskrevet [i specifikationen](https://html.spec.whatwg.org/multipage/window-object.html#named-access-on-the-window-object), men det er understøttet hovedsageligt af kompetibilitet.
 
-The browser tries to help us by mixing namespaces of JS and DOM. That's fine for simple scripts, inlined into HTML, but generally isn't a good thing. There may be naming conflicts. Also, when one reads JS code and doesn't have HTML in view, it's not obvious where the variable comes from.
+Browseren forsøger at hjælpe os ved at blande namespaces for JS og DOM. Det er i orden for simple scripts, indlejret i HTML, men generelt er det ikke en god idé. Der kan være navnekonflikter. Desuden, når man læser JS-kode og ikke har HTML i samme visning, er det ikke helt klart hvor variablen kommer fra.
 
-Here in the tutorial we use `id` to directly reference an element for brevity, when it's obvious where the element comes from.
+Her i tutorialen bruger vi `id` til at referere direkte til et element for korthed, når det er klart hvor elementet kommer fra.
 
-In real life `document.getElementById` is the preferred method.
+I virkeligheden er `document.getElementById` den foretrukne metode.
 ```
 
-```smart header="The `id` must be unique"
-The `id` must be unique. There can be only one element in the document with the given `id`.
+```smart header="Et `id` skal være unikt"
+Et `id` skal være unikt. Der kan kun være ét element i dokumentet med det givne `id`.
 
-If there are multiple elements with the same `id`, then the behavior of methods that use it is unpredictable, e.g. `document.getElementById` may return any of such elements at random. So please stick to the rule and keep `id` unique.
+Hvis der er flere elementer med det samme `id`, så er opførslen for metoder, der bruger det, uforudsigelig, f.eks. `document.getElementById` kan returnere et af sådanne elementer tilfældigt. Så husk venligst reglen og hold `id` unikt.
 ```
 
-```warn header="Only `document.getElementById`, not `anyElem.getElementById`"
-The method `getElementById` can be called only on `document` object. It looks for the given `id` in the whole document.
+```warn header="Kun `document.getElementById`, ikke `anyElem.getElementById`"
+Metoden `getElementById` kan kun kaldes på `document` objektet. Den leder efter det givne `id` i hele dokumentet.
 ```
 
 ## querySelectorAll [#querySelectorAll]
 
-By far, the most versatile method, `elem.querySelectorAll(css)` returns all elements inside `elem` matching the given CSS selector.
+Den mest fleksible metode, `elem.querySelectorAll(css)` returnerer alle elementer inden for `elem` som matcher den givne CSS-selektor.
 
-Here we look for all `<li>` elements that are last children:
+Her leder vi efter alle `<li>` elementer som er sidste børn:
 
 ```html run
 <ul>
-  <li>The</li>
+  <li>Denne</li>
   <li>test</li>
 </ul>
 <ul>
-  <li>has</li>
-  <li>passed</li>
+  <li>er</li>
+  <li>fuldført</li>
 </ul>
 <script>
 *!*
@@ -95,44 +95,44 @@ Here we look for all `<li>` elements that are last children:
 */!*
 
   for (let elem of elements) {
-    alert(elem.innerHTML); // "test", "passed"
+    alert(elem.innerHTML); // "test", "fuldført"
   }
 </script>
 ```
 
-This method is indeed powerful, because any CSS selector can be used.
+Denne metode er ret kraftfuld, fordi du kan bruge en hvilken som helst CSS-selektor.
 
-```smart header="Can use pseudo-classes as well"
-Pseudo-classes in the CSS selector like `:hover` and `:active` are also supported. For instance, `document.querySelectorAll(':hover')` will return the collection with elements that the pointer is over now (in nesting order: from the outermost `<html>` to the most nested one).
+```smart header="Du kan også bruge pseudo-classes"
+Pseudo-classes i en CSS selector såsom `:hover` og `:active` understøttes også. For eksempel vil `document.querySelectorAll(':hover')` returnere en samling der indeholder elementer, som markøren er over (i indlejret orden: fra den yderste `<html>` til den mest indlejrede).
 ```
 
 ## querySelector [#querySelector]
 
-The call to `elem.querySelector(css)` returns the first element for the given CSS selector.
+Kaldet til `elem.querySelector(css)` returnere det første element med den givne CSS-selektor.
 
-In other words, the result is the same as `elem.querySelectorAll(css)[0]`, but the latter is looking for *all* elements and picking one, while `elem.querySelector` just looks for one. So it's faster and also shorter to write.
+Med andre ord er resultatet det samme som `elem.querySelectorAll(css)[0]`, men det vil kigge efte *alle* elementer og give det første, mens `elem.querySelector` kun kigger efter det første og returnerer det. Så det er både hurtigere at afvikle og skrive.
 
 ## matches
 
-Previous methods were searching the DOM.
+De forrige metoder søger i DOM'en.
 
-The [elem.matches(css)](https://dom.spec.whatwg.org/#dom-element-matches) does not look for anything, it merely checks if `elem` matches the given CSS-selector. It returns `true` or `false`.
+Metoden [elem.matches(css)](https://dom.spec.whatwg.org/#dom-element-matches) kigger ikke efter noget, det tjekker kun om `elem` matcher den givne CSS-selector. Det returnerer `true` eller `false`.
 
-The method comes in handy when we are iterating over elements (like in an array or something) and trying to filter out those that interest us.
+Metoden kommer i brug, når vi itererer over elementer (som i en liste eller noget lignende) og forsøger at filtrere de elementer, der interesserer os.
 
-For instance:
+For eksempel, hvis vi har en liste af elementer og ønsker at finde dem, der er links til zip-arkiver:
 
 ```html run
 <a href="http://example.com/file.zip">...</a>
 <a href="http://ya.ru">...</a>
 
 <script>
-  // can be any collection instead of document.body.children
+  // kan være en hvilken som helst samling i stedet for document.body.children
   for (let elem of document.body.children) {
 *!*
     if (elem.matches('a[href$="zip"]')) {
 */!*
-      alert("The archive reference: " + elem.href );
+      alert("Referencen til arkivet: " + elem.href );
     }
   }
 </script>
@@ -140,21 +140,21 @@ For instance:
 
 ## closest
 
-*Ancestors* of an element are: parent, the parent of parent, its parent and so on. The ancestors together form the chain of parents from the element to the top.
+*Forfædre* til et element er: forældre, forældren af forældren, etc. De forfædre sammen danner kæden af forældre fra elementet til toppen.
 
-The method `elem.closest(css)` looks for the nearest ancestor that matches the CSS-selector. The `elem` itself is also included in the search.
+Metoden `elem.closest(css)` leder efter den nærmeste forfader, der matcher CSS-selektoren. `elem` selv er også inkluderet i søgningen.
 
-In other words, the method `closest` goes up from the element and checks each of parents. If it matches the selector, then the search stops, and the ancestor is returned.
+Med andre ord går metoden `closest` op fra elementet og tjekker hver enkelt forfader. Hvis den matcher selektoren, stopper søgningen, og forfaderen returneres. Hvis ingen forfader matcher, returneres `null`.
 
-For instance:
+For eksempel:
 
 ```html run
 <h1>Contents</h1>
 
 <div class="contents">
   <ul class="book">
-    <li class="chapter">Chapter 1</li>
-    <li class="chapter">Chapter 2</li>
+    <li class="chapter">Kapitel 1</li>
+    <li class="chapter">Kapitel 2</li>
   </ul>
 </div>
 
@@ -164,44 +164,45 @@ For instance:
   alert(chapter.closest('.book')); // UL
   alert(chapter.closest('.contents')); // DIV
 
-  alert(chapter.closest('h1')); // null (because h1 is not an ancestor)
+  alert(chapter.closest('h1')); // null (fordi h1 er ikke en forælder)
+is not an ancestor)
 </script>
 ```
 
 ## getElementsBy*
 
-There are also other methods to look for nodes by a tag, class, etc.
+Der er også andre metoder til at finde elementer - via tag, class, etc.
 
-Today, they are mostly history, as `querySelector` is more powerful and shorter to write.
+De bliver sjældent brugt i dag, da `querySelector` er mere kraftfuld og kortere at skrive.
 
-So here we cover them mainly for completeness, while you can still find them in the old scripts.
+Så her dækker vi dem hovedsageligt for komplettheden, mens du stadig kan finde dem i gamle scripts.
 
-- `elem.getElementsByTagName(tag)` looks for elements with the given tag and returns the collection of them. The `tag` parameter can also be a star `"*"` for "any tags".
-- `elem.getElementsByClassName(className)` returns elements that have the given CSS class.
-- `document.getElementsByName(name)` returns elements with the given `name` attribute, document-wide. Very rarely used.
+- `elem.getElementsByTagName(tag)` kigger efter elementer med den givne tag og returnerer en samling med dem. Parameteren `tag` kan også være en stjerne `"*"` for "any tags".
+- `elem.getElementsByClassName(className)` returnerer elementer, der har den givne CSS-class.
+- `document.getElementsByName(name)` returnerer elementer med den givne `name`-attribut, Søger hele dokumentet og er meget sjældent brugt.
 
-For instance:
+For eksempel:
 ```js
-// get all divs in the document
+// hent alle div i dokumentet
 let divs = document.getElementsByTagName('div');
 ```
 
-Let's find all `input` tags inside the table:
+Lad os finde alle `input` tags inde i tabellen:
 
 ```html run height=50
 <table id="table">
   <tr>
-    <td>Your age:</td>
+    <td>Din alder:</td>
 
     <td>
       <label>
-        <input type="radio" name="age" value="young" checked> less than 18
+        <input type="radio" name="age" value="young" checked> under 18
       </label>
       <label>
-        <input type="radio" name="age" value="mature"> from 18 to 50
+        <input type="radio" name="age" value="mature"> mellem 18 og 50
       </label>
       <label>
-        <input type="radio" name="age" value="senior"> more than 60
+        <input type="radio" name="age" value="senior"> over 60
       </label>
     </td>
   </tr>
@@ -218,56 +219,56 @@ Let's find all `input` tags inside the table:
 </script>
 ```
 
-```warn header="Don't forget the `\"s\"` letter!"
-Novice developers sometimes forget the letter `"s"`. That is, they try to call `getElementByTagName` instead of <code>getElement<b>s</b>ByTagName</code>.
+```warn header="Glem ikke bogstavet `\"s\"`!"
+Udviklere kan nogle gange glemme bogstavet `"s"`. F. eks. når de forsøger at kalde `getElementByTagName` istedet for <code>getElement<b>s</b>ByTagName</code>.
 
-The `"s"` letter is absent in `getElementById`, because it returns a single element. But `getElementsByTagName` returns a collection of elements, so there's `"s"` inside.
+Når bogstavet `"s"` udelades i `getElementById` returnerer det et enkelt element. Men `getElementsByTagName` returnerer en samling af elementer - så det lille `"s"` i metoden er vigtig.
 ```
 
-````warn header="It returns a collection, not an element!"
-Another widespread novice mistake is to write:
+````warn header="Det returnerer en samling, ikke et element!"
+En anden udbredt fejl er at skrive:
 
 ```js
-// doesn't work
+// virker ikke
 document.getElementsByTagName('input').value = 5;
 ```
 
-That won't work, because it takes a *collection* of inputs and assigns the value to it rather than to elements inside it.
+Dette vil ikke virke fordi det tager en *samling* af input og tildeler en værdi til den i stedet for elementerne inde i samlingen.
 
-We should either iterate over the collection or get an element by its index, and then assign, like this:
+Vi skal enten iterere over samlingen eller pege på et specifikt element i samlingen og tildele værdien til det, sådan her:
 
 ```js
-// should work (if there's an input)
+// bør virke (hvis der er et input)
 document.getElementsByTagName('input')[0].value = 5;
 ```
 ````
 
-Looking for `.article` elements:
+Her kigges efter `.article` elementer:
 
 ```html run height=50
 <form name="my-form">
-  <div class="article">Article</div>
-  <div class="long article">Long article</div>
+  <div class="article">Artikel</div>
+  <div class="long article">Lang artikel</div>
 </form>
 
 <script>
-  // find by name attribute
+  // find via attributten name
   let form = document.getElementsByName('my-form')[0];
 
-  // find by class inside the form
+  // find via en class inde i formen
   let articles = form.getElementsByClassName('article');
-  alert(articles.length); // 2, found two elements with class "article"
+  alert(articles.length); // 2, fandt to elementer med class "article"
 </script>
 ```
 
-## Live collections
+## Live samlinger
 
-All methods `"getElementsBy*"` return a *live* collection. Such collections always reflect the current state of the document and "auto-update" when it changes.
+Alle metoderne `"getElementsBy*"` returnerer en *live* samling. Sådanne samlinger reflekterer altid den nuværende tilstand af dokumentet og opdateres automatisk når det ændres.
 
-In the example below, there are two scripts.
+I eksemplet herunder er der to scripts.
 
-1. The first one creates a reference to the collection of `<div>`. As of now, its length is `1`.
-2. The second scripts runs after the browser meets one more `<div>`, so its length is `2`.
+1. Det første opretter en reference til en samling af `<div>`. Som det er nu er dets længde `1`.
+2. Det andet script kører efter at browseren har fundet et tilføjet `<div>`, så dets længde er `2`.
 
 ```html run
 <div>First div</div>
@@ -286,9 +287,9 @@ In the example below, there are two scripts.
 </script>
 ```
 
-In contrast, `querySelectorAll` returns a *static* collection. It's like a fixed array of elements.
+Som kontrast til dette så returnerer `querySelectorAll` en *statisk* samling. Her er det en fikseret liste af elementer.
 
-If we use it instead, then both scripts output `1`:
+Hvis vi brugte denne metode i stedet, så ville begge scripts outputte `1`:
 
 
 ```html run
@@ -308,18 +309,18 @@ If we use it instead, then both scripts output `1`:
 </script>
 ```
 
-Now we can easily see the difference. The static collection did not increase after the appearance of a new `div` in the document.
+Nu bør det være tydeligt at se forskellen. Den statiske samling øgede ikke sin længde efter det nye `div` blev tilføjet i dokumentet.
 
-## Summary
+## Opsummering
 
-There are 6 main methods to search for nodes in DOM:
+Der er seks hoved-metoder til at finde elementer i DOM'en:
 
 <table>
 <thead>
 <tr>
-<td>Method</td>
-<td>Searches by...</td>
-<td>Can call on an element?</td>
+<td>Metoder</td>
+<td>Søger ved ...</td>
+<td>Kan kaldes på et element?</td>
 <td>Live?</td>
 </tr>
 </thead>
@@ -363,12 +364,12 @@ There are 6 main methods to search for nodes in DOM:
 </tbody>
 </table>
 
-By far the most used are `querySelector` and `querySelectorAll`, but `getElement(s)By*` can be sporadically helpful or found in the old scripts.
+Den klart mest fleksible metode er `querySelector` og `querySelectorAll`, men `getElement(s)By*` kan fra tid til anden være nyttige eller findes i gamle scripts.
 
-Besides that:
+Derudover finde der:
 
-- There is `elem.matches(css)` to check if `elem` matches the given CSS selector.
-- There is `elem.closest(css)` to look for the nearest ancestor that matches the given CSS-selector. The `elem` itself is also checked.
+- metoden `elem.matches(css)` der tjekker om `elem` matcher det givne CSS-selector.
+- metoden `elem.closest(css)` der kigger efter den nærmeste forælder, der matcher det givne CSS-selector. Selve `elem` er også med i søgningen.
 
-And let's mention one more method here to check for the child-parent relationship, as it's sometimes useful:
--  `elemA.contains(elemB)` returns true if `elemB` is inside `elemA` (a descendant of `elemA`) or when `elemA==elemB`.
+Og lad os nævne en yderligere metode her til at tjekke for barn-forælder-forhold, da det kan være nyttigt:
+-  `elemA.contains(elemB)` returnerer true hvis `elemB` er inde i `elemA` (en efterkommer af `elemA`) eller når `elemA==elemB`.
