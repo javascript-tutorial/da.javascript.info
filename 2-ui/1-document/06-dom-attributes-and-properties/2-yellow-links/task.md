@@ -2,15 +2,15 @@ importance: 3
 
 ---
 
-# Make external links orange
+# Gør eksterne links orange
 
-Make all external links orange by altering their `style` property.
+Gør alle eksterne links orange ved at ændre deres `style`-egenskab.
 
-A link is external if:
-- Its `href` has `://` in it
-- But doesn't start with `http://internal.com`.
+Et link er eksternt hvis:
+- Dets `href` har `://` i sig, og
+- Det ikke starter med `http://internal.com`.
 
-Example:
+Eksempel:
 
 ```html run
 <a name="list">the list</a>
@@ -24,12 +24,12 @@ Example:
 </ul>
 
 <script>
-  // setting style for a single link
+  // set style for et enkelt link
   let link = document.querySelector('a');
   link.style.color = 'orange';
 </script>
 ```
 
-The result should be:
+Resultatet skal være som her:
 
 [iframe border=1 height=180 src="solution"]
