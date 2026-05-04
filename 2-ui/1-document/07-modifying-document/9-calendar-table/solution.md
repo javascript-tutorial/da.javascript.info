@@ -1,9 +1,9 @@
-We'll create the table as a string: `"<table>...</table>"`, and then assign it to  `innerHTML`.
+Vi opretter tabellen som en streng: `"<table>...</table>"`, og tilknytter den til  `innerHTML`.
 
-The algorithm:
+Algoritmen er som følger:
 
-1. Create the table header with `<th>` and weekday names.
-2. Create the date object `d = new Date(year, month-1)`. That's the first day of `month` (taking into account that months in JavaScript start from `0`, not `1`).
-3. First few cells till the first day of the month `d.getDay()` may be empty. Let's fill them in with `<td></td>`.
-4. Increase the day in `d`: `d.setDate(d.getDate()+1)`. If `d.getMonth()` is not yet the next month, then add the new cell `<td>` to the calendar. If that's a Sunday, then add a newline <code>"&lt;/tr&gt;&lt;tr&gt;"</code>.
-5. If the month has finished, but the table row is not yet full, add empty `<td>` into it, to make it square.
+1. Opret en tabelhoved med `<th>` og navne på ugedage.
+2. Opret datoobjektet `d = new Date(year, month-1)`. Det er den første dag i `month` (med hensyn til at måneder i JavaScript starter fra `0`, ikke `1`).
+3. De første få celler indtil den første dag i måneden `d.getDay()` kan være tomme. Lad os fylde dem med `<td></td>`.
+4. Øg dagen i `d`: `d.setDate(d.getDate()+1)`. Hvis `d.getMonth()` ikke er den næste måned, så tilføj den nye celle `<td>` til kalenderen. Hvis det er en søndag, så tilføj en ny linje <code>"&lt;/tr&gt;&lt;tr&gt;"</code>.
+5. Hvis måneden er slut, men tabelrækken ikke er fuld, tilføj tomme `<td>` til den, for at gøre den kvadratisk.

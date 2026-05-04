@@ -1,56 +1,60 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<body>
+  <body>
+    <ul>
+      <li>
+        Dyr
+        <ul>
+          <li>
+            Pattedyr
+            <ul>
+              <li>Køer</li>
+              <li>Aber</li>
+              <li>Hunde</li>
+              <li>Tigre</li>
+            </ul>
+          </li>
+          <li>
+            Andet
+            <ul>
+              <li>Slanger</li>
+              <li>Fugle</li>
+              <li>Øgler</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Fisk
+        <ul>
+          <li>
+            Akvarium
+            <ul>
+              <li>Guppy</li>
+              <li>Skalare</li>
+            </ul>
+          </li>
+          <li>
+            Havet
+            <ul>
+              <li>Havørred</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
 
-  <ul>
-    <li>Animals
-      <ul>
-        <li>Mammals
-          <ul>
-            <li>Cows</li>
-            <li>Donkeys</li>
-            <li>Dogs</li>
-            <li>Tigers</li>
-          </ul>
-        </li>
-        <li>Other
-          <ul>
-            <li>Snakes</li>
-            <li>Birds</li>
-            <li>Lizards</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li>Fishes
-      <ul>
-        <li>Aquarium
-          <ul>
-            <li>Guppy</li>
-            <li>Angelfish</li>
-          </ul>
-        </li>
-        <li>Sea
-          <ul>
-            <li>Sea trout</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
+    <script>
+      let lis = document.getElementsByTagName('li');
 
-  <script>
-    let lis = document.getElementsByTagName('li');
+      for (let li of lis) {
+        // find antallet af alle <li> under denne <li>
+        let descendantsCount = li.getElementsByTagName('li').length;
+        if (!descendantsCount) continue;
 
-    for (let li of lis) {
-      // get the count of all <li> below this <li>
-      let descendantsCount = li.getElementsByTagName('li').length;
-      if (!descendantsCount) continue;
-
-      // add directly to the text node (append to the text)
-      li.firstChild.data += ' [' + descendantsCount + ']';
-    }
-  </script>
-
-</body>
+        // tilføj direkte til textnoden (tilføj til teksten i <li>)
+        li.firstChild.data += ' [' + descendantsCount + ']';
+      }
+    </script>
+  </body>
 </html>

@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Show descendants in a tree
+# Vis efterkommere i et træ
 
-There's a tree organized as nested `ul/li`.
+Der er et træ organiseret som indlejrede `ul/li`.
 
-Write the code that adds to each `<li>` the number of its descendants. Skip leaves (nodes without children).
+Skriv koden, der tilføjer til hvert `<li>` antallet af dets efterkommere. Spring blade over (noder uden børn).
 
-The result:
+Resultatet skal være sådan:
 
 [iframe border=1 src="solution"]

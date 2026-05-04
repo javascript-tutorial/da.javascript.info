@@ -2,26 +2,26 @@ importance: 5
 
 ---
 
-# Sort the table
+# Sorter tabellen
 
-There's a table:
+Der er en tabel:
 
 ```html run
 <table>
 <thead>
   <tr>
-    <th>Name</th><th>Surname</th><th>Age</th>
+    <th>Navn</th><th>Efternavn</th><th>Alder</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>John</td><td>Smith</td><td>10</td>
+    <td>Vibeke</td><td>Langholm</td><td>10</td>
   </tr>
   <tr>
-    <td>Pete</td><td>Brown</td><td>15</td>
+    <td>Felix</td><td>Nielsen</td><td>15</td>
   </tr>
   <tr>
-    <td>Ann</td><td>Lee</td><td>5</td>
+    <td>Carla</td><td>Bratskov</td><td>5</td>
   </tr>
   <tr>
     <td>...</td><td>...</td><td>...</td>
@@ -30,6 +30,6 @@ There's a table:
 </table>
 ```
 
-There may be more rows in it.
+Der kan være flere rækker i den.
 
-Write the code to sort it by the `"name"` column.
+Skriv koden til at sortere den efter `"Navn"`-kolonnen.

@@ -1,4 +1,4 @@
-The solution is short, yet may look a bit tricky, so here I provide it with extensive comments:
+Løsningen er kort, men kan se lidt tricky ud, så her leverer jeg den med omfattende kommentarer:
 
 ```js
 let sortedRows = Array.from(table.tBodies[0].rows) // 1
@@ -7,12 +7,12 @@ let sortedRows = Array.from(table.tBodies[0].rows) // 1
 table.tBodies[0].append(...sortedRows); // (3)
 ```
 
-The step-by-step algorthm:
+Algoritmen trin for trin er:
 
-1. Get all `<tr>`, from `<tbody>`.
-2. Then sort them comparing by the content of the first `<td>` (the name field).
-3. Now insert nodes in the right order by `.append(...sortedRows)`.
+1. Hent alle `<tr>`, fra `<tbody>`.
+2. Sorter dem ved at sammenligne indholdet af det første `<td>` (navnefeltet).
+3. Indsæt nu nodene i den rigtige rækkefølge ved hjælp af `.append(...sortedRows)`.
 
-We don't have to remove row elements, just "re-insert", they leave the old place automatically.
+Vi behøver ikke at fjerne rækkelementerne, bare "genindsætte" dem - de forlader den gamle plads automatisk.
 
-P.S. In our case, there's an explicit `<tbody>` in the table, but even if HTML table doesn't have `<tbody>`, the DOM structure always has it.
+P.S. I vores tilfælde er der en eksplicit `<tbody>` i tabellen, men selvom HTML-tabellen ikke har `<tbody>`, har DOM-strukturen altid en.

@@ -2,50 +2,50 @@ importance: 5
 
 ---
 
-# Create a tree from the object
+# OPret et træ fra objektet
 
-Write a function `createTree` that creates a nested `ul/li` list from the nested object.
+Skriv en funktion `createTree`, som opretter en indlejret `ul/li`-liste fra det indlejrede objekt.
 
-For instance:
+For eksempel:
 
 ```js
 let data = {
-  "Fish": {
-    "trout": {},
-    "salmon": {}
+  "Fisk": {
+    "ørred": {},
+    "laks": {}
   },
 
-  "Tree": {
-    "Huge": {
-      "sequoia": {},
-      "oak": {}
+  "Træ": {
+    "Store": {
+      "Mammuttræ": {},
+      "Eg": {}
     },
-    "Flowering": {
-      "apple tree": {},
+    "Blomstrende": {
+      "æbletræ": {},
       "magnolia": {}
     }
   }
 };
 ```
 
-The syntax:
+Syntaksen for at kalde funktionen er:
 
 ```js
 let container = document.getElementById('container');
 *!*
-createTree(container, data); // creates the tree in the container
+createTree(container, data); // opretter træet i container
 */!*
 ```
 
-The result (tree) should look like this:
+Resultatet (træet) bør se sådan ud:
 
 [iframe border=1 src="build-tree-dom"]
 
-Choose one of two ways of solving this task:
+Vælg en af følgende to måder at løse denne opgave:
 
-1. Create the HTML for the tree and then assign to `container.innerHTML`.
-2. Create tree nodes and append with DOM methods.
+1. Opret HTML'en for træet og tildel den til `container.innerHTML`.
+2. Opret de enkelte træ-noder og tilføj dem med DOM-metoder.
 
-Would be great if you could do both.
+Det ville være dejligt, hvis du kunne gøre begge dele.
 
-P.S. The tree should not have "extra" elements like empty `<ul></ul>` for the leaves.
+P.S. Træet bør ikke have "ekstra" elementer som tomme `<ul></ul>` for bladene.
