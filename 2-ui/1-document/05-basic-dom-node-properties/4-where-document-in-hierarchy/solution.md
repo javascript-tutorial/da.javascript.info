@@ -1,33 +1,33 @@
 
-We can see which class it belongs by outputting it, like:
+Vi kan se, hvilken kalsse den tilhører ved at udskrive den, f. eks. sådan her:
 
 ```js run
 alert(document); // [object HTMLDocument]
 ```
 
-Or:
+eller:
 
 ```js run
 alert(document.constructor.name); // HTMLDocument
 ```
 
-So, `document` is an instance of `HTMLDocument` class.
+Så, `document` er en udgave af klassen `HTMLDocument`.
 
-What's its place in the hierarchy?
+Hvad er dens position i hierarkiet?
 
-Yeah, we could browse the specification, but it would be faster to figure out manually.
+Ja, vi kunne selvfølgelig gennemgå specifikationen, men det er måske hurtigere at finde ud af det manuelt.
 
-Let's traverse the prototype chain via `__proto__`.
+Lad os gennemløbe prototypekæden via `__proto__`.
 
-As we know, methods of a class are in the `prototype` of the constructor. For instance, `HTMLDocument.prototype` has methods for documents.
+Vi ved følgende: Metoderne for en klasse findes i egenskaben `prototype` hos konstruktøren. For eksempel har `HTMLDocument.prototype` metoder for dokumenter.
 
-Also, there's a reference to the constructor function inside the `prototype`:
+Derudover er der en reference til `constructor` funktionen inde i `prototype`:
 
 ```js run
 alert(HTMLDocument.prototype.constructor === HTMLDocument); // true
 ```
 
-To get a name of the class as a string, we can use `constructor.name`. Let's do it for the whole `document` prototype chain, till class `Node`:
+For at få et navn på klassen som en streng, kan vi bruge `constructor.name`. Lad os gøre det for hele `document` prototypekæden, indtil klassen `Node`:
 
 ```js run
 alert(HTMLDocument.prototype.constructor.name); // HTMLDocument
@@ -35,6 +35,6 @@ alert(HTMLDocument.prototype.__proto__.constructor.name); // Document
 alert(HTMLDocument.prototype.__proto__.__proto__.constructor.name); // Node
 ```
 
-That's the hierarchy.
+Det er hierarkiet.
 
-We also could examine the object using `console.dir(document)` and see these names by opening `__proto__`. The console takes them from `constructor` internally.
+Vi kunne også undersøge objektet ved hjælp af `console.dir(document)` og se disse navne ved at åbne `__proto__`. Konsollen henter dem internt fra `constructor` egenskaben.

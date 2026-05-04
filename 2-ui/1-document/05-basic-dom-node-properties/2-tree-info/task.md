@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Count descendants
+# Tæl alle efterkommere
 
-There's a tree structured as nested `ul/li`.
+Der er en træstruktur af indlejrede `ul/li`.
 
-Write the code that for each `<li>` shows:
+Skriv den kode der for hvert `<li>` viser:
 
-1. What's the text inside it (without the subtree)
-2. The number of nested `<li>` -- all descendants, including the deeply nested ones.
+1. Hvad er teksten inde i det (uden undertræet)
+2. Antallet af indlejrede `<li>` -- alle efterkommere, inklusiv de dybt indlejrede.
 
 [demo src="solution"]
