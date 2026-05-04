@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Insert the HTML in the list
+# Indsæt HTML i listen
 
-Write the code to insert `<li>2</li><li>3</li>` between two `<li>` here:
+Skriv koden til at indsætte `<li>2</li><li>3</li>` mellem to `<li>` her:
 
 ```html
 <ul id="ul">

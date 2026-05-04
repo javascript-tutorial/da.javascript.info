@@ -2,10 +2,10 @@ importance: 4
 
 ---
 
-# Colored clock with setInterval
+# Farvet ud med setInterval
 
-Create a colored clock like here:
+Opret et farvet ur som det her:
 
 [iframe src="solution" height=60]
 
-Use HTML/CSS for the styling, JavaScript only updates time in elements.
+Brug HTML/CSS til styling, JavaScript opdaterer kun tiden i elementerne.

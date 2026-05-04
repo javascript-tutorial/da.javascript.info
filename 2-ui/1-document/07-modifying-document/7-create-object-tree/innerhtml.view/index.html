@@ -1,45 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<body>
+  <body>
+    <div id="container"></div>
 
-  <div id="container"></div>
-
-  <script>
-    let data = {
-      "Fish": {
-        "trout": {},
-        "salmon": {}
-      },
-
-      "Tree": {
-        "Huge": {
-          "sequoia": {},
-          "oak": {}
+    <script>
+      let data = {
+        Fisk: {
+          ørred: {},
+          laks: {},
         },
-        "Flowering": {
-          "apple tree": {},
-          "magnolia": {}
+
+        Træ: {
+          Store: {
+            mammuttræ: {},
+            eg: {},
+          },
+          Blomstrende: {
+            æbletræ: {},
+            magnolia: {},
+          },
+        },
+      };
+
+      function createTree(container, obj) {
+        container.innerHTML = createTreeText(obj);
+      }
+
+      function createTreeText(obj) {
+        // selvstændig rekursiv funktion
+        let li = '';
+        let ul;
+        for (let key in obj) {
+          li += '<li>' + key + createTreeText(obj[key]) + '</li>';
         }
+        if (li) {
+          ul = '<ul>' + li + '</ul>';
+        }
+        return ul || '';
       }
-    };
 
-    function createTree(container, obj) {
-      container.innerHTML = createTreeText(obj);
-    }
-
-    function createTreeText(obj) { // standalone recursive function
-      let li = '';
-      let ul;
-      for (let key in obj) {
-        li += '<li>' + key + createTreeText(obj[key]) + '</li>';
-      }
-      if (li) {
-        ul = '<ul>' + li + '</ul>'
-      }
-      return ul || '';
-    }
-
-    createTree(container, data);
-  </script>
-</body>
+      createTree(container, data);
+    </script>
+  </body>
 </html>

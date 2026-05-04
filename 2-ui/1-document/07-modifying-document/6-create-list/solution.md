@@ -1,1 +1,1 @@
-Please note the usage of `textContent` to assign the `<li>` content.
+Bemærk brugen af `textContent` til at tildele `<li>`-indholdet.

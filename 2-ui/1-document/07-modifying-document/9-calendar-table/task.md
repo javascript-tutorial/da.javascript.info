@@ -2,16 +2,16 @@ importance: 4
 
 ---
 
-# Create a calendar
+# Opret en kalender
 
-Write a function `createCalendar(elem, year, month)`.
+Skriv funktionen `createCalendar(elem, year, month)`.
 
-The call should create a calendar for the given year/month and put it inside `elem`.
+Kaldet skal oprette en kalender for det givne år/måned og putte den indeni `elem`.
 
-The calendar should be a table, where a week is `<tr>`, and a day is `<td>`. The table top should be `<th>` with weekday names: the first day should be Monday, and so on till Sunday.
+Kalenderen skal være en tabel, hvor en uge er `<tr>`, og en dag er `<td>`. Den øverste del af tabellen skal være `<th>` med navne på ugedage: den første dag skal være mandag, og så videre til søndag.
 
-For instance, `createCalendar(cal, 2012, 9)` should generate in element `cal` the following calendar:
+For eksempel, `createCalendar(cal, 2012, 9)` skal generere følgende kalender i element `cal`:
 
 [iframe height=210 src="solution"]
 
-P.S. For this task it's enough to generate the calendar, should not yet be clickable.
+P.S. Det er nok at generere kalenderen, den skal ikke være klikbar endnu.

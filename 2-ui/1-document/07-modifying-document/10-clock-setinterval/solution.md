@@ -1,16 +1,16 @@
-First, let's make HTML/CSS.
+Lad os først oprette HTML/CSS.
 
-Each component of the time would look great in its own `<span>`:
+Hvert komponent af tiden ville se rigtig godt ud i sin egen `<span>`:
 
 ```html
 <div id="clock">
-  <span class="hour">hh</span>:<span class="min">mm</span>:<span class="sec">ss</span>
+  <span class="hour">tt</span>:<span class="min">mm</span>:<span class="sec">ss</span>
 </div>
 ```
 
-Also we'll need CSS to color them.
+Vi har også brug for CSS til at farve dem.
 
-The `update` function will refresh the clock, to be called by `setInterval` every second:
+Funktionen `update` vil genopfriske uret, og vil blive kaldt af `setInterval` hver sekundd. Den skal hente det aktuelle tidspunkt og opdatere indholdet af de tre `<span>` elementer:
 
 ```js
 function update() {
@@ -32,15 +32,15 @@ function update() {
 }
 ```
 
-In the line `(*)` we every time check the current date. The calls to `setInterval` are not reliable: they may happen with delays.
+I linjen mærket `(*)` tjekker vi den aktuelle dato. Kaldet til `setInterval` er ikke troværdigt nok: de kan ske med forsinkelser.
 
-The clock-managing functions:
+Funktionen til at håndtere ur-funktioner:
 
 ```js
 let timerId;
 
-function clockStart() { // run the clock  
-  if (!timerId) { // only set a new interval if the clock is not running
+function clockStart() { // kør klokken
+  if (!timerId) { // sæt kun et nyt interval hvis uret ikke er startet
     timerId = setInterval(update, 1000);
   }
   update(); // (*)
@@ -52,6 +52,6 @@ function clockStop() {
 }
 ```
 
-Please note that the call to `update()` is not only scheduled in `clockStart()`, but immediately run in the line `(*)`. Otherwise the visitor would have to wait till the first execution of `setInterval`. And the clock would be empty till then.
+Bemærk at kaldet til `update()` ikke kun er planlagt i `clockStart()`, men også kørt umiddelbart i linjen `(*)`. Ellers ville brugeren have ventet til den første udførelse af `setInterval`. Og uret ville være tomt indtil da.
 
-Also it is important to set a new interval in `clockStart()` only when the clock is not running. Otherways clicking the start button several times would set multiple concurrent intervals. Even worse - we would only keep the `timerID` of the last interval, losing references to all others. Then we wouldn't be able to stop the clock ever again! Note that we need to clear the `timerID` when the clock is stopped in the line `(**)`, so that it can be started again by running `clockStart()`.
+Det er også vigtigt kun at sætte et nyt interval i `clockStart()` når uret *ikke* kører. Hvis ikke, ville klik på start-knappen flere gange sætte flere samtidige intervaller. Vi ville samtidig kun beholde `timerID` for det sidste interval, og miste referencer til alle andre. På denne måde ville vi ikke kunne stoppe uret igen! Bemærk at vi skal rydde `timerID` når uret er stopped i linjen `(**)`, så det kan startes igen ved at køre `clockStart()`.

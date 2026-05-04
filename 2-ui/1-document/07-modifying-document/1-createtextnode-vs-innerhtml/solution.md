@@ -1,15 +1,15 @@
-Answer: **1 and 3**.
+Svar: **1 og 3**.
 
-Both commands result in adding the `text` "as text" into the `elem`.
+Begge kommandoer resulterer i at tilføje `text` "som tekst" til `elem`.
 
-Here's an example:
+Her er et eksempel:
 
 ```html run height=80
 <div id="elem1"></div>
 <div id="elem2"></div>
 <div id="elem3"></div>
 <script>
-  let text = '<b>text</b>';
+  let text = '<b>Tekst</b>';
 
   elem1.append(document.createTextNode(text));
   elem2.innerHTML = text;

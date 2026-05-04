@@ -1,9 +1,9 @@
-The HTML in the task is incorrect. That's the reason of the odd thing.
+Selve HTML-koden i opgaven er forkert. Det er årsagen til det mærkelige resultat.
 
-The browser has to fix it automatically. But there may be no text inside the `<table>`: according to the spec only table-specific tags are allowed. So the browser shows `"aaa"` *before* the `<table>`.
+Browseren må reparere det automatisk. Men der kan ikke være noget tekst inden i `<table>`: ifølge specifikationen er kun tabel-specifikke tags tilladt. Så browseren viser `"aaa"` *før* `<table>`.
 
-Now it's obvious that when we remove the table, it remains.
+Nu bliver det mere tydeligt hvorfor det bliver stående når tabellen fjernes.
 
-The question can be easily answered by exploring the DOM using the browser tools. You'll see `"aaa"` before the `<table>`.
+Spørgsmålet kan nemt besvares ved at udforske DOM'en ved hjælp af browserværktøjerne. Du vil se `"aaa"` før `<table>`.
 
-The HTML standard specifies in detail how to process bad HTML, and such behavior of the browser is correct.
+HTML-standarden specificerer i detaljer, hvordan man behandler dårlig HTML, og sådan adfærd fra browseren anses for korrekt.

@@ -1,79 +1,76 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-
-<head>
-  <style>
-    table {
-      border-collapse: collapse;
-    }
-
-    td,
-    th {
-      border: 1px solid black;
-      padding: 3px;
-      text-align: center;
-    }
-
-    th {
-      font-weight: bold;
-      background-color: #E6E6E6;
-    }
-  </style>
-</head>
-
-<body>
-
-
-  <div id="calendar"></div>
-
-  <script>
-    function createCalendar(elem, year, month) {
-
-      let mon = month - 1; // months in JS are 0..11, not 1..12
-      let d = new Date(year, mon);
-
-      let table = '<table><tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>';
-
-      // spaces for the first row
-      // from Monday till the first day of the month
-      // * * * 1  2  3  4
-      for (let i = 0; i < getDay(d); i++) {
-        table += '<td></td>';
+  <head>
+    <style>
+      table {
+        border-collapse: collapse;
       }
 
-      // <td> with actual dates
-      while (d.getMonth() == mon) {
-        table += '<td>' + d.getDate() + '</td>';
-
-        if (getDay(d) % 7 == 6) { // sunday, last day of week - newline
-          table += '</tr><tr>';
-        }
-
-        d.setDate(d.getDate() + 1);
+      td,
+      th {
+        border: 1px solid black;
+        padding: 3px;
+        text-align: center;
       }
 
-      // add spaces after last days of month for the last row
-      // 29 30 31 * * * *
-      if (getDay(d) != 0) {
-        for (let i = getDay(d); i < 7; i++) {
+      th {
+        font-weight: bold;
+        background-color: #e6e6e6;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="calendar"></div>
+
+    <script>
+      function createCalendar(elem, year, month) {
+        let mon = month - 1; // måneder i JS er 0..11, ikke 1..12
+        let d = new Date(year, mon);
+
+        let table = '<table><tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>';
+
+        // mellemrum for den første række
+        // fra mandag til den første dag i måneden
+        // * * * 1  2  3  4
+        for (let i = 0; i < getDay(d); i++) {
           table += '<td></td>';
         }
+
+        // <td> med faktiske datoer
+        while (d.getMonth() == mon) {
+          table += '<td>' + d.getDate() + '</td>';
+
+          if (getDay(d) % 7 == 6) {
+            // søndag, sidste dag i ugen - ny linje
+            table += '</tr><tr>';
+          }
+
+          d.setDate(d.getDate() + 1);
+        }
+
+        // tilføj mellemrum efter sidste dage i måneden for den sidste række
+        // 29 30 31 * * * *
+        if (getDay(d) != 0) {
+          for (let i = getDay(d); i < 7; i++) {
+            table += '<td></td>';
+          }
+        }
+
+        // luk tabellen
+        table += '</tr></table>';
+
+        elem.innerHTML = table;
       }
 
-      // close the table
-      table += '</tr></table>';
+      function getDay(date) {
+        // hent dagens nummer fra 0 (mandag) til 6 (søndag)
+        let day = date.getDay();
+        if (day == 0) day = 7; // gør søndag (0) til den sidste dag
+        return day - 1;
+      }
 
-      elem.innerHTML = table;
-    }
-
-    function getDay(date) { // get day number from 0 (monday) to 6 (sunday)
-      let day = date.getDay();
-      if (day == 0) day = 7; // make Sunday (0) the last day
-      return day - 1;
-    }
-
-    createCalendar(calendar, 2012, 9);
-  </script>
-
-</body>
+      createCalendar(calendar, 2012, 9);
+    </script>
+  </body>
 </html>

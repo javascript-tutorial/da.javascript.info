@@ -2,19 +2,19 @@ importance: 5
 
 ---
 
-# Clear the element
+# Slet et element
 
-Create a function `clear(elem)` that removes everything from the element.
+Opret en funktion `clear(elem)` der fjerner alt indhold fra et element.
 
 ```html run height=60
 <ol id="elem">
-  <li>Hello</li>
-  <li>World</li>
+  <li>Hej</li>
+  <li>Verden</li>
 </ol>
 
 <script>
-  function clear(elem) { /* your code */ }
+  function clear(elem) { /* din kode */ }
 
-  clear(elem); // clears the list
+  clear(elem); // sletter listen
 </script>
 ```

@@ -2,18 +2,17 @@ importance: 4
 
 ---
 
-# Create a list
+# Opret en liste
 
-Write an interface to create a list from user input.
+Skriv et interface til at oprette en liste fra brugerinput.
 
-For every list item:
+For hvert listeelement:
+1. Spørg brugeren om dens indhold ved hjælp af `prompt`.
+2. Opret `<li>` med det og tilføj det til `<ul>`.
+3. Fortsæt indtil brugeren annullerer input (ved at trykke på `key:Esc` eller via en tom indtastning).
 
-1. Ask a user about its content using `prompt`.
-2. Create the `<li>` with it and add it to `<ul>`.
-3. Continue until the user cancels the input (by pressing `key:Esc` or via an empty entry).
+Alle elementer skal oprettes dynamisk.
 
-All elements should be created dynamically.
-
-If a user types HTML-tags, they should be treated like a text.
+Hvis en bruger indtaster HTML-tags, skal de behandles som tekst.
 
 [demo src="solution"]
