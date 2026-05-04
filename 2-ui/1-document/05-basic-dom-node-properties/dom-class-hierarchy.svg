@@ -1,1 +1,122 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="552" height="403" viewBox="0 0 552 403"><defs><style>@import url(https://fonts.googleapis.com/css?family=Open+Sans:bold,italic,bolditalic%7CPT+Mono);@font-face{font-family:&apos;PT Mono&apos;;font-weight:700;font-style:normal;src:local(&apos;PT MonoBold&apos;),url(/font/PTMonoBold.woff2) format(&apos;woff2&apos;),url(/font/PTMonoBold.woff) format(&apos;woff&apos;),url(/font/PTMonoBold.ttf) format(&apos;truetype&apos;)}</style></defs><g id="dom" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g id="dom-class-hierarchy.svg"><path id="Rectangle-9" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M181 6h118v28H181z"/><path id="Rectangle-8" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M181 74h118v28H181z"/><text id="EventTarget" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="200.9" y="24">EventTarget</tspan></text><text id="Node" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="225.6" y="91">Node </tspan></text><path id="Line-2" fill="#C06334" fill-rule="nonzero" d="M240.5 39.5l7 14h-6v17h-2v-17h-6l7-14z"/><path id="Rectangle-8-Copy" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M181 144h118v28H181z"/><text id="Element" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="214.8" y="161">Element </tspan></text><path id="Line-2-Copy" fill="#C06334" fill-rule="nonzero" d="M240.5 109.5l7 14h-6v17h-2v-17h-6l7-14z"/><path id="Rectangle-8-Copy-4" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M181 230h118v28H181z"/><text id="HTMLElement" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="200.4" y="247">HTMLElement </tspan></text><path id="Line-2-Copy-4" fill="#C06334" fill-rule="nonzero" d="M240.5 195.5l7 14h-6v17h-2v-17h-6l7-14zM72.5 158.5l7.273 13.86-5.999.117L74 183.98l.02 1-2 .04-.02-1-.226-11.503-5.998.118L72.5 158.5z"/><path id="Rectangle-8-Copy-6" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M171 300h138v28H171z"/><text id="HTMLBodyElement" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="186" y="317">HTMLBodyElement </tspan></text><path id="Line-2-Copy-6" fill="#C06334" fill-rule="nonzero" d="M240.5 265.5l7 14h-6v17h-2v-17h-6l7-14z"/><path id="Rectangle-8-Copy-7" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M1 300h138v28H1z"/><text id="HTMLInputElement" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="13.4" y="317">HTMLInputElement </tspan></text><path id="Line-2-Copy-7" fill="#C06334" fill-rule="nonzero" d="M159 261l-6.753 14.12-3.685-4.736-29.448 22.905-.79.614-1.227-1.578.79-.614 29.448-22.906-3.684-4.735L159 261z"/><path id="Rectangle-8-Copy-8" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M339 300h138v28H339z"/><text id="HTMLAnchorElement" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="348.3" y="317">HTMLAnchorElement </tspan></text><path id="Line-2-Copy-8" fill="#C06334" fill-rule="nonzero" d="M312 261l15.305 3.28-3.749 4.684 29.069 23.255.78.625-1.249 1.562-.78-.625-29.069-23.254-3.748 4.685L312 261z"/><path id="Rectangle-8-Copy-2" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M22 126h98v28H22z"/><text id="Document" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="42.2" y="144">Document </tspan></text><path id="Rectangle-8-Copy-2" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M22 192h98v28H22z"/><text id="HTMLDocument" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="27.8" y="210">HTMLDocument </tspan></text><path id="Line-2-Copy-2" fill="#C06334" fill-rule="nonzero" d="M168 90l-8.862 12.902-2.905-5.251-34.749 19.224-.875.484-.968-1.75.875-.484 34.749-19.224-2.904-5.25L168 90z"/><path id="Rectangle-8-Copy-3" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M369 126h118v28H369z"/><text id="CharacterData" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="381.2" y="144">CharacterData </tspan></text><path id="Line-2-Copy-3" fill="#C06334" fill-rule="nonzero" d="M314 91l15.648.379-2.813 5.299 36.634 19.439.883.468-.937 1.767-.884-.469-36.633-19.439-2.812 5.301L314 91zM458 159l13.93 7.138-4.836 3.552 9.712 13.218.592.806-1.612 1.184-.592-.806-9.712-13.218-4.834 3.553L458 159zM400 158l-1.376 15.592-5.11-3.146-8.662 14.078-.524.852-1.704-1.048.524-.852 8.663-14.078-5.11-3.143L400 158z"/><text id="Document-as-a-whole" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="6.6" y="235">Document as a whole</tspan></text><text id="&lt;input-type=&quot;…&quot;&gt;" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="13.4" y="341">&lt;input type=&quot;…&quot;&gt;</tspan></text><text id="&lt;body&gt;" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="220.4" y="341">&lt;body&gt;</tspan></text><text id="&lt;a-href=&quot;…&quot;&gt;" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="365.8" y="341">&lt;a href=&quot;…&quot;&gt;</tspan></text><text id="&lt;div&gt;...&lt;/div&gt;" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="192.6" y="188" fill="#AF6E24">&lt;</tspan> <tspan x="199.8" y="188" fill="#C06334">div</tspan> <tspan x="221.4" y="188" fill="#AF6E24">&gt;</tspan> <tspan x="228.6" y="188" fill="#DBAF88">...</tspan> <tspan x="250.2" y="188" fill="#AF6E24">&lt;/</tspan> <tspan x="264.6" y="188" fill="#C06334">div</tspan> <tspan x="286.2" y="188" fill="#AF6E24">&gt;</tspan></text><path id="Rectangle-8-Copy-3" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M449 192h78v28h-78z"/><text id="Comment" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="463.8" y="210">Comment </tspan></text><text id="&lt;!--comment--&gt;" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="442.6" y="237">&lt;!--comment--&gt;</tspan></text><path id="Rectangle-8-Copy-3" fill="#FBF2EC" stroke="#DBAF88" stroke-width="2" d="M342 192h78v28h-78z"/><text id="Text" fill="#AF6E24" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="365.6" y="210">Text </tspan></text><text id="&quot;Hello&quot;" fill="#C06334" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal"><tspan x="356.8" y="237">&quot;Hello&quot;</tspan></text></g></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 552 403">
+  <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
+  <defs>
+    <style>
+      .st0, .st1, .st2 {
+        font-family: PTMono-Regular, 'PT Mono';
+        font-size: 12px;
+      }
+
+      .st0, .st1, .st2, .st3 {
+        isolation: isolate;
+      }
+
+      .st0, .st4 {
+        fill: #c06334;
+      }
+
+      .st1 {
+        fill: #dbaf88;
+      }
+
+      .st5 {
+        fill: #fbf2ec;
+        fill-rule: evenodd;
+        stroke: #dbaf88;
+        stroke-width: 2px;
+      }
+
+      .st2 {
+        fill: #af6e24;
+      }
+    </style>
+  </defs>
+  <g id="dom">
+    <g id="dom-class-hierarchy.svg">
+      <path id="Rectangle-9" class="st5" d="M181,6h118v28h-118V6Z"/>
+      <path id="Rectangle-8" class="st5" d="M181,74h118v28h-118v-28Z"/>
+      <g id="EventTarget" class="st3">
+        <text class="st2" transform="translate(200.9 24)"><tspan x="0" y="0">EventTarget</tspan></text>
+      </g>
+      <g id="Node" class="st3">
+        <text class="st2" transform="translate(225.6 91)"><tspan x="0" y="0">Node</tspan></text>
+      </g>
+      <path id="Line-2" class="st4" d="M240.5,39.5l7,14h-6v17h-2v-17h-6l7-14Z"/>
+      <path id="Rectangle-8-Copy" class="st5" d="M181,144h118v28h-118v-28Z"/>
+      <g id="Element" class="st3">
+        <text class="st2" transform="translate(214.8 161)"><tspan x="0" y="0">Element</tspan></text>
+      </g>
+      <path id="Line-2-Copy" class="st4" d="M240.5,109.5l7,14h-6v17h-2v-17h-6l7-14Z"/>
+      <path id="Rectangle-8-Copy-4" class="st5" d="M181,230h118v28h-118v-28Z"/>
+      <g id="HTMLElement" class="st3">
+        <text class="st2" transform="translate(200.4 247)"><tspan x="0" y="0">HTMLElement</tspan></text>
+      </g>
+      <path id="Line-2-Copy-4" class="st4" d="M240.5,195.5l7,14h-6v17h-2v-17h-6l7-14ZM72.5,158.5l7.27,13.86-6,.12.23,11.5.02,1-2,.04-.02-1-.23-11.5-6,.12,6.72-14.13Z"/>
+      <path id="Rectangle-8-Copy-6" class="st5" d="M171,300h138v28h-138v-28Z"/>
+      <g id="HTMLBodyElement" class="st3">
+        <text class="st2" transform="translate(186 317)"><tspan x="0" y="0">HTMLBodyElement</tspan></text>
+      </g>
+      <path id="Line-2-Copy-6" class="st4" d="M240.5,265.5l7,14h-6v17h-2v-17h-6l7-14Z"/>
+      <path id="Rectangle-8-Copy-7" class="st5" d="M1,300h138v28H1v-28Z"/>
+      <g id="HTMLInputElement" class="st3">
+        <text class="st2" transform="translate(13.4 317)"><tspan x="0" y="0">HTMLInputElement</tspan></text>
+      </g>
+      <path id="Line-2-Copy-7" class="st4" d="M159,261l-6.75,14.12-3.68-4.74-29.45,22.9-.79.61-1.23-1.58.79-.61,29.45-22.91-3.68-4.73,15.35-3.07Z"/>
+      <path id="Rectangle-8-Copy-8" class="st5" d="M339,300h138v28h-138v-28Z"/>
+      <g id="HTMLAnchorElement" class="st3">
+        <text class="st2" transform="translate(348.3 317)"><tspan x="0" y="0">HTMLAnchorElement</tspan></text>
+      </g>
+      <path id="Line-2-Copy-8" class="st4" d="M312,261l15.3,3.28-3.75,4.68,29.07,23.26.78.62-1.25,1.56-.78-.62-29.07-23.25-3.75,4.68-6.56-14.21Z"/>
+      <path id="Rectangle-8-Copy-2" class="st5" d="M22,126h98v28H22v-28Z"/>
+      <g id="Document" class="st3">
+        <text class="st2" transform="translate(42.2 144)"><tspan x="0" y="0">Document</tspan></text>
+      </g>
+      <path id="Rectangle-8-Copy-21" data-name="Rectangle-8-Copy-2" class="st5" d="M22,192h98v28H22v-28Z"/>
+      <g id="HTMLDocument" class="st3">
+        <text class="st2" transform="translate(27.8 210)"><tspan x="0" y="0">HTMLDocument</tspan></text>
+      </g>
+      <path id="Line-2-Copy-2" class="st4" d="M168,90l-8.86,12.9-2.9-5.25-34.75,19.22-.88.48-.97-1.75.88-.48,34.75-19.22-2.9-5.25,15.64-.65Z"/>
+      <path id="Rectangle-8-Copy-3" class="st5" d="M369,126h118v28h-118v-28Z"/>
+      <g id="CharacterData" class="st3">
+        <text class="st2" transform="translate(381.2 144)"><tspan x="0" y="0">CharacterData</tspan></text>
+      </g>
+      <path id="Line-2-Copy-3" class="st4" d="M314,91l15.65.38-2.81,5.3,36.63,19.44.88.47-.94,1.77-.88-.47-36.63-19.44-2.81,5.3-9.09-12.74ZM458,159l13.93,7.14-4.84,3.55,9.71,13.22.59.81-1.61,1.18-.59-.81-9.71-13.22-4.83,3.55-2.65-15.43ZM400,158l-1.38,15.59-5.11-3.15-8.66,14.08-.52.85-1.7-1.05.52-.85,8.66-14.08-5.11-3.14,13.3-8.25Z"/>
+      <g id="Document-as-a-whole" class="st3">
+        <text class="st0" transform="translate(6.6 235)"><tspan x="0" y="0">Dokumentet som helhed</tspan></text>
+      </g>
+      <g id="_x3C_input-type_x3D__x22__x2026__x22__x3E_" class="st3">
+        <text class="st0" transform="translate(13.4 341)"><tspan x="0" y="0">&lt;input type=&quot;…&quot;&gt;</tspan></text>
+      </g>
+      <g id="_x3C_body_x3E_" class="st3">
+        <text class="st0" transform="translate(220.4 341)"><tspan x="0" y="0">&lt;body&gt;</tspan></text>
+      </g>
+      <g id="_x3C_a-href_x3D__x22__x2026__x22__x3E_" class="st3">
+        <text class="st0" transform="translate(365.8 341)"><tspan x="0" y="0">&lt;a href=&quot;…&quot;&gt;</tspan></text>
+      </g>
+      <g id="_x3C_div_x3E_..._x3C__x2F_div_x3E_" class="st3">
+        <text class="st2" transform="translate(192.6 188)"><tspan x="0" y="0">&lt;</tspan></text>
+        <text class="st0" transform="translate(199.8 188)"><tspan x="0" y="0">div</tspan></text>
+        <text class="st2" transform="translate(221.4 188)"><tspan x="0" y="0">&gt;</tspan></text>
+        <text class="st1" transform="translate(228.6 188)"><tspan x="0" y="0">...</tspan></text>
+        <text class="st2" transform="translate(250.2 188)"><tspan x="0" y="0">&lt;/</tspan></text>
+        <text class="st0" transform="translate(264.6 188)"><tspan x="0" y="0">div</tspan></text>
+        <text class="st2" transform="translate(286.2 188)"><tspan x="0" y="0">&gt;</tspan></text>
+      </g>
+      <path id="Rectangle-8-Copy-31" data-name="Rectangle-8-Copy-3" class="st5" d="M449,192h78v28h-78v-28Z"/>
+      <g id="Comment" class="st3">
+        <text class="st2" transform="translate(463.8 210)"><tspan x="0" y="0">Comment</tspan></text>
+      </g>
+      <g id="_x3C__x21_--comment--_x3E_" class="st3">
+        <text class="st0" transform="translate(442.6 237)"><tspan x="0" y="0">&lt;!--comment--&gt;</tspan></text>
+      </g>
+      <path id="Rectangle-8-Copy-32" data-name="Rectangle-8-Copy-3" class="st5" d="M342,192h78v28h-78v-28Z"/>
+      <g id="Text" class="st3">
+        <text class="st2" transform="translate(365.6 210)"><tspan x="0" y="0">Text</tspan></text>
+      </g>
+      <g id="_x22_Hello_x22_" class="st3">
+        <text class="st0" transform="translate(356.8 237)"><tspan x="0" y="0">&quot;Hej&quot;</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,57 +1,61 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<body>
+  <body>
+    <ul>
+      <li>
+        Dyr
+        <ul>
+          <li>
+            Pattedyr
+            <ul>
+              <li>Køer</li>
+              <li>Aber</li>
+              <li>Hunde</li>
+              <li>Tigre</li>
+            </ul>
+          </li>
+          <li>
+            Andet
+            <ul>
+              <li>Slanger</li>
+              <li>Fugle</li>
+              <li>Øgler</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Fisk
+        <ul>
+          <li>
+            Akvarium
+            <ul>
+              <li>Guppy</li>
+              <li>Skalare</li>
+            </ul>
+          </li>
+          <li>
+            Havet
+            <ul>
+              <li>Havørred</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
 
-  <ul>
-    <li>Animals
-      <ul>
-        <li>Mammals
-          <ul>
-            <li>Cows</li>
-            <li>Donkeys</li>
-            <li>Dogs</li>
-            <li>Tigers</li>
-          </ul>
-        </li>
-        <li>Other
-          <ul>
-            <li>Snakes</li>
-            <li>Birds</li>
-            <li>Lizards</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li>Fishes
-      <ul>
-        <li>Aquarium
-          <ul>
-            <li>Guppy</li>
-            <li>Angelfish</li>
-          </ul>
-        </li>
-        <li>Sea
-          <ul>
-            <li>Sea trout</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
+    <script>
+      for (let li of document.querySelectorAll('li')) {
+        // hent titlen fra tekstnoden
+        let title = li.firstChild.data;
 
-  <script>
-    for (let li of document.querySelectorAll('li')) {
-      // get the title from the text node
-      let title = li.firstChild.data;
+        title = title.trim(); // fjern ekstra mellemrum rundt om teksten
 
-      title = title.trim(); // remove extra spaces from ends
+        // få antallet af efterkommere
+        let count = li.getElementsByTagName('li').length;
 
-      // get the descendants count
-      let count = li.getElementsByTagName('li').length;
-
-      alert(title + ': ' + count);
-    }
-  </script>
-
-</body>
+        alert(title + ': ' + count);
+      }
+    </script>
+  </body>
 </html>

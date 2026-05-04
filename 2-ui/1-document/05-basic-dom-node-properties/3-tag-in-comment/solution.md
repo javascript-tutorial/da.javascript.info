@@ -1,4 +1,4 @@
-The answer: **`BODY`**.
+Svaret er: **`BODY`**.
 
 ```html run
 <script>
@@ -10,8 +10,8 @@ The answer: **`BODY`**.
 </script>
 ```
 
-What's going on step by step:
+Hvad sker der trin for trin:
 
-1. The content of `<body>` is replaced with the comment. The comment is `<!--BODY-->`, because `body.tagName == "BODY"`. As we remember, `tagName` is always uppercase in HTML.
-2. The comment is now the only child node, so we get it in `body.firstChild`.
-3. The `data` property of the comment is its contents (inside `<!--...-->`): `"BODY"`.
+1. Indholdet af `<body>` erstattes af en kommentar. Kommentaren er `<!--BODY-->`, fordi `body.tagName == "BODY"`. Som vi husker, er `tagName` altid versaler i HTML.
+2. Kommentaren er nu det eneste barn, så vi får den med `body.firstChild`.
+3. `data`-egenskaben af kommentaren er dens indhold (inde i `<!--...-->`): `"BODY"`.

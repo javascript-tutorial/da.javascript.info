@@ -1,8 +1,8 @@
-There's a catch here.
+Der er en lille hage er.
 
-At the time of `<script>` execution the last DOM node is exactly `<script>`, because the browser did not process the rest of the page yet.
+På det tidspunkt hvor `<script>` eksekveres er DOM noden præcis `<script>`, fordi browseren ikke har processeret resten af siden endnu.
 
-So the result is `1` (element node).
+Så resultatet er `1` (element node).
 
 ```html run height=60
 <html>

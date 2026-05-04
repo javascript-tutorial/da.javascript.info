@@ -2,10 +2,10 @@ importance: 4
 
 ---
 
-# Where's the "document" in the hierarchy?
+# Hvor er  "document" i hierarkiet?
 
-Which class does the `document` belong to?
+Hvilken klasse hører `document` til?
 
-What's its place in the DOM hierarchy?
+Hvad er dens position i DOM-hierarkiet?
 
-Does it inherit from `Node` or `Element`, or maybe `HTMLElement`?
+Arver den fra `Node` eller `Element`, eller måske `HTMLElement`?
