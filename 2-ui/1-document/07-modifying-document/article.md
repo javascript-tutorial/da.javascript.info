@@ -546,7 +546,7 @@ Så hvis vi har brug for at tilføje en masse tekst til HTML dynamisk, OG vi er 
 
     Alle disse metoder returnerer `node`.
 
-- Givet nogle HTML i `html`, indsætter `elem.insertAdjacentHTML(where, html)` det afhængigt af værdien af `where`:
+- Givet noget HTML i `html`, indsætter `elem.insertAdjacentHTML(where, html)` det afhængigt af værdien af `where`:
     - `"beforebegin"` -- indsætter `html` lige før `elem`,
     - `"afterbegin"` -- indsætter `html` inde i `elem`, i begyndelsen,
     - `"beforeend"` -- indsætter `html` inde i `elem`, i slutningen,
