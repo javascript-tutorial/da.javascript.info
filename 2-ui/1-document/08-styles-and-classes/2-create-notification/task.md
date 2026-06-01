@@ -2,23 +2,23 @@ importance: 5
 
 ---
 
-# Create a notification
+# Opret en notifikation
 
-Write a function `showNotification(options)` that creates a notification: `<div class="notification">` with the given content. The notification should automatically disappear after 1.5 seconds.
+Skriv en funktion `showNotification(options)` der opretter en notifikation: `<div class="notification">` med det givne indhold. Notifikationen skal automatisk forsvinde efter 1.5 sekunder.
 
-The options are:
+Mulighederne er:
 
 ```js
-// shows an element with the text "Hello" near the right-top of the window
+// vis et element med teksten "Hejsa!" nær det højre øverste hjørne af vinduet
 showNotification({
-  top: 10, // 10px from the top of the window (by default 0px)
-  right: 10, // 10px from the right edge of the window (by default 0px)
-  html: "Hello!", // the HTML of notification
-  className: "welcome" // an additional class for the div (optional)
+  top: 10, // 10px fra toppen af vinduet (standard 0px)
+  right: 10, // 10px fra den højre side af vinduet (standard 0px)
+  html: "Hejsa!", // den HTML som skal vises i notifikationen
+  className: "welcome" // en ekstra klasse for div-elementet (valgfrit)
 });
 ```
 
 [demo src="solution"]
 
 
-Use CSS positioning to show the element at given top/right coordinates. The source document has the necessary styles.
+Brug CSS positioning til at vise elementet ved de givne top/right koordinater. Det originale dokument har de nødvendige styles.

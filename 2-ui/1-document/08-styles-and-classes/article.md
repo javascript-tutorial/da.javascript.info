@@ -1,37 +1,37 @@
-# Styles and classes
+# Styles og classes
 
-Before we get into JavaScript's ways of dealing with styles and classes -- here's an important rule. Hopefully it's obvious enough, but we still have to mention it.
+Før vi dykkter ned i JavaScript's måde at arbejde med styles og classes er der en vigtig regel. Forhåbentligt er den tydelig i eksemplerne, men vi bør nok stadig nævne den fra starten.
 
-There are generally two ways to style an element:
+Der er generelt to måder at style et element:
 
-1. Create a class in CSS and add it: `<div class="...">`
-2. Write properties directly into `style`: `<div style="...">`.
+1. Opret en klasse i CSS og tilføj den: `<div class="...">`
+2. Skriv egenskaber direkte ind i `style`: `<div style="...">`.
 
-JavaScript can modify both classes and `style` properties.
+JavaScript kan både ændre både classes og `style` egenskaber.
 
-We should always prefer CSS classes to `style`. The latter should only be used if classes "can't handle it".
+Vi bør altid foretrække CSS-classes frem for `style`. Den sidste bør kun bruges, hvis classes "ikke kan klare det".
 
-For example, `style` is acceptable if we calculate coordinates of an element dynamically and want to set them from JavaScript, like this:
+For eksempel er `style` acceptabel, hvis vi beregner koordinater for et element dynamisk og vil sætte dem fra JavaScript, sådan her:
 
 ```js
-let top = /* complex calculations */;
-let left = /* complex calculations */;
+let top = /* kompleks beregning */;
+let left = /* kompleks beregning */;
 
-elem.style.left = left; // e.g '123px', calculated at run-time
+elem.style.left = left; // e.g '123px', beregnes ved kørsel
 elem.style.top = top; // e.g '456px'
 ```
 
-For other cases, like making the text red, adding a background icon -- describe that in CSS and then add the class (JavaScript can do that). That's more flexible and easier to support.
+I andre situationer, som at gøre teksten rød, tilføje et baggrundsbillede -- beskriv det i CSS og tilføj derefter klassen (det kan JavaScript gøre). Det er mere fleksibelt og lettere at vedligeholde.
 
-## className and classList
+## className og classList
 
-Changing a class is one of the most often used actions in scripts.
+Ændring af class er en af de mest brugte handlinger i scripts.
 
-In the ancient time, there was a limitation in JavaScript: a reserved word like `"class"` could not be an object property. That limitation does not exist now, but at that time it was impossible to have a `"class"` property, like `elem.class`.
+I gamle dage var der en begrænsning i JavaScript: et reserveret ord som `"class"` kunne ikke være en egenskab for et objekt. Denne begrænsning findes ikke længere, men på det tidspunkt var det umuligt at have en `"class"`-egenskab, som `elem.class`.
 
-So for classes the similar-looking property `"className"` was introduced: the `elem.className` corresponds to the `"class"` attribute.
+Så for classes blev den lignende egenskab `"className"` introduceret: the `elem.className` corresponds to the `"class"` attribute.
 
-For instance:
+For eksempel:
 
 ```html run
 <body class="main page">
@@ -41,19 +41,19 @@ For instance:
 </body>
 ```
 
-If we assign something to `elem.className`, it replaces the whole string of classes. Sometimes that's what we need, but often we want to add/remove a single class.
+Hvis vi tildeler noget til `elem.className`, erstatter det hele strengen af classes. Nogle gange er det det vi har brug for, men ofte vil vi kun tilføje/fjerne en enkelt class.
 
-There's another property for that: `elem.classList`.
+Der er en anden egenskab for det: `elem.classList`.
 
-The `elem.classList` is a special object with methods to `add/remove/toggle` a single class.
+Objektet `elem.classList` er et specielt objekt med metoderne `add/remove/toggle` i relation til en enkelt class.
 
-For instance:
+For eksempel:
 
 ```html run
 <body class="main page">
   <script>
 *!*
-    // add a class
+    // tilføj en class
     document.body.classList.add('article');
 */!*
 
@@ -62,21 +62,21 @@ For instance:
 </body>
 ```
 
-So we can operate both on the full class string using `className` or on individual classes using `classList`. What we choose depends on our needs.
+Så vi kan både behandle hele strengen af classes ved hjælp af `className` eller individuelle classes ved hjælp af `classList`. Hvad vi vælger, afhænger af vores behov.
 
-Methods of `classList`:
+Metoder for `classList`:
 
-- `elem.classList.add/remove("class")` -- adds/removes the class.
-- `elem.classList.toggle("class")` -- adds the class if it doesn't exist, otherwise removes it.
-- `elem.classList.contains("class")` -- checks for the given class, returns `true/false`.
+- `elem.classList.add/remove("class")` -- tilføjer/fjerner en class.
+- `elem.classList.toggle("class")` -- tilføjer class'en, hvis den ikke eksisterer, ellers fjerner den.
+- `elem.classList.contains("class")` -- tjekker for den givne class, returnerer `true/false`.
 
-Besides, `classList` is iterable, so we can list all classes with `for..of`, like this:
+Derudover er `classList` itererbar, så vi kan opliste alle classes med `for..of`, sådan her:
 
 ```html run
 <body class="main page">
   <script>
     for (let name of document.body.classList) {
-      alert(name); // main, and then page
+      alert(name); // main, og derefter page
     }
   </script>
 </body>
@@ -84,9 +84,9 @@ Besides, `classList` is iterable, so we can list all classes with `for..of`, lik
 
 ## Element style
 
-The property `elem.style` is an object that corresponds to what's written in the `"style"` attribute. Setting `elem.style.width="100px"` works the same as if we had in the attribute `style` a string `width:100px`.
+Egenskaben `elem.style` er et objekt, der svarer til det, der er skrevet i `"style"`-attributten. At sætte `elem.style.width="100px"` virker på samme måde som hvis vi havde strengen `width:100px` sat i attributten `style`.
 
-For multi-word property the camelCase is used:
+For egenskaber sammensat af flere ord bruges camelCase i stedet for bindestreger. Det betyder, at bindestreger i CSS erstattes af store bogstaver i JavaScript.:
 
 ```js no-beautify
 background-color  => elem.style.backgroundColor
@@ -94,16 +94,16 @@ z-index           => elem.style.zIndex
 border-left-width => elem.style.borderLeftWidth
 ```
 
-For instance:
+For eksempel:
 
 ```js run
 document.body.style.backgroundColor = prompt('background color?', 'green');
 ```
 
-````smart header="Prefixed properties"
-Browser-prefixed properties like `-moz-border-radius`, `-webkit-border-radius` also follow the same rule: a dash means upper case.
+````smart header="Præfikserede egenskaber"
+Browser-præfiks egenskaber som `-moz-border-radius`, `-webkit-border-radius` følger også samme regle: en bindestreg betyder stort bogstav.
 
-For instance:
+For eksempel:
 
 ```js
 button.style.MozBorderRadius = '5px';
@@ -111,41 +111,41 @@ button.style.WebkitBorderRadius = '5px';
 ```
 ````
 
-## Resetting the style property
+## Nulstilling af en `style` egenskab
 
-Sometimes we want to assign a style property, and later remove it.
+Nogle gange vil vi tildele en værdi til en style egenskab, andre gange vil vi fjerne den.
 
-For instance, to hide an element, we can set `elem.style.display = "none"`.
+For eksempel, for at skjule et element, kan vi sætte `elem.style.display = "none"`.
 
-Then later we may want to remove the `style.display` as if it were not set. Instead of `delete elem.style.display` we should assign an empty string to it: `elem.style.display = ""`.
+Senere vil vi måske ønske at fjerne værdien fra `style.display` som om den ikke var sat. I stedet for `delete elem.style.display` bør vi tildele en tom streng til den: `elem.style.display = ""`.
 
 ```js run
-// if we run this code, the <body> will blink
+// hvis vi kører denne kode, vil <body> blinke
 document.body.style.display = "none"; // hide
 
-setTimeout(() => document.body.style.display = "", 1000); // back to normal
+setTimeout(() => document.body.style.display = "", 1000); // tilbage til normal
 ```
 
-If we set `style.display` to an empty string, then the browser applies CSS classes and its built-in styles normally, as if there were no such `style.display` property at all.
+Hvis vi sætter `style.display` til en tom streng, så anvender browseren egne indbyggede CSS-klasser og stil, som om der ikke var nogen sådan `style.display`-egenskab overhovedet.
 
-Also there is a special method for that, `elem.style.removeProperty('style property')`. So, We can remove a property like this:
+Der er også en speciel metode til det, `elem.style.removeProperty('style property')`. Så kan vi fjerne en egenskab sådan her:
 
 ```js run
-document.body.style.background = 'red'; //set background to red
+document.body.style.background = 'red'; //sæt background til red
 
-setTimeout(() => document.body.style.removeProperty('background'), 1000); // remove background after 1 second
+setTimeout(() => document.body.style.removeProperty('background'), 1000); // fjern background efter 1 sekund
 ```
 
-````smart header="Full rewrite with `style.cssText`"
-Normally, we use `style.*` to assign individual style properties. We can't set the full style like `div.style="color: red; width: 100px"`, because `div.style` is an object, and it's read-only.
+````smart header="Fuld omskrivning med `style.cssText`"
+Normalt bruger vi `style.*` til at tildele individuelle style-egenskaber. Vi kan ikke sætte et samlet udseende (flere enkelte styles) i stil med `div.style="color: red; width: 100px"`, fordi `div.style` er et objekt, og det er read-only.
 
-To set the full style as a string, there's a special property `style.cssText`:
+For at sætte den samlede style som en enkelt streng, er der en speciel egenskab `style.cssText`:
 
 ```html run
-<div id="div">Button</div>
+<div id="div">Knap</div>
 
 <script>
-  // we can set special style flags like "important" here
+  // vi kan sætte specielle style flag som "important" her
   div.style.cssText=`color: red !important;
     background-color: yellow;
     width: 100px;
@@ -156,27 +156,27 @@ To set the full style as a string, there's a special property `style.cssText`:
 </script>
 ```
 
-This property is rarely used, because such assignment removes all existing styles: it does not add, but replaces them. May occasionally delete something needed. But we can safely use it for new elements, when we know we won't delete an existing style.
+Denne egenskab er sjældent brugt, fordi en sådan tildeling fjerner alle eksisterende styles: det tilføjer ikke, men erstatter dem. Det kan betyde, at du kommer til at slette noget, der er nødvendigt. Men vi kan trygt bruge den for nye elementer, når vi ved, at vi ikke vil slette en eksisterende style.
 
-The same can be accomplished by setting an attribute: `div.setAttribute('style', 'color: red...')`.
+Det samme kan opnås ved at sætte en attribut: `div.setAttribute('style', 'color: red...')`.
 ````
 
-## Mind the units
+## Vær opmærksom på enheder
 
-Don't forget to add CSS units to values.
+Glem ikke at tilføje CSS-enheder til værdier.
 
-For instance, we should not set `elem.style.top` to `10`, but rather to `10px`. Otherwise it wouldn't work:
+For eksempel skal vi ikke sætte `elem.style.top` til `10`, men til `10px` - ellers virker det ikke:
 
 ```html run height=100
 <body>
   <script>
   *!*
-    // doesn't work!
+    // virker ikke!
     document.body.style.margin = 20;
-    alert(document.body.style.margin); // '' (empty string, the assignment is ignored)
+    alert(document.body.style.margin); // '' (tom streng, tildeling ignoreres)
   */!*
 
-    // now add the CSS unit (px) - and it works
+    // tilføj nu en CSS-enhed (px) - og så virker det
     document.body.style.margin = '20px';
     alert(document.body.style.margin); // 20px
 
@@ -186,19 +186,19 @@ For instance, we should not set `elem.style.top` to `10`, but rather to `10px`. 
 </body>
 ```
 
-Please note: the browser "unpacks" the property `style.margin` in the last lines and infers `style.marginLeft` and `style.marginTop` from it.
+Bemærk: browseren "pakker egenskaber ud" så egenskaben `style.margin` i forrige eksempel afleder selv værdierne i `style.marginLeft` og `style.marginTop` fra `style.margin`.
 
-## Computed styles: getComputedStyle
+## beregnet udseende: getComputedStyle
 
-So, modifying a style is easy. But how to *read* it?
+Så det, at modificere en style er ret nemt. Men hvordan *læser* man det?
 
-For instance, we want to know the size, margins, the color of an element. How to do it?
+Hvis vi f.eks. vil vide størrelsen, margenerne og farven på et element. Hvordan gør vi det?
 
-**The `style` property operates only on the value of the `"style"` attribute, without any CSS cascade.**
+**Egenskaben `style` opererer kun med værdien af `"style"` attributten - uden CSS cascade.**
 
-So we can't read anything that comes from CSS classes using `elem.style`.
+Derfor kan vi ikke læse noget, der kommer fra CSS-klasser ved hjælp af `elem.style`.
 
-For instance, here `style` doesn't see the margin:
+For eksempel ser `style` ikke marginen, der er defineret i CSS:
 
 ```html run height=60 no-beautify
 <head>
@@ -216,25 +216,25 @@ For instance, here `style` doesn't see the margin:
 </body>
 ```
 
-...But what if we need, say, to increase the margin by `20px`? We would want the current value of it.
+...men hvad nu hvis vi f.eks. vil øge marginen med `20px`? Til det har vi brug for at vide den nuværende værdi.
 
-There's another method for that: `getComputedStyle`.
+Der findes en metode til det: `getComputedStyle`.
 
-The syntax is:
+Syntaksen er:
 
 ```js
 getComputedStyle(element, [pseudo])
 ```
 
 element
-: Element to read the value for.
+: Det element du vil læse værdien for.
 
 pseudo
-: A pseudo-element if required, for instance `::before`. An empty string or no argument means the element itself.
+: Et pseudo-element hvis krævet, for eksempel `::before`. En tom streng eller intet argument betyder selve elementet.
 
-The result is an object with styles, like `elem.style`, but now with respect to all CSS classes.
+Resultatet er et objekt med styles, som du kender dem fra `elem.style`, men nu med hensyn til alle CSS-klasser.
 
-For instance:
+For eksempel:
 
 ```html run height=100
 <head>
@@ -245,7 +245,7 @@ For instance:
   <script>
     let computedStyle = getComputedStyle(document.body);
 
-    // now we can read the margin and the color from it
+    // nu kan vi læse marginen og farven fra det
 
     alert( computedStyle.marginTop ); // 5px
     alert( computedStyle.color ); // rgb(255, 0, 0)
@@ -254,44 +254,44 @@ For instance:
 </body>
 ```
 
-```smart header="Computed and resolved values"
-There are two concepts in [CSS](https://drafts.csswg.org/cssom/#resolved-values):
+```smart header="Beregnede og udledte værdier (computed and resolved values)"
+Der er to koncepter i [CSS](https://drafts.csswg.org/cssom/#resolved-values):
 
-1. A *computed* style value is the value after all CSS rules and CSS inheritance is applied, as the result of the CSS cascade. It can look like `height:1em` or `font-size:125%`.
-2. A *resolved* style value is the one finally applied to the element. Values like `1em` or `125%` are relative. The browser takes the computed value and makes all units fixed and absolute, for instance: `height:20px` or `font-size:16px`. For geometry properties resolved values may have a floating point, like `width:50.5px`.
+1. En *computed* style-værdi er værdien efter alle CSS-regler og CSS-arv er anvendt, som resultatet af CSS-kaskaden. Den kan se ud som `height:1em` eller `font-size:125%`.
+2. En *resolved* style-værdi er den værdi, der endelig er anvendt på elementet. Værdier som `1em` eller `125%` er relative. Browseren tager den computed værdi og gør alle enheder faste og absolute, for eksempel: `height:20px` eller `font-size:16px`. For geometriske egenskaber kan resolved værdier have et flydende komma, som `width:50.5px`.
 
-A long time ago `getComputedStyle` was created to get computed values, but it turned out that resolved values are much more convenient, and the standard changed.
+For lang tid siden blev `getComputedStyle` oprettet for at hente computed værdier, men det viste sig, at de endeligt udledte værdier er meget mere praktiske, og standarden ændrede sig.
 
-So nowadays `getComputedStyle` actually returns the resolved value of the property, usually in `px` for geometry.
+Så nu om stunder returnerer `getComputedStyle` faktisk de udledte værdier, normalt i `px` for geometriske egenskaber.
 ```
 
-````warn header="`getComputedStyle` requires the full property name"
-We should always ask for the exact property that we want, like `paddingLeft` or `marginTop` or `borderTopWidth`. Otherwise the correct result is not guaranteed.
+````warn header="`getComputedStyle` kræver det fulde navn på egenskaben"
+Vi bør altid spørge efter den præcise egenskab, vi vil have, som `paddingLeft` eller `marginTop` eller `borderTopWidth`. Ellers er det ikke garanteret, at vi får det korrekte resultat.
 
-For instance, if there are properties `paddingLeft/paddingTop`, then what should we get for `getComputedStyle(elem).padding`? Nothing, or maybe a "generated" value from known paddings? There's no standard rule here.
+For eksempel, hvis der er sat egenskaber for `paddingLeft/paddingTop`, hvad skal vi få for `getComputedStyle(elem).padding`? Intet, eller måske en "genereret" værdi fra kendte padding-værdier? Der er ingen standardregel her.
 ````
 
-```smart header="Styles applied to `:visited` links are hidden!"
-Visited links may be colored using `:visited` CSS pseudoclass.
+```smart header="Styles påført til `:visited` links er skjulte!"
+Besøgte links kan farves ved hjælp af CSS-pseudoklassen `:visited`.
 
-But `getComputedStyle` does not give access to that color, because otherwise an arbitrary page could find out whether the user visited a link by creating it on the page and checking the styles.
+Men `getComputedStyle` giver ikke adgang til den farve, fordi ellers kunne en vilkårlig side finde ud af, om brugeren har besøgt en link ved at oprette den på siden og tjekke stilene.
 
-JavaScript may not see the styles applied by `:visited`. And also, there's a limitation in CSS that forbids applying geometry-changing styles in `:visited`. That's to guarantee that there's no side way for an evil page to test if a link was visited and hence to break the privacy.
+JavaScript kan ikke se de stilarter, der er anvendt af `:visited`. Der er også en begrænsning i CSS, der forbyder at anvende ændringer relateret til geometri i `:visited`. Det er for at garantere, at der ikke er nogen smutveje for en ond side til at teste, om en link blev besøgt og dermed bryde med regler for privatliv.
 ```
 
-## Summary
+## Opsummering
 
-To manage classes, there are two DOM properties:
+Til at håndtere klasser, er der to DOM-egenskaber:
 
-- `className` -- the string value, good to manage the whole set of classes.
-- `classList` -- the object with methods `add/remove/toggle/contains`, good for individual classes.
+- `className` -- en regulær streng, god til at håndtere hele sættet af klasser.
+- `classList` -- et objekt med metoder `add/remove/toggle/contains`, god til individuelle klasser.
 
-To change the styles:
+For at ændre stilene:
 
-- The `style` property is an object with camelCased styles. Reading and writing to it has the same meaning as modifying individual properties in the `"style"` attribute. To see how to apply `important` and other rare stuff -- there's a list of methods at [MDN](mdn:api/CSSStyleDeclaration).
+- Egenskaben `style` er et objekt med camelCased styles. Læsning og skrivning til dem har samme betydning som at modificere de individuelle egenskaber i `"style"`-attributten. For at se, hvordan man anvender `important` og andre mindre brugte muligheder er der en liste af metoder på [MDN](mdn:api/CSSStyleDeclaration).
 
-- The `style.cssText` property corresponds to the whole `"style"` attribute, the full string of styles.
+- Egenskaben `style.cssText` svarer til hele `"style"`-attributten - altså, den fulde streng af styles.
 
-To read the resolved styles (with respect to all classes, after all CSS is applied and final values are calculated):
+For at læse de udledte styles (resolved values) (hvor der tages hensyn til alle klasser, og efter at al CSS er anvendt og de endelige værdier er beregnet):
 
-- The `getComputedStyle(elem, [pseudo])` returns the style-like object with them. Read-only.
+- `getComputedStyle(elem, [pseudo])` returnerer et style-lignende objekt med dem. Skrivebeskyttet.
