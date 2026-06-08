@@ -2,10 +2,10 @@ importance: 5
 
 ---
 
-# What's the scroll from the bottom?
+# Hvad er scroll fra bunden?
 
-The `elem.scrollTop` property is the size of the scrolled out part from the top. How to get the size of the bottom scroll (let's call it `scrollBottom`)?
+Egenskaben `elem.scrollTop` viser den del af indholdet, der er scroll'et ud fra toppen. Hvordan får man størrelsen på den del af indholdet, der er scroll'et ud fra bunden (lad os kalde den `scrollBottom`)?
 
-Write the code that works for an arbitrary `elem`.
+Skriv en kode der virker for et vilkårligt element.
 
-P.S. Please check your code: if there's no scroll or the element is fully scrolled down, then it should return `0`.
+P.S. Tjek din kode: hvis der ikke er nogen scroll eller elementet er fuldt scroll'et ud, så skal den returnere `0`.

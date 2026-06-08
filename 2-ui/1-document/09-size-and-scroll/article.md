@@ -1,16 +1,16 @@
-# Element size and scrolling
+# Størrelsen på elementer og scrolling
 
-There are many JavaScript properties that allow us to read information about element width, height and other geometry features.
+Der er mange JavaScript-egenskaber, der giver os mulighed for at læse information om elementets bredde, højde og andre geometriske træk.
 
-We often need them when moving or positioning elements in JavaScript.
+Vi har ofte brug for dem, når vi flytter eller placerer elementer i JavaScript.
 
-## Sample element
+## Eksempel-element
 
-As a sample element to demonstrate properties we'll use the one given below:
+Lad os bruge elementet herunder som eksempel til at demonstrere egenskaberne:
 
 ```html no-beautify
 <div id="example">
-  ...Text...
+  ...Tekst...
 </div>
 <style>
   #example {
@@ -23,49 +23,49 @@ As a sample element to demonstrate properties we'll use the one given below:
 </style>
 ```
 
-It has the border, padding and scrolling. The full set of features. There are no margins, as they are not the part of the element itself, and there are no special properties for them.
+Det har kant, padding og scroll-mulighed. Det har ingen margin, da de ikke er en del af elementet selv, og der er ingen specielle egenskaber for dem.
 
-The element looks like this:
+Elementet ser sådan ud:
 
 ![](metric-css.svg)
 
-You can [open the document in the sandbox](sandbox:metric).
+Du kan [åbne dokumentet i sandbox](sandbox:metric).
 
 ```smart header="Mind the scrollbar"
-The picture above demonstrates the most complex case when the element has a scrollbar. Some browsers (not all) reserve the space for it by taking it from the content (labeled as "content width" above).
+Billedet ovenfor viser det mest komplekse tilfælde, hvor elementet har en scrollbjælke. Nogle browsere (ikke alle) reserverer plads til den ved at tage den fra indholdet (angivet som "content width" ovenfor).
 
-So, without scrollbar the content width would be `300px`, but if the scrollbar is `16px` wide (the width may vary between devices and browsers) then only `300 - 16 = 284px` remains, and we should take it into account. That's why examples from this chapter assume that there's a scrollbar. Without it, some calculations are simpler.
+Så uden en scrollbjælke ville indholdsbredden være `300px`, men hvis scrollbjælken er `16px` bred (bredden kan variere mellem enheder og browsere), er der kun `300 - 16 = 284px` tilbage, og vi bør tage det med i betragtning. Det er derfor, eksemplerne i dette kapitel antager, at der er en scrollbjælke. Uden den er nogle beregninger enklere.
 ```
 
-```smart header="The `padding-bottom` area may be filled with text"
-Usually paddings are shown empty on our illustrations, but if there's a lot of text in the element and it overflows, then browsers show the "overflowing" text at `padding-bottom`, that's normal.
+```smart header="Området `padding-bottom` kan fyldes med tekst"
+Normalt vil padding være tom som det ses på illustrationerne, men hvis der er meget tekst i elementet og det overløber, vil browseren vise den " overløbende" tekst på `padding-bottom`, det er normalt.
 ```
 
-## Geometry
+## Geometri
 
-Here's the overall picture with geometry properties:
+Her er et billede, der viser alle geometriske egenskaber:
 
 ![](metric-all.svg)
 
-Values of these properties are technically numbers, but these numbers are "of pixels", so these are pixel measurements.
+Værdierne af disse egenskaber er teknisk set bare talværdier, men værdierne er i pixels, så det er pixelmålinger.
 
-Let's start exploring the properties starting from the outside of the element.
+Lad os starte med at udforske egenskaberne startende fra elementets yderside.
 
 ## offsetParent, offsetLeft/Top
 
-These properties are rarely needed, but still they are the "most outer" geometry properties, so we'll start with them.
+Disse egenskaber er sjældent nødvendige, men de er stadig de "yderste" geometriske egenskaber, så vi starter med dem.
 
-The `offsetParent` is the nearest ancestor that the browser uses for calculating coordinates during rendering.
+`offsetParent` er den nærmeste forfader, som browseren bruger til at beregne koordinater under rendering.
 
-That's the nearest ancestor that is one of the following:
+Det er den nærmeste forfader, der er en af følgende:
 
-1. CSS-positioned (`position` is `absolute`, `relative`, `fixed` or `sticky`),  or
-2. `<td>`, `<th>`, or `<table>`,  or
+1. CSS-positioneret (`position` er enten `absolute`, `relative`, `fixed` eller `sticky`),  eller
+2. `<td>`, `<th>`, eller `<table>`,  eller
 3. `<body>`.
 
-Properties `offsetLeft/offsetTop` provide x/y coordinates relative to `offsetParent` upper-left corner.
+Egenskaberne `offsetLeft` og `offsetTop` giver x/y koordinater i forhold til `offsetParent`'s øverste venstre hjørne.
 
-In the example below the inner `<div>` has `<main>` as `offsetParent` and `offsetLeft/offsetTop` shifts from its upper-left corner (`180`):
+I eksemplet nedenfor har det indre `<div>` `<main>` som `offsetParent` og `offsetLeft/offsetTop` viser forskydningen fra dets øverste venstre hjørne (`180`):
 
 ```html run height=10
 <main style="position: relative" id="main">
@@ -75,40 +75,40 @@ In the example below the inner `<div>` has `<main>` as `offsetParent` and `offse
 </main>
 <script>
   alert(example.offsetParent.id); // main
-  alert(example.offsetLeft); // 180 (note: a number, not a string "180px")
+  alert(example.offsetLeft); // 180 (bemærk: et tal, ikke en streng "180px")
   alert(example.offsetTop); // 180
 </script>
 ```
 
 ![](metric-offset-parent.svg)
 
-There are several occasions when `offsetParent` is `null`:
+Der er lejligheder hvor `offsetParent` er `null`:
 
-1. For not shown elements (`display:none` or not in the document).
-2. For `<body>` and `<html>`.
-3. For elements with `position:fixed`.
+1. For ikke viste elementer (`display:none` eller ikke i dokumentet).
+2. For `<body>` og `<html>`.
+3. For elementer med `position:fixed`.
 
 ## offsetWidth/Height
 
-Now let's move on to the element itself.
+Nu til selve elementet.
 
-These two properties are the simplest ones. They provide the "outer" width/height of the element. Or, in other words, its full size including borders.
+Disse to egenskaber er de simpleste. De giver elementets "ydre" bredde/højde. Eller med andre ord, dets fulde størrelse inklusive rammer.
 
 ![](metric-offset-width-height.svg)
 
-For our sample element:
+For vores eksempel gælder det at:
 
-- `offsetWidth = 390` -- the outer width, can be calculated as inner CSS-width (`300px`) plus paddings (`2 * 20px`) and borders (`2 * 25px`).
-- `offsetHeight = 290` -- the outer height.
+- `offsetWidth = 390` -- den ydre bredde, kan beregnes som indre CSS-bredde (`300px`) plus padding (`2 * 20px`) og rammer (`2 * 25px`).
+- `offsetHeight = 290` -- den ydre højde.
 
-````smart header="Geometry properties are zero/null for elements that are not displayed"
-Geometry properties are calculated only for displayed elements.
+````smart header="Geometriske egenskaber er nul/null for elementer, der ikke vises"
+Geometriske egenskaber beregnes kun for viste elementer.
 
-If an element (or any of its ancestors) has `display:none` or is not in the document, then all geometry properties are zero (or `null` for `offsetParent`).
+Hvis et element (eller en af dets forfædre) har `display:none` eller ikke er i dokumentet, er alle geometriske egenskaber nul (eller `null` for `offsetParent`).
 
-For example, `offsetParent` is `null`, and `offsetWidth`, `offsetHeight` are `0` when we created an element, but haven't inserted it into the document yet, or it (or its ancestor) has `display:none`.
+For eksempel er `offsetParent` `null`, og `offsetWidth` og `offsetHeight` er `0`, når vi har oprettet et element, men ikke har indsat det i dokumentet endnu, eller hvis det (eller en af dets forfædre) har `display:none`.
 
-We can use this to check if an element is hidden, like this:
+Vi kan bruge dette til at tjekke, om et element er skjult, sådan her:
 
 ```js
 function isHidden(elem) {
@@ -116,122 +116,122 @@ function isHidden(elem) {
 }
 ```
 
-Please note that such `isHidden` returns `true` for elements that are on-screen, but have zero sizes.
+Bemærk at sådan en `isHidden` returnerer `true` for elementer, der er på skærmen, men har nul størrelser.
 ````
 
 ## clientTop/Left
 
-Inside the element we have the borders.
+Inde i elementet har vi rammerne.
 
-To measure them, there are properties `clientTop` and `clientLeft`.
+For at måle dem, er der egenskaberne `clientTop` og `clientLeft`.
 
-In our example:
+I vores eksempel:
 
-- `clientLeft = 25` -- left border width
-- `clientTop = 25` -- top border width
+- `clientLeft = 25` -- venstre rammes bredde
+- `clientTop = 25` -- øverste rammes bredde
 
 ![](metric-client-left-top.svg)
 
-...But to be precise -- these properties are not border width/height, but rather relative coordinates of the inner side from the outer side.
+...Men for at være præcis -- disse egenskaber er ikke rammens bredde/højde, men snarere relative koordinater af den indre side fra den ydre side.
 
-What's the difference?
+Hvad er forskellen?
 
-It becomes visible when the document is right-to-left (the operating system is in Arabic or Hebrew languages). The scrollbar is then not on the right, but on the left, and then `clientLeft` also includes the scrollbar width.
+Det bliver synligt, når dokumentet er højre-til-venstre (operativsystemet er på arabisk eller hebraisk). Scrollbjælken er så ikke til højre, men til venstre, og så inkluderer `clientLeft` også scrollbjælkens bredde.
 
-In that case, `clientLeft` would be not `25`, but with the scrollbar width `25 + 16 = 41`.
+I det tilfælde vil `clientLeft` være ikke `25`, men med scrollbjælkens bredde `25 + 16 = 41`.
 
-Here's the example in hebrew:
+Hér er eksemplet på hebraisk:
 
 ![](metric-client-left-top-rtl.svg)
 
 ## clientWidth/Height
 
-These properties provide the size of the area inside the element borders.
+Disse egenskaber giver størrelsen af området inde i elementets rammer.
 
-They include the content width together with paddings, but without the scrollbar:
+De inkluderer indholdsbredden sammen med padding, men uden scrollbjælken:
 
 ![](metric-client-width-height.svg)
 
-On the picture above let's first consider `clientHeight`.
+I forhold til billedet ovenfor, lad os først se på `clientHeight`.
 
-There's no horizontal scrollbar, so it's exactly the sum of what's inside the borders: CSS-height `200px` plus top and bottom paddings (`2 * 20px`) total `240px`.
+Der er ingen vandret scrollbjælke, så det er præcis summen af det, der er inde i rammerne: CSS-højde (`200px`) plus top og bund padding (`2 * 20px`), i alt `240px`.
 
-Now `clientWidth` -- here the content width is not `300px`, but `284px`, because `16px` are occupied by the scrollbar. So the sum is `284px` plus left and right paddings, total `324px`.
+Nu `clientWidth` -- her er indholdsbredden ikke `300px`, men `284px`, fordi `16px` er optaget af scrollbjælken. Så summen er `284px` plus venstre og højre padding, i alt `324px`.
 
-**If there are no paddings, then `clientWidth/Height` is exactly the content area, inside the borders and the scrollbar (if any).**
+**Hvis der ikke er nogen padding, så er `clientWidth/Height` præcis indholdsområdet, inde i rammerne og scrollbjælken (hvis nogen).**
 
 ![](metric-client-width-nopadding.svg)
 
-So when there's no padding we can use `clientWidth/clientHeight` to get the content area size.
+Så når der ikke er nogen padding, kan vi bruge `clientWidth/clientHeight` til at få størrelsen af indholdsområdet.
 
 ## scrollWidth/Height
 
-These properties are like `clientWidth/clientHeight`, but they also include the scrolled out (hidden) parts:
+Disse egenskaber er som `clientWidth/clientHeight`, men de inkluderer også de "ud-scrollede" dele (som jo egentligt er skjulte):
 
 ![](metric-scroll-width-height.svg)
 
-On the picture above:
+I forhold til billedet ovenfor:
 
-- `scrollHeight = 723` -- is the full inner height of the content area including the scrolled out parts.
-- `scrollWidth = 324` -- is the full inner width, here we have no horizontal scroll, so it equals `clientWidth`.
+- `scrollHeight = 723` -- er den fulde indre højde af indholdsområdet inklusive de ud-scrollede dele.
+- `scrollWidth = 324` -- er den fulde indre bredde, her har vi ingen vandret scroll, så den er lig med `clientWidth`.
 
-We can use these properties to expand the element wide to its full width/height.
+Vi kan bruge disse egenskaber til at udvide elementet til dets fulde bredde/højde.
 
-Like this:
+Sådan her:
 
 ```js
-// expand the element to the full content height
+// Udvid elementet til dets fulde højde
 element.style.height = `${element.scrollHeight}px`;
 ```
 
 ```online
-Click the button to expand the element:
+Klik på knappen for at udvide elementet:
 
-<div id="element" style="width:300px;height:200px; padding: 0;overflow: auto; border:1px solid black;">text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text</div>
+<div id="element" style="width:300px;height:200px; padding: 0;overflow: auto; border:1px solid black;">tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst</div>
 
 <button style="padding:0" onclick="element.style.height = `${element.scrollHeight}px`">element.style.height = `${element.scrollHeight}px`</button>
 ```
 
 ## scrollLeft/scrollTop
 
-Properties `scrollLeft/scrollTop` are the width/height of the hidden, scrolled out part of the element.
+Egenskaberne `scrollLeft/scrollTop` er bredden/højden af den skjulte, ud-scrollede del af elementet.
 
-On the picture below we can see `scrollHeight` and `scrollTop` for a block with a vertical scroll.
+På billedet nedenfor kan vi se `scrollHeight` og `scrollTop` for en blok med en lodret scroll.
 
 ![](metric-scroll-top.svg)
 
-In other words, `scrollTop` is "how much is scrolled up".
+Med andre ord er `scrollTop` "hvor meget der er scrollet op".
 
-````smart header="`scrollLeft/scrollTop` can be modified"
-Most of the geometry properties here are read-only, but `scrollLeft/scrollTop` can be changed, and the browser will scroll the element.
+````smart header="`scrollLeft/scrollTop` kan ændres"
+De fleste geometriske egenskaber her kan kun læses, men `scrollLeft/scrollTop` kan ændres, og browseren vil så rulle elementet.
 
 ```online
-If you click the element below, the code `elem.scrollTop += 10` executes. That makes the element content scroll `10px` down.
+Hvis du klikker på elementet nedenfor, udføres koden `elem.scrollTop += 10`. Det får elementets indhold til at rulle `10px` ned.
 
-<div onclick="this.scrollTop+=10" style="cursor:pointer;border:1px solid black;width:100px;height:80px;overflow:auto">Click<br>Me<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</div>
+<div onclick="this.scrollTop+=10" style="cursor:pointer;border:1px solid black;width:100px;height:80px;overflow:auto">Klik<br>Mig<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</div>
 ```
 
-Setting `scrollTop` to `0` or a big value, such as `1e9` will make the element scroll to the very top/bottom respectively.
+Ved at sætte `scrollTop` til `0` eller en stor værdi, som `1e9`, får vi elementet til at rulle til toppen/bunden.
 ````
 
-## Don't take width/height from CSS
+## Tag ikke højde/bredde fra CSS
 
-We've just covered geometry properties of DOM elements, that can be used to get widths, heights and calculate distances.
+Vi har netop dækket geometriske egenskaber af DOM-elementer, der kan bruges til at få bredder, højder og beregne afstande.
 
-But as we know from the chapter <info:styles-and-classes>, we can read CSS-height and width using `getComputedStyle`.
+Men som vi ved fra kapitlet <info:styles-and-classes>, kan vi læse CSS-højde og bredde ved hjælp af `getComputedStyle`.
 
-So why not to read the width of an element with `getComputedStyle`, like this?
+Hvorfor ikke så bruge `getComputedStyle` til at få bredden af et element, sådan her?
 
 ```js run
 let elem = document.body;
 
-alert( getComputedStyle(elem).width ); // show CSS width for elem
+alert( getComputedStyle(elem).width ); // vis CSS-bredde for elem
 ```
 
-Why should we use geometry properties instead? There are two reasons:
+Hvorfor skulle vi så bruge geometriske egenskaber i stedet? Der er to grunde:
 
-1. First, CSS `width/height` depend on another property: `box-sizing` that defines "what is" CSS width and height. A change in `box-sizing` for CSS purposes may break such JavaScript.
-2. Second, CSS `width/height` may be `auto`, for instance for an inline element:
+1. Først afhænger CSS `width/height` af en anden egenskab: `box-sizing`, der definerer, "hvad" CSS-bredden og -højden omfatter. En ændring i `box-sizing` til CSS-formål kan ødelægge sådan et stykke JavaScript.
+2. Dernæst kan CSS `width/height` være `auto`, for eksempel for et inline element:
 
     ```html run
     <span id="elem">Hello!</span>
@@ -243,34 +243,34 @@ Why should we use geometry properties instead? There are two reasons:
     </script>
     ```
 
-    From the CSS standpoint, `width:auto` is perfectly normal, but in JavaScript we need an exact size in `px` that we can use in calculations. So here CSS width is useless.
+    Set fra et CSS-perspektiv er `width:auto` helt normalt, men i JavaScript har vi brug for en præcis størrelse i `px`, som vi kan bruge i beregninger. Så her er CSS-bredden ubrugelig.
 
-And there's one more reason: a scrollbar. Sometimes the code that works fine without a scrollbar becomes buggy with it, because a scrollbar takes the space from the content in some browsers. So the real width available for the content is *less* than CSS width. And `clientWidth/clientHeight` take that into account.
+Og så er der endnu en grund: scrollbjælken. Nogle gange bliver kode, der fungerer fint uden en scrollbjælke, fejlbehæftet med en scrollbjælke, fordi en scrollbjælke optager plads fra indholdet i nogle browsere. Så den reelle bredde, der er til rådighed for indholdet, er *mindre* end CSS-bredden. Og `clientWidth/clientHeight` tager højde for det.
 
-...But with `getComputedStyle(elem).width` the situation is different. Some browsers (e.g. Chrome) return the real inner width, minus the scrollbar, and some of them (e.g. Firefox) -- CSS width (ignore the scrollbar). Such cross-browser differences is the reason not to use `getComputedStyle`, but rather rely on geometry properties.
+...Men med `getComputedStyle(elem).width` er situationen anderledes. Nogle browsere (f.eks. Chrome) returnerer den reelle indre bredde, minus scrollbjælken, og nogle af dem (f.eks. Firefox) -- CSS-bredden (ignorerer scrollbjælken). Sådan en tværbrowser-forskel er grunden til ikke at bruge `getComputedStyle`, men snarere stole på geometriske egenskaber.
 
 ```online
-If your browser reserves the space for a scrollbar (most browsers for Windows do), then you can test it below.
+Hvis din browser reserverer plads til en scrollbjælke (de fleste browsere til Windows gør), så kan du teste det nedenfor.
 
 [iframe src="cssWidthScroll" link border=1]
 
-The element with text has CSS `width:300px`.
+Elementet med tekst har CSS `width:300px`.
 
-On a Desktop Windows OS, Firefox, Chrome, Edge all reserve the space for the scrollbar. But  Firefox shows `300px`, while Chrome and Edge show less. That's because Firefox returns the CSS width and other browsers return the "real" width.
+På et Desktop Windows-operativsystem reserverer Firefox, Chrome og Edge alle plads til scrollbjælken. Men Firefox viser `300px`, mens Chrome og Edge viser mindre. Det skyldes, at Firefox returnerer CSS-bredden, mens andre browsere returnerer den "reelle" bredde.
 ```
 
-Please note that the described difference is only about reading `getComputedStyle(...).width` from JavaScript, visually everything is correct.
+Bemærk, at den beskrevne forskel kun gælder for at læse `getComputedStyle(...).width` fra JavaScript; visuelt er alt korrekt.
 
-## Summary
+## Opsummering
 
-Elements have the following geometry properties:
+Elementer har følgende geometriske egenskaber:
 
-- `offsetParent` -- is the nearest positioned ancestor or `td`, `th`, `table`, `body`.
-- `offsetLeft/offsetTop` -- coordinates relative to the upper-left edge of `offsetParent`.
-- `offsetWidth/offsetHeight` -- "outer" width/height of an element including borders.
-- `clientLeft/clientTop` -- the distances from the upper-left outer corner to the upper-left inner (content + padding) corner. For left-to-right OS they are always the widths of left/top borders. For right-to-left OS the vertical scrollbar is on the left so `clientLeft` includes its width too.
-- `clientWidth/clientHeight` -- the width/height of the content including paddings, but without the scrollbar.
-- `scrollWidth/scrollHeight` -- the width/height of the content, just like `clientWidth/clientHeight`, but also include scrolled-out, invisible part of the element.
-- `scrollLeft/scrollTop` -- width/height of the scrolled out upper part of the element, starting from its upper-left corner.
+- `offsetParent` -- er den nærmeste positionerede ancestor eller `td`, `th`, `table`, `body`.
+- `offsetLeft/offsetTop` -- koordinater i forhold til den øverste venstre kant af `offsetParent`.
+- `offsetWidth/offsetHeight` -- "ydre" bredde/højde af et element inklusive rammer.
+- `clientLeft/clientTop` -- afstandene fra det øverste venstre ydre hjørne til det øverste venstre indre hjørne (indhold + padding). For venstre-til-højre operativsystemer er det altid bredden af venstre/øverste ramme. For højre-til-venstre operativsystemer er den lodrette scrollbjælke til venstre, så `clientLeft` inkluderer også dens bredde.
+- `clientWidth/clientHeight` -- bredden/højden af indholdet inklusive padding, men uden scrollbjælken.
+- `scrollWidth/scrollHeight` -- bredden/højden af indholdet, ligesom `clientWidth/clientHeight`, men inkluderer også den ud-scrollede, usynlige del af elementet.
+- `scrollLeft/scrollTop` -- bredden/højden af den ud-scrollede øverste del af elementet, startende fra dets øverste venstre hjørne.
 
-All properties are read-only except `scrollLeft/scrollTop` that make the browser scroll the element if changed.
+Alle egenskaber kan kun læses undtagen `scrollLeft/scrollTop`, som får browseren til at rulle elementet, hvis de ændres.

@@ -2,10 +2,10 @@ importance: 3
 
 ---
 
-# What is the scrollbar width?
+# Hvad er bredden på en scrollbjælke?
 
-Write the code that returns the width of a standard scrollbar.
+Skriv koden der returnerer bredden på en standard scrollbjælke.
 
-For Windows it usually varies between `12px` and `20px`. If the browser doesn't reserve any space for it (the scrollbar is half-translucent over the text, also happens), then it may be `0px`.
+For Windows varierer den normalt mellem `12px` og `20px`. Hvis browseren ikke reserverer plads til den (scrollbjælken er halvt gennemsigtig over teksten, hvilket også sker), kan den være `0px`.
 
-P.S. The code should work for any HTML document, do not depend on its content.
+P.S. Koden skal virke for et vilkårligt HTML dokument og må ikke afhæng af dets indhold.

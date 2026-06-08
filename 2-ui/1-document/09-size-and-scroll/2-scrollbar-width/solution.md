@@ -1,16 +1,16 @@
-To get the scrollbar width, we can create an element with the scroll, but without borders and paddings.
+For at få bredden på en scrollbjælke kan vi oprette et element med scroll, men uden rammer og padding.
 
-Then the difference between its full width `offsetWidth` and the inner content area width `clientWidth` will be exactly the scrollbar:
+Forskellen mellem dets fulde bredde `offsetWidth` og den indre indholdsarealbredde `clientWidth` vil være præcis scrollbjælken:
 
 ```js run
-// create a div with the scroll
+// Opret et div element med scroll
 let div = document.createElement('div');
 
 div.style.overflowY = 'scroll';
 div.style.width = '50px';
 div.style.height = '50px';
 
-// must put it in the document, otherwise sizes will be 0
+// Vi skal indsætte elementet i dokumentet, ellers vil dimensionerne være 0
 document.body.append(div);
 let scrollWidth = div.offsetWidth - div.clientWidth;
 
