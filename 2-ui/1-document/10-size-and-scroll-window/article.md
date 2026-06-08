@@ -1,50 +1,51 @@
-# Window sizes and scrolling
+# Størrelse på vinduet og scrolling
 
-How do we find the width and height of the browser window? How do we get the full width and height of the document, including the scrolled out part? How do we scroll the page using JavaScript?
+Hvordan finder vi bredden og højden på browserens vindue? Hvordan får vi den fulde bredde og højde af dokumentet ... inklusiv den del, der er rullet ud så vi ikke kan se den? Hvordan ruller vi siden ved hjælp af JavaScript?
 
-For this type of information, we can use the root document element `document.documentElement`, that corresponds to the `<html>` tag. But there are additional methods and peculiarities to consider.
+Til denne type information kan vi bruge det roden dokumentelement `document.documentElement`, der svarer til `<html>` taggen. Men der er en del særheder at overveje, fordi de virker lidt forskelligt i forskellige browsere. Og det kan være svært at gennemskue.
 
-## Width/height of the window
+## Bredde/højde på vinduet
 
-To get window width and height, we can use the `clientWidth/clientHeight` of `document.documentElement`:
+For at få vinduets bredde og højde kan vi bruge `clientWidth/clientHeight` af `document.documentElement`:
 
 ![](document-client-width-height.svg)
 
 ```online
-For instance, this button shows the height of your window:
+For eksempel viser denne knap højden på dit vindue:
 
 <button onclick="alert(document.documentElement.clientHeight)">alert(document.documentElement.clientHeight)</button>
 ```
 
-````warn header="Not `window.innerWidth/innerHeight`"
-Browsers also support properties like `window.innerWidth/innerHeight`. They look like what we want, so why not to use them instead?
+````warn header="Ikke `window.innerWidth/innerHeight`"
+Browsere understøtter også egenskaber som `window.innerWidth/innerHeight`. De ser ud til at være det vi vil have, så hvorfor ikke bruge dem i stedet?
 
-If there exists a scrollbar, and it occupies some space, `clientWidth/clientHeight` provide the width/height without it (subtract it). In other words, they return the width/height of the visible part of the document, available for the content.
+Hvis der er et scrollbar, og det optager plads, giver `clientWidth/clientHeight` bredden og højden uden (minus) det. Med andre ord returnerer de bredden og højden af den synlige del af dokumentet, klar til brug af indholdet.
 
-`window.innerWidth/innerHeight` includes the scrollbar.
+`window.innerWidth/innerHeight` inkluderer scrollbar'en.
 
-If there's a scrollbar, and it occupies some space, then these two lines show different values:
+Hvis der er et scrollbar, og det optager plads, så viser disse to linjer forskellige værdier:
+
 ```js run
-alert( window.innerWidth ); // full window width
-alert( document.documentElement.clientWidth ); // window width minus the scrollbar
+alert( window.innerWidth ); // fuld bredde af vinduet
+alert( document.documentElement.clientWidth ); // vinduets bredde minus scrollbar'en
 ```
 
-In most cases, we need the *available* window width in order to draw or position something within scrollbars (if there are any), so we should use `documentElement.clientHeight/clientWidth`.
+I de fleste tilfælde har vi brug for den *tilgængelige* bredde af vinduet for at kunne tegne eller placere noget inden for scrollbars (hvis der er nogen), så vi bør bruge `documentElement.clientHeight/clientWidth`.
 ````
 
-```warn header="`DOCTYPE` is important"
-Please note: top-level geometry properties may work a little bit differently when there's no `<!DOCTYPE HTML>` in HTML. Odd things are possible.
+```warn header="`DOCTYPE` er vigtigt"
+Bemærk: top-level geometri egenskaber kan virke en smule anderledes, når der ikke er et `<!DOCTYPE HTML>` i HTML'en. Lidt mærkeligt men sandt.
 
-In modern HTML we should always write `DOCTYPE`.
+I moderne HTML bør vi altid skrive `DOCTYPE`.
 ```
 
-## Width/height of the document
+## Bredde/højde på dokumentet
 
-Theoretically, as the root document element is `document.documentElement`, and it encloses all the content, we could measure the document's full size as `document.documentElement.scrollWidth/scrollHeight`.
+Teoretisk set er `document.documentElement` roden - det vil sige det element der indeholder alt indholdet - så vi kunne forvente at kunne måle dokumentets fulde størrelse som `document.documentElement.scrollWidth/scrollHeight`.
 
-But on that element, for the whole page, these properties do not work as intended. In Chrome/Safari/Opera, if there's no scroll, then `documentElement.scrollHeight` may be even less than `documentElement.clientHeight`! Weird, right?
+Men for siden som helhed virker disse egenskaber ikke altid som forventet. For eksempel kan `document.documentElement.scrollHeight` være mindre end `document.documentElement.clientHeight` i Chrome/Safari/Opera, hvis der ikke er noget scrollbar. Mærkeligt, ikke? 
 
-To reliably obtain the full document height, we should take the maximum of these properties:
+For at få den fulde højde på dokumentet med sikkerhed, skal vi tage maksimum af følgende egenskaber:
 
 ```js run
 let scrollHeight = Math.max(
@@ -53,110 +54,110 @@ let scrollHeight = Math.max(
   document.body.clientHeight, document.documentElement.clientHeight
 );
 
-alert('Full document height, with scrolled out part: ' + scrollHeight);
+alert('Dokumentets fulde højde, inklusiv den del der er scrollet ud: ' + scrollHeight);
 ```
 
-Why so? Better don't ask. These inconsistencies come from ancient times, not a "smart" logic.
+Hvorfor det? Jeg tror det er bedre at lade være med at spørge. Disse uoverensstemmelser stammer fra gamle dage, ikke fra en "smart" logik.
 
-## Get the current scroll [#page-scroll]
+## Find den nuværende scroll position [#page-scroll]
 
-DOM elements have their current scroll state in their `scrollLeft/scrollTop` properties.
+DOM-elementer har deres nuværende scroll information i deres `scrollLeft/scrollTop` egenskaber.
 
-For document scroll, `document.documentElement.scrollLeft/scrollTop` works in most browsers, except older WebKit-based ones, like Safari (bug [5991](https://bugs.webkit.org/show_bug.cgi?id=5991)), where we should use `document.body` instead of `document.documentElement`.
+`document.documentElement.scrollLeft/scrollTop` virker i de fleste browsere, undtagen ældre WebKit-baserede browsere, som Safari (bug [5991](https://bugs.webkit.org/show_bug.cgi?id=5991)), hvor vi skal bruge `document.body` i stedet for `document.documentElement`.
 
-Luckily, we don't have to remember these peculiarities at all, because the scroll is available in the special properties, `window.pageXOffset/pageYOffset`:
+Heldigvis behøver vi slet ikke at huske disse særheder, for scroll positionen er tilgængelig i de specielle egenskaber `window.pageXOffset/pageYOffset`:
 
 ```js run
-alert('Current scroll from the top: ' + window.pageYOffset);
-alert('Current scroll from the left: ' + window.pageXOffset);
+alert('Aktuelle scroll position fra toppen: ' + window.pageYOffset);
+alert('Aktuelle scroll position fra venstre: ' + window.pageXOffset);
 ```
 
-These properties are read-only.
+Disse egenskaber kan kun læses.
 
-```smart header="Also available as `window` properties `scrollX` and `scrollY`"
-For historical reasons, both properties exist, but they are the same:
-- `window.pageXOffset` is an alias of `window.scrollX`.
-- `window.pageYOffset` is an alias of `window.scrollY`.
+```smart header="Findes også som `window`-egenskaberne `scrollX` og `scrollY`"
+Af historiske årsager eksisterer begge egenskaber, men de er det samme:
+- `window.pageXOffset` er et alias for `window.scrollX`.
+- `window.pageYOffset` er et alias for `window.scrollY`.
 ```
 
 ## Scrolling: scrollTo, scrollBy, scrollIntoView [#window-scroll]
 
 ```warn
-To scroll the page with JavaScript, its DOM must be fully built.
+For at rulle siden med JavaScript skal dens DOM være fuldt udbygget.
 
-For instance, if we try to scroll the page with a script in `<head>`, it won't work.
+For eksempel vil det ikke virke, hvis vi forsøger at rulle siden med et script i `<head>`.
 ```
 
-Regular elements can be scrolled by changing `scrollTop/scrollLeft`.
+Regelmæssige elementer kan rulles ved at ændre `scrollTop/scrollLeft`.
 
-We can do the same for the page using `document.documentElement.scrollTop/scrollLeft` (except Safari, where `document.body.scrollTop/Left` should be used instead).
+Vi kan gøre det samme for siden ved hjælp af `document.documentElement.scrollTop/scrollLeft` (undtagen Safari, hvor `document.body.scrollTop/Left` skal bruges i stedet).
 
-Alternatively, there's a simpler, universal solution: special methods [window.scrollBy(x,y)](mdn:api/Window/scrollBy) and [window.scrollTo(pageX,pageY)](mdn:api/Window/scrollTo).
+Alternativt er der en simplere, universel løsning: de specielle metoder [window.scrollBy(x,y)](mdn:api/Window/scrollBy) og [window.scrollTo(pageX,pageY)](mdn:api/Window/scrollTo).
 
-- The method `scrollBy(x,y)` scrolls the page *relative to its current position*. For instance, `scrollBy(0,10)` scrolls the page `10px` down.
+- Metoden `scrollBy(x,y)` ruller siden *relativt til dens nuværende position*. For eksempel vil `scrollBy(0,10)` rulle siden `10px` ned.
 
     ```online
-    The button below demonstrates this:
+    Knappen herunder demonstrerer dette:
 
     <button onclick="window.scrollBy(0,10)">window.scrollBy(0,10)</button>
     ```
-- The method `scrollTo(pageX,pageY)` scrolls the page *to absolute coordinates*, so that the top-left corner of the visible part has coordinates `(pageX, pageY)` relative to the document's top-left corner. It's like setting `scrollLeft/scrollTop`.
+- Metoden `scrollTo(pageX,pageY)` ruller siden *til absolutte koordinater*, således at øverste venstre hjørne af den synlige del har koordinaterne `(pageX, pageY)` relativt til dokumentets øverste venstre hjørne. Det er som at sætte `scrollLeft/scrollTop`.
 
-    To scroll to the very beginning, we can use `scrollTo(0,0)`.
+    For at rulle til helt i begyndelsen kan vi bruge `scrollTo(0,0)`.
 
     ```online
     <button onclick="window.scrollTo(0,0)">window.scrollTo(0,0)</button>
     ```
 
-These methods work for all browsers the same way.
+Disse metoder virker på tværs af alle browsere på samme måde.
 
 ## scrollIntoView
 
-For completeness, let's cover one more method: [elem.scrollIntoView(top)](mdn:api/Element/scrollIntoView).
+For fuldstændighedens skyld, lad os dække én metode mere: [elem.scrollIntoView(top)](mdn:api/Element/scrollIntoView).
 
-The call to `elem.scrollIntoView(top)` scrolls the page to make `elem` visible. It has one argument:
+Kaldet til `elem.scrollIntoView(top)` ruller siden for at gøre `elem` synlig. Den har et argument:
 
-- If `top=true` (that's the default), then the page will be scrolled to make `elem` appear on the top of the window. The upper edge of the element will be aligned with the window top.
-- If `top=false`, then the page scrolls to make `elem` appear at the bottom. The bottom edge of the element will be aligned with the window bottom.
+- Hvis `top=true` (standard), så rulles siden for at gøre `elem` synlig øverst i vinduet. Elementets øvre kant vil blive justeret med vinduets top.
+- Hvis `top=false`, så rulles siden for at gøre `elem` synlig nederst. Elementets nedre kant vil blive justeret med vinduets bund.
 
 ```online
-The button below scrolls the page to position itself at the window top:
+Knappen herunder ruller siden for at positionere sig selv øverst i vinduet:
 
 <button onclick="this.scrollIntoView()">this.scrollIntoView()</button>
 
-And this button scrolls the page to position itself at the bottom:
+Og denne knap ruller siden for at positionere sig selv nederst:
 
 <button onclick="this.scrollIntoView(false)">this.scrollIntoView(false)</button>
 ```
 
-## Forbid the scrolling
+## Forbud mod scrolling
 
-Sometimes we need to make the document "unscrollable". For instance, when we need to cover the page with a large message requiring immediate attention, and we want the visitor to interact with that message, not with the document.
+Nogle gange skal vi gøre dokumentet "unscrollable". For eksempel, når vi skal dække siden med en stor besked, der kræver øjeblikkelig opmærksomhed, og vi ønsker, at den besøgende skal interagere med den besked, ikke med dokumentet.
 
-To make the document unscrollable, it's enough to set `document.body.style.overflow = "hidden"`. The page will "freeze" at its current scroll position.
+For at forhindre scrolling i dokumentet er det nok at sætte `document.body.style.overflow = "hidden"`. Siden vil "fryse" ved sin nuværende scroll position.
 
 ```online
-Try it:
+Prøv det:
 
 <button onclick="document.body.style.overflow = 'hidden'">document.body.style.overflow = 'hidden'</button>
 
 <button onclick="document.body.style.overflow = ''">document.body.style.overflow = ''</button>
 
-The first button freezes the scroll, while the second one releases it.
+Den første knap forhindrer scrollingen, mens den anden frigiver den.
 ```
 
-We can use the same technique to freeze the scroll for other elements, not just for `document.body`.
+Den samme teknik kan bruges til at forhindre scrollingen for andre elementer end `document.body`.
 
-The drawback of the method is that the scrollbar disappears. If it occupied some space, then that space is now free and the content "jumps" to fill it.
+Ulempen ved metoden er, at scrollbaren forsvinder. Hvis den optog noget plads, så er den plads nu fri og indholdet "springer" for at fylde den.
 
-That looks a bit odd, but can be worked around if we compare `clientWidth` before and after the freeze. If it increased (the scrollbar disappeared), then add `padding` to `document.body` in place of the scrollbar to keep the content width the same.
+Det ser lidt mærkeligt ud, men kan løses ved at sammenligne `clientWidth` før og efter pausen. Hvis den steg (scrollbaren forsvandt), så tilføjes `padding` til `document.body` i stedet for scrollbaren for at holde indholdets bredde den samme.
 
-## Summary
+## Opsummering
 
-Geometry:
+Geometri:
 
-- Width/height of the visible part of the document (content area width/height): `document.documentElement.clientWidth/clientHeight`
-- Width/height of the whole document, with the scrolled out part:
+- Bredde/højde på den synlige del af dokumentet (indholdsområdets bredde/højde): `document.documentElement.clientWidth/clientHeight`
+- Bredde/højde af hele dokumentet, med den del der er scrollet ud:
 
     ```js
     let scrollHeight = Math.max(
@@ -168,9 +169,9 @@ Geometry:
 
 Scrolling:
 
-- Read the current scroll: `window.pageYOffset/pageXOffset`.
-- Change the current scroll:
+- Læs den aktuelle scroll: `window.pageYOffset/pageXOffset`.
+- Ændr den aktuelle scroll:
 
-    - `window.scrollTo(pageX,pageY)` -- absolute coordinates,
-    - `window.scrollBy(x,y)` -- scroll relative the current place,
-    - `elem.scrollIntoView(top)` -- scroll to make `elem` visible (align with the top/bottom of the window).
+    - `window.scrollTo(pageX,pageY)` -- absolutte koordinater,
+    - `window.scrollBy(x,y)` -- scroll relativt til den aktuelle position,
+    - `elem.scrollIntoView(top)` -- scroll for at gøre `elem` synlig (juster med toppen/bunden af vinduet).
