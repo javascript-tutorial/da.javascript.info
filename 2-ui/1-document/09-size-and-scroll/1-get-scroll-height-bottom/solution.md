@@ -1,7 +1,8 @@
-The solution is:
+Løsningen er:
 
 ```js
 let scrollBottom = elem.scrollHeight - elem.scrollTop - elem.clientHeight;
 ```
 
-In other words: (full height) minus (scrolled out top part) minus (visible part) -- that's exactly the scrolled out bottom part.
+Eller med andre ord: (fuld højde) minus (ud-scrollet top del) minus (synlig del) = den ud-scrollede bund del.
+
