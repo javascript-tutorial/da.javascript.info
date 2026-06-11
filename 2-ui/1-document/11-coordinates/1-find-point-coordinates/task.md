@@ -2,23 +2,23 @@ importance: 5
 
 ---
 
-# Find window coordinates of the field
+# Find vindueskoordinaterne for feltet
 
-In the iframe below you can see a document with the green "field".
+I iframen nedenfor kan du se et dokument med det grønne "felt".
 
-Use JavaScript to find window coordinates of corners pointed by with arrows.
+Brug JavaScript til at finde vindueskoordinaterne for hjørnerne, der peges på med pilene.
 
-There's a small feature implemented in the document for convenience. A click at any place shows coordinates there.
+Der er en lille funktion implementeret i dokumentet for nemheds skyld. Et klik ethvert sted viser koordinaterne der.
 
 [iframe border=1 height=360 src="source" link edit]
 
-Your code should use DOM to get window coordinates of:
+Din kode skal bruge DOM til at finde vindueskoordinaterne for:
 
-1. Upper-left, outer corner (that's simple).
-2. Bottom-right, outer corner (simple too).
-3. Upper-left, inner corner (a bit harder).
-4. Bottom-right, inner corner (there are several ways, choose one).
+1. Øverste venstre, ydre hjørne (det er simpelt).
+2. Nederste højre, ydre hjørne (også simpelt).
+3. Øverste venstre, indre hjørne (lidt sværere).
+4. Nederste højre, indre hjørne (der er flere måder, vælg en).
 
-The coordinates that you calculate should be the same as those returned by the mouse click.
+De koordinater du beregner, skal være de samme som dem, der returneres af museklikket.
 
-P.S. The code should also work if the element has another size or border, not bound to any fixed values.
+P.S. Koden skal også virke, hvis elementet har en anden størrelse eller kant, der ikke er bundet til nogen faste værdier.

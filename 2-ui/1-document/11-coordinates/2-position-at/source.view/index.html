@@ -8,37 +8,41 @@
 
 <body>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt
+    voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident
+    molestias sit tempore omnis recusandae
     esse sequi officia sapiente.</p>
 
   <blockquote>
-    Teacher: Why are you late?
-    Student: There was a man who lost a hundred dollar bill.
-    Teacher: That's nice. Were you helping him look for it?
-    Student: No. I was standing on it.
+    Underviser: Hvorfor kommer du for sent?
+    Studerende: Der var en mand der tabte en 100 kr. seddel.
+    Underviser: Det er da betænksomt at du ville hjælpe med at lede efter den?
+    Studerende: Nej, jeg stod på den!
   </blockquote>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt
+    voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident
+    molestias sit tempore omnis recusandae
     esse sequi officia sapiente.</p>
 
 
   <script>
     /**
-     * Positions elem relative to anchor as said in position.
+     * Positioner elem relativt til anker-elementet, som angivet i position-parameteren.
      *
-     * @param {Node} anchor     Anchor element for positioning
-     * @param {string} position One of: top/right/bottom
-     * @param {Node} elem       Element to position
+     * @param {Node} anchor     Anker elementet for positioneringen
+     * @param {string} position Positionen, en af: top/right/bottom
+     * @param {Node} elem       Elementet, der skal positioneres
      *
-     * Both elements: elem and anchor must be in the document
+     * Både elem og anchor-elementet skal være en del af dokumentet
      */
     function positionAt(anchor, position, elem) {
-      // ... your code ...
+      // ... din kode ...
     }
 
     /**
-     * Shows a note with the given html at the given position
-     * relative to the anchor element.
+     * Viser en note med den givne html på den givne position
+     * i forhold til anker-elementet.
      */
     function showNote(anchor, position, html) {
 
@@ -50,14 +54,15 @@
       positionAt(anchor, position, note);
     }
 
-    // test it
+    // test det
     let blockquote = document.querySelector('blockquote');
 
-    showNote(blockquote, "top", "note above");
-    showNote(blockquote, "right", "note at the right");
-    showNote(blockquote, "bottom", "note below");
+    showNote(blockquote, "top", "note over");
+    showNote(blockquote, "right", "note til højre for");
+    showNote(blockquote, "bottom", "note under");
   </script>
 
 
 </body>
+
 </html>
