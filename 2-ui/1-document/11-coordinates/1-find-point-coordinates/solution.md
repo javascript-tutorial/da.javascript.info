@@ -1,8 +1,8 @@
-# Outer corners
+# Ydre hjørner
 
-Outer corners are basically what we get from [elem.getBoundingClientRect()](https://developer.mozilla.org/en-US/docs/DOM/element.getBoundingClientRect).
+Ydre hjørner er det, vi får fra [elem.getBoundingClientRect()](https://developer.mozilla.org/en-US/docs/DOM/element.getBoundingClientRect).
 
-Coordinates of the upper-left corner `answer1` and the bottom-right corner `answer2`:
+Koordinaterne for det øverste venstre hjørne `answer1` og det nederste højre hjørne `answer2`:
 
 ```js
 let coords = elem.getBoundingClientRect();
@@ -11,19 +11,19 @@ let answer1 = [coords.left, coords.top];
 let answer2 = [coords.right, coords.bottom];
 ```
 
-# Left-upper inner corner
+# Indre øverste venstre hjørne
 
-That differs from the outer corner by the border width. A reliable way to get the distance is `clientLeft/clientTop`:
+Det adskiller sig fra det ydre hjørne ved bredden af kanten. En pålidelig måde at få afstanden er `clientLeft/clientTop`:
 
 ```js
 let answer3 = [coords.left + field.clientLeft, coords.top + field.clientTop];
 ```
 
-# Right-bottom inner corner
+# Nederste højre indre hjørne
 
-In our case we need to substract the border size from the outer coordinates.
+I dette tilfælde skal vi trække bredden af kanten fra de ydre koordinater.
 
-We could use CSS way:
+Vi kunne bruge CSS-måden:
 
 ```js
 let answer4 = [
@@ -32,7 +32,7 @@ let answer4 = [
 ];
 ```
 
-An alternative way would be to add `clientWidth/clientHeight` to coordinates of the left-upper corner. That's probably even better:
+En alternativ måde ville være at tilføje `clientWidth/clientHeight` til koordinaterne for det øverste venstre hjørne.
 
 ```js
 let answer4 = [

@@ -2,10 +2,12 @@ importance: 5
 
 ---
 
-# Show a note near the element (absolute)
+# Vis en note tæt på elementet (absolut)
 
-Modify the solution of the [previous task](info:task/position-at) so that the note uses `position:absolute` instead of `position:fixed`.
+Ret løsningen fra den [forrige opgave](info:task/position-at) sådan at noten anvender `position:absolute` i stedet for `position:fixed`.
 
-That will prevent its "runaway" from the element when the page scrolls.
+Dette vil forhindre at den bevæger sig væk fra elementet, når siden scroller.
 
-Take the solution of that task as a starting point. To test the scroll, add the style `<body style="height: 2000px">`.
+Tag udgangspunkt i løsningen fra den forrige opgave.
+
+For at teste rulningen kan du tilføje denne stil til body-tag'et: `<body style="height: 2000px">`

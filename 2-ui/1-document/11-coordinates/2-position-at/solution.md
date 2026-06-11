@@ -1,4 +1,4 @@
-In this task we only need to accurately calculate the coordinates. See the code for details.
+I denne opgave handler det mest om at udregne koordinaterne korrekt. Se kildekoden for detaljer.
 
-Please note: the elements must be in the document to read `offsetHeight` and other properties.
-A hidden (`display:none`) or out of the document element has no size.
+Bemærk: elementerne skal være i dokumentet for at kunne læse `offsetHeight` og andre egenskaber.
+Et skjult (`display:none`) eller uden for dokumentet element har ingen størrelse.

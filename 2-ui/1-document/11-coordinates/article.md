@@ -1,42 +1,42 @@
-# Coordinates
+# Koordinator
 
-To move elements around we should be familiar with coordinates.
+For at flytte elementer rundt bør vi være bekendt med koordinaterne.
 
-Most JavaScript methods deal with one of two coordinate systems:
+De fleste JavaScript-metoder bruger en af to koordinatsystemer:
 
-1. **Relative to the window** - similar to `position:fixed`, calculated from the window top/left edge.
-    - we'll denote these coordinates as `clientX/clientY`, the reasoning for such name will become clear later, when we study event properties.
-2. **Relative to the document** - similar to `position:absolute` in the document root, calculated from the document top/left edge.
-    - we'll denote them `pageX/pageY`.
+1. **Relativt til vinduet** - minder om `position:fixed`, beregnet fra vinduets top/venstre kant.
+    - vi vil betegne disse koordinater som `clientX/clientY`, årsagen til et sådant navn vil blive klar senere, når vi studerer event-egenskaber.
+2. **Relativt til dokumentet** - minder om `position:absolute` i dokumentets rod, beregnet fra dokumentets top/venstre kant.
+    - vi vil betegne dem `pageX/pageY`.
 
-When the page is scrolled to the very beginning, so that the top/left corner of the window is exactly the document top/left corner, these coordinates equal each other. But after the document shifts, window-relative coordinates of elements change, as elements move across the window, while document-relative coordinates remain the same.
+Når siden rulles til begyndelsen, således at top/venstre hjørne af vinduet er præcis dokumentets top/venstre hjørne, er disse koordinater ens. Men efter at dokumentet forskydes, ændres vinduesrelative koordinater for elementer, da elementer bevæger sig hen over vinduet, mens dokumentrelative koordinater forbliver de samme.
 
-On this picture we take a point in the document and demonstrate its coordinates before the scroll (left) and after it (right):
+På dette billede tager vi et punkt i dokumentet og demonstrerer dets koordinater før scrollen (venstre) og efter den (højre):
 
 ![](document-and-window-coordinates-scrolled.svg)
 
-When the document scrolled:
-- `pageY` - document-relative coordinate stayed the same, it's counted from the document top (now scrolled out).
-- `clientY` - window-relative coordinate did change (the arrow became shorter), as the same point became closer to window top.
+Når dokumentet er scrollet:
+- `pageY` - dokument-relative koordinater forbliver de samme, det beregnes fra dokumentets top (nu scrollet ud).
+- `clientY` - vinduesrelative koordinater ændrede sig (pilen blev kortere), da det samme punkt kom tættere på vinduets top.
 
-## Element coordinates: getBoundingClientRect
+## Element koordinater: getBoundingClientRect
 
-The method `elem.getBoundingClientRect()` returns window coordinates for a minimal rectangle that encloses `elem` as an object of built-in [DOMRect](https://www.w3.org/TR/geometry-1/#domrect) class.
+Metoden `elem.getBoundingClientRect()` returnerer vindueskoordinater for et minimalt rektangel, der omgiver `elem` som et objekt af den indbyggede [DOMRect](https://www.w3.org/TR/geometry-1/#domrect) klasse.
 
-Main `DOMRect` properties:
+Hoved `DOMRect`-egenskaber:
 
-- `x/y` -- X/Y-coordinates of the rectangle origin relative to window,
-- `width/height` -- width/height of the rectangle (can be negative).
+- `x/y` -- X/Y-koordinater for rektangelens oprindelse relativt til vinduet,
+- `width/height` -- bredde/højde af rektanglet (kan være negativ).
 
-Additionally, there are derived properties:
+Derudover findes afledte egenskaber:
 
-- `top/bottom` -- Y-coordinate for the top/bottom rectangle edge,
-- `left/right` -- X-coordinate for the left/right rectangle edge.
+- `top/bottom` -- Y-koordinater for rektangelens top/bund kant,
+- `left/right` -- X-koordinater for rektangelens venstre/højre kant.
 
 ```online
-For instance click this button to see its window coordinates:
+Klik på denne knap for at se dens vindueskoordinater:
 
-<p><input id="brTest" type="button" style="max-width: 90vw;" value="Get coordinates using button.getBoundingClientRect() for this button" onclick='showRect(this)'/></p>
+<p><input id="brTest" type="button" style="max-width: 90vw;" value="Hent koordinater ved at bruge button.getBoundingClientRect() for denne knap" onclick='showRect(this)'/></p>
 
 <script>
 function showRect(elem) {
@@ -53,66 +53,66 @@ right:${r.right}
 }
 </script>
 
-If you scroll the page and repeat, you'll notice that as window-relative button position changes, its window coordinates (`y/top/bottom` if you scroll vertically) change as well.
+Hvis du ruller siden og gentager, vil du bemærke, at når knapens vinduesrelative position ændres, ændres dens vindueskoordinater (`y/top/bottom`, hvis du ruller lodret) også.
 ```
 
-Here's the picture of `elem.getBoundingClientRect()` output:
+Her er billedet af `elem.getBoundingClientRect()` output:
 
 ![](coordinates.svg)
 
-As you can see, `x/y` and `width/height` fully describe the rectangle. Derived properties can be easily calculated from them:
+Som du kan se, beskriver `x/y` og `width/height` rektanglet fuldt ud. Afledte egenskaber kan nemt beregnes ud fra dem:
 
 - `left = x`
 - `top = y`
 - `right = x + width`
 - `bottom = y + height`
 
-Please note:
+Bemærk venligst:
 
-- Coordinates may be decimal fractions, such as `10.5`. That's normal, internally browser uses fractions in calculations. We don't have to round them when setting to `style.left/top`.
-- Coordinates may be negative. For instance, if the page is scrolled so that `elem` is now above the window, then `elem.getBoundingClientRect().top` is negative.
+- Koordinater kan være decimalfraktioner, såsom `10.5`. Det er normalt, internt bruger browseren fraktioner i beregninger. Vi behøver ikke runde dem af, når vi sætter dem til `style.left/top`.
+- Koordinater kan være negative. For eksempel, hvis siden er scrollet således at `elem` nu er over vinduet, så er `elem.getBoundingClientRect().top` negativ.
 
-```smart header="Why derived properties are needed? Why does `top/left` exist if there's `x/y`?"
-Mathematically, a rectangle is uniquely defined with its starting point `(x,y)` and the direction vector `(width,height)`. So the additional derived properties are for convenience.
+```smart header="Hvorfor er afledte egenskaber nødvendige? Hvorfor findes `top/left` hvis `x/y` allerede eksisterer?"
+Matematisk set er et rektangel entydigt defineret med dets startpunkt `(x,y)` og retningsvektoren `(width,height)`. De ekstra afledte egenskaber er altså for bekvemmelighedens skyld.
 
-Technically it's possible for `width/height` to be negative, that allows for "directed" rectangle, e.g. to represent mouse selection with properly marked start and end.
+Teknisk set er det muligt for `width/height` at være negative, hvilket muliggør et "retningsbestemt" rektangel, f.eks. til at repræsentere musevalg med korrekt markerede start- og slutpunkter.
 
-Negative `width/height` values mean that the rectangle starts at its bottom-right corner and then "grows" left-upwards.
+Negative værdier for `width/height` betyder, at rektanglet starter ved sit nederste højre hjørne og derefter "vokser" mod venstre og opad.
 
-Here's a rectangle with negative `width` and `height` (e.g. `width=-200`, `height=-100`):
+Her er et rektangel med negativ `width` og `height` (f.eks. `width=-200`, `height=-100`):
 
 ![](coordinates-negative.svg)
 
-As you can see, `left/top` do not equal `x/y` in such case.
+Som du kan se, er `left/top` ikke lig med `x/y` i dette tilfælde.
 
-In practice though, `elem.getBoundingClientRect()` always returns positive width/height, here we mention negative `width/height` only for you to understand why these seemingly duplicate properties are not actually duplicates.
+I praksis returnerer `elem.getBoundingClientRect()` dog altid positive værdier for width/height. Vi nævner negative width/height kun for at hjælpe dig med at forstå, hvorfor disse tilsyneladende duplikerede egenskaber ikke er faktiske duplikater.
 ```
 
-```warn header="Internet Explorer: no support for `x/y`"
-Internet Explorer doesn't support `x/y` properties for historical reasons.
+```warn header="Internet Explorer: ingen understøttelse for `x/y`"
+Internet Explorer understøtter af historiske årsager ikke `x/y` egenskaberne.
 
-So we can either make a polyfill (add getters in `DomRect.prototype`) or just use `top/left`, as they are always the same as `x/y` for positive `width/height`, in particular in the result of `elem.getBoundingClientRect()`.
+Vi kan derfor enten lave en polyfill (tilføje getters i `DomRect.prototype`) eller blot bruge `top/left`, da de altid er lig med `x/y` for positive `width/height`, især i resultatet af `elem.getBoundingClientRect()`.
 ```
 
-```warn header="Coordinates right/bottom are different from CSS position properties"
-There are obvious similarities between window-relative coordinates and CSS `position:fixed`.
+```warn header="Koordinaterne right/bottom er forskellige fra CSS positionsegenskaberne"
+Der er tydelige ligheder mellem vinduesrelative koordinater og CSS `position:fixed`.
 
-But in CSS positioning, `right` property means the distance from the right edge, and `bottom` property means the distance from the bottom edge.
+Men i CSS positionering betyder `right`-egenskaben afstanden fra højre kant, og `bottom`-egenskaben betyder afstanden fra bundkanten.
 
-If we just look at the picture above, we can see that in JavaScript it is not so. All window coordinates are counted from the top-left corner, including these ones.
+Hvis vi bare ser på billedet ovenfor, kan vi se, at det ikke er sådan i JavaScript. Alle vindueskoordinater tælles fra øverste venstre hjørne, inklusive disse.
 ```
 
 ## elementFromPoint(x, y) [#elementFromPoint]
 
-The call to `document.elementFromPoint(x, y)` returns the most nested element at window coordinates `(x, y)`.
+Kaldet `document.elementFromPoint(x, y)` returnerer det mest indlejrede element i vindueskoordinaterne `(x, y)`.
 
-The syntax is:
+Syntaksen er:
 
 ```js
 let elem = document.elementFromPoint(x, y);
 ```
 
-For instance, the code below highlights and outputs the tag of the element that is now in the middle of the window:
+For eksempel fremhæver og viser koden nedenfor tagget for det element, der nu er i midten af vinduet:
 
 ```js run
 let centerX = document.documentElement.clientWidth / 2;
@@ -124,43 +124,43 @@ elem.style.background = "red";
 alert(elem.tagName);
 ```
 
-As it uses window coordinates, the element may be different depending on the current scroll position.
+Da det bruger vindueskoordinater, kan elementet være forskelligt afhængigt af den aktuelle scrolleposition.
 
-````warn header="For out-of-window coordinates the `elementFromPoint` returns `null`"
-The method `document.elementFromPoint(x,y)` only works if `(x,y)` are inside the visible area.
+````warn header="For koordinater uden for vinduet returnerer `elementFromPoint` `null`"
+Metoden `document.elementFromPoint(x,y)` virker kun, hvis `(x,y)` er inden for det synlige område.
 
-If any of the coordinates is negative or exceeds the window width/height, then it returns `null`.
+Hvis en af koordinaterne er negativ eller overstiger vinduets bredde/højde, returneres `null`.
 
-Here's a typical error that may occur if we don't check for it:
+Her er en typisk fejl, der kan opstå, hvis vi ikke kontrollerer for dette:
 
 ```js
 let elem = document.elementFromPoint(x, y);
-// if the coordinates happen to be out of the window, then elem = null
+// hvis koordinaterne tilfældigvis er uden for vinduet, så er elem = null
 *!*
-elem.style.background = ''; // Error!
+elem.style.background = ''; // Fejl!
 */!*
 ```
 ````
 
-## Using for "fixed" positioning
+## Brug til "fast" positionering
 
-Most of time we need coordinates in order to position something.
+Langt de fleste gange har vi brug for koordinater for at placere noget.
 
-To show something near an element, we can use `getBoundingClientRect` to get its coordinates, and then CSS `position` together with `left/top` (or `right/bottom`).
+For at vise noget nær et element kan vi bruge `getBoundingClientRect` til at få dets koordinater, og derefter CSS `position` sammen med `left/top` (eller `right/bottom`).
 
-For instance, the function `createMessageUnder(elem, html)` below shows the message under `elem`:
+For eksempel viser funktionen `createMessageUnder(elem, html)` nedenfor beskeden under `elem`:
 
 ```js
 let elem = document.getElementById("coords-show-mark");
 
 function createMessageUnder(elem, html) {
-  // create message element
+  // Opret et besked element
   let message = document.createElement('div');
-  // better to use a css class for the style here
+  // Nok bedre at bruge en css klasse for stilen her
   message.style.cssText = "position:fixed; color: red";
 
 *!*
-  // assign coordinates, don't forget "px"!
+  // Tildel koordinater, husk "px"!
   let coords = elem.getBoundingClientRect();
 
   message.style.left = coords.left + "px";
@@ -172,45 +172,45 @@ function createMessageUnder(elem, html) {
   return message;
 }
 
-// Usage:
-// add it for 5 seconds in the document
+// Anvendelse:
+// tilføj den i 5 sekunder i dokumentet
 let message = createMessageUnder(elem, 'Hello, world!');
 document.body.append(message);
 setTimeout(() => message.remove(), 5000);
 ```
 
 ```online
-Click the button to run it:
+Prøv at trykke på knappen for at se den køre:
 
-<button id="coords-show-mark">Button with id="coords-show-mark", the message will appear under it</button>
+<button id="coords-show-mark">Knap med id="coords-show-mark", beskeden vil blive vist under den</button>
 ```
 
-The code can be modified to show the message at the left, right, below, apply CSS animations to "fade it in" and so on. That's easy, as we have all the coordinates and sizes of the element.
+Koden kan ændres til at vise beskeden til venstre, højre, nedenunder, anvende CSS animationer til at "fade den ind" og så videre. Det er nemt, da vi har alle koordinater og størrelser af elementet.
 
-But note the important detail: when the page is scrolled, the message flows away from the button.
+Bemærk dog den vigtige detalje: når siden scroller væk, flyder beskeden væk fra knappen.
 
-The reason is obvious: the message element relies on `position:fixed`, so it remains at the same place of the window while the page scrolls away.
+Årsagen er åbenlys: besked elementet er afhængigt af `position:fixed`, så det forbliver på det samme sted i vinduet, mens siden scroller væk.
 
-To change that, we need to use document-based coordinates and `position:absolute`.
+For at ændre det, skal vi bruge dokumentbaserede koordinater og `position:absolute`.
 
-## Document coordinates [#getCoords]
+## Dokument-relative koordinater [#getCoords]
 
-Document-relative coordinates start from the upper-left corner of the document, not the window.
+Dokument-relative koordinater starter fra dokumentets øverste venstre hjørne, ikke vinduet.
 
-In CSS, window coordinates correspond to `position:fixed`, while document coordinates are similar to `position:absolute` on top.
+I CSS svarer vindueskoordinater til `position:fixed`, mens dokumentkoordinater ligner `position:absolute` placeret øverst i dokumentet.
 
-We can use `position:absolute` and `top/left` to put something at a certain place of the document, so that it remains there during a page scroll. But we need the right coordinates first.
+Vi kan bruge `position:absolute` og `top/left` til at placere noget et bestemt sted i dokumentet, så det forbliver der under en side scroll. Men vi har brug for de rigtige koordinater først.
 
-There's no standard method to get the document coordinates of an element. But it's easy to write it.
+Der er ingen standard metode til at få elementets dokumentkoordinater. Men det er ret nemt at skrive sig frem til dem.
 
-The two coordinate systems are connected by the formula:
-- `pageY` = `clientY` + height of the scrolled-out vertical part of the document.
-- `pageX` = `clientX` + width of the scrolled-out horizontal part of the document.
+De to koordinatsystemer er forbundet med formlen:
+- `pageY` = `clientY` + højden af det ud-scrollede del af dokumentet.
+- `pageX` = `clientX` + bredden af det ud-scrollede del af dokumentet.
 
-The function `getCoords(elem)` will take window coordinates from `elem.getBoundingClientRect()` and add the current scroll to them:
+Funktionen `getCoords(elem)` tager vindueskoordinaterne fra `elem.getBoundingClientRect()` og lægger det nuværende scroll til dem:
 
 ```js
-// get document coordinates of the element
+// Funktion til at hente dokumentkoordinaterne for et element
 function getCoords(elem) {
   let box = elem.getBoundingClientRect();
 
@@ -223,9 +223,9 @@ function getCoords(elem) {
 }
 ```
 
-If in the example above we used it with `position:absolute`, then the message would stay near the element on scroll.
+Hvis vi i eksemplet ovenfor brugte `position:absolute`, så ville beskeden forblive nær elementet under scroll.
 
-The modified `createMessageUnder` function:
+Den ændrede `createMessageUnder` funktion:
 
 ```js
 function createMessageUnder(elem, html) {
@@ -243,13 +243,13 @@ function createMessageUnder(elem, html) {
 }
 ```
 
-## Summary
+## Opsamling
 
-Any point on the page has coordinates:
+Ethvert punkt på siden har koordinater:
 
-1. Relative to the window -- `elem.getBoundingClientRect()`.
-2. Relative to the document -- `elem.getBoundingClientRect()` plus the current page scroll.
+1. Relativt til vinduet -- `elem.getBoundingClientRect()`.
+2. Relativt til dokumentet -- `elem.getBoundingClientRect()` plus det nuværende scroll af siden.
 
-Window coordinates are great to use with `position:fixed`, and document coordinates do well with `position:absolute`.
+Vindueskoordinater er gode at bruge med `position:fixed`, og dokumentkoordinater virker godt med `position:absolute`.
 
-Both coordinate systems have their pros and cons; there are times we need one or the other one, just like CSS `position` `absolute` and `fixed`.
+Begge koordinatsystemer har deres fordele og ulemper; der er tidspunkter, hvor vi har brug for den ene eller den anden, ligesom med CSS `position` `absolute` og `fixed`.
