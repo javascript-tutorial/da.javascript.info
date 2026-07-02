@@ -1,17 +1,17 @@
-The images ribbon can be represented as `ul/li` list of images `<img>`.
+Billederne i båndet kan repræsenteres som en `ul/li` liste af billeder `<img>`.
 
-Normally, such a ribbon is wide, but we put a fixed-size `<div>` around to "cut" it, so that only a part of the ribbon is visible:
+Normalt vil sådan et bånd være meget bredt, men vi putter en fast størrelse `<div>` omkring for at "beskære" det, så det kun er en del af båndet der er synligt:
 
 ![](carousel1.svg)
 
-To make the list show horizontally we need to apply correct CSS properties for `<li>`, like `display: inline-block`.
+For at vise listen vandret, kan vi anvende CSS-egenskaber for `<li>`, som f.eks. `display: inline-block`.
 
-For `<img>` we should also adjust `display`, because by default it's `inline`. There's extra space reserved under `inline` elements for "letter tails", so we can use `display:block` to remove it.
+For `<img>` bør vi også justere `display`, fordi standard er `inline`. Der er afsat ekstra plads under `inline`-elementer til "underliggere" (bogstaver der går under grundlinjen). Med `display:block` fjerner vi den plads.
 
-To do the scrolling, we can shift `<ul>`. There are many ways to do it, for instance by changing `margin-left` or (better performance) use `transform: translateX()`:
+Til at udføre scrolling, kan vi flytte `<ul>`. Der er mange måder at gøre det på. For eksempel kan vi ændre `margin-left` eller (endnu bedre ift ydeevne) bruge `transform: translateX()`:
 
 ![](carousel2.svg)
 
-The outer `<div>` has a fixed width, so "extra" images are cut.
+Den ydre `<div>` har en fast bredde, så "ekstra" billeder bliver beskåret.
 
-The whole carousel is a self-contained "graphical component" on the page, so we'd better wrap it into a single `<div class="carousel">` and style things inside it.
+Hele karrusellen er en selvstændig "grafisk komponent" på siden, så vi bør pakke den ind i en enkelt `<div class="carousel">` og style tingene inden for den.

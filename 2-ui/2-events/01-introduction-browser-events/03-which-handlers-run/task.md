@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Which handlers run?
+# Hvilken handler vil blive afviklet?
 
-There's a button in the variable. There are no handlers on it.
+Der er et element i variablen (en knap). Der er ingen handlers på den.
 
-Which handlers run on click after the following code? Which alerts show up?
+Hvilke handlers afvikles ved klik efter følgende kode? Hvilke alerts vises?
 
 ```js no-beautify
 button.addEventListener("click", () => alert("1"));

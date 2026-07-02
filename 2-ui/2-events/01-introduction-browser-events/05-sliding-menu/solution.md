@@ -1,47 +1,47 @@
 
 # HTML/CSS
-First let's create HTML/CSS.
+Lad os først oprette HTML/CSS.
 
-A menu is a standalone graphical component on the page, so it's better to put it into a single DOM element.
+En menu er at selvstændigt element på side, så det bør puttes i sit eget DOM-element.
 
-A list of menu items can be laid out as a list `ul/li`.
+En liste at menupunkter kan opstilles som en liste `ul/li`.
 
 Here's the example structure:
 
 ```html
 <div class="menu">
-  <span class="title">Sweeties (click me)!</span>
+  <span class="title">Søde sager (klik her)!</span>
   <ul>
-    <li>Cake</li>
+    <li>Kage</li>
     <li>Donut</li>
-    <li>Honey</li>
+    <li>Honning</li>
   </ul>
 </div>
 ```
 
-We use `<span>` for the title, because `<div>` has an implicit `display:block` on it, and it will occupy 100% of the horizontal width.
+Vi bruger `<span>` til titlen fordi `<div>` har en implicit `display:block` på det, og det vil optage 100% af den horisontale bredde.
 
-Like this:
-
-```html autorun height=50
-<div style="border: solid red 1px" onclick="alert(1)">Sweeties (click me)!</div>
-```
-
-So if we set `onclick` on it, then it will catch clicks to the right of the text.
-
-As `<span>` has an implicit `display: inline`, it occupies exactly enough place to fit all the text:
+Sådan her:
 
 ```html autorun height=50
-<span style="border: solid red 1px" onclick="alert(1)">Sweeties (click me)!</span>
+<div style="border: solid red 1px" onclick="alert(1)">Søde sager (klik her)!</div>
 ```
 
-# Toggling the menu
+Så hvis vi sætter et `onclick` på det, så vil det også opfange klik til højre for teksten.
 
-Toggling the menu should change the arrow and show/hide the menu list.
+Da `<span>` har en implicit `display: inline`, optager det kun den plads, der er nødvendig for at rumme hele teksten:
 
-All these changes are perfectly handled by CSS. In JavaScript we should label the current state of the menu by adding/removing the class `.open`.
+```html autorun height=50
+<span style="border: solid red 1px" onclick="alert(1)">Søde sager (klik her)!</span>
+```
 
-Without it, the menu will be closed:
+# Toggling af menu
+
+Toggling af menu bør ændre pilen og vise/skjule menu-listen.
+
+Alle disse ændringer håndteres perfekt af CSS. I JavaScript skal vi justere den tilstand menuen er i ved at tilføje eller fjerne klassen `.open`.
+
+Uden den vil menuen være uden den vil menuen være lukket:
 
 ```css
 .menu ul {
@@ -58,7 +58,7 @@ Without it, the menu will be closed:
 }
 ```
 
-...And with `.open` the arrow changes and the list shows up:
+... og med `.open` vil pilen ændres og listen vises:
 
 ```css
 .menu.open .title::before {

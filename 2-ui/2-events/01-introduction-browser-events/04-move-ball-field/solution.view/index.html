@@ -1,75 +1,69 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      #field {
+        width: 200px;
+        height: 150px;
+        border: 10px solid black;
+        background-color: #00ff00;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
 
-<head>
-  <meta charset="utf-8">
-  <style>
-    #field {
-      width: 200px;
-      height: 150px;
-      border: 10px solid black;
-      background-color: #00FF00;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
+      #ball {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        transition: all 1s;
+      }
+    </style>
+  </head>
 
-    #ball {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 40px;
-      height: 40px;
-      transition: all 1s;
-    }
-  </style>
-</head>
+  <body style="height: 2000px">
+    Klik på plænen for at flytte bolden derhen.
+    <br />
 
-<body style="height:2000px">
+    <div id="field">
+      <img src="https://en.js.cx/clipart/ball.svg" id="ball" />
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
 
-  Click on a field to move the ball there.
-  <br>
+    <script>
+      field.onclick = function (event) {
+        // Koordinater relativt til vinduet
+        let fieldCoords = this.getBoundingClientRect();
 
+        // bolden har position:absolute, plænen: position:relative
+        // så boldens koordinater er relative til plænen's indre venstre øverste hjørne
+        let ballCoords = {
+          top: event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 2,
+          left: event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 2,
+        };
 
-  <div id="field">
-    <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-  </div>
+        // forhindrer bolden i at forlade toppen af plænen
+        if (ballCoords.top < 0) ballCoords.top = 0;
 
-  <script>
-    field.onclick = function(event) {
+        // forhindrer bolden i at forlade plænen til venstre
+        if (ballCoords.left < 0) ballCoords.left = 0;
 
-      // window-relative field coordinates
-      let fieldCoords = this.getBoundingClientRect();
+        // // forhindrer bolden i at forlade plænen til højre
+        if (ballCoords.left + ball.clientWidth > field.clientWidth) {
+          ballCoords.left = field.clientWidth - ball.clientWidth;
+        }
 
-      // the ball has position:absolute, the field: position:relative
-      // so ball coordinates are relative to the field inner left-upper corner
-      let ballCoords = {
-        top: event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 2,
-        left: event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 2
+        // forhindrer bolden i at forlade bunden af plænen
+        if (ballCoords.top + ball.clientHeight > field.clientHeight) {
+          ballCoords.top = field.clientHeight - ball.clientHeight;
+        }
+
+        ball.style.left = ballCoords.left + 'px';
+        ball.style.top = ballCoords.top + 'px';
       };
-
-      // prevent crossing the top field boundary
-      if (ballCoords.top < 0) ballCoords.top = 0;
-
-      // prevent crossing the left field boundary
-      if (ballCoords.left < 0) ballCoords.left = 0;
-
-
-      // // prevent crossing the right field boundary
-      if (ballCoords.left + ball.clientWidth > field.clientWidth) {
-        ballCoords.left = field.clientWidth - ball.clientWidth;
-      }
-
-      // prevent crossing the bottom field boundary
-      if (ballCoords.top + ball.clientHeight > field.clientHeight) {
-        ballCoords.top = field.clientHeight - ball.clientHeight;
-      }
-
-      ball.style.left = ballCoords.left + 'px';
-      ball.style.top = ballCoords.top + 'px';
-    }
-  </script>
-
-</body>
+    </script>
+  </body>
 </html>

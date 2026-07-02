@@ -1,11 +1,11 @@
 
-First we need to choose a method of positioning the ball.
+Først skal vi vælge en metode til at positionere bolden.
 
-We can't use `position:fixed` for it, because scrolling the page would move the ball from the field.
+Vi kan ikke bruge `position:fixed` til det, fordi scrolling af siden ville flytte bolden fra plænen.
 
-So we should use `position:absolute` and, to make the positioning really solid, make `field` itself positioned.
+Så vi bør bruge `position:absolute` og, for at gøre positioneringen virkelig solid, give selve `field` en `position`.
 
-Then the ball will be positioned relatively to the field:
+På den måde vil bolden blive positioneret relativt til plænen:
 
 ```css
 #field {
@@ -16,36 +16,36 @@ Then the ball will be positioned relatively to the field:
 
 #ball {
   position: absolute;
-  left: 0; /* relative to the closest positioned ancestor (field) */
+  left: 0; /* relativt til den nærmeste positionerede forælder (field) */
   top: 0;
-  transition: 1s all; /* CSS animation for left/top makes the ball fly */
+  transition: 1s all; /* CSS animation for left/top får bolden til at bevæge sig */
 }
 ```
 
-Next we need to assign the correct `ball.style.left/top`. They contain field-relative coordinates now.
+Derefter skal vi tildele de korrekte `ball.style.left/top`. De indeholder nu koordinater relative til plænen.
 
-Here's the picture:
+Her er et billede:
 
 ![](move-ball-coords.svg)
 
-We have `event.clientX/clientY` -- window-relative coordinates of the click.
+Vi har `event.clientX/clientY` -- koordinater relativt til vinduet.
 
-To get field-relative `left` coordinate of the click, we can substract the field left edge and the border width:
+For at få et field-relativt `left` koordinat, kan vi trække fields venstre side og border tykkelse fra:
 
 ```js
 let left = event.clientX - fieldCoords.left - field.clientLeft;
 ```
 
-Normally, `ball.style.left` means the "left edge of the element" (the ball). So if we assign that `left`, then the ball edge, not center, would be under the mouse cursor.
+Normalt betyder `ball.style.left` den "venstre kant af et element" (bolden). Så hvis vi tildeler den `left`, så vil det være boldens venstre side og ikke center der vil være under musemarkøren.
 
-We need to move the ball half-width left and half-height up to make it center.
+Vi skal flytte den halve bredde af bolden til venstre og den halve højde op for at centrere den.
 
-So the final `left` would be:
+Så den endelige `left` vil være:
 
 ```js
 let left = event.clientX - fieldCoords.left - field.clientLeft - ball.offsetWidth/2;
 ```
 
-The vertical coordinate is calculated using the same logic.
+Den samme logik bruges til at beregne den lodrette koordinat.
 
-Please note that the ball width/height must be known at the time we access `ball.offsetWidth`. Should be specified in HTML or CSS.
+Bemærk, at boldens bredde/højde skal være kendt på det tidspunkt, hvor vi tilgår `ball.offsetWidth`. Den skal angives i HTML eller CSS.
