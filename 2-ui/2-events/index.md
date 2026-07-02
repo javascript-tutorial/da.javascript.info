@@ -1,3 +1,3 @@
-# Introduction to Events
+# Introduktion til Events
 
-An introduction to browser events, event properties and handling patterns.
+En introduktion til browser events, eventegenskaber og mønstre til håndtering af events.

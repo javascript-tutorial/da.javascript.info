@@ -2,10 +2,12 @@ importance: 5
 
 ---
 
-# Create a sliding menu
+# Opret en sliding menu
 
-Create a menu that opens/collapses on click:
+Opret en menu, der åbner/skjuler ved klik:
 
 [iframe border=1 height=100 src="solution"]
 
-P.S. HTML/CSS of the source document is to be modified.
+PS. Du skal også ændre HTML/CSS i dokumentet for at løse opgaven.
+
+

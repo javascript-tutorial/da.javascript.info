@@ -2,20 +2,20 @@ importance: 5
 
 ---
 
-# Move the ball across the field
+# Flyt bolden hen over plænen
 
-Move the ball across the field to a click. Like this:
+Flyt bolden hen over plænen til det sted der klikkes. Som dette:
 
 [iframe src="solution" height="260" link]
 
-Requirements:
+Krav:
 
-- The ball center should come exactly under the pointer on click (if possible without crossing the field edge).
-- CSS-animation is welcome.
-- The ball must not cross field boundaries.
-- When the page is scrolled, nothing should break.
+- Boldens center skal være det sted der klikkes (hvis muligt uden at lande uden for plænen).
+- CSS-animationer er velkomne.
+- Bolden må ikke lande uden for plænen.
+- Når siden scrolles, skal det stadig virke.
 
-Notes:
+Note:
 
-- The code should also work with different ball and field sizes, not be bound to any fixed values.
-- Use properties `event.clientX/event.clientY` for click coordinates.
+- Koden skal kunne virke ved forskellige bold- og plæne-størrelser og må ikke være bundet til faste værdier.
+- Brug egenskaberne `event.clientX/event.clientY` for klik-koordinater.

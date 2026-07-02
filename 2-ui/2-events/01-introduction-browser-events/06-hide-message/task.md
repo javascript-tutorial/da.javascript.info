@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Add a closing button
+# Tilføj en lukkeknap
 
-There's a list of messages.
+Der er en liste af beskeder.
 
-Use JavaScript to add a closing button to the right-upper corner of each message.
+Brug nu JavaScript til at tilføje en lukkeknap til højre i hjørnet af hver besked.
 
-The result should look like this:
+Resultatet skal se sådan ud:
 
 [iframe src="solution" height=450]

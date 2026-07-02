@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Hide self
+# Skjul dig selv
 
-Create a button that hides itself on click.
+Opret en knap, der skjuler sig selv ved klik.
 
 ```online
-Like this:
-<input type="button" onclick="this.hidden=true" value="Click to hide">
+Som dette:
+<input type="button" onclick="this.hidden=true" value="Klik for at skjule">
 ```
