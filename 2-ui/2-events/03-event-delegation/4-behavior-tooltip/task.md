@@ -2,37 +2,37 @@ importance: 5
 
 ---
 
-# Tooltip behavior
+# Tooltip adfærd
 
-Create JS-code for the tooltip behavior.
+Skriv JavaScrip kode for en tooltip-adfærd.
 
-When a mouse comes over an element with `data-tooltip`, the tooltip should appear over it, and when it's gone then hide.
+Når en mus kommer over et element med `data-tooltip`, skal tooltippen vises over det, og når den er væk, skal den blive skjult.
 
-An example of annotated HTML:
+Et eksempel på hvordan det ser ud i HTML:
 ```html
-<button data-tooltip="the tooltip is longer than the element">Short button</button>
-<button data-tooltip="HTML<br>tooltip">One more button</button>
+<button data-tooltip="tooltip er ikke længere end elementet">Kort knap</button>
+<button data-tooltip="HTML<br>tooltip">Endnu en knap</button>
 ```
 
-Should work like this:
+Den skal virke således:
 
 [iframe src="solution" height=200 border=1]
 
-In this task we assume that all elements with `data-tooltip` have only text inside. No nested tags (yet).
+I denne opgave antager vi, at alle elementer med `data-tooltip` kun har tekst indeni. Ingen indlejrede tags (endnu).
 
-Details:
+Detaljer:
 
-- The distance between the element and the tooltip should be `5px`.
-- The tooltip should be centered relative to the element, if possible.
-- The tooltip should not cross window edges. Normally it should be above the element, but if the element is at the page top and there's no space for the tooltip, then below it.
-- The tooltip content is given in the `data-tooltip` attribute. It can be arbitrary HTML.
+- Afstanden mellem elementet og tooltippen skal være `5px`.
+- Dit tooltip skal være centreret i forhold til elementet, hvis det er muligt.
+- Dit tooltip skal ikke krydse vindueskanterne. Normalt skal det være over elementet, men hvis elementet er øverst på siden og der ikke er plads til tooltippen, så skal den være under det.
+- Indholdet af tooltippen er givet i attributten `data-tooltip`. Det kan være vilkårlig HTML.
 
-You'll need two events here:
-- `mouseover` triggers when a pointer comes over an element.
-- `mouseout` triggers when a pointer leaves an element.
+Du har brug for to events:
+- `mouseover` trigger når musen kommer over et element.
+- `mouseout` trigger når musen forlader et element.
 
-Please use event delegation: set up two handlers on `document` to track all "overs" and "outs" from elements with `data-tooltip` and manage tooltips from there.
+Bemærk: Du skal bruge event delegation, dvs. du skal sætte to handlere på `document` for at følge alle "overs" og "outs" fra elementer med `data-tooltip` og håndtere dine tooltip derfra.
 
-After the behavior is implemented, even people unfamiliar with JavaScript can add annotated elements.
+Efter adfærden er implementeret, kan alle mennesker, også de, der ikke er vant til JavaScript, tilføje annoterede elementer.
 
-P.S. Only one tooltip may show up at a time.
+P.S. Kun en tooltip kan vises ad gangen.

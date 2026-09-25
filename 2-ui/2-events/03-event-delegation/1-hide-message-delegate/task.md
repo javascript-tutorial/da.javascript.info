@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Hide messages with delegation
+# Skjul meddelelser med delegation
 
-There's a list of messages with removal buttons `[x]`. Make the buttons work.
+Der er en liste over meddelelser med knapper til at skjule dem `[x]`. Få knapperne til at virke.
 
-Like this:
+Som dette:
 
 [iframe src="solution" height=420]
 
-P.S. Should be only one event listener on the container, use event delegation.
+P.S. Der skal kun være en event listener på containeren, brug event delegation.
