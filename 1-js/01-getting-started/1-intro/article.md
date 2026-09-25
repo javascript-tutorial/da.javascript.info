@@ -24,7 +24,7 @@ Browseren har en indlejret motor, der nogle gange kaldes en "JavaScript virtual 
 
 Forskellige motorer har forskellige "kodenavne". F.eks:
 
-- V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- i Chrome, Opera og Edge.
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- i Chrome, Opera og Edge.
 - [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- i Firefox.
 - ...Der er andre kodenavne som "Chakra" i IE, "JavaScriptCore", "Nitro" og "SquirrelFish" i Safari osv.
 
@@ -106,7 +106,7 @@ Moderne værktøjer gør transpileringen meget hurtig og gennemsigtig, idet de f
 
 Eksempler på sådanne sprog:
 
-- [CoffeeScript] (https://coffeescript.org/) er "syntaktisk sukker" til JavaScript. Det introducerer en kortere syntaks, så du kan skrive klarere og mere præcis kode. Normalt kan Ruby-udviklere lide det.
+- [CoffeeScript](https://coffeescript.org/) er "syntaktisk sukker" til JavaScript. Det introducerer en kortere syntaks, så du kan skrive klarere og mere præcis kode. Normalt kan Ruby-udviklere lide det.
 - [TypeScript](https://www.typescriptlang.org/) er koncentreret om at tilføje "strict data typing" for at forenkle udviklingen og understøttelsen af komplekse systemer. Det er udviklet af Microsoft.
 - [Flow](https://flow.org/) tilføjer også datatyper, men på en anden måde. Udviklet af Facebook.
 - [Dart](https://www.dartlang.org/) er et selvstændigt sprog, der har sin egen motor, som kører i miljøer uden for browsere (f.eks. mobilapps), men som også kan transpileres til JavaScript. Udviklet af Google.
