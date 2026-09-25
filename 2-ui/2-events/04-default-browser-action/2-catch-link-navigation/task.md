@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Catch links in the element
+# Fang links i elementet
 
-Make all links inside the element with `id="contents"` ask the user if they really want to leave. And if they don't then don't follow.
+Sørg for, at alle links i elementet med `id="contents"` spørger brugeren, om de virkelig vil forlade siden. Og hvis de ikke vil, så følg ikke linkets url.
 
-Like this:
+Sådan her:
 
 [iframe height=100 border=1 src="solution"]
 
-Details:
+Detaljer:
 
-- HTML inside the element may be loaded or regenerated dynamically at any time, so we can't find all links and put handlers on them. Use event delegation.
-- The content may have nested tags. Inside links too, like `<a href=".."><i>...</i></a>`.
+- HTML-indholdet i elementet kan være indlæst eller blive genereret dynamisk, så vi kan ikke bare finde alle links og putte håndteringer på dem. Brug event delegation.
+- Indholdet kan have indlejrede tags. Også inde i links, som f.eks. `<a href=".."><i>...</i></a>`.
