@@ -17,15 +17,15 @@ For eksempel:
 
 <body>
 
-  <p>Before the script...</p>
+  <p>Før scriptet...</p>
 
 *!*
   <script>
-    alert( 'Hello, world!' );
+    alert( 'Hej verden!' );
   </script>
 */!*
 
-  <p>...After the script.</p>
+  <p>...Efter scriptet.</p>
 
 </body>
 
@@ -63,9 +63,9 @@ Kommentarer før og efter scripts.
 
 ## Eksterne scripts
 
-HVis du har meget JavaScript kode, kan du placere det i en ekstern fil.
+Hvis du har meget JavaScript kode, kan du placere det i en ekstern fil.
 
-Script-filer bliver knuttet til HTML gennem en `src` attribut:
+Script-filer bliver knyttet til HTML gennem en `src` attribut:
 
 ```html
 <script src="/path/to/script.js"></script>
