@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Tree menu
+# Træ-menu
 
-Create a tree that shows/hides node children on click:
+Opret et træ, der viser/skjuler "node-børn" ved klik:
 
 [iframe border=1 src="solution"]
 
-Requirements:
+Krav til løsningen:
 
-- Only one event handler (use delegation)
-- A click outside the node title (on an empty space) should not do anything.
+- Kun en event handler (brug delegation)
+- Et klik uden for node-titlen (på et tomt område) bør ikke gøre noget.
