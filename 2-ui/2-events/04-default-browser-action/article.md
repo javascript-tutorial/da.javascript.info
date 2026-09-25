@@ -1,43 +1,43 @@
-# Browser default actions
+# Browserens standard handlinger
 
-Many events automatically lead to certain actions performed by the browser.
+Mange events følger automatisk med bestemte handlinger, som udføres af browseren.
 
-For instance:
+For eksempel:
 
-- A click on a link - initiates navigation to its URL.
-- A click on a form submit button - initiates its submission to the server.
-- Pressing a mouse button over a text and moving it - selects the text.
+- Et klik på et link - starter navigation til dens URL.
+- Et klik på en form submit-knap - starter indsendelsen af formen til serveren.
+- Tryk på en museknap over en tekst og flytter den efterfølgende - vælger teksten.
 
-If we handle an event in JavaScript, we may not want the corresponding browser action to happen, and want to implement another behavior instead.
+Hvis vi håndterer et event i JavaScript, vil vi måske ikke ønske den tilsvarende browserhandling skal ske. Det kan være, at vi ønsker at implementere en anden adfærd i stedet.
 
-## Preventing browser actions
+## Forhindring af browserhandling
 
-There are two ways to tell the browser we don't want it to act:
+Der er to måder at sige til browseren, at vi ikke vil have den til at handle:
 
-- The main way is to use the `event` object. There's a method `event.preventDefault()`.
-- If the handler is assigned using `on<event>` (not by `addEventListener`), then returning `false` also works the same.
+- Standardmetoden er at bruge `event`-objektet. I den er der metode `event.preventDefault()`.
+- Hvis handleren er tildelt ved hjælp af `on<event>` (ikke ved hjælp af `addEventListener`), så virker det samme, hvis man returnerer `false`.
 
-In this HTML, a click on a link doesn't lead to navigation; the browser doesn't do anything:
+I dette HTML vil et klik på et link ikke føre til navigation; browseren gør ikke noget:
 
 ```html autorun height=60 no-beautify
-<a href="/" onclick="return false">Click here</a>
-or
-<a href="/" onclick="event.preventDefault()">here</a>
+<a href="/" onclick="return false">Klik her</a>
+eller
+<a href="/" onclick="event.preventDefault()">her</a>
 ```
 
-In the next example we'll use this technique to create a JavaScript-powered menu.
+I det næste eksempel vil vi bruge denne teknik til at skabe et menu baseret på JavaScript.
 
-```warn header="Returning `false` from a handler is an exception"
-The value returned by an event handler is usually ignored.
+```warn header="Returnering af `false` fra en handler er en undtagelse"
+Værdien der returneres fra en event handler ignoreres normalt.
 
-The only exception is `return false` from a handler assigned using `on<event>`.
+Den eneste undtagelse er `return false` fra en handler tildelt ved hjælp af `on<event>`.
 
-In all other cases, `return` value is ignored. In particular, there's no sense in returning `true`.
+I alle andre tilfælde bliver `return`-værdien ignoreret. Der er i hvert fald ingen mening i at returnere `true`.
 ```
 
-### Example: the menu
+### Eksempel: en menu
 
-Consider a site menu, like this:
+Forestil dig en menu på et websted, som denne:
 
 ```html
 <ul id="menu" class="menu">
@@ -47,116 +47,116 @@ Consider a site menu, like this:
 </ul>
 ```
 
-Here's how it looks with some CSS:
+Her er hvordan det ser ud med noget CSS:
 
 [iframe height=70 src="menu" link edit]
 
-Menu items are implemented as HTML-links `<a>`, not buttons `<button>`. There are several reasons to do so, for instance:
+Menupunkter implementeres som HTML-links `<a>`, ikke knapper `<button>`. Der er flere grunde til at gøre det på denne måde, for eksempel:
 
-- Many people like to use "right click" -- "open in a new window". If we use `<button>` or `<span>`, that doesn't work.
-- Search engines follow `<a href="...">` links while indexing.
+- Mange brugere foretrækker at bruge "højreklik" -- "åbn i et nyt vindue". Hvis vi bruger `<button>` eller `<span>`, virker det ikke.
+- Søgemaskiner følger `<a href="...">` links mens de indexerer.
 
-So we use `<a>` in the markup. But normally we intend to handle clicks in JavaScript. So we should prevent the default browser action.
+Så vi bruger `<a>` i markup'en. Men normalt vil vi håndtere klik i JavaScript. Så vi bør forhindre den standard browserhandling.
 
-Like here:
+Sådan her:
 
 ```js
 menu.onclick = function(event) {
   if (event.target.nodeName != 'A') return;
 
   let href = event.target.getAttribute('href');
-  alert( href ); // ...can be loading from the server, UI generation etc
+  alert( href ); // ...kan være at der hentes fra en server, generering af UI osv.
 
 *!*
-  return false; // prevent browser action (don't go to the URL)
+  return false; // forhindrer browserhandling (gå ikke til URL'en)
 */!*
 };
 ```
 
-If we omit `return false`, then after our code executes the browser will do its "default action" -- navigating to the URL in `href`. And we don't need that here, as we're handling the click by ourselves.
+Hvis vi udelader `return false`, vil browseren efter vores kode eksekveres køre sin "standardhandling" -- navigere til URL'en i `href`. Det har vi ikke brug for her, da vi håndterer klikket selv.
 
-By the way, using event delegation here makes our menu very flexible. We can add nested lists and style them using CSS to "slide down".
+Forresten vil event delegation gøre vores menu meget fleksibel. Vi kan tilføje indre lister og style dem så de "glider ned" ved hjælp af CSS.
 
 ````smart header="Follow-up events"
-Certain events flow one into another. If we prevent the first event, there will be no second.
+Bestemte events flyder fra den ene til den anden. Hvis vi forhindrer det første event, vil der ikke være noget andet.
 
-For instance, `mousedown` on an `<input>` field leads to focusing in it, and the `focus` event. If we prevent the `mousedown` event, there's no focus.
+For eksempel fører `mousedown` på et `<input>`-felt til fokus i det, og eventet `focus`. Hvis vi forhindrer eventet `mousedown`, er der ingen fokus.
 
-Try to click on the first `<input>` below -- the `focus` event happens. But if you click the second one, there's no focus.
+Prøv at klikke på det første `<input>` nedenfor -- eventet `focus` sker. Men hvis du klikker på det andet, er der ingen fokus.
 
 ```html run autorun
-<input value="Focus works" onfocus="this.value=''">
-<input *!*onmousedown="return false"*/!* onfocus="this.value=''" value="Click me">
+<input value="Fokus virker" onfocus="this.value=''">
+<input *!*onmousedown="return false"*/!* onfocus="this.value=''" value="Klik mig">
 ```
 
-That's because the browser action is canceled on `mousedown`. The focusing is still possible if we use another way to enter the input. For instance, the `key:Tab` key to switch from the 1st input into the 2nd. But not with the mouse click any more.
+Det er fordi den browserhandling, der sker ved `mousedown`, bliver annulleret. Fokusering er stadig muligt, hvis vi bruger en anden måde at komme ind i inputfeltet på. For eksempel tasterne `key:Tab` for at skifte fra det 1. input til det 2. input. Men museklik virker ikke mere.
 ````
 
-## The "passive" handler option
+## Den "passive" handler mulighed
 
-The optional `passive: true` option of `addEventListener` signals the browser that the handler is not going to call `preventDefault()`.
+Den frivillige indstilling `passive: true` i `addEventListener` signalerer til browseren, at handleren ikke vil kalde `preventDefault()`.
 
-Why might that be needed?
+Hvorfor vil det være nødvendigt?
 
-There are some events like `touchmove` on mobile devices (when the user moves their finger across the screen), that cause scrolling by default, but that scrolling can be prevented using `preventDefault()` in the handler.
+Der findes events som `touchmove` på mobile enheder (når brugeren flytter sin finger over skærmen), som forårsager rulning (scrolling) som standard, men hvor denne rulning kan forhindres ved hjælp af `preventDefault()` i handleren.
 
-So when the browser detects such event, it has first to process all handlers, and then if `preventDefault` is not called anywhere, it can proceed with scrolling. That may cause unnecessary delays and "jitters" in the UI.
+Så når browseren registrerer et sådant event, skal den først behandle alle handlers, og derefter, hvis `preventDefault` ikke kaldes nogen steder, kan den fortsætte med rulningen. Det kan forårsage unødige forsinkelser og "hakker" i brugerfladen.
 
-The `passive: true` options tells the browser that the handler is not going to cancel scrolling. Then browser scrolls immediately providing a maximally fluent experience, and the event is handled by the way.
+Indstillingen `passive: true` fortæller browseren, at handleren ikke vil annullere rulningen. Derefter ruller browseren umiddelbart, hvilket giver bedst mulighed for en flydende oplevelse, og eventet håndteres på den måde.
 
-For some browsers (Firefox, Chrome), `passive` is `true` by default for `touchstart` and `touchmove` events.
+For noglebrowsere (Firefox, Chrome), er `passive` sat til `true` som standardværdi for `touchstart` og `touchmove` events.
 
 
 ## event.defaultPrevented
 
-The property `event.defaultPrevented` is `true` if the default action was prevented, and `false` otherwise.
+Egenskaben `event.defaultPrevented` er `true`, hvis standardhandlingen blev forhindret, og `false` ellers.
 
-There's an interesting use case for it.
+Der er et interessant case for det.
 
-You remember in the chapter <info:bubbling-and-capturing> we talked about `event.stopPropagation()` and why stopping bubbling is bad?
+Du husker måske kapitlet <info:bubbling-and-capturing> hvor vi talte om `event.stopPropagation()` og hvorfor det er dårligt at stoppe bubbling?
 
-Sometimes we can use `event.defaultPrevented` instead, to signal other event handlers that the event was handled.
+Nogle gange kan vi bruge `event.defaultPrevented` i stedet for at signalere andre event handlers, at eventet er blevet håndteret.
 
-Let's see a practical example.
+Lad os se et praktisk eksempel.
 
-By default the browser on `contextmenu` event (right mouse click) shows a context menu with standard options. We can prevent it and show our own, like this:
+Som udgangspunkt viser browseren ved et `contextmenu`-event (højre museklik) en kontekstmenu med standardindstillinger. Vi kan forhindre dette og vise vores egen menu, på følgende måde:
 
 ```html autorun height=50 no-beautify run
-<button>Right-click shows browser context menu</button>
+<button>Højreklik viser browserens kontekstmenu</button>
 
-<button *!*oncontextmenu="alert('Draw our menu'); return false"*/!*>
-  Right-click shows our context menu
+<button *!*oncontextmenu="alert('Tegn vores kontekstmenu'); return false"*/!*>
+  Højreklik viser vores kontekstmenu
 </button>
 ```
 
-Now, in addition to that context menu we'd like to implement document-wide context menu.
+Nu, udover den kontekstmenu, vi har, vil vi gerne implementere en kontekstmenu på dokumentniveau.
 
-Upon right click, the closest context menu should show up.
+Ved højre museklik skal den nærmeste kontekstmenu vises.
 
 ```html autorun height=80 no-beautify run
-<p>Right-click here for the document context menu</p>
-<button id="elem">Right-click here for the button context menu</button>
+<p>Højreklik her for dokumentets kontekstmenu</p>
+<button id="elem">Højreklik her for knappens kontekstmenu</button>
 
 <script>
   elem.oncontextmenu = function(event) {
     event.preventDefault();
-    alert("Button context menu");
+    alert("Knappens kontekstmenu");
   };
 
   document.oncontextmenu = function(event) {
     event.preventDefault();
-    alert("Document context menu");
+    alert("Dokumentets kontekstmenu");
   };
 </script>
 ```
 
-The problem is that when we click on `elem`, we get two menus: the button-level and (the event bubbles up) the document-level menu.
+Problemet er, at når vi klikker på `elem`, får vi to menuer: den ene på knapniveau og (eventet bobler op) den anden på dokumentniveau.
 
-How to fix it? One of solutions is to think like: "When we handle right-click in the button handler, let's stop its bubbling" and use `event.stopPropagation()`:
+Hvordan fikser vi det? En løsning kunne være at tænke: "Når vi håndterer højre museklik i knap-håndteringen, så stopper vi dens bobling" og bruger `event.stopPropagation()`:
 
 ```html autorun height=80 no-beautify run
-<p>Right-click for the document menu</p>
-<button id="elem">Right-click for the button menu (fixed with event.stopPropagation)</button>
+<p>Højreklik for dokumentets kontekstmenu</p>
+<button id="elem">Højreklik for knappens kontekstmenu (rettet med event.stopPropagation)</button>
 
 <script>
   elem.oncontextmenu = function(event) {
@@ -164,29 +164,29 @@ How to fix it? One of solutions is to think like: "When we handle right-click in
 *!*
     event.stopPropagation();
 */!*
-    alert("Button context menu");
+    alert("Knappens kontekstmenu");
   };
 
   document.oncontextmenu = function(event) {
     event.preventDefault();
-    alert("Document context menu");
+    alert("Dokumentets kontekstmenu");
   };
 </script>
 ```
 
-Now the button-level menu works as intended. But the price is high. We forever deny access to information about right-clicks for any outer code, including counters that gather statistics and so on. That's quite unwise.
+Nu virker knappens kontekstmenu som forventet. Men prisen er høj. Vi forhindrer for altid adgang til information om højre museklik for enhver ydre kode, herunder tællere, der indsamler statistik og så videre. Det er ikke helt klogt.
 
-An alternative solution would be to check in the `document` handler if the default action was prevented? If it is so, then the event was handled, and we don't need to react on it.
+En alternativ løsning ville være at tjekke i `document`-håndteringen, om standardhandlingen blev forhindret? Hvis det er tilfældet, så blev eventet håndteret, og vi behøver ikke reagere på det.
 
 
 ```html autorun height=80 no-beautify run
-<p>Right-click for the document menu (added a check for event.defaultPrevented)</p>
-<button id="elem">Right-click for the button menu</button>
+<p>Højreklik for dokumentets kontekstmenu (tilføjet en kontrol af event.defaultPrevented)</p>
+<button id="elem">Højreklik for knappens kontekstmenu</button>
 
 <script>
   elem.oncontextmenu = function(event) {
     event.preventDefault();
-    alert("Button context menu");
+    alert("Knappens kontekstmenu");
   };
 
   document.oncontextmenu = function(event) {
@@ -195,50 +195,50 @@ An alternative solution would be to check in the `document` handler if the defau
 */!*
 
     event.preventDefault();
-    alert("Document context menu");
+    alert("Dokumentets kontekstmenu");
   };
 </script>
 ```
 
-Now everything also works correctly. If we have nested elements, and each of them has a context menu of its own, that would also work. Just make sure to check for `event.defaultPrevented` in each `contextmenu` handler.
+Nu virker alt som forventet. Hvis vi har indlejrede elementer, og hvert enkelt har sin egen kontekstmenu, vil det også virke. Sørg blot for at tjekke for `event.defaultPrevented` i hver `contextmenu`-håndtering.
 
-```smart header="event.stopPropagation() and event.preventDefault()"
-As we can clearly see, `event.stopPropagation()` and `event.preventDefault()` (also known as `return false`) are two different things. They are not related to each other.
+```smart header="event.stopPropagation() og event.preventDefault()"
+Det er tydeligt, at `event.stopPropagation()` og `event.preventDefault()` (også kendt som `return false`) er to forskellige ting. De er ikke relaterede til hinanden.
 ```
 
-```smart header="Nested context menus architecture"
-There are also alternative ways to implement nested context menus. One of them is to have a single global object with a handler for `document.oncontextmenu`, and also methods that allow us to store other handlers in it.
+```smart header="Indlejret kontekstmenuers arkitektur"
+Der er også alternative måder at implementere indlejrede kontekstmenuer. En af dem er at have et enkelt globalt objekt med en håndtering af `document.oncontextmenu`, og metoder, der tillader os at gemme andre håndteringer i det.
 
-The object will catch any right-click, look through stored handlers and run the appropriate one.
+Objektet vil fange alle højreklik, kigge gennem de gemte håndteringer og køre den der passer.
 
-But then each piece of code that wants a context menu should know about that object and use its help instead of the own `contextmenu` handler.
+Men så skal al kode der ønsker en kontekstmenu kende til det objekt og bruge dets hjælp i stedet for dens egen `contextmenu`-håndtering.
 ```
 
-## Summary
+## Opsummering
 
-There are many default browser actions:
+Der er mange standard browser-handlinger:
 
-- `mousedown` -- starts the selection (move the mouse to select).
-- `click` on `<input type="checkbox">` -- checks/unchecks the `input`.
-- `submit` -- clicking an `<input type="submit">` or hitting `key:Enter` inside a form field causes this event to happen, and the browser submits the form after it.
-- `keydown` -- pressing a key may lead to adding a character into a field, or other actions.
-- `contextmenu` -- the event happens on a right-click, the action is to show the browser context menu.
-- ...there are more...
+- `mousedown` -- starter valg (flyt musen for at vælge).
+- `click` på `<input type="checkbox">` -- markerer/afmarkerer et `input`.
+- `submit` -- Klik på `<input type="submit">` eller tast `key:Enter` inde i et formularfelt medfører at denne event opstår, og browseren sender formen.
+- `keydown` -- tryk på en tast kan medføre tilføjelse af et tegn i et felt, eller andre handlinger.
+- `contextmenu` -- denne event opstår ved et højreklik, og handlingen er at vise browserens kontekstmenu.
+- ...og der er flere...
 
-All the default actions can be prevented if we want to handle the event exclusively by JavaScript.
+Alle de standard handlinger kan forhindres, hvis vi ønsker at håndtere eventen udelukkende med JavaScript.
 
-To prevent a default action -- use either `event.preventDefault()` or  `return false`. The second method works only for handlers assigned with `on<event>`.
+For at forhindre en standard handling -- brug enten `event.preventDefault()` eller  `return false`. Den anden metode virker kun for håndteringer, der er tildelt med `on<event>`.
 
-The `passive: true` option of `addEventListener` tells the browser that the action is not going to be prevented. That's useful for some mobile events, like `touchstart` and `touchmove`, to tell the browser that it should not wait for all handlers to finish before scrolling.
+Indstillingen `passive: true` på `addEventListener` fortæller browseren, at handlingen ikke vil blive forhindret. Det er nyttigt for nogle mobile events, som `touchstart` og `touchmove`, for at fortælle browseren, at den ikke skal vente på, at alle håndteringer er færdige, før den begynder at scrolle.
 
-If the default action was prevented, the value of `event.defaultPrevented` becomes `true`, otherwise it's `false`.
+Hvis en standard handling blev forhindret, bliver værdien af `event.defaultPrevented` til `true`, ellers er det `false`.
 
-```warn header="Stay semantic, don't abuse"
-Technically, by preventing default actions and adding JavaScript we can customize the behavior of any elements. For instance, we can make a link `<a>` work like a button, and a button `<button>` behave as a link (redirect to another URL or so).
+```warn header="Fokus på semantik, ikke misbrug"
+Teknisk set, kan vi ved at forhindre standard handlinger og tilføje JavaScript tilpasse adfærd for ethvert element. For eksempel kan vi få et link `<a>` til at virke som en knap, og en knap `<button>` til at opføre sig som et link (omdirigere til en anden URL osv.).
 
-But we should generally keep the semantic meaning of HTML elements. For instance, `<a>` should perform navigation, not a button.
+Men vi bør generelt holde den semantiske betydning af HTML-elementer. For eksempel bør `<a>` udføre navigation, ikke en knap.
 
-Besides being "just a good thing", that makes your HTML better in terms of accessibility.
+Udover bare at være "god stil", så gør det også din HTML bedre i forhold til tilgængelighed.
 
-Also if we consider the example with `<a>`, then please note: a browser allows us to open such links in a new window (by right-clicking them and other means). And people like that. But if we make a button behave as a link using JavaScript and even look like a link using CSS, then `<a>`-specific browser features still won't work for it.
+Endelig, hvis vi tager eksemplet med `<a>` i betragtning, så bør vi bemærke følgende: En browser tillader os at åbne sådanne links i et nyt vindue (ved at højreklikke på dem og andre midler) ... og folk kan lide det. Men hvis vi designer en knap så den opfører sig som et link ved hjælp af JavaScript og endda ser ud som et link ved hjælp af CSS, så vil `<a>`-specifikke browserfunktioner stadig ikke virke for det.
 ```

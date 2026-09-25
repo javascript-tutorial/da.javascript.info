@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Image gallery
+# Billedgalleri
 
-Create an image gallery where the main image changes by the click on a thumbnail.
+Opret et billedgalleri, hvor hovedbilledet ændres ved klik på en miniature.
 
-Like this:
+Sådan her:
 
 [iframe src="solution" height=600]
 
-P.S. Use event delegation.
+P.S. Brug event delegation.
