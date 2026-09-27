@@ -52,7 +52,7 @@ Koden viser `6` fordi JavaScript ikke indsætter et semikolon her. Det er intuit
 
 Fejl der opstår på denne måde kan være svære at finde og rette.
 
-````smart header="Et ekempel på en fejl"
+````smart header="Et eksempel på en fejl"
 Hvis du er nysgerrig efter et konkret eksempel på sådan en fejl, så prøv denne kode:
 
 ```js run
@@ -61,7 +61,7 @@ alert("Hello");
 [1, 2].forEach(alert);
 ```
 
-Tænk ikke for meget på de hårde paranteser `[]` og `forEach` endnuyet. Dem lærer du om senere. For nu, så tænk bare, at denne kode vil vise en dialogboks med tallet `1` efterfulgt af tallet `2`.
+Tænk ikke for meget på de hårde paranteser `[]` og `forEach` endnu. Dem lærer du om senere. For nu, så tænk bare, at denne kode vil vise en dialogboks med tallet `1` efterfulgt af tallet `2`.
 
 Prøv nu, at tilføje en `alert` før den anden kode og lad være med at afslutte med semikolon:
 
@@ -74,6 +74,7 @@ alert("Nu vil der ske en fejl")
 Nu vil den første advarsel vise sig og bagefter vil konsollen melde fejl.
 
 Men, alt vil virke fint, hvis du sætter et semikolon efter `alert`:
+
 ```js run
 alert("Alt er fint nu");
 
